@@ -1,0 +1,6 @@
+name: robocation
+channels:
+  - defaults
+dependencies:
+  - flask
+  - flake8

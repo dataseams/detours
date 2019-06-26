@@ -1,0 +1,12 @@
+version: '3'
+services:
+  core:
+    build: ./core
+    image: core:0.1
+    container_name: core
+    ports:
+      - "5000:5000"
+  ui:
+    build: ./ui
+    image:  ui:0.01
+    container_name: ui
