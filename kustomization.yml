@@ -1,0 +1,3 @@
+resources:
+- core/k8s.yml
+- ui/k8s.yml
