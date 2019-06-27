@@ -31,4 +31,10 @@ spec:
         image: robocation/core:0.1
         imagePullPolicy: Never
         ports:
-        - containerPort: 5000
+          - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /test
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5

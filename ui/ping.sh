@@ -1,5 +1,5 @@
 while true; do
-  curl core:5000/test
+  curl $CORE_IP:$CORE_PORT/test
   echo \
 
   sleep 5;
