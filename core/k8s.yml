@@ -36,5 +36,5 @@ spec:
           httpGet:
             path: /test
             port: 5000
-          initialDelaySeconds: 5
+          initialDelaySeconds: 60
           periodSeconds: 5
