@@ -40,3 +40,12 @@ kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-adm
 # Deploy jenkins helm chart - use -f values.yml to replace values
 ./helm install -n cd stable/jenkins --version 0.16.6 --wait
 
+# Forward jenkins port
+export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+
+# Confirm installation
+kubectl get service
+
+# Get password for `admin` user
+printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
