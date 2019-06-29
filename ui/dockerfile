@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY ping.sh /app/
 
-ENV CORE_IP core
-ENV CORE_PORT 5000
+ENV CORE_SVC_IP core
+ENV CORE_SVC_PORT 5000
 
 CMD sh ping.sh

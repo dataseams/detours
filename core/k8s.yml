@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
       - name: core
-        image: robocation/core:0.1
-        imagePullPolicy: Never
+        image: gcr.io/robocation/core:0.1
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 5000
         livenessProbe:

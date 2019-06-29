@@ -1,5 +1,7 @@
 #!/bin/bash
-CLUSTER=robocation1
+PROJECT_ID=robocation
+CLUSTER=$PROJECT_ID"1"
+SVC_ACCOUNT=svc-$PROJECT_ID
 
 # Create gcp cluster
 gcloud container clusters create $CLUSTER \
@@ -47,5 +49,19 @@ kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
 # Confirm installation
 kubectl get service
 
-# Get password for `admin` user
+# Retrieve jenkins admin password
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+# Build docker images on gcloud image build
+gcloud builds submit --tag gcr.io/robocation/core:0.1 cd../$PROJECT_ID/core/.
+gcloud builds submit --tag gcr.io/robocation/ui:0.1 cd../$PROJECT_ID/ui/.
+
+# # Create service account for gcr image pull
+# gcloud beta iam service-accounts create $SVC_ACCOUNT \
+# --description "pull gcr images" \
+# --display-name $SVC_ACCOUNT
+
+# Grant service accoutn access to project resources to pull images
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+--member serviceAccount:935307630863-compute@developer.gserviceaccount.com \
+--role roles/viewer
