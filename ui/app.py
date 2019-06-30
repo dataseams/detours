@@ -12,7 +12,8 @@ core_svc_port = os.environ["CORE_SVC_PORT"]
 def main_endpoint():
     resp = requests.get(f"http://{core_svc_ip}:{core_svc_port}/test")
     if resp.text == "ok":
-        display = "Welcome to Robocation."
+        with open("text.txt", "r") as f:
+            display = f.read()
     else:
         display = "Error contacting core service."
     return display
