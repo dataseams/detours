@@ -4,7 +4,7 @@ RUN apk add curl
 
 RUN mkdir /app
 WORKDIR /app
-COPY app.py requirements.txt /app/
+COPY app.py requirements.txt text.txt /app/
 
 RUN pip install -r requirements.txt
 
