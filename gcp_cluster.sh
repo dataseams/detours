@@ -53,8 +53,8 @@ kubectl get service
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 # Build docker images on gcloud image build
-gcloud builds submit --tag gcr.io/robocation/core:0.1 cd../$PROJECT_ID/core/.
-gcloud builds submit --tag gcr.io/robocation/ui:0.1 cd../$PROJECT_ID/ui/.
+gcloud builds submit --tag gcr.io/$PROJECT_ID/core:0.1 ../$PROJECT_ID/core/.
+gcloud builds submit --tag gcr.io/$PROJECT_ID/ui:0.1 ../$PROJECT_ID/ui/.
 
 # # Create service account for gcr image pull
 # gcloud beta iam service-accounts create $SVC_ACCOUNT \

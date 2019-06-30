@@ -4,9 +4,12 @@ RUN apk add curl
 
 RUN mkdir /app
 WORKDIR /app
-COPY ping.sh /app/
+COPY app.py requirements.txt /app/
+
+RUN pip install -r requirements.txt
 
 ENV CORE_SVC_IP core
 ENV CORE_SVC_PORT 5000
+ENV FLASK_APP=/app/app.py
 
-CMD sh ping.sh
+CMD gunicorn --bind 0.0.0.0:8080 app:app
