@@ -1,0 +1,21 @@
+timeout: 1200s
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker pull gcr.io/robocation/ui:latest || exit 0
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build',
+           '-t', 'gcr.io/robocation/ui:$SHORT_SHA',
+           '-t', 'gcr.io/robocation/ui:prod',
+           '-t', 'gcr.io/robocation/ui:latest',
+           '--cache-from', 'gcr.io/robocation/ui:latest',
+           '.'
+           ]
+images: [
+  'gcr.io/robocation/ui:$SHORT_SHA',
+  'gcr.io/robocation/ui:prod',
+  'gcr.io/robocation/ui:latest',
+]

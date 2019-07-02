@@ -1,0 +1,13 @@
+timeout: 1200s
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker pull gcr.io/robocation/ui:latest || exit 0
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'ui', '--cache-from', 'gcr.io/robocation/ui:latest', '.']
+    timeout: 1200s
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', 'ui', 'python', '-m', 'pytest']
