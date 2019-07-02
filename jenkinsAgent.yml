@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  component: ci
+spec:
+  serviceAccountName: cd-jenkins
+  containers:
+  - name: gcloud
+    image: gradle:5.5.0-jdk11
+    resources:
+      limits:
+        memory: "2000Mi"
+        cpu: "1"
+      requests:
+        memory: "2000Mi"
+        cpu: "1"
+    command:
+    - cat:
+    tty: true
+  tolerations:
+  - key: cloud.google.com/gke-preemptible
+    operator: Equal
+    value: "true"
+    effect: NoSchedule

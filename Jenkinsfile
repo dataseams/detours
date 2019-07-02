@@ -12,7 +12,14 @@ pipeline {
               return changed('ui')
             }
           }
-          agent any
+          agent {
+            kubernetes {
+              label 'jenkins_grade_agent'
+              defaultContainer 'jnlp'
+              yamlFile 'jenkinsAgent.yml'
+              idleMinutes 10
+            }
+          }
           steps {
             dir('ui') {
               runBuildTest()
@@ -25,7 +32,14 @@ pipeline {
               return changed('core')
             }
           }
-          agent any
+          agent {
+            kubernetes {
+              label 'jenkins_grade_agent'
+              defaultContainer 'jnlp'
+              yamlFile 'jenkinsAgent.yml'
+              idleMinutes 10
+            }
+          }
           steps {
             dir('core') {
               runBuildTest()
@@ -42,7 +56,14 @@ pipeline {
               return changed('ui')
             }
           }
-          agent any
+          agent {
+            kubernetes {
+              label 'jenkins_grade_agent'
+              defaultContainer 'jnlp'
+              yamlFile 'jenkinsAgent.yml'
+              idleMinutes 10
+            }
+          }
           steps {
             dir('ui') {
               runBuildDeploy()
@@ -55,7 +76,14 @@ pipeline {
               return changed('core')
             }
           }
-          agent any
+          agent {
+            kubernetes {
+              label 'jenkins_grade_agent'
+              defaultContainer 'jnlp'
+              yamlFile 'jenkinsAgent.yml'
+              idleMinutes 10
+            }
+          }
           steps {
             dir('core') {
               runBuildDeploy()
