@@ -7,14 +7,7 @@ spec:
   serviceAccountName: cd-jenkins
   containers:
   - name: gcloud
-    image: gradle:5.5.0-jdk11
-    resources:
-      limits:
-        memory: "2000Mi"
-        cpu: "1"
-      requests:
-        memory: "2000Mi"
-        cpu: "1"
+    image: gcr.io/cloud-builders/gcloud
     command:
-    - cat:
+    - cat
     tty: true

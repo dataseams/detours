@@ -1,27 +1,16 @@
 pipeline {
-  agent none
+  agent {
+    kubernetes {
+      label 'robocation-pipeline'
+      defaultContainer 'jnlp'
+      yamlFile 'jenkinsAgent.yml'
+    }
+  }
   stages {
-    stage('Test') {
-      parallel {
-        stage('Test UI') {
-          when {
-            expression {
-              return true
-            }
-          }
-          agent {
-            kubernetes {
-              label 'jenkins_grade_agent'
-              defaultContainer 'jnlp'
-              yamlFile 'jenkinsAgent.yml'
-              idleMinutes 10
-            }
-          }
-          steps {
-            dir('ui') {
-              runBuildTest()
-            }
-          }
+    stage('Test UI') {
+      steps {
+        container() {
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/robocation/ui:0.1 ui/."
         }
       }
     }
