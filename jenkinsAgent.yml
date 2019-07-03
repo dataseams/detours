@@ -18,8 +18,3 @@ spec:
     command:
     - cat:
     tty: true
-  tolerations:
-  - key: cloud.google.com/gke-preemptible
-    operator: Equal
-    value: "true"
-    effect: NoSchedule
