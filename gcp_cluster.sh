@@ -17,8 +17,8 @@ git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubern
 cd continuous-deployment-on-kubernetes
 
 # Install helm
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
-tar zxfv helm-v2.9.1-linux-amd64.tar.gz
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz
+tar zxfv helm-v2.14.1-linux-amd64.tar.gz
 cp linux-amd64/helm .
 
 # Add yourself as a cluster administrator in the cluster's RBAC so that you can give
@@ -40,10 +40,10 @@ kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-adm
 ./helm version
 
 # Deploy jenkins helm chart - use -f values.yml to replace values
-./helm install -n cd stable/jenkins --version 0.16.6 --wait
+./helm install -n cd stable/jenkins -f jenkins/values.yaml --version 1.2.2 --wait
 
 # Forward jenkins port
-export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
+export POD_NAME=$(kubectl get pods -l "component=jenkins-master" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
 
 # Confirm installation
