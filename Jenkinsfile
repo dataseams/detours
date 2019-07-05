@@ -12,13 +12,11 @@ pipeline {
     }
   }
   stages {
-    stage('Test') {
+    stage('Build') {
       steps {
         container('gcloud') {
-          sh("docker pull gcr.io/robocation/ui:latest")
-          sh("PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} ui/.")
-          // sh("PYTHONUNBUFFERED=1 gcloud build -t ui --cache-from gcr.io/robocation/ui:latest ui/.")
-          sh("python -m pytest ui/.")
+          sh("gcloud builds submit --config cloudBuild.yaml ui/.")
+          // sh("python -m pytest ui/.")
         }
       }
     }
