@@ -12,10 +12,18 @@ pipeline {
     }
   }
   stages {
-    stage('Build') {
+    stage('Build ui') {
       steps {
         container('gcloud') {
           sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
+          // sh("python -m pytest ui/.")
+        }
+      }
+    }
+    stage('Build core') {
+      steps {
+        container('gcloud') {
+          sh("gcloud builds submit --config core/cloudBuild.yml core/.")
           // sh("python -m pytest ui/.")
         }
       }
