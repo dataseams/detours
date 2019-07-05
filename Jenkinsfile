@@ -13,6 +13,7 @@ pipeline {
   }
   stages {
     stage('Build ui') {
+      when {branch 'master'}
       steps {
         container('gcloud') {
           sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
@@ -21,6 +22,7 @@ pipeline {
       }
     }
     stage('Build core') {
+      when {branch 'master'}
       steps {
         container('gcloud') {
           sh("gcloud builds submit --config core/cloudBuild.yml core/.")
