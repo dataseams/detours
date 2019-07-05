@@ -15,7 +15,7 @@ pipeline {
     stage('Build') {
       steps {
         container('gcloud') {
-          sh("gcloud builds submit --config ui/cloudBuild.yaml ui/.")
+          sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
           // sh("python -m pytest ui/.")
         }
       }
