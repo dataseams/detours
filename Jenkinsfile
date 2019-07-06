@@ -1,5 +1,3 @@
-def project = 'robocation'
-def appName = 'ui'
 def SHORT_SHA = ${GIT_COMMIT}
 
 pipeline {
