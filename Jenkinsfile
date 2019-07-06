@@ -1,7 +1,5 @@
 def project = 'robocation'
 def appName = 'ui'
-def uiSvcName = "${appName}-ui"
-def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 def SHORT_SHA = env.GIT_COMMIT
 
 pipeline {
@@ -35,6 +33,7 @@ pipeline {
       when {branch 'master'}
       steps {
         container('gcloud') {
+          sh("printenv | sort")
           sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
         }
       }
