@@ -20,4 +20,3 @@ images: [
     'gcr.io/$PROJECT_ID/ui:production',
     'gcr.io/$PROJECT_ID/ui:$SHORT_SHA',
 ]
-# timeout: 1200s

@@ -1,5 +1,3 @@
-def SHORT_SHA = env.GIT_COMMIT
-
 pipeline {
   agent {
     kubernetes {
@@ -31,7 +29,7 @@ pipeline {
       when {branch 'master'}
       steps {
         container('gcloud') {
-          sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
+          sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config ui/cloudBuild.yml ui/.")
         }
       }
     }
@@ -39,7 +37,7 @@ pipeline {
       when {branch 'master'}
       steps {
         container('gcloud') {
-          sh("gcloud builds submit --config core/cloudBuild.yml core/.")
+          sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config core/cloudBuild.yml core/.")
         }
       }
     }
@@ -47,43 +45,10 @@ pipeline {
       when {branch 'master'}
       steps {
         container('kubectl') {
-          sh("echo $SHORT_SHA")
+          sh("echo hello")
         }
       }
     }
-    // stage('Build and push image with Container Builder') {
-    //   steps {
-    //     container('gcloud') {
-    //       sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} ."
-    //     }
-    //   }
-    // }
-    // stage('Deploy Canary') {
-    //   // Canary branch
-    //   when { branch 'canary' }
-    //   steps {
-    //     container('kubectl') {
-    //       // Change deployed image in canary to the one we just built
-    //       sh("sed -i.bak 's#gcr.io/cloud-solutions-images/gceme:1.0.0#${imageTag}#' ./k8s/canary/*.yaml")
-    //       sh("kubectl --namespace=production apply -f k8s/services/")
-    //       sh("kubectl --namespace=production apply -f k8s/canary/")
-    //       sh("echo http://`kubectl --namespace=production get service/${uiSvcName} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${uiSvcName}")
-    //     }
-    //   }
-    // }
-    // stage('Deploy Production') {
-    //   // Production branch
-    //   when { branch 'master' }
-    //   steps{
-    //     container('kubectl') {
-    //     // Change deployed image in canary to the one we just built
-    //       sh("sed -i.bak 's#gcr.io/cloud-solutions-images/gceme:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
-    //       sh("kubectl --namespace=production apply -f k8s/services/")
-    //       sh("kubectl --namespace=production apply -f k8s/production/")
-    //       sh("echo http://`kubectl --namespace=production get service/${uiSvcName} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${uiSvcName}")
-    //     }
-    //   }
-    // }
   //   stage('Deploy Dev') {
   //     // Developer Branches
   //     when {
