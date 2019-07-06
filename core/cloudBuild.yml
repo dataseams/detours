@@ -1,4 +1,4 @@
-timeout: 20m0s
+timeout: '20m0s'
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
