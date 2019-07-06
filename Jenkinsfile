@@ -25,7 +25,7 @@ pipeline {
       when {branch 'master'}
       steps {
         container('python-core') {
-          // sh("pip install -r core/requirements.txt")
+          sh("pip install -r core/requirements.txt")
           sh("python -m pytest core/.")
         }
       }
@@ -35,7 +35,6 @@ pipeline {
       steps {
         container('gcloud') {
           sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
-          // sh("python -m pytest ui/.")
         }
       }
     }
@@ -44,7 +43,6 @@ pipeline {
       steps {
         container('gcloud') {
           sh("gcloud builds submit --config core/cloudBuild.yml core/.")
-          // sh("python -m pytest ui/.")
         }
       }
     }
