@@ -41,33 +41,13 @@ pipeline {
         }
       }
     }
-    stage("Deploy ui") {
+    stage("Deploy") {
       when {branch 'master'}
       steps {
         container('kubectl') {
-          sh("echo hello")
+          sh("kubectl kustomize k8s | kubectl --namespace=production apply -f -")
         }
       }
     }
-  //   stage('Deploy Dev') {
-  //     // Developer Branches
-  //     when {
-  //       not { branch 'master' }
-  //       not { branch 'canary' }
-  //     }
-  //     steps {
-  //       container('kubectl') {
-  //         // Create namespace if it doesn't exist
-  //         sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
-  //         // Don't use public load balancing for development branches
-  //         sh("sed -i.bak 's#LoadBalancer#ClusterIP#' ./k8s/services/frontend.yaml")
-  //         sh("sed -i.bak 's#gcr.io/cloud-solutions-images/gceme:1.0.0#${imageTag}#' ./k8s/dev/*.yaml")
-  //         sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/services/")
-  //         sh("kubectl --namespace=${env.BRANCH_NAME} apply -f k8s/dev/")
-  //         echo 'To access your environment run `kubectl proxy`'
-  //         echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${uiSvcName}:80/"
-  //       }
-  //     }
-  //   }
   }
 }
