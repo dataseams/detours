@@ -15,7 +15,7 @@ pipeline {
     stage('Test ui') {
       when {branch 'master'}
       steps {
-        container('python') {
+        container('python-ui') {
           sh("pip install -r ui/requirements.txt")
           sh("python -m pytest ui/.")
         }
@@ -24,7 +24,7 @@ pipeline {
     stage('Test core') {
       when {branch 'master'}
       steps {
-        container('python') {
+        container('python-core') {
           // sh("pip install -r core/requirements.txt")
           sh("python -m pytest core/.")
         }
@@ -45,6 +45,14 @@ pipeline {
         container('gcloud') {
           sh("gcloud builds submit --config core/cloudBuild.yml core/.")
           // sh("python -m pytest ui/.")
+        }
+      }
+    }
+    stage("Deploy ui") {
+      when {branch 'master'}
+      steps {
+        container('kubectl') {
+          sh("echo $SHORT_SHA")
         }
       }
     }
