@@ -1,4 +1,4 @@
-def SHORT_SHA = ${GIT_COMMIT}
+def SHORT_SHA = "${env.GIT_COMMIT}"
 
 pipeline {
   agent {
