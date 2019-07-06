@@ -30,6 +30,15 @@ pipeline {
         }
       }
     }
+    stage('Test ui') {
+      when {branch 'master'}
+      steps {
+        container('python') {
+          sh("pip install -r ui/requirements.txt")
+          sh("python -m pytest ui/.")
+        }
+      }
+    }
     // stage('Build and push image with Container Builder') {
     //   steps {
     //     container('gcloud') {
