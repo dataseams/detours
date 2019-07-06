@@ -1,6 +1,6 @@
 def project = 'robocation'
 def appName = 'ui'
-def SHORT_SHA = env.GIT_COMMIT
+def SHORT_SHA = ${GIT_COMMIT}
 
 pipeline {
   agent {
@@ -33,7 +33,6 @@ pipeline {
       when {branch 'master'}
       steps {
         container('gcloud') {
-          sh("printenv | sort")
           sh("gcloud builds submit --config ui/cloudBuild.yml ui/.")
         }
       }
