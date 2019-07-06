@@ -11,12 +11,12 @@ steps:
     'build',
     '-t', 'gcr.io/$PROJECT_ID/core:latest',
     '-t', 'gcr.io/$PROJECT_ID/core:production',
-    '-t', 'gcr.io/$PROJECT_ID/core:$SHORT_SHA',
+    '-t', 'gcr.io/$PROJECT_ID/core:${GIT_COMMIT}',
     '--cache-from', 'gcr.io/$PROJECT_ID/ui:latest',
     '.'
     ]
 images: [
     'gcr.io/$PROJECT_ID/core:latest',
     'gcr.io/$PROJECT_ID/core:production',
-    'gcr.io/$PROJECT_ID/core:$SHORT_SHA',
+    'gcr.io/$PROJECT_ID/core:${GIT_COMMIT}',
 ]
