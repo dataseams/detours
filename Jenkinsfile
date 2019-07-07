@@ -45,8 +45,9 @@ pipeline {
       when {branch 'master'}
       steps {
         container('kubectl') {
-          sh("kubectl --namespace=production apply -f k8s/production/")
-          sh("kubectl --namespace=production apply -f k8s/services/")
+          sh("kubectl -n production deployment -l app=core")
+          sh("kubectl -n production delete deployment -l app=ui")
+          sj("kubectl -n production apply -f k8s/production/")
         }
       }
     }
