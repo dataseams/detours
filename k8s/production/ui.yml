@@ -21,4 +21,3 @@ spec:
         ports:
         - name: ui
           containerPort: 8080
-
