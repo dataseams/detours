@@ -45,7 +45,8 @@ pipeline {
       when {branch 'master'}
       steps {
         container('kubectl') {
-          sh("kubectl kustomize k8s | kubectl --namespace=production apply -f -")
+          sh("kubectl --namespace=production apply -f k8s/prod")
+          sh("kubectl --namespace=production apply -f k8s/services")
         }
       }
     }
