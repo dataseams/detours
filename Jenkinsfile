@@ -13,7 +13,7 @@ pipeline {
         stage('Test ui') {
           when {
             expression {
-              return hasChanges('ui\/')
+              return moduleChanged('ui')
             }
           }
           steps {
@@ -26,7 +26,7 @@ pipeline {
         stage('Test core') {
           when {
             expression {
-              return hasChanges('core\/')
+              return moduleChanged('core')
             }
           }
           steps {
@@ -44,7 +44,7 @@ pipeline {
         stage('Build ui') {
           when {
             expression {
-              return hasChanges('ui\/')
+              return moduleChanged('ui')
             }
           }
           steps {
@@ -56,7 +56,7 @@ pipeline {
         stage('Build core') {
           when {
             expression {
-              return hasChanges('core\/')
+              return moduleChanged('core')
             }
           }
           steps {
@@ -72,10 +72,10 @@ pipeline {
         branch 'master'
         anyOf {
           expression {
-            return hasChanges('ui\/')
+            return moduleChanged('ui')
           }
           expression {
-            return hasChanges('k8s\/production\/ui.yml')
+            return fileChanged('k8s.production.ui.yml')
           }
         }
       }
@@ -91,10 +91,10 @@ pipeline {
         branch 'master'
         anyOf {
           expression {
-            return hasChanges('core\/')
+            return moduleChanged('core')
           }
           expression {
-            return hasChanges('k8s\/production\/core.yml')
+            return fileChanged('k8s.production.core.yml')
           }
         }
       }
@@ -109,7 +109,7 @@ pipeline {
       when {
         branch 'master'
         expression {
-          return hasChanges('k8s\/services\/ui.yml')
+          return moduleChanged('k8s.services.ui.yml')
         }
       }
       steps {
@@ -121,7 +121,7 @@ pipeline {
       when {
         branch 'master'
         expression {
-          return hasChanges('k8s\/services\/core.yml')
+          return fileChanged('k8s.services.core.yml')
         }
       }
       steps {
@@ -132,10 +132,18 @@ pipeline {
   }
 }
 
-boolean hasChanges(String module) {
+boolean moduleChanged(String module) {
     def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
     return sh(
         returnStatus: true,
-        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}'
+        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}/'
+    ) == 0
+}
+
+boolean fileChanged(String file) {
+    def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
+    return sh(
+        returnStatus: true,
+        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep "^${file}$"'
     ) == 0
 }
