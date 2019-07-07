@@ -136,6 +136,6 @@ boolean hasChanges(String module) {
     def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
     return sh(
         returnStatus: true,
-        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}'
+        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}/'
     ) == 0
 }
