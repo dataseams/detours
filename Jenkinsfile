@@ -49,7 +49,9 @@ pipeline {
           }
           steps {
             container('gcloud') {
-              sh('gcloud builds submit --substitutions=SHORT_SHA=${env.GIT_COMMIT},_BUILD_ID=${env.BUILD_ID} --config ui/cloudBuild.yml ui/.')
+              sh("echo ${env.GIT_COMMIT}")
+              sh("echo ${env.BUILD_ID}")
+              sh("gcloud builds submit --substitutions=SHORT_SHA=${env.GIT_COMMIT},_BUILD_ID=${env.BUILD_ID} --config ui/cloudBuild.yml ui/.")
             }
           }
         }
@@ -61,7 +63,7 @@ pipeline {
           }
           steps {
             container('gcloud') {
-              sh('gcloud builds submit --substitutions=SHORT_SHA=${env.GIT_COMMIT},_BUILD_ID=${env.BUILD_ID} --config core/cloudBuild.yml core/.')
+              sh("gcloud builds submit --substitutions=SHORT_SHA=${env.GIT_COMMIT},_BUILD_ID=${env.BUILD_ID} --config core/cloudBuild.yml core/.")
             }
           }
         }

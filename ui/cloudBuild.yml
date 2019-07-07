@@ -16,8 +16,6 @@ steps:
     '--cache-from', 'gcr.io/$PROJECT_ID/ui:latest',
     '.'
     ]
-substitutions:
-    PROJECT_ID: build.ProjetId
 images: [
     'gcr.io/$PROJECT_ID/ui:latest',
     'gcr.io/$PROJECT_ID/ui:production',
