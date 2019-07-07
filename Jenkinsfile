@@ -30,17 +30,19 @@ pipeline {
     }
     stage('Build') {
       when {branch 'master'}
-      stage('Build ui') {
-        steps {
-          container('gcloud') {
-            sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config ui/cloudBuild.yml ui/.")
+      parallel {
+        stage('Build ui') {
+          steps {
+            container('gcloud') {
+              sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config ui/cloudBuild.yml ui/.")
+            }
           }
         }
-      }
-      stage('Build core') {
-        steps {
-          container('gcloud') {
-            sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config core/cloudBuild.yml core/.")
+        stage('Build core') {
+          steps {
+            container('gcloud') {
+              sh("gcloud builds submit --substitutions SHORT_SHA=${env.GIT_COMMIT} --config core/cloudBuild.yml core/.")
+            }
           }
         }
       }
