@@ -12,6 +12,7 @@ steps:
     '-t', 'gcr.io/$PROJECT_ID/ui:latest',
     '-t', 'gcr.io/robocation/ui:production',
     '-t', 'gcr.io/robocation/ui:$SHORT_SHA',
+    '-t', 'gcr.io/robocation/ui:$BUILD_NO',
     '--cache-from', 'gcr.io/$PROJECT_ID/ui:latest',
     '.'
     ]
@@ -21,4 +22,5 @@ images: [
     'gcr.io/$PROJECT_ID/ui:latest',
     'gcr.io/$PROJECT_ID/ui:production',
     'gcr.io/$PROJECT_ID/ui:$SHORT_SHA',
+    'gcr.io/robocation/ui:$BUILD_NO',
 ]
