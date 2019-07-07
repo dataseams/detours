@@ -1,4 +1,5 @@
 Welcome to Robocation!
 Bonjour.
-Goodbye
+Please come back.
+Goodbye.
 ...
