@@ -12,6 +12,7 @@ steps:
     '-t', 'gcr.io/$PROJECT_ID/core:latest',
     '-t', 'gcr.io/$PROJECT_ID/core:production',
     '-t', 'gcr.io/$PROJECT_ID/core:$SHORT_SHA',
+    '-t', 'gcr.io/$PROJET_ID/core:$BUILD_ID',
     '--cache-from', 'gcr.io/$PROJECT_ID/ui:latest',
     '.'
     ]
@@ -19,4 +20,5 @@ images: [
     'gcr.io/$PROJECT_ID/core:latest',
     'gcr.io/$PROJECT_ID/core:production',
     'gcr.io/$PROJECT_ID/core:$SHORT_SHA',
+    'gcr.io/$PROJET_ID/core:$BUILD_ID',
 ]
