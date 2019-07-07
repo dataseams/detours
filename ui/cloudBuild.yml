@@ -12,13 +12,13 @@ steps:
     '-t', 'gcr.io/$PROJECT_ID/ui:latest',
     '-t', 'gcr.io/robocation/ui:production',
     '-t', 'gcr.io/robocation/ui:$SHORT_SHA',
-    '-t', 'gcr.io/robocation/ui:$BUILD_ID',
     '--cache-from', 'gcr.io/$PROJECT_ID/ui:latest',
     '.'
     ]
+substitutions:
+    PROJECT_ID: build.ProjetId
 images: [
     'gcr.io/$PROJECT_ID/ui:latest',
     'gcr.io/$PROJECT_ID/ui:production',
     'gcr.io/$PROJECT_ID/ui:$SHORT_SHA',
-    'gcr.io/robocation/ui:$BUILD_ID',
 ]
