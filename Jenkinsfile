@@ -144,6 +144,6 @@ boolean fileChanged(String file) {
     def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
     return sh(
         returnStatus: true,
-        script: "git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${file}$"
+        script: "git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${file}"
     ) == 0
 }
