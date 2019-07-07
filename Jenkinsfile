@@ -13,7 +13,7 @@ pipeline {
         stage('Test ui') {
           when {
             expression {
-              return moduleChanged('ui')
+              return moduleChanged("ui")
             }
           }
           steps {
@@ -26,7 +26,7 @@ pipeline {
         stage('Test core') {
           when {
             expression {
-              return moduleChanged('core')
+              return moduleChanged("core")
             }
           }
           steps {
@@ -44,7 +44,7 @@ pipeline {
         stage('Build ui') {
           when {
             expression {
-              return moduleChanged('ui')
+              return moduleChanged("ui")
             }
           }
           steps {
@@ -56,7 +56,7 @@ pipeline {
         stage('Build core') {
           when {
             expression {
-              return moduleChanged('core')
+              return moduleChanged("core")
             }
           }
           steps {
@@ -72,7 +72,7 @@ pipeline {
         branch 'master'
         anyOf {
           expression {
-            return moduleChanged('ui')
+            return moduleChanged("ui")
           }
           expression {
             return fileChanged('k8s.production.ui.yml')
@@ -136,7 +136,7 @@ boolean moduleChanged(String module) {
     def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
     return sh(
         returnStatus: true,
-        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}/'
+        script: "git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${module}/"
     ) == 0
 }
 
@@ -144,6 +144,6 @@ boolean fileChanged(String file) {
     def diffBase = !env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? 'origin/master' : env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
     return sh(
         returnStatus: true,
-        script: 'git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep "^${file}$"'
+        script: "git diff --name-only ${diffBase}...${env.GIT_COMMIT} | grep ^${file}$"
     ) == 0
 }
