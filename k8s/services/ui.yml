@@ -4,6 +4,8 @@ metadata:
   name: ui
   labels:
     app: ui
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "robocation-static-ip"
 spec:
   type: LoadBalancer
   selector:
@@ -13,7 +15,3 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8080
-status:
-  loadBalancer:
-    ingress:
-      - ip: 34.94.90.221
