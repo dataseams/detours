@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fanout-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "fanout-static-ip"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /jenkins
+        backend:
+          serviceName: cd-jenkins
+          servicePort: 8080
