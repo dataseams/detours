@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: core
-        image: robocation/core:0.1
-        imagePullPolicy: IfNotPresent
+        image: robocation/core:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
         livenessProbe:
@@ -25,4 +25,4 @@ spec:
             path: /test
             port: 5000
           initialDelaySeconds: 60
-          periodSeconds: 5
+          periodSeconds: 10

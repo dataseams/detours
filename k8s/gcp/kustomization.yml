@@ -1,5 +1,5 @@
 resources:
-- prod/core.yml
-- prod/ui.yml
+- production/core.yml
+- production/ui.yml
 - services/core.yml
 - services/ui.yml
