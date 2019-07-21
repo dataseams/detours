@@ -13,3 +13,22 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ui
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: ui
+    servicePort: 80
+  rules:
+  - host: dataseams.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ui
+          servicePort: 80
