@@ -22,3 +22,12 @@ source ~/.zshrc
 
 `ansible-playbook -K minikube.yml`
 
+## Continuous Development with skaffold
+
+We use skaffold for continuous development. To build and deployt a development environment in minikube, run the command below:
+
+`skaffold dev`
+
+This will automatically deploy any saved changes in your local environment. If you prefer to deploy without automatic deployment of changes, run the command below:
+
+`skaffold run --tail`
