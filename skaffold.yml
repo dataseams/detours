@@ -1,0 +1,69 @@
+apiVersion: skaffold/v1beta13
+kind: Config
+metadata:
+  name: robocation-dev
+
+profiles:
+- name: core
+  build:
+    artifacts:
+    - image: robocation/core
+      context: core/.
+      sync:
+        manual:
+        - src: "core/*"
+          dest: "app/"
+      docker:
+        dockerfile: dockerfile
+  deploy:
+    kubectl:
+      manifests:
+      - k8s/minikube/deployment/core.yml
+      - k8s/minikube/services/core.yml
+      flags:
+        global: [-n,development]
+- name: ui
+  build:
+    artifacts:
+    - image: robocation/ui
+      context: ui/.
+      sync:
+        manual:
+        - src: "ui/*"
+          dest: "app/"
+      docker:
+        dockerfile: dockerfile
+  deploy:
+    kubectl:
+      manifests:
+      - k8s/minikube/deployment/ui.yml
+      - k8s/minikube/services/ui.yml
+      flags:
+        global: [-n,development]
+build:
+  artifacts:
+  - image: robocation/core
+    context: core/.
+    sync:
+      manual:
+      - src: "core/*"
+        dest: "app/"
+    docker:
+      dockerfile: dockerfile
+  - image: robocation/ui
+    context: ui/.
+    sync:
+      manual:
+      - src: "ui/*"
+        dest: "app/"
+    docker:
+      dockerfile: dockerfile
+  local:
+    push: false
+deploy:
+  kubectl:
+    manifests:
+    - k8s/minikube/deployment/*.yml
+    - k8s/minikube/services/*.yml
+    flags:
+      global: [-n,development]

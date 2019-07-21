@@ -1,0 +1,5 @@
+resources:
+- deployment/core.yml
+- deployment/ui.yml
+- services/core.yml
+- services/ui.yml

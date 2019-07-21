@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ui
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: ui
   ports:
@@ -13,18 +13,3 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8080
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: ui-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: ui
-          servicePort: 80
