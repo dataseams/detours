@@ -2,15 +2,37 @@
 
 The Travel Robot
 
-## Continuous Development
+## Local Development Setup
+We use minikube and a combination of tools for local development. To setup your local development environment on ubuntu, follow the instructions below, assuming you use a _zsh_ shell:
 
-Support is provided to allow simple and straightforward setup of your local development cluster with minikube. Follow the steps below to build the solution in your local minikube environment.
+1- Install miniconda
 
-`minikube start`
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+zsh Miniconda3-latest-Linux-x86_64.sh
+eval "$(/home/sam/miniconda3/bin/conda shell.zsh hook)"
+conda init zsh
+source ~/.zshrc
+```
 
-After minikube cluster starts, run the command below to build and deploy the solution:
+2- Install ansible with miniconda's pip
 
-`kubectl create ns development`
+`pip install ansible`
+
+3- Let ansible setup your environment by running the following command (_coming soon_)
+
+`ansible-playbook -K minikube.yml`
+
+_this should start minikube and create the development namespace_
+
+## Continuous Development with skaffold
+
+We use skaffold for continuous development. To build and deployt a development environment in minikube, run the command below:
+
+`skaffold dev`
+
+This will automatically deploy any saved changes in your local environment. If you prefer to deploy without automatic deployment of changes, run the command below:
+
 `skaffold run --tail`
 
 Follow the link below to access the ui in your local development environment.
