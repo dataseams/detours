@@ -1,0 +1,39 @@
+- name: Initial setup
+  hosts: localhost
+  tasks:
+
+  - name: install minikube
+    become: true
+    apt:
+      name: minikube
+      state: present
+
+  - name: install vim
+    become: true
+    apt:
+      name: vim
+      state: present
+
+  - name: install net-tools for ifconfig
+    become: true
+    apt:
+      name: net-tools
+      state: present
+
+  - name: install pciutils for lpci
+    become: true
+    apt:
+      name: pciutils
+      state: present
+
+  - name: install kmod
+    become: true
+    apt:
+      name: kmod
+      state: present
+
+  - name: install aircrack-ng
+    become: true
+    apt:
+      name: aircrack-ng
+      state: present
