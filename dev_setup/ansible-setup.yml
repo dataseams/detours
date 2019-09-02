@@ -1,0 +1,44 @@
+- name: environment setup
+  hosts: localhost
+  tasks:
+
+# ui requirements
+  - name: download nodejs and npm
+    get_url:
+      url: https://deb.nodesource.com/setup_12.x
+      dest: /tmp/nodesetup
+      mode: '0755'
+
+  - name: setup nodejs and npm
+    become: true
+    command: /tmp/nodesetup
+
+  - name: install nodejs
+    become: true
+    apt:
+      name: nodejs
+      state: latest
+
+  - name: install gcc
+    become: true
+    apt:
+      name: gcc
+      state: latest
+
+  - name: install g++
+    become: true
+    apt:
+      name: g++
+      state: latest
+
+  - name: install make
+    become: true
+    apt:
+      name: make
+      state: latest
+
+  - name: install make
+    become: true
+    apt:
+      name: make
+      state: latest
