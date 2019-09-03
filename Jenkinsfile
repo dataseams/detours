@@ -18,8 +18,8 @@ pipeline {
           }
           steps {
             container('python-ui') {
-              sh('pip install -r ui/requirements.txt')
-              sh('python -m pytest ui/.')
+              // sh('pip install -r ui/requirements.txt')
+              // sh('python -m pytest ui/.')
             }
           }
         }

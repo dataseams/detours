@@ -20,4 +20,4 @@ spec:
         imagePullPolicy: Never
         ports:
         - name: ui
-          containerPort: 8080
+          containerPort: 3000
