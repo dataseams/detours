@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
 
-# ui requirements
+# ui package requirements
   - name: download nodejs and npm
     get_url:
       url: https://deb.nodesource.com/setup_12.x
@@ -42,3 +42,10 @@
     apt:
       name: make
       state: latest
+
+# Minikube and infrastructure
+  - name: install minikube
+    become: true
+    apt:
+      name: minikube
+      state: present
