@@ -1,31 +1,45 @@
+import { useRouter } from 'next/router';
+import Markdown from 'react-markdown';
 import Layout from '../components/MyLayout';
-import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
 
-const Index = props => (
-  <Layout>
-    <h1>Batman TV Shows</h1>
-    <ul>
-      {props.shows.map(show => (
-        <li key={show.id}>
-          <Link href="/p/[id]" as={`/p/${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </Layout>
-);
+export default () => {
+  const router = useRouter();
+  return (
+    <Layout>
+      <h1>{router.query.id}</h1>
+      <div className="markdown">
+        <Markdown
+          source={`
+This is our blog post.
+Yes. We can have a [link](/link).
+And we can have a title as well.
 
-Index.getInitialProps = async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data = await res.json();
+### This is a title
 
-  console.log(`Show data fetched. Count: ${data.length}`);
+And here's the content.
+      `}
+        />
+      </div>
+      <style jsx global>{`
+        .markdown {
+          font-family: 'Arial';
+        }
 
-  return {
-    shows: data.map(entry => entry.show)
-  };
+        .markdown a {
+          text-decoration: none;
+          color: blue;
+        }
+
+        .markdown a:hover {
+          opacity: 0.6;
+        }
+
+        .markdown h3 {
+          margin: 0;
+          padding: 0;
+          text-transform: uppercase;
+        }
+      `}</style>
+    </Layout>
+  );
 };
-
-export default Index;
