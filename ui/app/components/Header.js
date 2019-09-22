@@ -5,7 +5,7 @@ const Header = () => (
     <div>
       <button><Link><a href="/survey">Get Started</a></Link></button>
       <ul>
-        <li><Link><a href="/about-us">About Us</a></Link></li>
+        <li><Link><a href="/about">About Us</a></Link></li>
         <li><Link><a href="/pricing">Pricing</a></Link></li>
         <li><Link><a href="/how-it-works">How It Works</a></Link></li>
         <li><Link><a href="/">Home</a></Link></li>
