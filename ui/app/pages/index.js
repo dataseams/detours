@@ -1,6 +1,5 @@
 import Layout from '../components/MainLayout';
 import Link from 'next/link';
-import parisImg from '../img/paris.png';
 
 const Index = props => (
   <Layout>
@@ -13,7 +12,7 @@ const Index = props => (
         <div id="sample-itineraries">
           <p>See sample itineraries to:</p>
           <div id="city-1">
-            <img src={parisImg} alt="Paris, France" />
+            <img src="/static/paris.png" alt="Paris, France" />
           </div>
         </div>
       </div>
