@@ -19,5 +19,9 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-markdown": "^4.2.2"
+  },
+  "devDependencies": {
+    "file-loader": "^4.2.0",
+    "img-loader": "^3.0.1"
   }
 }
