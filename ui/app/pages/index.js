@@ -6,27 +6,28 @@ const Index = props => (
     <div>
       <h1 id="h1-first">Plan your dream vacation,</h1>
       <h1 id="h1-second">tailored just for you.</h1>
-      <p>Fill out a short questionnaire and get a personalized itinerary.</p>
+      <p id="subtitle-1">Fill out a short questionnaire and get a personalized itinerary</p>
+      <p id="subtitle-2">in <b>5 minutes.</b></p>
       <button><Link><a href="/survey">Get Started</a></Link></button>
       <div id="landing-2">
         <div id="sample-itineraries">
           <p id="see-header">See sample itineraries to:</p>
           <div id="sample-images">
-            <div id="city-1" className="image">
+            <div id="city-1" className="image-container">
               <img src="/static/paris.png" alt="Paris, France" />
-              <div className="img-text">Paris, France</div>
+              <span className="img-text">Paris, France</span>
             </div>
-            <div id="city-2" className="image">
+            <div id="city-2" className="image-container">
               <img src="/static/nyc.png" alt="NYC, NY" />
-              <div className="img-text">New York, NY</div>
+              <span className="img-text">New York, NY</span>
             </div>
-            <div id="city-3" className="image">
+            <div id="city-3" className="image-container">
               <img src="/static/goldengate.png" alt="San Francisco, CA" />
-              <div className="img-text">San Francisco, CA</div>
+              <span className="img-text">San Francisco, CA</span>
             </div>
-            <div id="city-4" className="image">
+            <div id="city-4" className="image-container">
               <img src="/static/barcelona.png" alt="Barcelona, Spain" />
-              <div className="img-text">Barcelona, Spain</div>
+              <span className="img-text">Barcelona, Spain</span>
             </div>
           </div>
         </div>
@@ -61,6 +62,14 @@ const Index = props => (
         letter-spacing: 0;
       }
 
+      #subtitle-1 {
+        margin-bottom: 0;
+      }
+
+      #subtitle-2 {
+        margin-top: 0;
+      }
+
       button {
         margin: 10px 0 30px 0;
         text-align: center;
@@ -89,13 +98,6 @@ const Index = props => (
         box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
       }
 
-      img {
-        max-width: 100%;
-        object-fit: contain;
-        margin: 0;
-        padding: 0;
-      }
-
       #landing-2 {
         justify-text: center;
         width: 100%;
@@ -118,7 +120,14 @@ const Index = props => (
         font-size: 1.3em;
       }
 
-      .image {
+      img {
+        max-width: 100%;
+        object-fit: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .image-container {
         display: inline-block;
         padding-right: 25px;
         width: 220px;
@@ -130,6 +139,8 @@ const Index = props => (
         text-align: left;
         padding: 10px;
         font-size: 0.9em;
+        display: block;
+        margin-top: -7px;
       }
 
       #landing-3 {
