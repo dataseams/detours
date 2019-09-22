@@ -10,7 +10,7 @@ const Index = props => (
       <button><Link><a href="/survey">Get Started</a></Link></button>
       <div id="landing-2">
         <div id="sample-itineraries">
-          <p id="see-text">See sample itineraries to:</p>
+          <p id="see-header">See sample itineraries to:</p>
           <div id="sample-images">
             <div id="city-1" className="image">
               <img src="/static/paris.png" alt="Paris, France" />
@@ -29,6 +29,11 @@ const Index = props => (
               <div className="img-text">Barcelona, Spain</div>
             </div>
           </div>
+        </div>
+      </div>
+      <div id="landing-3">
+        <div id="testimonials">
+          <p id="testimonials-header">What our customers say</p>
         </div>
       </div>
     </div>
@@ -93,53 +98,31 @@ const Index = props => (
 
       #landing-2 {
         justify-text: center;
-        display: flex;
         width: 100%;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
       }
 
       #sample-itineraries {
-        width: 80%;
+        margin: 20px;
+        width: 100%;
         height: auto;
         text-align: left;
         background-color: #5865BC;
         padding: 25px 20px 20px 30px;
       }
 
-      #see-text {
+      #see-header {
         color: white;
+        font-size: 1.3em;
       }
 
-      #sample-images {
-        display: flex;
-      }
-
-      #city-1 {
+      .image {
+        display: inline-block;
         padding-right: 25px;
-        width: 250px;
-        height: 250px;
-      }
-
-      #city-2 {
-        padding-right: 25px;
-        width: 250px;
-        height: 250px;
-      }
-
-      #city-3 {
-        padding-right: 25px;
-        width: 250px;
-        height: 250px;
-      }
-
-      #city-4 {
-        padding: 0px 10px 5px 20px;
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
       }
 
       .img-text {
@@ -147,6 +130,26 @@ const Index = props => (
         text-align: left;
         padding: 10px;
         font-size: 0.9em;
+      }
+
+      #landing-3 {
+        justify-text: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #testimonials {
+        margin: 20px;
+        width: 100%;
+        height: auto;
+        text-align: left;
+        padding: 25px 20px 20px 30px;
+      }
+
+      #testimonials-header {
+        font-size: 1.3em;
       }
     `}
     </style>
