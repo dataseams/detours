@@ -3,12 +3,12 @@ import Link from 'next/link';
 const Header = () => (
   <div id="navbar">
     <div>
-      <button><Link><a href="/survey">Get Started</a></Link></button>
+      <Link href="/survey"><button><a>Get Started</a></button></Link>
       <ul>
-        <li><Link><a href="/about">About Us</a></Link></li>
-        <li><Link><a href="/pricing">Pricing</a></Link></li>
-        <li><Link><a href="/how-it-works">How It Works</a></Link></li>
-        <li><Link><a href="/">Home</a></Link></li>
+        <li><Link href="/about"><a>About Us</a></Link></li>
+        <li><Link href="/pricing"><a>Pricing</a></Link></li>
+        <li><Link href="/how-it-works"><a>How It Works</a></Link></li>
+        <li><Link href="/"><a>Home</a></Link></li>
       </ul>
     </div>
 
@@ -69,6 +69,7 @@ const Header = () => (
         -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
         -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
         box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+        cursor: pointer;
       }
     `}
     </style>

@@ -1,9 +1,9 @@
 import Layout from '../components/MainLayout';
 import Link from 'next/link';
 
-const testimonial_1_avatar = "/static/mary.png"
-const testimonial_2_avatar = "/static/mary.png"
-const testimonial_3_avatar = "/static/mary.png"
+const testimonial_1_avatar = "/static/kathleen.png"
+const testimonial_2_avatar = "/static/kathleen.png"
+const testimonial_3_avatar = "/static/kathleen.png"
 
 const testimonial_1_text = "This travel agent and concierge rolled into one will construct a highly detailed itinerary for you that includes the best restaurants, sights, and events for your trip.";
 const testimonial_2_text = "This travel agent and concierge rolled into one will construct a highly detailed itinerary for you that includes the best restaurants, sights, and events for your trip.";
@@ -18,7 +18,7 @@ const Index = props => (
     <div id="landing-1">
       <h1>Plan your dream vacation, tailored just for you.</h1>
       <p id="subtitle">Fill out a short questionnaire and get a personalized itinerary in <b>5 minutes.</b></p>
-      <button><Link><a href="/survey">Get Started</a></Link></button>
+      <Link href="/survey"><button><a>Get Started</a></button></Link>
     </div>
     <div id="landing-2">
       <div id="sample-itineraries">
@@ -148,6 +148,7 @@ const Index = props => (
         -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.6);
         -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.6);
         box-shadow: 5px 40px -10px rgba(0,0,0,0.6);
+        cursor: pointer;
       }
 
       #landing-2 {
