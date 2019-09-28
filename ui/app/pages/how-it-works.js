@@ -4,10 +4,10 @@ import fetch from 'isomorphic-unfetch';
 
 const HowItWorks = props => (
   <Layout>
-    <h1>Batman TV Shows</h1>
+    <h1>Somehow it does.</h1>
     <style jsx>{`
       h1 {
-        color: Blue;
+        color: Gray;
         margin-top: 100px;
       }
     `}
