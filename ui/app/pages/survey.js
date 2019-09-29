@@ -1,6 +1,8 @@
 import Layout from "../components/MainLayout";
 import React from "react";
 import Select from "react-select";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core";
 
 // my questions.json
 let questions = [
@@ -10,15 +12,31 @@ let questions = [
   },
   {
     id: 1,
-    desc: "Kitty"
+    desc: "When are you planning to take your vacation?"
   },
   {
     id: 2,
-    desc: "Ji"
+    desc: "What occasion are you celebrating?"
   },
   {
     id: 3,
-    desc: "Mattis"
+    desc: "What is your age and gender?"
+  },
+  {
+    id: 4,
+    desc: "Who are you travelling with?"
+  },
+  {
+    id: 5,
+    desc: "Have you travelled to this location before?"
+  },
+  {
+    id: 6,
+    desc: "What do you like to do when you travel?"
+  },
+  {
+    id: 7,
+    desc: "Food & beverages"
   }
 ];
 
@@ -26,27 +44,131 @@ const cityOptions = [
   { value: "Paris", label: "Paris, France" },
   { value: "SF", label: "San Francisco, CA" },
   { value: "LA", label: "Los Angeles, CA" },
-  { value: "Habana", label: "Habana, Cuba" }
+  { value: "Habana", label: "Habana, Cuba" },
+  { value: "Other", label: "Other" }
 ];
+
+const useStyles = makeStyles(theme => ({
+  nextButton: {
+    margin: theme.spacing(1),
+    minWidth: "20%",
+    backgroundColor: "#5865bc",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#5865bc",
+      opacity: 0.7
+    }
+  },
+
+  backButton: {
+    margin: theme.spacing(1),
+    minWidth: "20%",
+    backgroundColor: "white",
+    border: '1px solid "#5865bc',
+    "&:hover": {
+      backgroundColor: "white",
+      opacity: 0.7
+    }
+  }
+}));
+
+function QuestionComp(props) {
+  questions = props.questions;
+  const question = questions ? questions[props.index] : null;
+  console.log(question);
+
+  var comp = {
+    0: (
+      <div>
+        <span className="q-title">STEP 1/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Select
+            placeholder="Type or select..."
+            options={cityOptions}
+          ></Select>
+        </div>
+      </div>
+    ),
+    1: (
+      <div>
+        <span className="q-title">STEP 2/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    2: (
+      <div>
+        <span className="q-title">STEP 3/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    3: (
+      <div>
+        <span className="q-title">STEP 4/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    4: (
+      <div>
+        <span className="q-title">STEP 4/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    5: (
+      <div>
+        <span className="q-title">STEP 4/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    6: (
+      <div>
+        <span className="q-title">STEP 4/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    ),
+    7: (
+      <div>
+        <span className="q-title">STEP 4/15</span>
+        <div>
+          <h1>{question.desc}</h1>
+        </div>
+      </div>
+    )
+  };
+
+  return comp[props.index];
+}
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      index: 1,
+      index: 0,
       disabledNext: false,
-      disabledPrev: false
+      disabledBack: true
     };
   }
 
-  togglePrev(e) {
+  toggleBack(e) {
     let index = this.state.index - 1;
-    let disabledPrev = index === 0;
+    let disabledBack = index === 0;
 
     this.setState({
       index: index,
-      disabledPrev: disabledPrev,
+      disabledBack: disabledBack,
       disabledNext: false
     });
   }
@@ -58,36 +180,35 @@ class Main extends React.Component {
     this.setState({
       index: index,
       disabledNext: disabledNext,
-      disabledPrev: false
+      disabledBack: false
     });
   }
 
   render() {
-    const { index, disabledNext, disabledPrev } = this.state;
+    const { index, disabledNext, disabledBack } = this.state;
     const question = this.props.questions ? this.props.questions[index] : null;
 
     if (question) {
       return (
         <div className="survey">
           <div>
-            <h3>STEP 1/15</h3>
-            <Question {...question} />
-            <div className="survey-buttons">
-              <Prev toggle={e => this.togglePrev(e)} active={disabledPrev} />
-              <Next toggle={e => this.toggleNext(e)} active={disabledNext} />
-            </div>
+            <QuestionComp questions={questions} index={index} />
+          </div>
+          <div className="survey-buttons">
+            <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
+            <Next toggle={e => this.toggleNext(e)} active={disabledNext} />
           </div>
           <style jsx>
             {`
-              h3 {
-                color: #606DC3,
+              .q-title {
+                color: red,
                 text-transform: uppercase;
                 font-size: 1.125em;
               }
 
               .survey {
                 text-align: left;
-                max-width: 40%;
+                width: 40%;
               }
 
               .question {
@@ -108,30 +229,33 @@ class Main extends React.Component {
   }
 }
 
-function Prev(props) {
+function Back(props) {
+  const classes = useStyles();
+
   return (
-    <dv>
-      <button onClick={props.toggle} disabled={props.active}>
-        Previous
-      </button>
-    </dv>
+    <Button
+      variant="contained"
+      className={classes.backButton}
+      onClick={props.toggle}
+      disabled={props.active}
+    >
+      Back
+    </Button>
   );
 }
 
 function Next(props) {
-  return (
-    <button onClick={props.toggle} disabled={props.active}>
-      Next
-    </button>
-  );
-}
+  const classes = useStyles();
 
-function Question(props) {
   return (
-    <div>
-      <h1>{props.desc}</h1>
-      <Select placeholder="Type or select..." options={cityOptions}></Select>
-    </div>
+    <Button
+      variant="contained"
+      className={classes.nextButton}
+      onClick={props.toggle}
+      disabled={props.active}
+    >
+      Next
+    </Button>
   );
 }
 
