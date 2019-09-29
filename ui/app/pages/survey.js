@@ -7,6 +7,9 @@ import { makeStyles } from "@material-ui/core";
 import Occasion from "../components/q-occasions";
 import City from "../components/q-cities";
 import TravelDates from "../components/q-dates";
+import AgeGender from "../components/q-agegender";
+import Companion from "../components/q-companion";
+import PriorVisit from "../components/q-priorvisit";
 
 // my questions.json
 let questions = [
@@ -104,6 +107,7 @@ function QuestionComp(props) {
         <span>STEP 4/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <AgeGender />
         </div>
       </div>
     ),
@@ -112,6 +116,7 @@ function QuestionComp(props) {
         <span>STEP 5/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <Companion />
         </div>
       </div>
     ),
@@ -120,6 +125,7 @@ function QuestionComp(props) {
         <span>STEP 6/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <PriorVisit />
         </div>
       </div>
     ),
@@ -149,7 +155,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      index: 0,
+      index: 4,
       disabledNext: false,
       disabledBack: true
     };
