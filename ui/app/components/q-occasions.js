@@ -2,7 +2,7 @@
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 // Local modules
-import StyledRadio from "../components/styles";
+import { StyledRadio } from "../components/styles";
 
 function Occasion() {
   let occasions = [

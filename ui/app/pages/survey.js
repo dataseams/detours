@@ -9,7 +9,8 @@ import City from "../components/q-cities";
 import TravelDates from "../components/q-dates";
 import AgeGender from "../components/q-agegender";
 import Companion from "../components/q-companion";
-import PriorVisit from "../components/q-priorvisit";
+import PriorVisit from "../components/q-priorvisits";
+import Preferences from "../components/q-preferences";
 
 // my questions.json
 let questions = [
@@ -134,6 +135,7 @@ function QuestionComp(props) {
         <span>STEP 7/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <Preferences />
         </div>
       </div>
     ),
@@ -155,9 +157,9 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      index: 4,
+      index: 6,
       disabledNext: false,
-      disabledBack: true
+      disabledBack: false
     };
   }
 
