@@ -46,23 +46,24 @@ const radioStyles = makeStyles({
   }
 });
 
-
 function StyledRadio(props) {
-const classes = radioStyles();
+  const classes = radioStyles();
 
   return (
     <Radio
-    className={classes.root}
-    disableRipple
-    color="default"
-    checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-    icon={<span className={classes.icon} />}
-    {...props}
+      className={classes.root}
+      disableRipple
+      color="default"
+      checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+      icon={<span className={classes.icon} />}
+      {...props}
     />
   );
 }
 
 function Occasion() {
+  const classes = radioStyles();
+
   let occasions = [
     { label: "Honeymoon", value: "Honeymoon" },
     { label: "Babymoon", value: "Babymoon" },
@@ -77,16 +78,16 @@ function Occasion() {
 
   return (
     <RadioGroup defaultValue="Honeymoon">
-    {occasions.map((choice, index) => (
-      <FormControlLabel
-      key={choice.value}
-      value={choice.value}
-      control={<StyledRadio />}
-      label={choice.label}
-      />
-    ))}
+      {occasions.map((choice, index) => (
+        <FormControlLabel
+          key={choice.value}
+          value={choice.value}
+          control={<StyledRadio />}
+          label={choice.label}
+        />
+      ))}
     </RadioGroup>
-    );
+  );
 }
 
 export default Occasion;
