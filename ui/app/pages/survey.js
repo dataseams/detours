@@ -1,8 +1,18 @@
+import "date-fns";
 import Layout from "../components/MainLayout";
 import React from "react";
+import clsx from "clsx";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, RadioGroup, Radio } from "@material-ui/core";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+  KeyboardTimePicker
+} from "@material-ui/pickers";
 
 // my questions.json
 let questions = [
@@ -64,7 +74,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: "20%",
     backgroundColor: "white",
-    border: '1px solid "#5865bc',
     "&:hover": {
       backgroundColor: "white",
       opacity: 0.7
@@ -72,15 +81,175 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+const radioStyles = makeStyles({
+  root: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+  icon: {
+    borderRadius: '50%',
+    width: 16,
+    height: 16,
+    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+    backgroundColor: '#f5f8fa',
+    backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
+    '$root.Mui-focusVisible &': {
+      outline: '2px auto rgba(19,124,189,.6)',
+      outlineOffset: 2,
+    },
+    'input:hover ~ &': {
+      backgroundColor: '#ebf1f5',
+    },
+    'input:disabled ~ &': {
+      boxShadow: 'none',
+      background: 'rgba(206,217,224,.5)',
+    },
+  },
+  checkedIcon: {
+    backgroundColor: '#606DC3',
+    backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
+    '&:before': {
+      display: 'block',
+      width: 16,
+      height: 16,
+      backgroundImage: 'radial-gradient(#fff,#fff 28%,transparent 32%)',
+      content: '""',
+    },
+    'input:hover ~ &': {
+      backgroundColor: '#106ba3',
+    },
+  },
+});
+
+
+function TravelDates() {
+  const [arrivalDate, setArrivalDate] = React.useState(new Date());
+  const [returnDate, setReturnDate] = React.useState(new Date());
+  const [arrivalTime, setArrivalTime] = React.useState(new Date());
+  const [returnTime, setReturnTime] = React.useState(new Date());
+
+  const handleArrivalDateChange = date => {
+    setArrivalDate(date);
+  };
+  const handleReturnDateChange = date => {
+    setReturnDate(date);
+  };
+  const handleArrivalTimeChange = date => {
+    setArrivalTime(date);
+  };
+  const handleReturnTimeChange = date => {
+    setReturnTime(date);
+  };
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <KeyboardDatePicker
+            disableToolbar
+            margin="normal"
+            variant="inline"
+            id="arrival-date-picker"
+            label="Arrivale date"
+            format="MM/dd/yyyy"
+            value={arrivalDate}
+            onChange={handleArrivalDateChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <KeyboardDatePicker
+            disableToolbar
+            margin="normal"
+            variant="inline"
+            id="return-date-picker"
+            label="Return date"
+            format="MM/dd/yyyy"
+            value={returnDate}
+            onChange={handleReturnDateChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <KeyboardTimePicker
+            disableToolbar
+            margin="normal"
+            variant="inline"
+            id="arrival-time-picker"
+            label="Arrival time"
+            value={arrivalTime}
+            onChange={handleArrivalTimeChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <KeyboardTimePicker
+            disableToolbar
+            margin="normal"
+            variant="inline"
+            id="return-time-picker"
+            label="Return time"
+            value={returnTime}
+            onChange={handleReturnTimeChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+          />
+        </Grid>
+      </Grid>
+    </MuiPickersUtilsProvider>
+  );
+}
+
+function StyledRadio(props) {
+  const classes = radioStyles();
+
+  return (
+    <Radio
+      className={classes.root}
+      disableRipple
+      color="default"
+      checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+      icon={<span className={classes.icon} />}
+      {...props}
+    />
+  );
+}
+
+function Occasion() {
+  let occasions = [
+    { label: "Honeymoon", value: "Honeymoon" },
+    { label: "Babymoon", value: "Babymoon" },
+    { label: "Anniversary", value: "Anniversary" },
+    { label: "Weekend getaway", value: "Weekend getaway" },
+    { label: "Business trip", value: "Business trip" },
+    { label: "Trip with friends", value: "Trip with friends" },
+    { label: "Birthday", value: "Birthday" },
+    { label: "Family vacation", value: "Family vacation" },
+    { label: "Other", value: "Other" }
+  ];
+
+  return (
+    <RadioGroup defaultValue="Honeymoon">
+      {occasions.map((choice, index) => (
+        <FormControlLabel
+          key={choice.value}
+          value={choice.value}
+          control={<StyledRadio />}
+          label={choice.label}
+        />
+      ))}
+    </RadioGroup>
+  );
+}
+
 function QuestionComp(props) {
   questions = props.questions;
   const question = questions ? questions[props.index] : null;
-  console.log(question);
 
   var comp = {
     0: (
       <div>
-        <span className="q-title">STEP 1/15</span>
+        <span>STEP 1/15</span>
         <div>
           <h1>{question.desc}</h1>
           <Select
@@ -92,23 +261,25 @@ function QuestionComp(props) {
     ),
     1: (
       <div>
-        <span className="q-title">STEP 2/15</span>
+        <span>STEP 2/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <TravelDates />
         </div>
       </div>
     ),
     2: (
       <div>
-        <span className="q-title">STEP 3/15</span>
+        <span>STEP 3/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <Occasion />
         </div>
       </div>
     ),
     3: (
       <div>
-        <span className="q-title">STEP 4/15</span>
+        <span>STEP 4/15</span>
         <div>
           <h1>{question.desc}</h1>
         </div>
@@ -116,7 +287,7 @@ function QuestionComp(props) {
     ),
     4: (
       <div>
-        <span className="q-title">STEP 4/15</span>
+        <span>STEP 5/15</span>
         <div>
           <h1>{question.desc}</h1>
         </div>
@@ -124,7 +295,7 @@ function QuestionComp(props) {
     ),
     5: (
       <div>
-        <span className="q-title">STEP 4/15</span>
+        <span>STEP 6/15</span>
         <div>
           <h1>{question.desc}</h1>
         </div>
@@ -132,7 +303,7 @@ function QuestionComp(props) {
     ),
     6: (
       <div>
-        <span className="q-title">STEP 4/15</span>
+        <span>STEP 7/15</span>
         <div>
           <h1>{question.desc}</h1>
         </div>
@@ -140,7 +311,7 @@ function QuestionComp(props) {
     ),
     7: (
       <div>
-        <span className="q-title">STEP 4/15</span>
+        <span>STEP 8/15</span>
         <div>
           <h1>{question.desc}</h1>
         </div>
@@ -156,7 +327,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      index: 0,
+      index: 1,
       disabledNext: false,
       disabledBack: true
     };
@@ -200,19 +371,9 @@ class Main extends React.Component {
           </div>
           <style jsx>
             {`
-              .q-title {
-                color: red,
-                text-transform: uppercase;
-                font-size: 1.125em;
-              }
-
               .survey {
                 text-align: left;
                 width: 40%;
-              }
-
-              .question {
-                font-size: 2.375em;
               }
 
               .survey-buttons {
