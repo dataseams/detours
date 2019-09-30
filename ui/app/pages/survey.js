@@ -11,6 +11,7 @@ import AgeGender from "../components/q-agegender";
 import Companion from "../components/q-companion";
 import PriorVisit from "../components/q-priorvisits";
 import Preferences from "../components/q-preferences";
+import FoodnBeverages from "../components/q-winendine";
 
 // my questions.json
 let questions = [
@@ -32,11 +33,11 @@ let questions = [
   },
   {
     id: 4,
-    desc: "Who are you travelling with?"
+    desc: "Who are you traveling with?"
   },
   {
     id: 5,
-    desc: "Have you travelled to this location before?"
+    desc: "Have you traveled to this location before?"
   },
   {
     id: 6,
@@ -144,6 +145,7 @@ function QuestionComp(props) {
         <span>STEP 8/15</span>
         <div>
           <h1>{question.desc}</h1>
+          <FoodnBeverages />
         </div>
       </div>
     )
@@ -157,7 +159,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      index: 6,
+      index: 7,
       disabledNext: false,
       disabledBack: false
     };
@@ -203,7 +205,7 @@ class Main extends React.Component {
             {`
               .survey {
                 text-align: left;
-                width: 40%;
+                width: 45%;
               }
 
               .survey-buttons {

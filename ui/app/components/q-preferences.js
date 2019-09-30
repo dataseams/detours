@@ -5,10 +5,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import { StyledCheckbox, checkboxStyles } from "../components/styles";
 
-
 function Preferences() {
   const preferences = [
-    { label: "Food & beverages", value: "Food & beverages", state: true },
+    { label: "Food & beverages", value: "Food & beverages", state: false },
     {
       label: "Must see attractions",
       value: "Must see attractions",

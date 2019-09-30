@@ -125,8 +125,30 @@ function StyledCheckbox(props) {
   );
 }
 
+const paperStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    height: "75px",
+    width: "120px",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  q: {
+    fontSize: "1.125em",
+    paddingBottom: theme.spacing(2)
+  },
+  cb: {
+    paddingLeft: theme.spacing(1),
+  }
+}));
+
 function NoStyle() {
   return <div></div>;
 }
+
 export default NoStyle;
-export { StyledRadio, StyledCheckbox, checkboxStyles };
+export { StyledRadio, StyledCheckbox, checkboxStyles, paperStyles };
