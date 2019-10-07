@@ -5,11 +5,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core";
 // Local modules
 import { StyledCheckbox, StyledRadio, paperStyles } from "../components/styles";
 
 function FoodnBeverages() {
-  const pricePoint = [
+  const pricePoints = [
     { label: "$", value: "Inexpensive" },
     { label: "$$", value: "Moderate" },
     { label: "$$$", value: "Expensive" },
@@ -60,6 +61,26 @@ function FoodnBeverages() {
     { label: "No shellfish", value: "No shellfish" }
   ];
 
+  const pricePoint = {};
+  for (var item of pricePoints) {
+    pricePoint[item.value] = false;
+  }
+
+  const classes = paperStyles();
+
+  const [pricePointState, pricePointSetState] = React.useState(pricePoint);
+  const handlePricePointChange = name => event => {
+    let ppDict = pricePoint;
+    let ppKeys = Object.keys(pricePointState);
+    let otherKeys = new Set([...ppKeys].filter(x => x !== name));
+    for (var k of otherKeys) {
+      ppDict[k] = false;
+    }
+    ppDict[name] = true;
+    pricePointSetState(ppDict);
+    console.log(pricePointState);
+  };
+
   const environmentDict = {};
   for (var item of diningEnvironments) {
     environmentDict[item.value] = false;
@@ -99,16 +120,17 @@ function FoodnBeverages() {
     setDietaryState({ ...dietaryState, [name]: event.target.checked });
   };
 
-  const classes = paperStyles();
-
   return (
     <Grid container spacing={5}>
       <Grid item xs={12}>
         <p className={classes.q}>1. What is your preferred price point?</p>
         <Grid container justify="center" spacing={spacing}>
-          {pricePoint.map((price, index) => (
+          {pricePoints.map((price, index) => (
             <Grid item key={index}>
-              <Paper className={classes.paper}>
+              <Paper
+                className={classes.paperSelected}
+                onClick={handlePricePointChange(price.value)}
+              >
                 <div>{price.label}</div>
                 <div>{price.value}</div>
               </Paper>

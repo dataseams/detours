@@ -135,7 +135,24 @@ const paperStyles = makeStyles(theme => ({
     textAlign: "center",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#F5F5F5",
+    },
+  },
+  paperSelected: {
+    height: "75px",
+    width: "120px",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    cursor: "pointer",
+    backgroundColor: "#DCDCDC",
+    "&:hover": {
+      backgroundColor: "#F5F5F5"
+    },
   },
   q: {
     fontSize: "1.125em",
