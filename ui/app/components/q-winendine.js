@@ -1,5 +1,6 @@
 // Global modules
 import React from "react";
+import ReactDom from "react-dom";
 import Grid from "@material-ui/core/Grid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -8,8 +9,11 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core";
 // Local modules
 import { StyledCheckbox, StyledRadio, paperStyles } from "../components/styles";
+import { string } from "prop-types";
 
 function FoodnBeverages() {
+  const classes = paperStyles();
+
   const pricePoints = [
     { label: "$", value: "Inexpensive" },
     { label: "$$", value: "Moderate" },
@@ -65,18 +69,29 @@ function FoodnBeverages() {
   for (var item of pricePoints) {
     pricePoint[item.value] = false;
   }
-
-  const classes = paperStyles();
+  for (var item of pricePoints) {
+    pricePoint[item.value + "_class"] = classes.paperSelected;
+  }
+  pricePoint["Moderate_class"] = classes.paper;
 
   const [pricePointState, pricePointSetState] = React.useState(pricePoint);
   const handlePricePointChange = name => event => {
     let ppDict = pricePoint;
     let ppKeys = Object.keys(pricePointState);
-    let otherKeys = new Set([...ppKeys].filter(x => x !== name));
+    let otherKeys = new Set(
+      [...ppKeys].filter(
+        x =>
+          x !== name &&
+          ["Inexpensive", "Moderate", "Expensive", "Luxury"].includes(x)
+      )
+    );
     for (var k of otherKeys) {
       ppDict[k] = false;
+      ppDict[k + "_class"] = classes.paper;
     }
     ppDict[name] = true;
+    ppDict[name + "_class"] = classes.paperSelected;
+
     pricePointSetState(ppDict);
     console.log(pricePointState);
   };
@@ -124,11 +139,11 @@ function FoodnBeverages() {
     <Grid container spacing={5}>
       <Grid item xs={12}>
         <p className={classes.q}>1. What is your preferred price point?</p>
-        <Grid container justify="center" spacing={spacing}>
+        <Grid id="pricepoints" container justify="center" spacing={spacing}>
           {pricePoints.map((price, index) => (
             <Grid item key={index}>
               <Paper
-                className={classes.paperSelected}
+                className={pricePointState[price.value + "_class"]}
                 onClick={handlePricePointChange(price.value)}
               >
                 <div>{price.label}</div>
