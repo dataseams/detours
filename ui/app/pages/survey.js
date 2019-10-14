@@ -10,8 +10,17 @@ import TravelDates from "../components/q-dates";
 import AgeGender from "../components/q-agegender";
 import Companion from "../components/q-companion";
 import PriorVisit from "../components/q-priorvisits";
-import Preferences from "../components/q-preferences";
+import GeneralPreferences from "../components/q-generalpreferences";
 import FoodnBeverages from "../components/q-winendine";
+import Museums from "../components/q-museums";
+import Relaxation from "../components/q-relaxation";
+import OutdoorActivities from "../components/q-outdooractivities";
+import Tours from "../components/q-tours";
+import Shopping from "../components/q-shopping";
+import Shows from "../components/q-shows";
+import Nightlife from "../components/q-nightlife";
+import AdventureSports from "../components/q-adventuresports";
+import Neighborhoods from "../components/q-neighborhoods";
 
 // my questions.json
 let questions = [
@@ -45,8 +54,44 @@ let questions = [
   },
   {
     id: 7,
-    desc: "Food & beverages"
-  }
+    desc: "Which shows and performances do you enjoy the most?"
+  },
+  {
+    id: 8,
+    desc: "Which museums do you enjoy the most?"
+  },
+  {
+    id: 9,
+    desc: "What are your favorite ways to relax?"
+  },
+  {
+    id: 10,
+    desc: "What are your favorite outdoor activities?"
+  },
+  {
+    id: 11,
+    desc: "Which tours do you enjoy the most?"
+  },
+  {
+    id: 12,
+    desc: "Shopping"
+  },
+  {
+    id: 13,
+    desc: "Shows & Performances"
+  },
+  {
+    id: 14,
+    desc: "Which type of nightlife do you enjoy the most?"
+  },
+  {
+    id: 15,
+    desc: "Which adventure sports do you enjoy the most?"
+  },
+  {
+    id: 16,
+    desc: "Do you know which neighborhood you'd like to stay in?"
+  },
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -79,7 +124,7 @@ function QuestionComp(props) {
   var comp = {
     0: (
       <div>
-        <span>STEP 1/15</span>
+        <span>STEP 1/17</span>
         <div>
           <h1>{question.desc}</h1>
           <City />
@@ -88,7 +133,7 @@ function QuestionComp(props) {
     ),
     1: (
       <div>
-        <span>STEP 2/15</span>
+        <span>STEP 2/17</span>
         <div>
           <h1>{question.desc}</h1>
           <TravelDates />
@@ -97,7 +142,7 @@ function QuestionComp(props) {
     ),
     2: (
       <div>
-        <span>STEP 3/15</span>
+        <span>STEP 3/17</span>
         <div>
           <h1>{question.desc}</h1>
           <Occasion />
@@ -106,7 +151,7 @@ function QuestionComp(props) {
     ),
     3: (
       <div>
-        <span>STEP 4/15</span>
+        <span>STEP 4/17</span>
         <div>
           <h1>{question.desc}</h1>
           <AgeGender />
@@ -115,7 +160,7 @@ function QuestionComp(props) {
     ),
     4: (
       <div>
-        <span>STEP 5/15</span>
+        <span>STEP 5/17</span>
         <div>
           <h1>{question.desc}</h1>
           <Companion />
@@ -124,7 +169,7 @@ function QuestionComp(props) {
     ),
     5: (
       <div>
-        <span>STEP 6/15</span>
+        <span>STEP 6/17</span>
         <div>
           <h1>{question.desc}</h1>
           <PriorVisit />
@@ -133,19 +178,100 @@ function QuestionComp(props) {
     ),
     6: (
       <div>
-        <span>STEP 7/15</span>
+        <span>STEP 7/17</span>
         <div>
           <h1>{question.desc}</h1>
-          <Preferences />
+          <GeneralPreferences />
         </div>
       </div>
     ),
     7: (
       <div>
-        <span>STEP 8/15</span>
+        <span>STEP 8/17</span>
         <div>
           <h1>{question.desc}</h1>
           <FoodnBeverages />
+        </div>
+      </div>
+    ),
+    8: (
+      <div>
+        <span>STEP 9/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Museums />
+        </div>
+      </div>
+    ),
+    9: (
+      <div>
+        <span>STEP 10/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Relaxation />
+        </div>
+      </div>
+    ),
+    10: (
+      <div>
+        <span>STEP 11/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <OutdoorActivities />
+        </div>
+      </div>
+    ),
+    11: (
+      <div>
+        <span>STEP 12/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Tours />
+        </div>
+      </div>
+    ),
+    12: (
+      <div>
+        <span>STEP 13/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Shopping />
+        </div>
+      </div>
+    ),
+    13: (
+      <div>
+        <span>Step 14/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Shows />
+        </div>
+      </div>
+    ),
+    14: (
+      <div>
+        <span>Step 15/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Nightlife />
+        </div>
+      </div>
+    ),
+    15: (
+      <div>
+        <span>Step 16/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <AdventureSports />
+        </div>
+      </div>
+    ),
+    16: (
+      <div>
+        <span>Step 17/17</span>
+        <div>
+          <h1>{question.desc}</h1>
+          <Neighborhoods />
         </div>
       </div>
     )
@@ -159,7 +285,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      index: 7,
+      index: 12,
       disabledNext: false,
       disabledBack: false
     };

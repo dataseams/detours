@@ -1,6 +1,5 @@
 // Global modules
 import React from "react";
-import ReactDom from "react-dom";
 import Grid from "@material-ui/core/Grid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -93,24 +92,6 @@ function FoodnBeverages() {
     console.log(pricePointState);
   };
 
-  function PricePointGrid() {
-    return <div>
-      <Grid id="pricepoints" container justify="center" spacing={spacing}>
-        {pricePoints.map((price, index) => (
-          <Grid item key={index}>
-            <Paper
-              className={pricePointState[price.value + "_class"]}
-              onClick={handlePricePointChange(price.value)}
-            >
-              <div>{price.label}</div>
-              <div>{price.value}</div>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  }
-
   const environmentDict = {};
   for (var item of diningEnvironments) {
     environmentDict[item.value] = false;
@@ -154,7 +135,19 @@ function FoodnBeverages() {
     <Grid container spacing={5}>
       <Grid item xs={12}>
         <p className={classes.q}>1. What is your preferred price point?</p>
-        <PricePointGrid />
+        <Grid id="pricepoints" container justify="center" spacing={spacing}>
+          {pricePoints.map((price, index) => (
+            <Grid item key={index}>
+              <Paper
+                className={pricePointState[price.value + "_class"]}
+                onClick={handlePricePointChange(price.value)}
+              >
+                <div>{price.label}</div>
+                <div>{price.value}</div>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <p className={classes.q}>2. Which dining environments do you prefer?</p>

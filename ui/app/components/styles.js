@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { makeStyles, Radio, Checkbox } from "@material-ui/core";
+import { makeStyles, Radio, Checkbox, Paper } from "@material-ui/core";
 
 const radioStyles = makeStyles({
   root: {
@@ -138,8 +138,8 @@ const paperStyles = makeStyles(theme => ({
     justifyContent: "center",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "#F5F5F5",
-    },
+      backgroundColor: "#F5F5F5"
+    }
   },
   paperSelected: {
     height: "75px",
@@ -152,20 +152,40 @@ const paperStyles = makeStyles(theme => ({
     backgroundColor: "#DCDCDC",
     "&:hover": {
       backgroundColor: "#F5F5F5"
-    },
+    }
   },
   q: {
     fontSize: "1.125em",
     paddingBottom: theme.spacing(2)
   },
   cb: {
-    paddingLeft: theme.spacing(1),
+    paddingLeft: theme.spacing(1)
   }
 }));
+
+function StyledPaper(props) {
+  const classes = paperStyles();
+
+  return (
+    <Radio
+      className={classes.paper}
+      disableRipple
+      checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+      icon={<span className={classes.paper} />}
+      {...props}
+    />
+  );
+}
 
 function NoStyle() {
   return <div></div>;
 }
 
 export default NoStyle;
-export { StyledRadio, StyledCheckbox, checkboxStyles, paperStyles };
+export {
+  StyledRadio,
+  StyledCheckbox,
+  StyledPaper,
+  checkboxStyles,
+  paperStyles
+};

@@ -5,7 +5,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import { StyledCheckbox, checkboxStyles } from "../components/styles";
 
-function Preferences() {
+function GeneralPreferences() {
   const preferences = [
     { label: "Food & beverages", value: "Food & beverages", state: false },
     {
@@ -73,4 +73,4 @@ function Preferences() {
   );
 }
 
-export default Preferences;
+export default GeneralPreferences;
