@@ -46,6 +46,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     width: 300,
     margin: theme.spacing(2),
+    background: "none",
+    boxShadow: "none"
   },
   media: {
     height: 300,
@@ -88,8 +90,8 @@ function HowItWorks() {
                 more.
               </Typography>
             </CardContent>
-        </Card>
-        <Card className={classes.card}>
+          </Card>
+          <Card className={classes.card}>
             <CardMedia
               className={classes.media}
               image="/static/howitworks2.svg"
@@ -104,14 +106,14 @@ function HowItWorks() {
                 color="textSecondary"
                 component="p"
               >
-                Then, our advanced data science model pulls data from
-                thousands of outside sources (Yelp, Trip Advisor, Google
-                Reviews) to aggregate the consistently top-rated experiences
-                within your travel destination
+                Then, our advanced data science model pulls data from thousands
+                of outside sources (Yelp, Trip Advisor, Google Reviews) to
+                aggregate the consistently top-rated experiences within your
+                travel destination
               </Typography>
             </CardContent>
-        </Card>
-        <Card className={classes.card}>
+          </Card>
+          <Card className={classes.card}>
             <CardMedia
               className={classes.media}
               image="/static/howitworks3.svg"
@@ -126,11 +128,11 @@ function HowItWorks() {
                 color="textSecondary"
                 component="p"
               >
-                Finally, we match your preferences to the top-rated
-                experiences within your destination and build an optimized
-                itinerary for your vacation. We show you a preview of that
-                itinerary, and if you think that it's worth it, you can
-                prurchase it for <b>just $10</b>.
+                Finally, we match your preferences to the top-rated experiences
+                within your destination and build an optimized itinerary for
+                your vacation. We show you a preview of that itinerary, and if
+                you think that it's worth it, you can prurchase it for{" "}
+                <b>just $10</b>.
               </Typography>
             </CardContent>
           </Card>
