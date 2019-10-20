@@ -19,9 +19,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#F6F6F6"
   },
   title: {
-    color: "white",
     alignSelf: "flex-start",
     paddingLeft: theme.spacing(2)
+  },
+  subtitle: {
+    padding: theme.spacing(1, 1, 1, 1)
+  },
+  text: {
+    padding: theme.spacing(1, 1, 1, 1)
   },
   mainGrid: {
     display: "flex",
@@ -37,18 +42,20 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   card: {
-    width: 200,
-    margin: theme.spacing(2)
+    display: "flex",
+    flexDirection: "column",
+    width: 300,
+    margin: theme.spacing(2),
   },
   media: {
-    height: 140
+    height: 300,
+    objectFit: "scale-down"
   },
   content: {
-    height: 40,
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 150,
     padding: 10
-  },
-  text: {
-    fontSize: "1.1em"
   }
 }));
 
@@ -58,47 +65,74 @@ function HowItWorks() {
   return (
     <Box className={classes.root}>
       <Grid className={classes.mainGrid}>
-        <Typography className={classes.title}>
-          See sample itineraries to:
-        </Typography>
+        <Typography className={classes.title}>How it works</Typography>
         <Grid className={classes.grid}>
           <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="/static/paris.png"
-                title="Paris, France"
-              />
-              <CardContent className={classes.content}>
-                <Typography className={classes.text}>Paris, France</Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="/static/nyc.png"
-                title="New York, NY"
-              />
-              <CardContent className={classes.content}>
-                <Typography className={classes.text}>New York, NY</Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="/static/goldengate.png"
-                title="San Francisco, CA"
-              />
-              <CardContent className={classes.content}>
-                <Typography className={classes.text}>
-                  San Francisco, CA
-                </Typography>
-              </CardContent>
-            </CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="/static/howitworks1.svg"
+              title="Step 1"
+              component="img"
+            />
+            <CardContent className={classes.content}>
+              <Typography className={classes.subtitle}>STEP 1</Typography>
+              <Typography
+                className={classes.text}
+                variant="body2"
+                color="textSecondary"
+                component="p"
+              >
+                First, you fill out an approximately 10-minute-long
+                questionnaire to let us know about all of your vacation
+                preferences, including dining, activities, transportation, and
+                more.
+              </Typography>
+            </CardContent>
+        </Card>
+        <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              image="/static/howitworks2.svg"
+              title="Step 2"
+              component="img"
+            />
+            <CardContent className={classes.content}>
+              <Typography className={classes.subtitle}>STEP 2</Typography>
+              <Typography
+                className={classes.text}
+                variant="body2"
+                color="textSecondary"
+                component="p"
+              >
+                Then, our advanced data science model pulls data from
+                thousands of outside sources (Yelp, Trip Advisor, Google
+                Reviews) to aggregate the consistently top-rated experiences
+                within your travel destination
+              </Typography>
+            </CardContent>
+        </Card>
+        <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              image="/static/howitworks3.svg"
+              title="Step 3"
+              component="img"
+            />
+            <CardContent className={classes.content}>
+              <Typography className={classes.subtitle}>STEP 3</Typography>
+              <Typography
+                className={classes.text}
+                variant="body2"
+                color="textSecondary"
+                component="p"
+              >
+                Finally, we match your preferences to the top-rated
+                experiences within your destination and build an optimized
+                itinerary for your vacation. We show you a preview of that
+                itinerary, and if you think that it's worth it, you can
+                prurchase it for <b>just $10</b>.
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
