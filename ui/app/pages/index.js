@@ -28,17 +28,6 @@ function Index() {
         <Pricing />
         <Testimonials />
       </Container>
-
-      {/*here starts the template code*/}
-      <Box my={10}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Next.js example
-        </Typography>
-        <Link href="/about" color="secondary">
-          Go to the about page
-        </Link>
-        <ProTip />
-      </Box>
       <Copyright />
     </div>
   );

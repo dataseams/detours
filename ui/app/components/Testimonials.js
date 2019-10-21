@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     width: 300,
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
     background: "none",
     boxShadow: "none"
   },
