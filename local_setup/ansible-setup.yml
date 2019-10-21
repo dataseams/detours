@@ -44,8 +44,22 @@
       state: latest
 
 # Minikube and infrastructure
-  - name: install minikube
+  - name: download minikube
+    get_url:
+      url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      dest: /tmp/minikube
+      mode: '0755'
+
+  - name: setup minikube
+    become: True
+    command: install /tmp/minikube /usr/local/bin
+
+  - name: download skaffold
+    get_url:
+      url: https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+      dest: /tmp/skaffold
+      mode: '0755'
+
+  - name: setup skaffold
     become: true
-    apt:
-      name: minikube
-      state: present
+    copy: remote_src=True src=/tmp/skaffold dest=/usr/local/bin/
