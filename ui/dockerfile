@@ -1,8 +1,11 @@
-FROM node:12.9.1-alpine
+FROM node:12.12.0-alpine
 
 WORKDIR /app
-ADD . /app/
+ADD app/. /app/
 
 RUN npm install
+RUN npm run build
 
-CMD ["npm", "start"]
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
