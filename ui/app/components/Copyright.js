@@ -1,16 +1,36 @@
-import Typography from "@material-ui/core/Typography";
+import React from "react";
 import MuiLink from "@material-ui/core/Link";
+import { Typography, makeStyles, Box } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  bottomBox: {
+    backgroundColor: "#7983c9",
+    padding: theme.spacing(5)
+  },
+  text: {
+    color: "white"
+  }
+}));
 
 function Copyright() {
+  const classes = useStyles();
+
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <MuiLink color="inherit" href="/">
-        Data Seams
-      </MuiLink>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <Box className={classes.bottomBox}>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        align="center"
+        className={classes.text}
+      >
+        {"Copyright © "}
+        <MuiLink color="inherit" href="https://www.dataseams.com">
+          Data Seams
+        </MuiLink>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </Box>
   );
 }
 

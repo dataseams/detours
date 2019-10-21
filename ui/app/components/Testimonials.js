@@ -66,7 +66,7 @@ function Testimonials() {
 
   return (
     <Box className={classes.root}>
-      <Grid className={classes.mainGrid} xs={12}>
+      <Grid className={classes.mainGrid}>
         <Grid className={classes.title}>
           <Typography className={classes.title}>
             What our customers say

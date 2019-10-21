@@ -3,12 +3,12 @@ import makeStyles from "@material-ui/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(10)
+    padding: theme.spacing(10, 5, 10, 10)
   },
   mainGrid: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
   },
   gridL1: {
     display: "flex",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "flex-start",
     alignContent: "center",
     flexGrow: 1,
-    padding: theme.spacing(2, 5, 2, 2)
+    padding: theme.spacing(2, 3, 2, 2)
   },
   gridL3: {
     display: "flex",
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexGrow: 1,
-    padding: theme.spacing(0, 0, 0, 4)
+    padding: theme.spacing(0, 0, 0, 2)
   },
   title: {
     fontWeight: "bold",
@@ -52,12 +52,12 @@ function Pricing() {
 
   return (
     <Box className={classes.root}>
-      <Grid className={classes.mainGrid} xs={12}>
+      <Grid className={classes.mainGrid}>
         <Grid className={classes.gridL1}>
           <Typography className={classes.title}>Pricing</Typography>
         </Grid>
         <Grid className={classes.gridL1}>
-          <Grid className={classes.gridL2} xs={8}>
+          <Grid className={classes.gridL2} item xs={8}>
             <Typography>
               We believe that affordable and enjoyable travel should be
               accessible for anyone. We're also in beta. For these reasons,
@@ -74,12 +74,21 @@ function Pricing() {
           </Grid>
           <Grid className={classes.gridL2}>
             <Grid className={classes.gridL3}>
-              <Typography className={classes.price} variant="h2" component="h2" color="primary">
+              <Typography
+                className={classes.price}
+                variant="h2"
+                component="h2"
+                color="primary"
+              >
                 $10
               </Typography>
             </Grid>
             <Grid className={classes.gridL3}>
-              <Typography className={classes.priceUnit} variant="h5" color="primary">
+              <Typography
+                className={classes.priceUnit}
+                variant="h5"
+                color="primary"
+              >
                 per itinerary
               </Typography>
             </Grid>

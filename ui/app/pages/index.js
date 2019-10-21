@@ -38,8 +38,8 @@ function Index() {
           Go to the about page
         </Link>
         <ProTip />
-        <Copyright />
       </Box>
+      <Copyright />
     </div>
   );
 }
