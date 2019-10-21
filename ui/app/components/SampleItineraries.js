@@ -4,7 +4,6 @@ import {
   Card,
   Typography,
   CardMedia,
-  CardActions,
   CardActionArea,
   CardContent
 } from "@material-ui/core";
@@ -15,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexFlow: "row",
     justifyContent: "center",
-    maxWidth: "85%",
     backgroundColor: "#5865bc"
   },
   title: {

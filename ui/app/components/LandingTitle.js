@@ -5,8 +5,11 @@ import GetStartedButton from "./GetStartedButton";
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexGrow: 1,
     padding: theme.spacing(20, 0, 10, 0),
-    maxWidth: "85%"
   },
   grid: {
     display: "flex",
@@ -15,7 +18,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    maxWidth: "750px"
   },
   subtitle: {
     fontSize: 20,

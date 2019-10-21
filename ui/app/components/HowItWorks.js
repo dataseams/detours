@@ -4,8 +4,6 @@ import {
   Card,
   Typography,
   CardMedia,
-  CardActions,
-  CardActionArea,
   CardContent
 } from "@material-ui/core";
 import makeStyles from "@material-ui/styles/makeStyles";
@@ -15,12 +13,12 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexFlow: "row",
     justifyContent: "center",
-    maxWidth: "85%",
     backgroundColor: "#F6F6F6"
   },
   title: {
     alignSelf: "flex-start",
-    paddingLeft: theme.spacing(2)
+    paddingLeft: theme.spacing(5),
+    fontWeight: "bold"
   },
   subtitle: {
     padding: theme.spacing(1, 1, 1, 1)
@@ -109,7 +107,7 @@ function HowItWorks() {
                 Then, our advanced data science model pulls data from thousands
                 of outside sources (Yelp, Trip Advisor, Google Reviews) to
                 aggregate the consistently top-rated experiences within your
-                travel destination
+                travel destination.
               </Typography>
             </CardContent>
           </Card>

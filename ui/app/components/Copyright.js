@@ -6,7 +6,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <MuiLink color="inherit" href="/">
-        Detours
+        Data Seams
       </MuiLink>{" "}
       {new Date().getFullYear()}
       {"."}

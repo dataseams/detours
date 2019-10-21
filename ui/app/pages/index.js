@@ -8,6 +8,8 @@ import NavigationBar from "../components/NavigationBar";
 import LandingTitle from "../components/LandingTitle";
 import SampleItineraries from "../components/SampleItineraries";
 import HowItWorks from "../components/HowItWorks";
+import Pricing from "../components/Pricing";
+import Testimonials from "../components/Testimonials";
 import Copyright from "../components/Copyright";
 
 // Template code
@@ -19,11 +21,13 @@ function Index() {
     <div>
       <Meta />
       <NavigationBar />
-      <Container maxWidth="md">
+      <Container maxWidth="xl" component="div">
         <LandingTitle />
+        <SampleItineraries />
+        <HowItWorks />
+        <Pricing />
+        <Testimonials />
       </Container>
-      <SampleItineraries />
-      <HowItWorks />
 
       {/*here starts the template code*/}
       <Box my={10}>
