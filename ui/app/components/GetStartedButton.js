@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { Button, Link } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const StyledButton = withStyles({
@@ -17,11 +17,12 @@ const StyledButton = withStyles({
       boxShadow: "5px 40px -10px rgba(0, 0, 0, 0.57)",
       WebkitBoxShadow: "0px 5px 40px -10px rgba(0, 0, 0, 0.57)",
       MozBoxShadow: "0px 5px 40px -10px rgba(0, 0, 0, 0.57)",
+      textDecoration: "none"
     },
     transitionDuration: "0.4",
     WebkitTransitionDuration: "0.4",
     height: "2.5em",
-    width: "8em",
+    width: "8em"
   }
 })(Button);
 
@@ -36,7 +37,14 @@ function GetStartedButton() {
 
   return (
     <div>
-      <StyledButton size="large" className={classes.margin}>Get Started</StyledButton>
+      <StyledButton
+        component={Link}
+        href="/questionnaire"
+        size="large"
+        className={classes.margin}
+      >
+        Get Started
+      </StyledButton>
     </div>
   );
 }

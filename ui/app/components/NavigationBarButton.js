@@ -1,9 +1,6 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import {
-  withStyles,
-  makeStyles,
-} from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const NavigationButton = withStyles({
   root: {
@@ -13,15 +10,15 @@ const NavigationButton = withStyles({
     lineHeight: 1,
     borderRadius: 0,
     "&:hover": {
-      borderBottom: "2px solid #7983c9",
-    },
+      borderBottom: "2px solid #7983c9"
+    }
   }
 })(Button);
 
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1),
-    backgroundColor: "white",
+    backgroundColor: "white"
   }
 }));
 
@@ -30,9 +27,7 @@ function NavigationBarButton(props) {
 
   return (
     <div>
-      <NavigationButton
-        className={classes.margin}
-      >
+      <NavigationButton className={classes.margin}>
         {props.name}
       </NavigationButton>
     </div>

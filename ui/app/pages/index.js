@@ -1,7 +1,5 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 
 import Meta from "../components/Head";
 import NavigationBar from "../components/NavigationBar";
@@ -11,10 +9,6 @@ import HowItWorks from "../components/HowItWorks";
 import Pricing from "../components/Pricing";
 import Testimonials from "../components/Testimonials";
 import Copyright from "../components/Copyright";
-
-// Template code
-import ProTip from "../src/ProTip";
-import Link from "../src/Link";
 
 function Index() {
   return (
