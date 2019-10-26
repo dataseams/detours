@@ -20,6 +20,7 @@ import Shows from "../components/q-shows";
 import Nightlife from "../components/q-nightlife";
 import AdventureSports from "../components/q-adventuresports";
 import Neighborhoods from "../components/q-neighborhoods";
+import LogoNavigationBar from "../components/LogoNavigationBar";
 
 let questions = [
   {
@@ -439,6 +440,7 @@ function Survey() {
   return (
     <div>
       <Meta />
+      <LogoNavigationBar />
       <div id="survey-1">
         <Main questions={questions} />
       </div>
