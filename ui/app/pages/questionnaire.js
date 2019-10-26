@@ -11,11 +11,22 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left",
     width: "45%"
   },
-  buttonsContainer: {
+  surveyButtons: {
     textAlign: "center",
     padding: theme.spacing(1)
+  },
+  surveyPage: {
+    paddingTop: theme.spacing(25),
+    textAlign: "center",
+    justifyText: "center",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
+
+var answers = {};
 
 class Main extends React.Component {
   constructor(props) {
@@ -53,31 +64,19 @@ class Main extends React.Component {
   render() {
     const { index, hiddenNext, disabledBack } = this.state;
     const question = this.props.questions ? this.props.questions[index] : null;
+    const classes = this.props.classes;
 
     if (question) {
       return (
-        <div className="survey">
+        <div className={classes.root}>
           <div>
-            <QuestionComp questions={questions} index={index} />
+            <QuestionComp questions={questions} index={index} answers={answers}/>
           </div>
-          <div className="survey-buttons">
+          <div className={classes.surveyButtons}>
             <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
             <Next toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
             <Submit toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
           </div>
-          <style jsx>
-            {`
-              .survey {
-                text-align: left;
-                width: 45%;
-              }
-
-              .survey-buttons {
-                text-align: center;
-                padding: 60px 10px 40px 10px;
-              }
-            `}
-          </style>
         </div>
       );
     } else {
@@ -87,26 +86,15 @@ class Main extends React.Component {
 }
 
 function Survey() {
+  const classes = useStyles();
+
   return (
     <div>
       <Meta />
       <LogoNavigationBar />
-      <div id="survey-1">
-        <Main questions={questions} />
+      <div className={classes.surveyPage}>
+        <Main questions={questions} classes={classes}/>
       </div>
-      <style jsx>
-        {`
-          #survey-1 {
-            padding-top: 150px;
-            text-align: center;
-            justify-text: center;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-        `}
-      </style>
     </div>
   );
 }
