@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Hidden } from "@material-ui/core";
 
 import Meta from "../components/Head";
 import Occasion from "../components/q-occasions";
@@ -52,7 +52,7 @@ let questions = [
   },
   {
     id: 7,
-    desc: "Which shows and performances do you enjoy the most?"
+    desc: "Food & Beverages"
   },
   {
     id: 8,
@@ -76,7 +76,7 @@ let questions = [
   },
   {
     id: 13,
-    desc: "Shows & Performances"
+    desc: "Which shows and performances do you enjoy the most?"
   },
   {
     id: 14,
@@ -104,6 +104,18 @@ const useStyles = makeStyles(theme => ({
     }
   },
 
+  hiddenButton: {
+    margin: theme.spacing(1),
+    minWidth: "20%",
+    backgroundColor: "#5865bc",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#5865bc",
+      opacity: 0.7
+    },
+    display: "none"
+  },
+
   backButton: {
     margin: theme.spacing(1),
     minWidth: "20%",
@@ -122,7 +134,9 @@ function QuestionComp(props) {
   var comp = {
     0: (
       <div>
-        <span>STEP 1/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <City />
@@ -131,7 +145,9 @@ function QuestionComp(props) {
     ),
     1: (
       <div>
-        <span>STEP 2/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <TravelDates />
@@ -140,7 +156,9 @@ function QuestionComp(props) {
     ),
     2: (
       <div>
-        <span>STEP 3/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Occasion />
@@ -149,7 +167,9 @@ function QuestionComp(props) {
     ),
     3: (
       <div>
-        <span>STEP 4/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <AgeGender />
@@ -158,7 +178,9 @@ function QuestionComp(props) {
     ),
     4: (
       <div>
-        <span>STEP 5/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Companion />
@@ -167,7 +189,9 @@ function QuestionComp(props) {
     ),
     5: (
       <div>
-        <span>STEP 6/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <PriorVisit />
@@ -176,7 +200,9 @@ function QuestionComp(props) {
     ),
     6: (
       <div>
-        <span>STEP 7/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <GeneralPreferences />
@@ -185,7 +211,9 @@ function QuestionComp(props) {
     ),
     7: (
       <div>
-        <span>STEP 8/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <FoodnBeverages />
@@ -194,7 +222,9 @@ function QuestionComp(props) {
     ),
     8: (
       <div>
-        <span>STEP 9/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Museums />
@@ -203,7 +233,9 @@ function QuestionComp(props) {
     ),
     9: (
       <div>
-        <span>STEP 10/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Relaxation />
@@ -212,7 +244,9 @@ function QuestionComp(props) {
     ),
     10: (
       <div>
-        <span>STEP 11/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <OutdoorActivities />
@@ -221,7 +255,9 @@ function QuestionComp(props) {
     ),
     11: (
       <div>
-        <span>STEP 12/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Tours />
@@ -230,7 +266,9 @@ function QuestionComp(props) {
     ),
     12: (
       <div>
-        <span>STEP 13/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Shopping />
@@ -239,7 +277,9 @@ function QuestionComp(props) {
     ),
     13: (
       <div>
-        <span>Step 14/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Shows />
@@ -248,7 +288,9 @@ function QuestionComp(props) {
     ),
     14: (
       <div>
-        <span>Step 15/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Nightlife />
@@ -257,7 +299,9 @@ function QuestionComp(props) {
     ),
     15: (
       <div>
-        <span>Step 16/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <AdventureSports />
@@ -266,7 +310,9 @@ function QuestionComp(props) {
     ),
     16: (
       <div>
-        <span>Step 17/17</span>
+        <span>
+          STEP {question.id + 1}/{questions.length}
+        </span>
         <div>
           <h1>{question.desc}</h1>
           <Neighborhoods />
@@ -276,74 +322,6 @@ function QuestionComp(props) {
   };
 
   return comp[props.index];
-}
-
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      index: 0,
-      disabledNext: false,
-      disabledBack: true
-    };
-  }
-
-  toggleBack(e) {
-    let index = this.state.index - 1;
-    let disabledBack = index === 0;
-
-    this.setState({
-      index: index,
-      disabledBack: disabledBack,
-      disabledNext: false
-    });
-  }
-
-  toggleNext(e) {
-    let index = this.state.index + 1;
-    let disabledNext = index === this.props.questions.length - 1;
-
-    this.setState({
-      index: index,
-      disabledNext: disabledNext,
-      disabledBack: false
-    });
-  }
-
-  render() {
-    const { index, disabledNext, disabledBack } = this.state;
-    const question = this.props.questions ? this.props.questions[index] : null;
-
-    if (question) {
-      return (
-        <div className="survey">
-          <div>
-            <QuestionComp questions={questions} index={index} />
-          </div>
-          <div className="survey-buttons">
-            <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
-            <Next toggle={e => this.toggleNext(e)} active={disabledNext} />
-          </div>
-          <style jsx>
-            {`
-              .survey {
-                text-align: left;
-                width: 45%;
-              }
-
-              .survey-buttons {
-                text-align: center;
-                padding: 60px 10px 40px 10px;
-              }
-            `}
-          </style>
-        </div>
-      );
-    } else {
-      return <span>error</span>;
-    }
-  }
 }
 
 function Back(props) {
@@ -367,35 +345,118 @@ function Next(props) {
   return (
     <Button
       variant="contained"
-      className={classes.nextButton}
+      className={props.hidden ? classes.hiddenButton : classes.nextButton}
       onClick={props.toggle}
-      disabled={props.active}
     >
       Next
     </Button>
   );
 }
 
-const Survey = () => (
-  <div>
-    <Meta />
-    <div id="survey-1">
-      <Main questions={questions} />
+function Submit(props) {
+  const classes = useStyles();
+
+  return (
+    <Button
+      variant="contained"
+      className={props.hidden ? classes.nextButton : classes.hiddenButton}
+    >
+      Submit
+    </Button>
+  );
+}
+
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      index: 0,
+      hiddenNext: false,
+      disabledBack: true
+    };
+  }
+
+  toggleBack(e) {
+    let index = this.state.index - 1;
+    let disabledBack = index === 0;
+
+    this.setState({
+      index: index,
+      disabledBack: disabledBack,
+      hiddenNext: false
+    });
+  }
+
+  toggleNext(e) {
+    let index = this.state.index + 1;
+    let hiddenNext = index === this.props.questions.length - 1;
+
+    this.setState({
+      index: index,
+      hiddenNext: hiddenNext,
+      disabledBack: false
+    });
+  }
+
+  render() {
+    const { index, hiddenNext, disabledBack } = this.state;
+    const question = this.props.questions ? this.props.questions[index] : null;
+
+    if (question) {
+      return (
+        <div className="survey">
+          <div>
+            <QuestionComp questions={questions} index={index} />
+          </div>
+          <div className="survey-buttons">
+            <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
+            <Next toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
+            <Submit toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
+          </div>
+          <style jsx>
+            {`
+              .survey {
+                text-align: left;
+                width: 45%;
+              }
+
+              .survey-buttons {
+                text-align: center;
+                padding: 60px 10px 40px 10px;
+              }
+            `}
+          </style>
+        </div>
+      );
+    } else {
+      return <span>error</span>;
+    }
+  }
+}
+
+function Survey() {
+  return (
+    <div>
+      <Meta />
+      <div id="survey-1">
+        <Main questions={questions} />
+      </div>
+      <style jsx>
+        {`
+          #survey-1 {
+            padding-top: 150px;
+            text-align: center;
+            justify-text: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        `}
+      </style>
     </div>
-    <style jsx>
-      {`
-        #survey-1 {
-          padding-top: 150px;
-          text-align: center;
-          justify-text: center;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      `}
-    </style>
-  </div>
-);
+  );
+}
 
 export default Survey;
