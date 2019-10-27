@@ -11,6 +11,7 @@ export default () => (
         type="text/css"
         charSet="utf-8"
       />
+      <link rel="shortcut icon" href="/static/favicon.ico" />
     </Head>
   </div>
 );
