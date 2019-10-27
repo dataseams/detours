@@ -15,7 +15,8 @@
     "react": "latest",
     "react-dom": "latest",
     "react-select": "^3.0.8",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-starter-kit": "^1.0.0"
   },
   "scripts": {
     "dev": "next",
