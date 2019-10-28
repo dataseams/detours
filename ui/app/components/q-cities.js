@@ -1,11 +1,12 @@
 import React from "react";
-import NativeSelect from "react-select";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 
 import { addCity } from "./QActions";
 
-const cityOptions = [
+const cities = [
   { value: "Paris", label: "Paris, France" },
   { value: "SF", label: "San Francisco, CA" },
   { value: "LA", label: "Los Angeles, CA" },
@@ -15,25 +16,31 @@ const cityOptions = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "500px"
+    maxWidth: "500px",
+    minWidth: "300px"
   }
 }));
 
-function AddCity ({ dispatch }) {
+function AddCity({ dispatch }) {
   const classes = useStyles();
 
   return (
-    <NativeSelect
-      instanceId="cities"
+    <Select
       className={classes.root}
-      placeholder="Type or select..."
-      options={cityOptions}
+      options={cities}
+      value={""}
       onChange={e => {
-        dispatch(addCity(e.value));
+        dispatch(addCity(e.target.value));
       }}
-    ></NativeSelect>
+    >
+    {cities.map(city => (
+      <MenuItem key={city.value} value={city.value}>
+        {city.label}
+      </MenuItem>
+    ))}
+    </Select>
   );
-};
+}
 AddCity = connect()(AddCity);
 
 export default AddCity;
