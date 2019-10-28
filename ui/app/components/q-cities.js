@@ -16,8 +16,10 @@ const cities = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "500px",
-    minWidth: "300px"
+    display: "flex",
+    flexGrow: 1,
+    maxWidth: "450px",
+    height: "40px"
   }
 }));
 
@@ -32,6 +34,7 @@ function AddCity({ dispatch }) {
       onChange={e => {
         dispatch(addCity(e.target.value));
       }}
+      variant="outlined"
     >
     {cities.map(city => (
       <MenuItem key={city.value} value={city.value}>
