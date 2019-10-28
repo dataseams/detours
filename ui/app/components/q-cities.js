@@ -1,7 +1,6 @@
 import React from "react";
 import NativeSelect from "react-select";
 import { makeStyles } from "@material-ui/styles";
-
 import { connect } from "react-redux";
 
 import { addCity } from "./QActions";

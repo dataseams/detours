@@ -1,4 +1,3 @@
-//Reducers
 import { combineReducers } from "redux";
 
 import { ADD_CITY } from "./QActions";
