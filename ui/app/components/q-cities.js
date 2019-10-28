@@ -1,6 +1,10 @@
 import React from "react";
-import Select from "react-select";
-import { makeStyles, mergeClasses } from "@material-ui/styles";
+import NativeSelect from "react-select";
+import { makeStyles } from "@material-ui/styles";
+
+import { connect } from "react-redux";
+
+import { addCity } from "./QActions";
 
 const cityOptions = [
   { value: "Paris", label: "Paris, France" },
@@ -16,22 +20,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function City() {
+function AddCity ({ dispatch }) {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({ city: "" });
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.value });
-  };
-
   return (
-    <Select
+    <NativeSelect
       instanceId="cities"
       className={classes.root}
       placeholder="Type or select..."
       options={cityOptions}
-    ></Select>
+      onChange={e => {
+        dispatch(addCity(e.value));
+      }}
+    ></NativeSelect>
   );
-}
+};
+AddCity = connect()(AddCity);
 
-export default City;
+export default AddCity;
