@@ -44,7 +44,11 @@ class QuestionnaireMain extends React.Component {
       return (
         <div className={classes.root}>
           <div>
-            <QuestionComp questions={questions} index={index} />
+            <QuestionComp
+              questions={questions}
+              index={index}
+              handleChange={this.props.handleChange}
+            />
           </div>
           <div className={classes.surveyButtons}>
             <Back toggle={e => this.toggleBack(e)} active={disabledBack} />

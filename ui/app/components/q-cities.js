@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 
 import { addCity } from "./QActions";
+import QuestionnaireReducer from "./QReducers";
 
 const cities = [
   { value: "Paris", label: "Paris, France" },
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AddCity({ dispatch }) {
+function City(props) {
   const classes = useStyles();
 
   return (
@@ -31,10 +32,8 @@ function AddCity({ dispatch }) {
       className={classes.root}
       options={cities}
       value={""}
-      onChange={e => {
-        dispatch(addCity(e.target.value));
-      }}
       variant="outlined"
+      onChange={props.handleChange}
     >
     {cities.map(city => (
       <MenuItem key={city.value} value={city.value}>
@@ -44,6 +43,5 @@ function AddCity({ dispatch }) {
     </Select>
   );
 }
-AddCity = connect()(AddCity);
 
-export default AddCity;
+export default City;

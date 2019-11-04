@@ -40,7 +40,11 @@ function Survey() {
       <LogoNavigationBar />
       <Provider store={store}>
         <div className={classes.surveyPage}>
-          <QuestionnaireMain questions={questions} classes={classes}/>
+          <QuestionnaireMain
+            questions={questions}
+            classes={classes}
+            handleChange={QuestionnaireReducer}
+          />
         </div>
       </Provider>
     </div>

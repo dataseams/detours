@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 
-import { ADD_CITY } from "./QActions";
+import { UPDATE_CITY } from "./QActions";
 
-function cities(state = [], action) {
+function HandleChange(state = [], action) {
   switch (action.type) {
-    case ADD_CITY:
+    case UPDATE_CITY:
       console.log(...state);
       return [
         ...state,
@@ -18,7 +18,7 @@ function cities(state = [], action) {
 }
 
 const QuestionnaireReducer = combineReducers({
-  cities
+  HandleChange
 });
 
 export default QuestionnaireReducer;

@@ -101,7 +101,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>{question.desc}</h1>
-          <City />
+          <City handleChange={props.handleChange}/>
         </div>
       </div>
     ),
