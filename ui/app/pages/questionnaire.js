@@ -6,12 +6,11 @@ import { makeStyles } from "@material-ui/core";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
-import { questions } from "../components/questionnaire/QuestionBank";
 
 const useStyles = makeStyles(theme => ({
   root: {
     textAlign: "left",
-    width: "45%"
+    width: "50%"
   },
   surveyButtons: {
     textAlign: "center",
@@ -54,7 +53,6 @@ function Survey() {
       <Provider store={store}>
         <div className={classes.surveyPage}>
           <QuestionnaireForm
-            questions={questions}
             classes={classes}
             onSubmit={showResults}
           />

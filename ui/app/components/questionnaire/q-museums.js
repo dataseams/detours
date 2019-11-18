@@ -1,16 +1,15 @@
 // Global modules
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
-function Relaxation() {
+function Museums() {
   const preferences = [
-    { label: "Spa treatments", value: "Spa treatments", state: false },
-    { label: "Facials", value: "Facials", state: false },
-    { label: "Massages", value: "Massages", state: false },
-    { label: "Bath houses", value: "Bath houses", state: false },
-    { label: "Yoga", value: "Yoga", state: false },
-    { label: "Downtime", value: "Downtime", state: false},
+    { label: "History", value: "History", state: false },
+    { label: "Science", value: "Science", state: false },
+    { label: "Art", value: "Art", state: false },
+    { label: "Design", value: "Design", state: false },
+    { label: "War", value: "War", state: false },
   ];
 
   const myDict = {};
@@ -44,4 +43,4 @@ function Relaxation() {
   );
 }
 
-export default Relaxation;
+export default Museums;

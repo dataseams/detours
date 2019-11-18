@@ -1,12 +1,9 @@
 import React from "react";
-import {
-  Select,
-  InputLabel,
-  FormHelperText,
-  FormControl
-} from "@material-ui/core";
+import { Select, InputLabel, FormControl } from "@material-ui/core";
 import { Field } from "redux-form";
 import { makeStyles } from "@material-ui/styles";
+
+import renderFormHelper from "./RenderFormHelper";
 
 const cityOptions = [
   { value: "", label: "" },
@@ -18,20 +15,15 @@ const cityOptions = [
 
 const useStyles = makeStyles(theme => ({
   root: {
+    width: "100%"
+  },
+  select: {
     display: "flex",
     flexGrow: 1,
     maxWidth: "450px",
     height: "40px"
   }
 }));
-
-const renderFromHelper = ({ touched, error }) => {
-  if (!(touched && error)) {
-    return;
-  } else {
-    return <FormHelperText>{touched && error}</FormHelperText>;
-  }
-};
 
 const renderCitySelect = ({
   input,
@@ -43,7 +35,7 @@ const renderCitySelect = ({
   const customClasses = useStyles();
 
   return (
-    <FormControl error={touched && error}>
+    <FormControl error={touched && error} className={customClasses.root}>
       <InputLabel htmlFor="city">{label}</InputLabel>
       <Select
         native
@@ -54,11 +46,11 @@ const renderCitySelect = ({
           name: input.name,
           id: "city"
         }}
-        className={customClasses.root}
+        className={customClasses.select}
       >
         {children}
       </Select>
-      {renderFromHelper({ touched, error })}
+      {renderFormHelper({ touched, error })}
     </FormControl>
   );
 };

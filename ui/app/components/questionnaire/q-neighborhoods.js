@@ -1,14 +1,13 @@
 // Global modules
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
-function Shows() {
+function Neighborhoods() {
   const preferences = [
-    { label: "Musicals", value: "Musicals", state: false },
-    { label: "Plays", value: "Plays", state: false },
-    { label: "Concerts", value: "Concerts", state: false },
-    { label: "Immersive theater", value: "Immersive theater", state: false },
+    { label: "Placeholder 1", value: "Placeholder 1", state: false },
+    { label: "Placeholder 2", value: "Placeholder 2", state: false },
+    { label: "Placeholder 3", value: "Placeholder 3", state: false },
   ];
 
   const myDict = {};
@@ -42,4 +41,4 @@ function Shows() {
   );
 }
 
-export default Shows;
+export default Neighborhoods;

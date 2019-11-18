@@ -1,19 +1,17 @@
 // Global modules
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
-function AdventureSports() {
+function Tours() {
   const preferences = [
-    { label: "Kayaking", value: "Kayaking", state: false },
-    { label: "Rafting/Tubing", value: "Rafting/Tubing", state: false },
-    { label: "Skydiving", value: "Skydiving", state: false },
-    { label: "Diving/Snorkeling", value: "Diving/Snorkeling", state: false },
-    { label: "Ziplining", value: "Ziplining", state: false },
-    { label: "Mountain biking", value: "Mountain biking", state: false },
-    { label: "Paragliding", value: "Paragliding", state: false },
-    { label: "Surfing", value: "Surfing", state: false },
-    { label: "Skiing", value: "Skiing", state: false },
+    { label: "Biking tours", value: "Biking tours", state: false },
+    { label: "Bus tours", value: "Bus tours", state: false },
+    { label: "Walking tours", value: "Walking tours", state: false },
+    { label: "Day trips", value: "Day trips", state: false },
+    { label: "Boat tours", value: "Boat tours", state: false },
+    { label: "Classes", value: "Classes", state: false },
+    { label: "Guided tours", value: "Guided tours", state: false },
   ];
 
   const myDict = {};
@@ -47,4 +45,4 @@ function AdventureSports() {
   );
 }
 
-export default AdventureSports;
+export default Tours;

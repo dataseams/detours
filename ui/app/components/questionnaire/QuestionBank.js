@@ -1,282 +1,211 @@
 import React from "react";
 
-import CitiesField from "../components/questionnaire/City";
-import TravelDates from "../components/q-dates";
-import Occasion from "../components/q-occasions";
-import AgeGender from "../components/q-agegender";
-import Companion from "../components/q-companion";
-import PriorVisit from "../components/q-priorvisits";
-import GeneralPreferences from "../components/q-generalpreferences";
-import FoodnBeverages from "../components/q-winendine";
-import Museums from "../components/q-museums";
-import Relaxation from "../components/q-relaxation";
-import OutdoorActivities from "../components/q-outdooractivities";
-import Tours from "../components/q-tours";
-import Shopping from "../components/q-shopping";
-import Shows from "../components/q-shows";
-import Nightlife from "../components/q-nightlife";
-import AdventureSports from "../components/q-adventuresports";
-import Neighborhoods from "../components/q-neighborhoods";
-
-var questions = [
-  {
-    id: 0,
-    desc: "Which city do you want to travel to?"
-  },
-  {
-    id: 1,
-    desc: "When are you planning to take your vacation?"
-  },
-  {
-    id: 2,
-    desc: "What occasion are you celebrating?"
-  },
-  {
-    id: 3,
-    desc: "What is your age and gender?"
-  },
-  {
-    id: 4,
-    desc: "Who are you traveling with?"
-  },
-  {
-    id: 5,
-    desc: "Have you traveled to this location before?"
-  },
-  {
-    id: 6,
-    desc: "What do you like to do when you travel?"
-  },
-  {
-    id: 7,
-    desc: "Food & Beverages"
-  },
-  {
-    id: 8,
-    desc: "Which museums do you enjoy the most?"
-  },
-  {
-    id: 9,
-    desc: "What are your favorite ways to relax?"
-  },
-  {
-    id: 10,
-    desc: "What are your favorite outdoor activities?"
-  },
-  {
-    id: 11,
-    desc: "Which tours do you enjoy the most?"
-  },
-  {
-    id: 12,
-    desc: "Shopping"
-  },
-  {
-    id: 13,
-    desc: "Which shows and performances do you enjoy the most?"
-  },
-  {
-    id: 14,
-    desc: "Which type of nightlife do you enjoy the most?"
-  },
-  {
-    id: 15,
-    desc: "Which adventure sports do you enjoy the most?"
-  },
-  {
-    id: 16,
-    desc: "Do you know which neighborhood you'd like to stay in?"
-  }
-];
+import CitiesField from "./City";
+import TravelDateFields from "./TravelDates";
+import OccasionField from "./Occasion";
+import AgeGender from "./q-agegender";
+import AgeGenderField from "./AgeGender";
+import Companion from "./q-companion";
+import PriorVisit from "./q-priorvisits";
+import GeneralPreferences from "./q-generalpreferences";
+import FoodnBeverages from "./q-winendine";
+import Museums from "./q-museums";
+import Relaxation from "./q-relaxation";
+import OutdoorActivities from "./q-outdooractivities";
+import Tours from "./q-tours";
+import Shopping from "./q-shopping";
+import Shows from "./q-shows";
+import Nightlife from "./q-nightlife";
+import AdventureSports from "./q-adventuresports";
+import Neighborhoods from "./q-neighborhoods";
 
 function QuestionComp(props) {
-  questions = props.questions;
-  const question = questions ? questions[props.index] : null;
+  const questionnaireLength = 17
 
   var comp = {
-    0: (
-      <div>
-        <span>
-          STEP {question.id + 1}/{questions.length}
-        </span>
-        <div>
-          <h1>{question.desc}</h1>
-          <CitiesField handleChange={props.handleChange}/>
-        </div>
-      </div>
-    ),
     1: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 1/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <TravelDates />
+          <h1>Which city do you want to travel to?</h1>
+          <CitiesField />
         </div>
       </div>
     ),
     2: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 2/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Occasion />
+          <h1>When are you planning to take your vacation?</h1>
+          <TravelDateFields />
         </div>
       </div>
     ),
     3: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 3/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <AgeGender />
+          <h1>What occasion are you celebrating?</h1>
+          <OccasionField />
         </div>
       </div>
     ),
     4: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 4/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Companion />
+          <h1>What is your age and gender?</h1>
+          <AgeGenderField />
         </div>
       </div>
     ),
     5: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 5/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <PriorVisit />
+          <h1>Who are you traveling with?</h1>
+          <Companion />
         </div>
       </div>
     ),
     6: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 6/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <GeneralPreferences />
+          <h1>Have you traveled to this location before?</h1>
+          <PriorVisit />
         </div>
       </div>
     ),
     7: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 7/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <FoodnBeverages />
+          <h1>What do you like to do when you travel?</h1>
+          <GeneralPreferences />
         </div>
       </div>
     ),
     8: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 8/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Museums />
+          <h1>Food & Beverages</h1>
+          <FoodnBeverages />
         </div>
       </div>
     ),
     9: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 9/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Relaxation />
+          <h1>Which museums do you enjoy the most?</h1>
+          <Museums />
         </div>
       </div>
     ),
     10: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 10/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <OutdoorActivities />
+          <h1>What are your favorite ways to relax?</h1>
+          <Relaxation />
         </div>
       </div>
     ),
     11: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 11/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Tours />
+          <h1>What are your favorite outdoor activities?</h1>
+          <OutdoorActivities />
         </div>
       </div>
     ),
     12: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 12/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Shopping />
+          <h1>Which tours do you enjoy the most?</h1>
+          <Tours />
         </div>
       </div>
     ),
     13: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 13/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Shows />
+          <h1>Shopping</h1>
+          <Shopping />
         </div>
       </div>
     ),
     14: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 14/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <Nightlife />
+          <h1>Which shows and performances do you enjoy the most?</h1>
+          <Shows />
         </div>
       </div>
     ),
     15: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 15/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
-          <AdventureSports />
+          <h1>Which type of nightlife do you enjoy the most?</h1>
+          <Nightlife />
         </div>
       </div>
     ),
     16: (
       <div>
         <span>
-          STEP {question.id + 1}/{questions.length}
+          STEP 16/{questionnaireLength}
         </span>
         <div>
-          <h1>{question.desc}</h1>
+          <h1>Which adventure sports do you enjoy the most?</h1>
+          <AdventureSports />
+        </div>
+      </div>
+    ),
+    17: (
+      <div>
+        <span>
+          STEP 17/{questionnaireLength}
+        </span>
+        <div>
+          <h1>Do you know which neighborhood you'd like to stay in?</h1>
           <Neighborhoods />
         </div>
       </div>
@@ -286,4 +215,4 @@ function QuestionComp(props) {
   return comp[props.index];
 }
 
-export { QuestionComp, questions };
+export default QuestionComp;

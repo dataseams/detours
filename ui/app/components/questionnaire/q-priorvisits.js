@@ -2,7 +2,7 @@
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 // Local modules
-import { StyledRadio } from "./styles";
+import { StyledRadio } from "../styles";
 
 function PriorVisit() {
   let priorvisits = [

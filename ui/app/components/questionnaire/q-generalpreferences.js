@@ -3,7 +3,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
 function GeneralPreferences() {
   const preferences = [

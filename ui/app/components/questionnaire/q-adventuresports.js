@@ -1,15 +1,19 @@
 // Global modules
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
-function Museums() {
+function AdventureSports() {
   const preferences = [
-    { label: "History", value: "History", state: false },
-    { label: "Science", value: "Science", state: false },
-    { label: "Art", value: "Art", state: false },
-    { label: "Design", value: "Design", state: false },
-    { label: "War", value: "War", state: false },
+    { label: "Kayaking", value: "Kayaking", state: false },
+    { label: "Rafting/Tubing", value: "Rafting/Tubing", state: false },
+    { label: "Skydiving", value: "Skydiving", state: false },
+    { label: "Diving/Snorkeling", value: "Diving/Snorkeling", state: false },
+    { label: "Ziplining", value: "Ziplining", state: false },
+    { label: "Mountain biking", value: "Mountain biking", state: false },
+    { label: "Paragliding", value: "Paragliding", state: false },
+    { label: "Surfing", value: "Surfing", state: false },
+    { label: "Skiing", value: "Skiing", state: false },
   ];
 
   const myDict = {};
@@ -43,4 +47,4 @@ function Museums() {
   );
 }
 
-export default Museums;
+export default AdventureSports;

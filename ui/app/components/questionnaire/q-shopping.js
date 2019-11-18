@@ -6,7 +6,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Paper from "@material-ui/core/Paper";
 // Local modules
-import { StyledCheckbox, StyledRadio, paperStyles } from "../components/styles";
+import { StyledCheckbox, StyledRadio, paperStyles } from "../styles";
 
 function Shopping() {
   const classes = paperStyles();

@@ -1,15 +1,14 @@
 // Global modules
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { StyledCheckbox, checkboxStyles } from "../components/styles";
+import { StyledCheckbox, checkboxStyles } from "../styles";
 
-function OutdoorActivities() {
+function Shows() {
   const preferences = [
-    { label: "Parks/Gardens", value: "Parks/Gardens", state: false },
-    { label: "Hiking", value: "Hiking", state: false },
-    { label: "Natural wonders", value: "Natural wonders", state: false },
-    { label: "Beaches", value: "Beaches", state: false },
-    { label: "Scenic views", value: "Scenic views", state: false },
+    { label: "Musicals", value: "Musicals", state: false },
+    { label: "Plays", value: "Plays", state: false },
+    { label: "Concerts", value: "Concerts", state: false },
+    { label: "Immersive theater", value: "Immersive theater", state: false },
   ];
 
   const myDict = {};
@@ -43,4 +42,4 @@ function OutdoorActivities() {
   );
 }
 
-export default OutdoorActivities;
+export default Shows;
