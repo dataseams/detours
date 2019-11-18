@@ -1,8 +1,21 @@
 import React from "react";
-import { questions, QuestionComp } from "../components/QuestionBank";
-import { Back, Next, Submit } from "../components/QuestionnaireButtons";
+import { reduxForm } from "redux-form";
 
-class QuestionnaireMain extends React.Component {
+import { questions, QuestionComp } from "../components/QuestionBank";
+import { Back, Next, Submit } from "../components/questionnaire/Buttons";
+
+const validate = values => {
+  const errors = {};
+  const requiredFields = ["city"];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
+  return errors;
+};
+
+class QuestionnaireForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -36,13 +49,13 @@ class QuestionnaireMain extends React.Component {
   }
 
   render() {
+    const { handleSubmit, pristine, reset, submitting, classes } = this.props;
     const { index, hiddenNext, disabledBack } = this.state;
     const question = this.props.questions ? this.props.questions[index] : null;
-    const classes = this.props.classes;
 
     if (question) {
       return (
-        <div className={classes.root}>
+        <form onSubmit={handleSubmit} className={classes.root}>
           <div>
             <QuestionComp
               questions={questions}
@@ -53,9 +66,14 @@ class QuestionnaireMain extends React.Component {
           <div className={classes.surveyButtons}>
             <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
             <Next toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
-            <Submit toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
+            <Submit
+              toggle={e => this.toggleNext(e)}
+              hidden={true}
+              disabled={pristine || submitting}
+              onClick={reset}
+            />
           </div>
-        </div>
+        </form>
       );
     } else {
       return <span>error</span>;
@@ -63,4 +81,7 @@ class QuestionnaireMain extends React.Component {
   }
 }
 
-export default QuestionnaireMain;
+export default reduxForm({
+  form: "Questionnaire",
+  validate
+})(QuestionnaireForm);

@@ -2,11 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
-import { questions } from "../components/questionnaire/QuestionBank";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
   surveyButtons: {
     textAlign: "center",
-    paddingTop: theme.spacing(5)
+    padding: theme.spacing(1)
   },
   surveyPage: {
     paddingTop: theme.spacing(25),
@@ -43,25 +42,20 @@ const showResults = values =>
     console.log(store.getState());
   });
 
-function Survey() {
+let RenderForm = () => {
   const classes = useStyles();
-  const QuestionnaireForm = require("../components/QuestionnaireForm").default;
-
-  return (
+  const QuestionsForm = require("../components/questionnaire/Form").default;
+  return(
     <div>
       <Meta />
       <LogoNavigationBar />
       <Provider store={store}>
         <div className={classes.surveyPage}>
-          <QuestionnaireForm
-            questions={questions}
-            classes={classes}
-            onSubmit={showResults}
-          />
+          <QuestionsForm onSubmit={showResults} />
         </div>
       </Provider>
     </div>
-  );
-}
+    )
+};
 
-export default Survey;
+export default RenderForm;

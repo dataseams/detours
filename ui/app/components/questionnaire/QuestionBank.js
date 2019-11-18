@@ -1,8 +1,8 @@
 import React from "react";
 
-import Occasion from "../components/q-occasions";
-import City from "../components/q-cities";
+import CitiesField from "../components/questionnaire/City";
 import TravelDates from "../components/q-dates";
+import Occasion from "../components/q-occasions";
 import AgeGender from "../components/q-agegender";
 import Companion from "../components/q-companion";
 import PriorVisit from "../components/q-priorvisits";
@@ -101,7 +101,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>{question.desc}</h1>
-          <City handleChange={props.handleChange}/>
+          <CitiesField handleChange={props.handleChange}/>
         </div>
       </div>
     ),
