@@ -3,10 +3,10 @@ import React from "react";
 import CitiesField from "./City";
 import TravelDateFields from "./TravelDates";
 import OccasionField from "./Occasion";
-import AgeGender from "./q-agegender";
 import AgeGenderField from "./AgeGender";
-import Companion from "./q-companion";
-import PriorVisit from "./q-priorvisits";
+import CompanionField from "./Companion";
+import PriorVisitsField from "./PriorVisits";
+import GeneralPreferencesField from "./GeneralPreferences";
 import GeneralPreferences from "./q-generalpreferences";
 import FoodnBeverages from "./q-winendine";
 import Museums from "./q-museums";
@@ -74,7 +74,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>Who are you traveling with?</h1>
-          <Companion />
+          <CompanionField />
         </div>
       </div>
     ),
@@ -85,7 +85,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>Have you traveled to this location before?</h1>
-          <PriorVisit />
+          <PriorVisitsField />
         </div>
       </div>
     ),
@@ -96,7 +96,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>What do you like to do when you travel?</h1>
-          <GeneralPreferences />
+          <GeneralPreferencesField />
         </div>
       </div>
     ),

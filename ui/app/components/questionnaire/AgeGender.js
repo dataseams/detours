@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import renderFormHelper from "./RenderFormHelper";
 
 const genderOptions = [
-  { value: "", label: "" },
   { value: "Female", label: "Female" },
   { value: "Male", label: "Male" },
   { value: "Other", label: "Other" }
@@ -48,6 +47,7 @@ const renderAgeText = ({
       value=""
       margin="normal"
       variant="outlined"
+      type="number"
       {...input}
       {...custom}
     />
@@ -74,7 +74,6 @@ const renderGenderText = ({
       InputLabelProps={{
         shrink: true
       }}
-      value=""
       margin="normal"
       variant="outlined"
       {...input}
