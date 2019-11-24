@@ -1,42 +1,47 @@
 import { Field } from "redux-form";
-import { Input } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
-import { StyledCheckbox } from "../styles";
-import renderCheckBox from "./Checkbox";
+import renderCheckbox from "./Checkbox";
 
 const preferenceOptions = [
-  { name: "Food & beverages", id: "food & beverages" },
-  { name: "Must see attractions", id: "must see attractions" },
-  { name: "Museums", id: "museums" },
-  { name: "Historical buildings", id: "historical buildings" },
-  { name: "Spas & wellness", id: "spas & wellness" },
-  { name: "Outdoors", id: "outdoors" },
-  { name: "Tours", id: "tours" },
-  { name: "Local culture", id: "Local culture" },
-  { name: "Shopping", id: "shopping" },
-  { name: "Performances & shows", id: "performances & shows" },
-  { name: "Nightlife", id: "nigthlife" },
-  { name: "Adventure sports", id: "adventure sports" }
+  { name: "Food & beverages", id: "generalPreferences.foodnbeverages" },
+  { name: "Must see attractions", id: "generalPreferences.mustseeattractions" },
+  { name: "Museums", id: "generalPreferences.museums" },
+  {
+    name: "Historical buildings",
+    id: "generalPreferences.historicalbuildings"
+  },
+  { name: "Spas & wellness", id: "generalPreferences.spasnwellness" },
+  { name: "Outdoors", id: "generalPreferences.outdoors" },
+  { name: "Tours", id: "generalPreferences.tours" },
+  { name: "Local culture", id: "generalPreferences.localculture" },
+  { name: "Shopping", id: "generalPreferences.shopping" },
+  { name: "Performances & shows", id: "generalPreferences.performancesnshows" },
+  { name: "Nightlife", id: "generalPreferences.nigthlife" },
+  { name: "Adventure sports", id: "generalPreferences.adventuresports" }
 ];
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexDirection: "column"
+  }
+}));
+
 const GeneralPreferencesField = props => {
-  const { classes } = props;
+  const classes = useStyles();
 
   return (
-    <Field
-      name="generalpreferences"
-      classes={classes}
-      component={renderCheckBox}
-      options={preferenceOptions}
-    >
+    <div className={classes.root}>
       {preferenceOptions.map((choice, index) => (
-        <StyledCheckbox
+        <Field
           key={choice.id}
+          name={choice.id}
+          component={renderCheckbox}
           label={choice.name}
-          value={choice.id}
         />
       ))}
-    </Field>
+    </div>
   );
 };
 

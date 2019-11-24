@@ -1,7 +1,7 @@
-import { RadioGroup, FormControl, FormControlLabel } from "@material-ui/core";
+import { FormControlLabel, FormControl, RadioGroup } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-import { StyledRadio } from "./styles/radio";
+import { StyledPaper } from "./styles/paper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const renderRadioButton = ({ options, input, ...rest}) => {
+const renderPaper = ({ options, input, ...rest }) => {
   const customClasses = useStyles();
 
   return (
@@ -17,10 +17,9 @@ const renderRadioButton = ({ options, input, ...rest}) => {
       <RadioGroup {...input} {...rest}>
         {options.map((choice, index) => (
           <FormControlLabel
-            key={choice.value}
-            value={choice.value}
-            control={<StyledRadio />}
-            label={choice.label}
+            key={choice.id}
+            value={choice.id}
+            control={<StyledPaper content="Hello" />}
           />
         ))}
       </RadioGroup>
@@ -28,4 +27,4 @@ const renderRadioButton = ({ options, input, ...rest}) => {
   );
 };
 
-export default renderRadioButton;
+export default renderPaper;

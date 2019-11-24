@@ -7,7 +7,7 @@ import AgeGenderField from "./AgeGender";
 import CompanionField from "./Companion";
 import PriorVisitsField from "./PriorVisits";
 import GeneralPreferencesField from "./GeneralPreferences";
-import GeneralPreferences from "./q-generalpreferences";
+import FoodNBeveragesField from "./FoodNBeverages";
 import FoodnBeverages from "./q-winendine";
 import Museums from "./q-museums";
 import Relaxation from "./q-relaxation";
@@ -107,7 +107,7 @@ function QuestionComp(props) {
         </span>
         <div>
           <h1>Food & Beverages</h1>
-          <FoodnBeverages />
+          <FoodNBeveragesField />
         </div>
       </div>
     ),

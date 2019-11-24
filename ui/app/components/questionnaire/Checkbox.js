@@ -1,31 +1,20 @@
-import { FormGroup, FormControl, FormControlLabel } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { FormControlLabel } from "@material-ui/core";
 
-import { StyledCheckbox } from "../styles";
+import { StyledCheckbox } from "./styles/checkbox";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%"
-  }
-}));
-
-const renderCheckBox = ({ options, input, ...rest}) => {
-  const customClasses = useStyles();
+const renderCheckbox = ({ input, label }) => {
 
   return (
-    <FormControl className={customClasses.root}>
-      <FormGroup {...input} {...rest}>
-        {options.map((choice, index) => (
-          <FormControlLabel
-            key={choice.id}
-            value={choice.id}
-            control={<StyledCheckbox />}
-            label={choice.name}
-          />
-        ))}
-      </FormGroup>
-    </FormControl>
+    <FormControlLabel
+      control={
+        <StyledCheckbox
+          checked={input.value ? true : false}
+          onChange={input.onChange}
+        />
+      }
+      label={label}
+    />
   );
 };
 
-export default renderCheckBox;
+export default renderCheckbox;

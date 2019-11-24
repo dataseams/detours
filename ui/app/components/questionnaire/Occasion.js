@@ -1,6 +1,5 @@
 import { Field } from "redux-form";
 
-import { StyledRadio } from "../styles";
 import renderRadioButton from "./RadioButton";
 
 const occasionsOptions = [
@@ -24,15 +23,7 @@ const OccasionField = props => {
       classes={classes}
       component={renderRadioButton}
       options={occasionsOptions}
-    >
-      {occasionsOptions.map(option => (
-        <StyledRadio
-          key={option.value}
-          label={option.label}
-          value={option.value}
-        />
-      ))}
-    </Field>
+    />
   );
 };
 

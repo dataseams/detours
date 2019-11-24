@@ -1,6 +1,6 @@
 import { Field } from "redux-form";
 
-import { StyledRadio } from "../styles";
+import { StyledRadio } from "./styles/radio";
 import renderRadioButton from "./RadioButton";
 
 const companionOptions = [
@@ -21,15 +21,7 @@ const CompanionField = props => {
       classes={classes}
       component={renderRadioButton}
       options={companionOptions}
-    >
-      {companionOptions.map((choice, index) => (
-        <StyledRadio
-          key={choice.value}
-          label={choice.label}
-          value={choice.value}
-        />
-      ))}
-    </Field>
+    />
   );
 };
 

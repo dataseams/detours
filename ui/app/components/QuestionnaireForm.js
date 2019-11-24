@@ -20,7 +20,7 @@ class QuestionnaireForm extends React.Component {
     super(props);
 
     this.state = {
-      index: 7,
+      index: 8,
       hiddenNext: false,
       disabledBack: true
     };

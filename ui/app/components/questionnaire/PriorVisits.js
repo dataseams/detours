@@ -1,6 +1,6 @@
 import { Field } from "redux-form";
 
-import { StyledRadio } from "../styles";
+import { StyledRadio } from "./styles/radio";
 import renderRadioButton from "./RadioButton";
 
 const priorVisitOptions = [
@@ -18,15 +18,7 @@ const PriorVisitsField = props => {
       classes={classes}
       component={renderRadioButton}
       options={priorVisitOptions}
-    >
-      {priorVisitOptions.map((choice, index) => (
-        <StyledRadio
-          key={choice.value}
-          label={choice.label}
-          value={choice.value}
-        />
-      ))}
-    </Field>
+    />
   );
 };
 
