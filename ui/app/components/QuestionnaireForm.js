@@ -20,7 +20,7 @@ class QuestionnaireForm extends React.Component {
     super(props);
 
     this.state = {
-      index: 13,
+      index: 1,
       hiddenNext: false,
       disabledBack: true
     };
@@ -39,7 +39,7 @@ class QuestionnaireForm extends React.Component {
 
   toggleNext(e) {
     let index = this.state.index + 1;
-    let hiddenNext = index === 17;
+    let hiddenNext = index === 16;
 
     this.setState({
       index: index,
@@ -73,6 +73,6 @@ class QuestionnaireForm extends React.Component {
 }
 
 export default reduxForm({
-  form: "Questionnaire",
+  form: "questionnaire",
   validate
 })(QuestionnaireForm);

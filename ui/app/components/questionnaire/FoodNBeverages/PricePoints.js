@@ -10,7 +10,7 @@ const pricePointOptions = [
   { name: "$$$$", id: "luxury" }
 ];
 
-const PricePointsField = props => {
+const DiningPricePointsField = props => {
   const { classes } = props;
 
   return (
@@ -23,4 +23,4 @@ const PricePointsField = props => {
   );
 };
 
-export default PricePointsField;
+export default DiningPricePointsField;

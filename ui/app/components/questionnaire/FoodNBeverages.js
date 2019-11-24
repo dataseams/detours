@@ -4,7 +4,7 @@ import DiningEnvironmentsField from "./FoodNBeverages/DiningEnvironments";
 import DiningFeaturesField from "./FoodNBeverages/DiningFeatures";
 import DietaryConstraintsFilterField from "./FoodNBeverages/DietaryConstraintsFilter";
 import DietaryConstraintsField from "./FoodNBeverages/DietaryConstraints";
-import PricePointsField from "./FoodNBeverages/PricePoints";
+import DiningPricePointsField from "./FoodNBeverages/PricePoints";
 import { paperStyles } from "./styles/paper";
 
 const FoodNBeveragesField = props => {
@@ -22,7 +22,7 @@ const FoodNBeveragesField = props => {
           spacing={spacing}
           className={classes.cb}
         >
-          <PricePointsField />
+          <DiningPricePointsField />
         </Grid>
       </Grid>
       <Grid item xs={12}>

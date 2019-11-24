@@ -5,7 +5,10 @@ import { StyledPaper } from "./styles/paper";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center"
   }
 }));
 
@@ -13,13 +16,13 @@ const renderPaper = ({ options, input, ...rest }) => {
   const customClasses = useStyles();
 
   return (
-    <FormControl className={customClasses.root}>
-      <RadioGroup {...input} {...rest}>
+    <FormControl>
+      <RadioGroup {...input} {...rest} className={customClasses.root}>
         {options.map((choice, index) => (
           <FormControlLabel
             key={choice.id}
             value={choice.id}
-            control={<StyledPaper content="Hello" />}
+            control={<StyledPaper content={choice} />}
           />
         ))}
       </RadioGroup>

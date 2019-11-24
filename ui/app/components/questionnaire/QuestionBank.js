@@ -16,10 +16,10 @@ import ShoppingField from "./Shopping";
 import ShowsField from "./Shows";
 import NightlifeField from "./Nightlife";
 import AdventureSportsField from "./AdventureSports";
-import Neighborhoods from "./q-neighborhoods";
+import NeighborhoodsField from "./Neighborhoods";
 
 function QuestionComp(props) {
-  const questionnaireLength = 17;
+  const questionnaireLength = 16;
 
   var comp = {
     1: (
@@ -166,15 +166,15 @@ function QuestionComp(props) {
         </div>
       </div>
     ),
-    17: (
-      <div>
-        <span>STEP 17/{questionnaireLength}</span>
-        <div>
-          <h1>Do you know which neighborhood you'd like to stay in?</h1>
-          <Neighborhoods />
-        </div>
-      </div>
-    )
+    // 17: (
+    //   <div>
+    //     <span>STEP 17/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Do you know which neighborhood you'd like to stay in?</h1>
+    //       <NeighborhoodsField />
+    //     </div>
+    //   </div>
+    // )
   };
 
   return comp[props.index];
