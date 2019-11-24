@@ -12,7 +12,7 @@ import MuseumsField from "./Museums";
 import RelaxationMethodsField from "./Relaxationmethods";
 import OutdoorActivitiesField from "./OutdoorActivities";
 import ToursField from "./Tours";
-import Shopping from "./q-shopping";
+import ShoppingField from "./Shopping";
 import ShowsField from "./Shows";
 import NightlifeField from "./Nightlife";
 import AdventureSportsField from "./AdventureSports";
@@ -135,7 +135,7 @@ function QuestionComp(props) {
         <span>STEP 13/{questionnaireLength}</span>
         <div>
           <h1>Shopping</h1>
-          <Shopping />
+          <ShoppingField />
         </div>
       </div>
     ),
