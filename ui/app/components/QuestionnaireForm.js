@@ -20,7 +20,7 @@ class QuestionnaireForm extends React.Component {
     super(props);
 
     this.state = {
-      index: 8,
+      index: 15,
       hiddenNext: false,
       disabledBack: true
     };
@@ -39,7 +39,7 @@ class QuestionnaireForm extends React.Component {
 
   toggleNext(e) {
     let index = this.state.index + 1;
-    let hiddenNext = index === 17 - 1;
+    let hiddenNext = index === 17;
 
     this.setState({
       index: index,
