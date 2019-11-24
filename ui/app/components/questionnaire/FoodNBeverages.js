@@ -51,7 +51,7 @@ const FoodNBeveragesField = props => {
       </Grid>
       <Grid item xs={12}>
         <p className={classes.q}>
-          4. Do you or anyone you're traveling with you have any dietary
+          4. Do you or anyone you're traveling with have any dietary
           constraints?
         </p>
         <Grid
