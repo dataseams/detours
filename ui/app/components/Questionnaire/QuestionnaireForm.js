@@ -1,8 +1,8 @@
 import React from "react";
 import { reduxForm } from "redux-form";
 
-import QuestionComp from "../components/questionnaire/QuestionBank";
-import { Back, Next, Submit } from "../components/questionnaire/Buttons";
+import QuestionComp from "./QuestionBank";
+import { Back, Next, Submit } from "./Buttons";
 
 const validate = values => {
   const errors = {};
@@ -48,6 +48,7 @@ class QuestionnaireForm extends React.Component {
     });
   }
 
+
   render() {
     const { handleSubmit, pristine, submitting, classes } = this.props;
     const { index, hiddenNext, disabledBack } = this.state;
@@ -63,7 +64,7 @@ class QuestionnaireForm extends React.Component {
           <Submit
             type="submit"
             toggle={e => this.toggleNext(e)}
-            hidden={true}
+            hidden={hiddenNext}
             disabled={pristine || submitting}
           />
         </div>

@@ -2,13 +2,13 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 
 import Meta from "../components/Head";
-import NavigationBar from "../components/NavigationBar";
-import LandingTitle from "../components/LandingTitle";
-import SampleItineraries from "../components/SampleItineraries";
-import HowItWorks from "../components/HowItWorks";
-import Pricing from "../components/Pricing";
-import Testimonials from "../components/Testimonials";
-import Copyright from "../components/Copyright";
+import NavigationBar from "../components/Landing/NavigationBar";
+import LandingTitle from "../components/Landing/LandingTitle";
+import SampleItineraries from "../components/Landing/SampleItineraries";
+import HowItWorks from "../components/Landing/HowItWorks";
+import Pricing from "../components/Landing/Pricing";
+import Testimonials from "../components/Landing/Testimonials";
+import Copyright from "../components/Landing/Copyright";
 
 function Index() {
   return (

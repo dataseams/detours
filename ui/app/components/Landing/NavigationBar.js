@@ -7,7 +7,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
-import LogoButton from "./LogoButton";
+import LogoButton from "../LogoButton";
 
 function ElevationScroll(props) {
   const { children } = props;

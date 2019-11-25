@@ -44,7 +44,7 @@ const showResults = values =>
 
 function Survey() {
   const classes = useStyles();
-  const QuestionnaireForm = require("../components/QuestionnaireForm").default;
+  const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm").default;
 
   return (
     <div>
