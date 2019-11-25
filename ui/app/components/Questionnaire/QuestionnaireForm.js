@@ -48,7 +48,6 @@ class QuestionnaireForm extends React.Component {
     });
   }
 
-
   render() {
     const { handleSubmit, pristine, submitting, classes } = this.props;
     const { index, hiddenNext, disabledBack } = this.state;
@@ -63,7 +62,6 @@ class QuestionnaireForm extends React.Component {
           <Next toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
           <Submit
             type="submit"
-            toggle={e => this.toggleNext(e)}
             hidden={hiddenNext}
             disabled={pristine || submitting}
           />

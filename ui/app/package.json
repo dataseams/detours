@@ -9,15 +9,21 @@
     "@material-ui/pickers": "^3.2.7",
     "@material-ui/styles": "latest",
     "clsx": "latest",
-    "date-fns": "^2.6.0",
+    "date-fns": "^2.1.0",
+    "dotenv": "^8.2.0",
+    "google-maps-react": "^2.0.2",
     "material-ui": "^0.20.2",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^7.1.1",
+    "react-scripts": "^3.2.0",
     "redux": "^4.0.4",
-    "redux-form": "^8.2.6"
+    "redux-form": "^8.2.6",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "scripts": {
     "dev": "next",
