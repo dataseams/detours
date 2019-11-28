@@ -1,26 +1,45 @@
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore, combineReducers } from "redux";
+import { reducer as reduxFormReducer } from "redux-form";
+import { makeStyles, Container } from "@material-ui/core";
 
-const mapStyles = {
-  width: "100%",
-  height: "100%"
-};
+import Meta from "../components/Head";
+import LogoNavigationBar from "../components/LogoNavigationBar";
 
-const MyMap = props => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    textAlign: "left",
+    width: "50%"
+  },
+  mapContainer: {
+    paddingTop: theme.spacing(25),
+  }
+}));
+
+const reducer = combineReducers({
+  form: reduxFormReducer
+});
+
+const store = createStore(reducer);
+
+const Itinerary = props => {
+  const classes = useStyles();
+  const ItineraryMap = require("../components/ItineraryMap").default;
+
   return (
     <div>
-      <h1>This is a google map.</h1>
-      <Map
-        google={props.google}
-        zoom={11}
-        style={mapStyles}
-        initialCenter={{ lat: 33.889, lng: -118.1489 }}
-      >
-        <Marker position={{ lat: 33.9, lng: -118.0 }} />
-      </Map>
+      <Meta />
+      <LogoNavigationBar />
+      <Provider store={store}>
+        <div className={classes.mapContainer}>
+          <Container>
+            <ItineraryMap />
+          </Container>
+        </div>
+      </Provider>
     </div>
   );
-};
+}
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-})(MyMap);
+export default Itinerary;
