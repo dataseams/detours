@@ -12,6 +12,10 @@ export default () => (
         charSet="utf-8"
       />
       <link rel="shortcut icon" href="/static/favicon.ico" />
+      <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+      ></link>
     </Head>
   </div>
 );

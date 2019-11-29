@@ -44,7 +44,8 @@ const showResults = values =>
 
 function Survey() {
   const classes = useStyles();
-  const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm").default;
+  const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
+    .default;
 
   return (
     <div>
@@ -52,10 +53,7 @@ function Survey() {
       <LogoNavigationBar />
       <Provider store={store}>
         <div className={classes.surveyPage}>
-          <QuestionnaireForm
-            classes={classes}
-            onSubmit={showResults}
-          />
+          <QuestionnaireForm classes={classes} onSubmit={showResults} />
         </div>
       </Provider>
     </div>

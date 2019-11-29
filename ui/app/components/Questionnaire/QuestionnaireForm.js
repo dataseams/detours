@@ -2,7 +2,7 @@ import React from "react";
 import { reduxForm } from "redux-form";
 
 import QuestionComp from "./QuestionBank";
-import { Back, Next, Submit } from "./Buttons";
+import { Back, Next, Submit } from "../Buttons";
 
 const validate = values => {
   const errors = {};

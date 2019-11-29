@@ -34,6 +34,17 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "white",
       opacity: 0.7
     }
+  },
+
+  purchaseButton: {
+    margin: theme.spacing(1),
+    width: "120px",
+    backgroundColor: "#5865bc",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#5865bc",
+      opacity: 0.7
+    }
   }
 }));
 
@@ -81,4 +92,14 @@ function Submit(props) {
   );
 }
 
-export { Back, Next, Submit };
+function Purchase(props) {
+  const classes = useStyles();
+
+  return (
+    <Button variant="contained" className={classes.purchaseButton}>
+      Purchase
+    </Button>
+  );
+}
+
+export { Back, Next, Submit, Purchase };
