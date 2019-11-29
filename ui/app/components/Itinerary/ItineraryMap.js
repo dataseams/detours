@@ -5,7 +5,7 @@ import { makeStyle, makeStyles } from "@material-ui/styles";
 
 const AnyReactComponent = props => (
   <Box border={1} borderColor="primary.main" borderRadius="borderRadius">
-    <i class="material-icons" style={{ fontSize: "30px", color: "#5865bc" }}>
+    <i class="material-icons" style={{ fontSize: "26px", color: "#5865bc" }}>
       restaurant
     </i>
   </Box>
@@ -14,10 +14,10 @@ const AnyReactComponent = props => (
 class SimpleMap extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 48.862419,
+      lng: 2.341400
     },
-    zoom: 11
+    zoom: 13
   };
 
   render() {
@@ -28,7 +28,7 @@ class SimpleMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent lat={59.955413} lng={30.337844} text="MARC" />
+          <AnyReactComponent lat={48.874204} lng={2.347704} />
         </GoogleMapReact>
       </div>
     );

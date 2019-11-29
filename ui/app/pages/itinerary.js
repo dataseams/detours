@@ -8,13 +8,14 @@ import {
   Typography,
   Grid,
   Box,
-  Paper,
   Divider
 } from "@material-ui/core";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import { Purchase } from "../components/Buttons";
+import AlignItemsList from "../components/Itinerary/ItineraryList";
+import ItineraryMap from "../components/Itinerary/ItineraryMap";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     width: "90%"
   },
+  itineraryBox: {
+    backgroundColor: "#F6F6F6",
+    padding: "2em"
+  },
   itineraryContainer: {
     display: "flex",
     flexGrow: 1,
@@ -34,9 +39,6 @@ const useStyles = makeStyles(theme => ({
   buttonContainer: {
     display: "flex",
     justifyContent: "center"
-  },
-  paperContainer: {
-    overflow: "scroll"
   },
   paper: {
     height: "5em",
@@ -56,7 +58,6 @@ const resultsList = Array(10)
 
 const Itinerary = props => {
   const classes = useStyles();
-  const ItineraryMap = require("../components/ItineraryMap").default;
 
   return (
     <div>
@@ -82,19 +83,17 @@ const Itinerary = props => {
             experiences which directly match with your following interests.
           </Typography>
         </Box>
-        <Grid item xs={12} className={classes.itineraryContainer}>
-          <Grid item xs={4}>
-            <Typography variant="h6">Monday, November 24</Typography>
-            <Grid className={classes.paperContainer}>
-              {resultsList.map((choice, index) => (
-                <Paper className={classes.paper}>This is paper {index}</Paper>
-              ))}
+        <Box className={classes.itineraryBox}>
+          <Grid item xs={12} className={classes.itineraryContainer}>
+            <Grid item xs={4}>
+              <Typography variant="h6">Monday, November 24</Typography>
+              <AlignItemsList />
+            </Grid>
+            <Grid item xs={8}>
+              <ItineraryMap containerStyle={mapContainer} />
             </Grid>
           </Grid>
-          <Grid item xs={8}>
-            <ItineraryMap containerStyle={mapContainer} />
-          </Grid>
-        </Grid>
+        </Box>
         <Box className={classes.buttonContainer}>
           <Purchase>Purchase</Purchase>
         </Box>
