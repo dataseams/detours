@@ -8,7 +8,10 @@ import {
   Typography,
   Grid,
   Box,
-  Divider
+  Divider,
+  AppBar,
+  Tabs,
+  Tab
 } from "@material-ui/core";
 
 import Meta from "../components/Head";
@@ -88,6 +91,20 @@ const Itinerary = props => {
             experiences which directly match with your following interests.
           </Typography>
         </Box>
+        <AppBar position="static" color="default">
+          <Tabs
+            textColor="primary"
+            indicatorColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs"
+          >
+            <Tab label="Day 1" />
+            <Tab label="Day 2" />
+            <Tab label="Day 3" />
+            <Tab label="Day 4" />
+          </Tabs>
+        </AppBar>
         <Box className={classes.itineraryBox}>
           <Grid item xs={12} className={classes.itineraryContainer}>
             <Grid item xs={4}>
