@@ -29,7 +29,7 @@ export default function AlignItemsList() {
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <i
-            class="material-icons"
+            className="material-icons"
             style={{ fontSize: "30px", color: "#5865bc" }}
           >
             hotel
@@ -56,7 +56,7 @@ export default function AlignItemsList() {
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <i
-            class="material-icons"
+            className="material-icons"
             style={{ fontSize: "30px", color: "#5865bc" }}
           >
             directions_bike
@@ -83,7 +83,7 @@ export default function AlignItemsList() {
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <i
-            class="material-icons"
+            className="material-icons"
             style={{ fontSize: "30px", color: "#5865bc" }}
           >
             restaurant

@@ -24,11 +24,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     flexDirection: "column",
     justifyContent: "center",
-    width: "90%"
+    width: "95%"
   },
   itineraryBox: {
+    display: "flex",
+    flexGrow: 1,
     backgroundColor: "#F6F6F6",
-    padding: "2em"
+    padding: "2em",
+    height: "565px"
   },
   itineraryContainer: {
     display: "flex",
@@ -36,9 +39,11 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
     height: "400px"
   },
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "center"
+  purchaseContainer: {
+    textAlign: "center"
+  },
+  purchaseItem: {
+    padding: "1em"
   },
   paper: {
     height: "5em",
@@ -94,8 +99,12 @@ const Itinerary = props => {
             </Grid>
           </Grid>
         </Box>
-        <Box className={classes.buttonContainer}>
-          <Purchase>Purchase</Purchase>
+        <Box className={classes.purchaseContainer} m={5}>
+          <Typography className={classes.purchaseItem}>
+            Get complete access to your itinerary for <b>just $10</b>.
+          </Typography>
+          <Divider variant="middle"></Divider>
+          <Purchase className={classes.purchaseItem}>Purchase</Purchase>
         </Box>
       </Container>
     </div>

@@ -39,12 +39,15 @@ const useStyles = makeStyles(theme => ({
   purchaseButton: {
     margin: theme.spacing(1),
     width: "120px",
+    height: "45px",
     backgroundColor: "#5865bc",
     color: "white",
     "&:hover": {
       backgroundColor: "#5865bc",
       opacity: 0.7
-    }
+    },
+    textTransform: "none",
+    fontSize: "16px"
   }
 }));
 

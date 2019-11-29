@@ -5,7 +5,7 @@ import { makeStyle, makeStyles } from "@material-ui/styles";
 
 const AnyReactComponent = props => (
   <Box border={1} borderColor="primary.main" borderRadius="borderRadius">
-    <i class="material-icons" style={{ fontSize: "26px", color: "#5865bc" }}>
+    <i className="material-icons" style={{ fontSize: "26px", color: "#5865bc" }}>
       restaurant
     </i>
   </Box>
