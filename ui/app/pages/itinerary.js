@@ -6,10 +6,10 @@ import { Container, Typography, Box, Divider } from "@material-ui/core";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
-import { Purchase } from "../components/Buttons";
 import ItineraryDescription from "../components/Itinerary/Description";
-import DailyTabs from "../components/Itinerary/DailyTabs";
+import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
+import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
 const resultsList = Array(10)
   .fill()
@@ -25,15 +25,7 @@ const Itinerary = props => {
       <Container className={classes.root}>
         <ItineraryDescription />
         <DailyTabs classes={classes} />
-        <Box className={classes.purchaseContainer} m={5}>
-          <Typography className={classes.purchaseItem}>
-            Get complete access to your itinerary for <b>just $10</b>.
-          </Typography>
-          <Box width="100px">
-            <Divider variant="middle"></Divider>
-          </Box>
-          <Purchase className={classes.purchaseItem}>Purchase</Purchase>
-        </Box>
+        <PurchaseBox classes={classes} />
       </Container>
     </div>
   );
