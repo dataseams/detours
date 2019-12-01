@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
       opacity: 0.7
     },
     textTransform: "none",
-    fontSize: "16px"
+    fontSize: "16px",
+    margin: "1em"
   }
 }));
 
