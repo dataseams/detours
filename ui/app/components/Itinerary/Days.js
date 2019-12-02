@@ -1,42 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Box, AppBar, Tabs, Tab, Grid, Typography } from "@material-ui/core";
+import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-import AlignItemsList from "./Items";
-import ItineraryMap from "./Map";
-
-function TabPanel(props) {
-  const { children, value, index, classes, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      <Box className={classes.itineraryBox}>
-        <Grid item xs={12} className={classes.itineraryContainer}>
-          <Grid item xs={4}>
-            <Typography variant="h6">Monday, November 24</Typography>
-            <AlignItemsList />
-          </Grid>
-          <Grid item xs={8}>
-            <ItineraryMap containerStyle={{ height: "35vh", width: "100%" }} />
-          </Grid>
-        </Grid>
-      </Box>
-    </Typography>
-  );
-}
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-};
+import TabPanel from "./TabPanel";
+import sampleItinerary from "./sampleItinerary";
 
 function a11yProps(index) {
   return {
@@ -74,14 +41,14 @@ const DailyTabs = props => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs"
         >
-          <Tab label="Day 1" {...a11yProps(0)} />
-          <Tab label="Day 2" {...a11yProps(1)} />
-          <Tab label="Day 3" {...a11yProps(2)} />
-          <Tab label="Day 4" {...a11yProps(3)} />
+          {sampleItinerary.plan.days.map((day, index) => (
+            <Tab label={"Day " + (day.order + 1)} {...a11yProps(day.order)} />
+          ))}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} classes={classes} />
-      <TabPanel value={value} index={1} classes={classes} />
+      {sampleItinerary.plan.days.map((day, index) => (
+        <TabPanel value={value} index={day.order} classes={classes} />
+      ))}
     </div>
   );
 };
