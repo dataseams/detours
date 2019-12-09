@@ -40,7 +40,7 @@ const ItineraryDescription = props => {
       <Typography variant="h3" paragraph={true}>
         Your trip to Paris, France
       </Typography>
-      <Divider variant="left" className={classes.divider}></Divider>
+      <Divider className={classes.divider}></Divider>
       <Typography className={classes.descParagraph}>
         This is a preview of your itinerary.
       </Typography>

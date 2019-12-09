@@ -6,7 +6,6 @@ import {
   Divider,
   ListItemText,
   ListItemAvatar,
-  Avatar,
   Typography
 } from "@material-ui/core";
 
@@ -14,7 +13,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+   margin: "0 3px 0 0"
   },
   inline: {
     display: "inline"

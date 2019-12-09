@@ -6,15 +6,14 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    justifyContent: "center",
-    width: "95%"
+    justifyContent: "center"
   },
   itineraryBox: {
     display: "flex",
+    flexDirection: "column",
     flexGrow: 1,
     backgroundColor: "#F6F6F6",
-    padding: "2em",
-    height: "565px"
+    padding: "2em"
   },
   itineraryContainer: {
     display: "flex",
@@ -23,7 +22,9 @@ const useStyles = makeStyles(theme => ({
     height: "400px"
   },
   purchaseContainer: {
-    textAlign: "center"
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   purchaseItem: {
     padding: "1em"
@@ -32,6 +33,16 @@ const useStyles = makeStyles(theme => ({
     height: "5em",
     padding: "5px",
     margin: "0 3px 3px 0"
+  },
+  divider: {
+    height: "2px",
+    backgroundColor: "#5865bc",
+    margin: "1em"
+  },
+  purchaseSubContainer: {
+    width: "90px",
+    padding: "0px",
+    margin: "0px"
   }
 }));
 

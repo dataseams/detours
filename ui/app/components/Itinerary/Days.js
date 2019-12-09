@@ -42,12 +42,12 @@ const DailyTabs = props => {
           aria-label="scrollable auto tabs"
         >
           {sampleItinerary.plan.days.map((day, index) => (
-            <Tab label={"Day " + (day.order + 1)} {...a11yProps(day.order)} />
+            <Tab key={day.order} label={"Day " + (day.order + 1)} {...a11yProps(day.order)} />
           ))}
         </Tabs>
       </AppBar>
       {sampleItinerary.plan.days.map((day, index) => (
-        <TabPanel value={value} index={day.order} classes={classes} />
+        <TabPanel key={day.order} value={value} index={day.order} classes={classes} />
       ))}
     </div>
   );

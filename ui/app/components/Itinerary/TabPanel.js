@@ -18,9 +18,9 @@ function TabPanel(props) {
       {...other}
     >
       <Box className={classes.itineraryBox}>
+        <Typography variant="h6">Monday, November 24</Typography>
         <Grid item xs={12} className={classes.itineraryContainer}>
           <Grid item xs={4}>
-            <Typography variant="h6">Monday, November 24</Typography>
             <AlignItemsList />
           </Grid>
           <Grid item xs={8}>

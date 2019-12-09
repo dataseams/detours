@@ -1,8 +1,5 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import { reducer as reduxFormReducer } from "redux-form";
-import { Container, Typography, Box, Divider } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
