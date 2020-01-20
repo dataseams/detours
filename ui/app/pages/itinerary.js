@@ -7,7 +7,7 @@ import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
-import sampleItinerary from "../components/Itinerary/sampleItinerary";
+import itineraryTemplate from "../components/Itinerary/itineraryTemplate";
 
 const resultsList = Array(10)
   .fill()
@@ -21,8 +21,8 @@ const Itinerary = props => {
       <Meta />
       <LogoNavigationBar />
       <Container className={classes.root}>
-        <ItineraryDescription summary={sampleItinerary.summary} />
-        <DailyTabs classes={classes} plan={sampleItinerary.plan} />
+        <ItineraryDescription summary={itineraryTemplate.summary} />
+        <DailyTabs classes={classes} plan={itineraryTemplate.plan} />
         <PurchaseBox classes={classes} />
       </Container>
     </div>
