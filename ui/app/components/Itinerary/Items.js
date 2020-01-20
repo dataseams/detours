@@ -14,100 +14,51 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-   margin: "0 3px 0 0"
+    margin: "0 3px 0 0"
   },
   inline: {
     display: "inline"
   }
 }));
 
-export default function AlignItemsList() {
+function AlignItemsList(props) {
+  var { events } = props;
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <i
-            className="material-icons"
-            style={{ fontSize: "30px", color: "#5865bc" }}
-          >
-            hotel
-          </i>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Maison natale Bernard Buffet"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
+      {events.map((event, index) => (
+        <div key={event.order}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <i
+                className="material-icons"
+                style={{ fontSize: "30px", color: "#5865bc" }}
               >
-                Breakfast
-              </Typography>
-              {" — A historical landmark with breakfast experience."}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <i
-            className="material-icons"
-            style={{ fontSize: "30px", color: "#5865bc" }}
-          >
-            directions_bike
-          </i>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Holland Bikes Norte Dame"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Biking
-              </Typography>
-              {" — A self-guided biking tour in the city."}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <i
-            className="material-icons"
-            style={{ fontSize: "30px", color: "#5865bc" }}
-          >
-            restaurant
-          </i>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Le Souffle"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Lunch
-              </Typography>
-              {
-                " — A local favorite, known for its generosity and tasty souffles."
+                {event.materialIcon}
+              </i>
+            </ListItemAvatar>
+            <ListItemText
+              primary={event.title}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    {event.activity}
+                  </Typography>
+                  {" — " + event.description}
+                </React.Fragment>
               }
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+            />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </div>
+      ))}
     </List>
   );
 }
+export default AlignItemsList;

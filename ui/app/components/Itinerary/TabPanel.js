@@ -5,8 +5,10 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import AlignItemsList from "./Items";
 import ItineraryMap from "./Map";
 
+var moment = require("moment");
+
 function TabPanel(props) {
-  const { children, value, index, classes, ...other } = props;
+  const { children, value, index, classes, data, ...other } = props;
 
   return (
     <Typography
@@ -18,10 +20,12 @@ function TabPanel(props) {
       {...other}
     >
       <Box className={classes.itineraryBox}>
-        <Typography variant="h6">Monday, November 24</Typography>
+        <Typography variant="h6">
+          {moment(data.date, "YYYY-MM-DD").format("dddd, MMM DD, YYYY")}
+        </Typography>
         <Grid item xs={12} className={classes.itineraryContainer}>
           <Grid item xs={4}>
-            <AlignItemsList />
+            <AlignItemsList events={data.events} />
           </Grid>
           <Grid item xs={8}>
             <ItineraryMap containerStyle={{ height: "35vh", width: "100%" }} />

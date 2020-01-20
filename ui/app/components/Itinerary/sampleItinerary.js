@@ -1,9 +1,9 @@
 const sampleItinerary = {
   surveyId: 1,
-  city: "Paris, France",
   summary: {
-    spendingPerDay: "$170",
-    hoursSaved: "20-30 hours per day",
+    city: "Paris, France",
+    spendingPerDay: "$176",
+    hoursSaved: "20-30 hours",
     interestsMatched: [
       "Intimate, authentic dining",
       "Markets",
@@ -17,7 +17,7 @@ const sampleItinerary = {
       {
         order: 0,
         date: "2019-01-01",
-        lineItems: [
+        events: [
           {
             order: 1,
             category: "Hotel",
@@ -51,17 +51,71 @@ const sampleItinerary = {
             activity: "Lunch",
             description:
               "A local favorite, known for its generosity and tasty souffles."
+          },
+          {
+            order: 5,
+            category: "Hotel",
+            materialIcon: "hotel",
+            title: "Maison Natale Bernard",
+            activity: "Sleep",
+            description:
+              "Go back to bed."
+          },
+          {
+            order: 6,
+            category: "Hotel",
+            materialIcon: "hotel",
+            title: "Maison Natale Bernard",
+            activity: "Sleep",
+            description:
+              "Sleep deeper."
           }
         ]
       },
       {
-        order: 1
+        order: 1,
+        date: "2019-01-02",
+        events: [
+          {
+            order: 1,
+            category: "Hotel",
+            materialIcon: "hotel",
+            title: "Maison Natale Bernard Buffet",
+            activity: "Wake-up",
+            description:
+              "Featuring a low-key art deco style, this conservative hotel is a 1-minute walk from the Cadet metro station."
+          }
+        ]
       },
       {
-        order: 2
+        order: 2,
+        date: "2019-01-03",
+        events: [
+          {
+            order: 1,
+            category: "Hotel",
+            materialIcon: "hotel",
+            title: "Maison Natale Bernard Buffet",
+            activity: "Wake-up",
+            description:
+              "Featuring a low-key art deco style, this conservative hotel is a 1-minute walk from the Cadet metro station."
+          }
+        ]
       },
       {
-        order: 3
+        order: 3,
+        date: "2019-01-04",
+        events: [
+          {
+            order: 1,
+            category: "Hotel",
+            materialIcon: "hotel",
+            title: "Maison Natale Bernard Buffet",
+            activity: "Wake-up",
+            description:
+              "Featuring a low-key art deco style, this conservative hotel is a 1-minute walk from the Cadet metro station."
+          }
+        ]
       }
     ]
   }

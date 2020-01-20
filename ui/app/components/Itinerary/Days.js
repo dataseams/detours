@@ -3,7 +3,6 @@ import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 import TabPanel from "./TabPanel";
-import sampleItinerary from "./sampleItinerary";
 
 function a11yProps(index) {
   return {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DailyTabs = props => {
-  const { classes } = props;
+  const { classes, plan } = props;
   const customClasses = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -41,13 +40,23 @@ const DailyTabs = props => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs"
         >
-          {sampleItinerary.plan.days.map((day, index) => (
-            <Tab key={day.order} label={"Day " + (day.order + 1)} {...a11yProps(day.order)} />
+          {plan.days.map((day, index) => (
+            <Tab
+              key={day.order}
+              label={"Day " + (day.order + 1)}
+              {...a11yProps(day.order)}
+            />
           ))}
         </Tabs>
       </AppBar>
-      {sampleItinerary.plan.days.map((day, index) => (
-        <TabPanel key={day.order} value={value} index={day.order} classes={classes} />
+      {plan.days.map((day, index) => (
+        <TabPanel
+          key={day.order}
+          value={value}
+          index={day.order}
+          classes={classes}
+          data={day}
+        />
       ))}
     </div>
   );
