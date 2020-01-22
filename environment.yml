@@ -2,5 +2,13 @@ name: robocation
 channels:
   - defaults
 dependencies:
-  - flask
-  - flake8
+  - pip=19.3.1
+  - python=3.7.3
+  - pip:
+    - flask==1.1.1
+    - flake8==3.7.9
+    - graphene==2.1.8
+    - gunicorn==20.0.4
+    - pytest==5.3.4
+    - flake8-docstrings==1.5.0
+    - black==19.10b0
