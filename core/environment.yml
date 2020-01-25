@@ -1,0 +1,22 @@
+name: detours
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python=3.8
+  - pip:
+    - flake8
+    - flake8-docstrings
+    - black
+    - flask
+    - flask-graphql
+    - gunicorn
+    - graphene
+    - pytest
+    - pytest-benchmark
+    - pytest-asyncio
+    - pytest-cov
+    - coveralls
+    - snapshottest
+    - promise
+    - pytz
