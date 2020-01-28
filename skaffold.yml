@@ -18,8 +18,8 @@ profiles:
   deploy:
     kubectl:
       manifests:
-      - k8s/minikube/deployment/core.yml
-      - k8s/minikube/services/core.yml
+      - k8s/minikube/core/deployment.yml
+      - k8s/minikube/core/service.yml
       flags:
         global: [-n,development]
 - name: ui
@@ -36,8 +36,8 @@ profiles:
   deploy:
     kubectl:
       manifests:
-      - k8s/minikube/deployment/ui.yml
-      - k8s/minikube/services/ui.yml
+      - k8s/minikube/ui/deployment.yml
+      - k8s/minikube/ui/service.yml
       flags:
         global: [-n,development]
 build:
@@ -63,7 +63,9 @@ build:
 deploy:
   kubectl:
     manifests:
-    - k8s/minikube/deployment/*.yml
-    - k8s/minikube/services/*.yml
+    - k8s/minikube/core/deployment.yml
+    - k8s/minikube/core/service.yml
+    - k8s/minikube/ui/deployment.yml
+    - k8s/minikube/ui/service.yml
     flags:
       global: [-n,development]

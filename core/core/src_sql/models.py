@@ -1,7 +1,8 @@
 """Module for all data models logic."""
-from database import Base
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, func
 from sqlalchemy.orm import backref, relationship
+
+from database import Base
 
 
 class Department(Base):
@@ -32,8 +33,9 @@ class Employee(Base):
     # Use cascade="delete,all" to propagate the deletion of a Department
     # onto its employees
     department = relationship(
-        Department, backref=("employees", uselist=True, cascade="delete,all")
+        Department,
+        backref=backref("employees", uselist=True, cascade="delete,all"),
     )
-    role=relationship(
-        Role, backref=("role", uselist=True, cascade="delete,all")
+    role = relationship(
+        Role, backref=backref("role", uselist=True, cascade="delete,all")
     )
