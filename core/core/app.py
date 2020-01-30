@@ -2,10 +2,17 @@
 from flask_graphql import GraphQLView
 from flask import Flask
 
-from database import db_session, init_db
-from schema import schema
+from .database import db_session, init_db
+from .schema import schema
 
 app = Flask(__name__)
+
+
+@app.route("/test")
+def liveness():
+    """Add liveness probe."""
+    return "Alive"
+
 
 app.add_url_rule(
     "/graphql",

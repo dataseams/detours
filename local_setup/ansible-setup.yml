@@ -37,12 +37,6 @@
       name: make
       state: latest
 
-  - name: install make
-    become: true
-    apt:
-      name: make
-      state: latest
-
 # Minikube and infrastructure
   - name: download minikube
     get_url:

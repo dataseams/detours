@@ -3,3 +3,8 @@ resources:
 - production/ui.yml
 - services/core.yml
 - services/ui.yml
+- postgres/secret.yml
+- postgres/pv.yml
+- postgres/pvc.yml
+- postgres/deployment.yml
+- postgres/service.yml

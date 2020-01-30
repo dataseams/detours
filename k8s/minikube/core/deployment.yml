@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: core
-        image: robocation/core:latest
+        image: detours/core:latest
         imagePullPolicy: Never
         ports:
           - containerPort: 5000

@@ -21,3 +21,4 @@ dependencies:
     - snapshottest==0.5.1
     - promise==2.3
     - pytz==2019.3
+    - psycopg2==2.8.4

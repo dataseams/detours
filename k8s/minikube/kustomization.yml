@@ -1,5 +1,10 @@
 resources:
 - core/deployment.yml
-- ui/deployment.yml
 - core/service.yml
+- ui/deployment.yml
 - ui/service.yml
+- postgres/secret.yml
+- postgres/pv.yml
+- postgres/pvc.yml
+- postgres/deployment.yml
+- postgres/service.yml

@@ -1,13 +1,13 @@
 apiVersion: skaffold/v1beta13
 kind: Config
 metadata:
-  name: robocation-dev
+  name: detours-dev
 
 profiles:
 - name: core
   build:
     artifacts:
-    - image: robocation/core
+    - image: detours/core
       context: core/.
       sync:
         manual:
@@ -25,7 +25,7 @@ profiles:
 - name: ui
   build:
     artifacts:
-    - image: robocation/ui
+    - image: detours/ui
       context: ui/.
       sync:
         manual:
@@ -42,7 +42,7 @@ profiles:
         global: [-n,development]
 build:
   artifacts:
-  - image: robocation/core
+  - image: detours/core
     context: core/.
     sync:
       manual:
@@ -50,7 +50,7 @@ build:
         dest: "app/"
     docker:
       dockerfile: dockerfile
-  - image: robocation/ui
+  - image: detours/ui
     context: ui/.
     sync:
       manual:
@@ -67,5 +67,10 @@ deploy:
     - k8s/minikube/core/service.yml
     - k8s/minikube/ui/deployment.yml
     - k8s/minikube/ui/service.yml
+    - k8s/minikube/postgres/pv.yml
+    - k8s/minikube/postgres/pvc.yml
+    - k8s/minikube/postgres/secret.yml
+    - k8s/minikube/postgres/deployment.yml
+    - k8s/minikube/postgres/service.yml
     flags:
       global: [-n,development]
