@@ -5,9 +5,30 @@ metadata:
   labels:
     app: core
 spec:
+  type: LoadBalancer
   selector:
     app: core
   ports:
-  - protocol: TCP
-    port: 5000
-    targetPort: 5000
+    - name: http
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: core
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: core
+    servicePort: 5000
+  rules:
+  - host: dataseams.local
+    http:
+      paths:
+      - path: /core
+        backend:
+          serviceName: core
+          servicePort: 5000
