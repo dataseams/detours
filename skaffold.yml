@@ -22,7 +22,7 @@ profiles:
       - k8s/minikube/core-api/service.yml
       flags:
         global: [-n,development]
-- name: ui
+- name: ui-api
   build:
     artifacts:
     - image: detours/ui-api
@@ -42,7 +42,7 @@ profiles:
         global: [-n,development]
 build:
   artifacts:
-  - image: detours/core
+  - image: detours/core-api
     context: core-api/.
     sync:
       manual:

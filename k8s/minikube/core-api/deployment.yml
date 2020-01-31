@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: core
-        image: detours/core:latest
+        image: detours/core-api:latest
         imagePullPolicy: Never
         ports:
           - containerPort: 5000
