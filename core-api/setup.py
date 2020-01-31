@@ -27,9 +27,9 @@ def version():
 
 
 setup(
-    name="core",
+    name="core-service",
     version=version(),
-    description="Detours' core package.",
+    description="Detours' core service.",
     long_description=readme(),
     classifiers=[
         "Development status :: 3 - Alpha",

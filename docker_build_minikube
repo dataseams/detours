@@ -1,3 +1,0 @@
-eval $(minikube docker-env)
-docker build -t robocation/core:0.1 core/.
-docker build -t robocation/ui:0.1 ui/.

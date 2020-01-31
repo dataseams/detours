@@ -11,7 +11,7 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 5432
+      port: 80
       targetPort: 5432
 ---
 apiVersion: extensions/v1beta1
@@ -23,12 +23,12 @@ metadata:
 spec:
   backend:
     serviceName: postgres-service
-    servicePort: 5432
+    servicePort: 80
   rules:
   - host: dataseams.local
     http:
       paths:
-      - path: /postgres
+      - path: /postgres/*
         backend:
           serviceName: postgres-service
-          servicePort: 5432
+          servicePort: 80

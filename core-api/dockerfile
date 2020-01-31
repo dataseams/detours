@@ -1,16 +1,14 @@
 FROM python:3.8.1-alpine3.11
 
-RUN apk update && apk upgrade && \
-    apk add build-base \
-        postgresql-dev
+RUN apk add build-base \
+            postgresql-dev
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY . /app/
 
-RUN pip install -r requirements.txt && \
-    pip install .
+RUN pip install -r requirements.txt
 
 ENV FLASK_APP=/app/core/src_sql/app.py \
     POSTGRES_USER=sam \
@@ -19,4 +17,4 @@ ENV FLASK_APP=/app/core/src_sql/app.py \
     POSTGRES_PORT=5432 \
     POSTGRES_DB=detours
 
-CMD gunicorn --bind 0.0.0.0:5000 core.app:app
+CMD ["gunicorn", "--bind=:5000", "--timeout=300", "app:app"]
