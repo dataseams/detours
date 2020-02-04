@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ui
+  name: ui-api
   labels:
-    app: ui
+    app: ui-api
 spec:
   type: LoadBalancer
   selector:
-    app: ui
+    app: ui-api
   ports:
     - name: http
       protocol: TCP
@@ -17,12 +17,12 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ui
+  name: ui-api
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   backend:
-    serviceName: ui
+    serviceName: ui-api
     servicePort: 80
   rules:
   - host: dataseams.local
@@ -30,5 +30,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: ui
+          serviceName: ui-api
           servicePort: 80
