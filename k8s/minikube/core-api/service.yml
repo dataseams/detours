@@ -1,34 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: core
+  name: core-api
   labels:
-    app: core
+    app: core-api
 spec:
   type: LoadBalancer
   selector:
-    app: core
+    app: core-api
   ports:
     - name: http
       protocol: TCP
-      port: 80
+      port: 5000
       targetPort: 5000
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: core
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  backend:
-    serviceName: core
-    servicePort: 80
-  rules:
-  - host: dataseams.local
-    http:
-      paths:
-      - path: /core/*
-        backend:
-          serviceName: core
-          servicePort: 80

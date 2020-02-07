@@ -1,25 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: core
+  name: core-api
   labels:
-    app: core
+    app: core-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: core
+      app: core-api
   template:
     metadata:
       labels:
-        app: core
+        app: core-api
     spec:
       containers:
-      - name: core
+      - name: core-api
         image: detours/core-api:latest
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
         livenessProbe:
           httpGet:
             path: /test

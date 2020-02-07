@@ -1,23 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui
+  name: ui-api
   labels:
-    app: ui
+    app: ui-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ui
+      app: ui-api
   template:
     metadata:
       labels:
-        app: ui
+        app: ui-api
     spec:
       containers:
-      - name: ui
+      - name: ui-api
         image: detours/ui-api:latest
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
-        - name: ui
-          containerPort: 3000
+          - name: ui-api
+            containerPort: 3000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"

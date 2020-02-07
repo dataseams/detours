@@ -1,40 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: postgres-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-container
+      app: postgres-api
   template:
     metadata:
       labels:
-        app: postgres-container
+        app: postgres-api
         tier: backend
     spec:
       containers:
-        - name: postgres-container
-          image: postgres:12.1
+        - name: postgres-api
+          image: postgres:12.1-alpine
+          imagePullPolicy: Always
           env:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-credentials
+                  name: postgres-api
                   key: user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-credentials
+                  name: postgres-api
                   key: password
             - name: POSTGRES_DB
               value: detours
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: postgres-pv
+            - name: postgres-api
               mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
       volumes:
-        - name: postgres-pv
+        - name: postgres-api
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: postgres-api

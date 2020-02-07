@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: core-api
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: core-api
+    servicePort: 5000
+  rules:
+  - host: graphql.dataseams.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: core-api
+          servicePort: 5000
