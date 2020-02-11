@@ -20,6 +20,7 @@ profiles:
       manifests:
       - k8s/minikube/core-api/deployment.yml
       - k8s/minikube/core-api/service.yml
+      - k8s/minikube/core-api/ingress.yml
       flags:
         global: [-n,development]
 - name: ui-api
@@ -38,6 +39,7 @@ profiles:
       manifests:
       - k8s/minikube/ui-api/deployment.yml
       - k8s/minikube/ui-api/service.yml
+      - k8s/minikube/ui-api/ingress.yml
       flags:
         global: [-n,development]
 - name: postgres-api
@@ -52,6 +54,8 @@ profiles:
       flags:
         global: [-n,development]
 build:
+  tagPolicy:
+    sha256: {}
   artifacts:
   - image: detours/core-api
     context: core-api/.
@@ -76,8 +80,10 @@ deploy:
     manifests:
     - k8s/minikube/core-api/deployment.yml
     - k8s/minikube/core-api/service.yml
+    - k8s/minikube/core-api/ingress.yml
     - k8s/minikube/ui-api/deployment.yml
     - k8s/minikube/ui-api/service.yml
+    - k8s/minikube/ui-api/ingress.yml
     - k8s/minikube/postgres/secret.yml
     - k8s/minikube/postgres/pv.yml
     - k8s/minikube/postgres/pvc.yml

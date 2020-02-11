@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-api
+  labels:
+    app: postgres-api
 spec:
   replicas: 1
   selector:
@@ -11,7 +13,6 @@ spec:
     metadata:
       labels:
         app: postgres-api
-        tier: backend
     spec:
       containers:
         - name: postgres-api
@@ -19,15 +20,9 @@ spec:
           imagePullPolicy: Always
           env:
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-api
-                  key: user
+              value: sam
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-api
-                  key: password
+              value: abcd
             - name: POSTGRES_DB
               value: detours
           ports:

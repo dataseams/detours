@@ -5,7 +5,7 @@ metadata:
   labels:
     app: core-api
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: core-api
   ports:
