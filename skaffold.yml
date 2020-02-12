@@ -46,6 +46,7 @@ profiles:
   deploy:
     kubectl:
       manifests:
+      - k8s/minikube/postgres/configmap.yml
       - k8s/minikube/postgres-api/secret.yml
       - k8s/minikube/postgres-api/pv.yml
       - k8s/minikube/postgres-api/pvc.yml
@@ -78,16 +79,17 @@ build:
 deploy:
   kubectl:
     manifests:
+    - k8s/minikube/postgres-api/configmap.yml
+    - k8s/minikube/postgres-api/secret.yml
+    - k8s/minikube/postgres-api/pv.yml
+    - k8s/minikube/postgres-api/pvc.yml
+    - k8s/minikube/postgres-api/deployment.yml
+    - k8s/minikube/postgres-api/service.yml
     - k8s/minikube/core-api/deployment.yml
     - k8s/minikube/core-api/service.yml
     - k8s/minikube/core-api/ingress.yml
     - k8s/minikube/ui-api/deployment.yml
     - k8s/minikube/ui-api/service.yml
     - k8s/minikube/ui-api/ingress.yml
-    - k8s/minikube/postgres/secret.yml
-    - k8s/minikube/postgres/pv.yml
-    - k8s/minikube/postgres/pvc.yml
-    - k8s/minikube/postgres/deployment.yml
-    - k8s/minikube/postgres/service.yml
     flags:
       global: [-n,development]

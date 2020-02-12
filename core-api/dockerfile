@@ -10,11 +10,6 @@ COPY . /app/
 
 RUN pip install -r requirements.txt
 
-ENV FLASK_APP=/app/core/src_sql/app.py \
-    POSTGRES_USER=sam \
-    POSTGRES_PASSWORD=myP@$s \
-    POSTGRES_HOST=postgres-service \
-    POSTGRES_PORT=5432 \
-    POSTGRES_DB=detours
+ENV FLASK_APP=/app/core/src_sql/app.py
 
 CMD ["gunicorn", "--bind=:5000", "--timeout=300", "app:app"]

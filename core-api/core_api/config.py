@@ -8,9 +8,7 @@ DATABASE = {
     "port": os.getenv("POSTGRES_PORT"),
     "name": os.getenv("POSTGRES_DB"),
 }
-# "postgres+pg1200:///sam:myP@ss@postgres-service:5432/detours"
-DB_URL = "sqlite:///database.sqlite3"
-# (
-#     f"postgresql://{DATABASE['user']}:{DATABASE['password']}@"
-#     f"{DATABASE['host']}:{DATABASE['port']}//{DATABASE['name']}"
-# )
+DB_URL = (
+    f"postgres://{DATABASE['user']}:{DATABASE['password']}"
+    f"@{DATABASE['host']}:{DATABASE['port']}/{DATABASE['name']}"
+)
