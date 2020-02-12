@@ -9,3 +9,4 @@ graphene==2.1.8
 snapshottest==0.5.1
 graphene-sqlalchemy==2.2.2
 psycopg2==2.8.4
+rope==0.16.0
