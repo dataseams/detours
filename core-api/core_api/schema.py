@@ -3,38 +3,96 @@ import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
 
-from .models import Department as DepartmentModel
-from .models import Employee as EmployeeModel
-from .models import Role as RoleModel
+import models
 
 
-class Department(SQLAlchemyObjectType):
-    """Department entity."""
+class User(SQLAlchemyObjectType):
+    """User entity."""
 
     class Meta:
         """Meta data."""
 
-        model = DepartmentModel
+        model = models.User
         interfaces = (relay.Node,)
 
 
-class Employee(SQLAlchemyObjectType):
-    """Employee entity."""
+class City(SQLAlchemyObjectType):
+    """City entity."""
 
     class Meta:
         """Meta data."""
 
-        model = EmployeeModel
+        model = models.City
         interfaces = (relay.Node,)
 
 
-class Role(SQLAlchemyObjectType):
-    """Role entity."""
+class TimeOfDay(SQLAlchemyObjectType):
+    """TimeOfDay entity."""
 
     class Meta:
         """Meta data."""
 
-        model = RoleModel
+        model = models.TimeOfDay
+        interfaces = (relay.Node,)
+
+
+class Trip(SQLAlchemyObjectType):
+    """Trip entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.Trip
+        interfaces = (relay.Node,)
+
+
+class TripDay(SQLAlchemyObjectType):
+    """TripDay entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.TripDay
+        interfaces = (relay.Node,)
+
+
+class MaterialIcon(SQLAlchemyObjectType):
+    """MaterialIcon entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.MaterialIcon
+        interfaces = (relay.Node,)
+
+
+class ActivityType(SQLAlchemyObjectType):
+    """ActivityType entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.ActivityType
+        interfaces = (relay.Node,)
+
+
+class Activity(SQLAlchemyObjectType):
+    """Activity entity."""
+
+    class Meta:
+        """Meta data."""
+
+        model = models.Activity
+        interfaces = (relay.Node,)
+
+
+class ItineraryItem(SQLAlchemyObjectType):
+    """ItineraryItem entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.ItineraryItem
         interfaces = (relay.Node,)
 
 
@@ -43,13 +101,11 @@ class Query(graphene.ObjectType):
 
     node = relay.Node.Field()
     # Allow only single column sorting
-    all_employees = SQLAlchemyConnectionField(
-        Employee, sort=Employee.sort_argument()
-    )
+    all_trips = SQLAlchemyConnectionField(Trip, sort=Trip.sort_argument())
     # Allow sorting over multiple columns, by default over the primary key
-    all_roles = SQLAlchemyConnectionField(Role)
+    all_activities = SQLAlchemyConnectionField(Activity)
     # Disable sorting over this field
-    all_departments = SQLAlchemyConnectionField(Department, sort=None)
+    all_trip_days = SQLAlchemyConnectionField(TripDay, sort=None)
 
 
-schema = graphene.Schema(query=Query, types=[Department, Employee, Role])
+schema = graphene.Schema(query=Query, types=[Trip, Activity, TripDay])
