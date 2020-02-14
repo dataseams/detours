@@ -110,7 +110,7 @@ def init_db():
     db_session.add(shahbaz)
     db_session.commit()
 
-    shahbaz_paris_trip_2019 = models.Trip(
+    shahbaz_paris_trip_2019 = models.TripPlan(
         start_date=date(2019, 1, 1),
         end_date=date(2019, 1, 4),
         start_time_of_day=time_of_day["morning"],
@@ -121,24 +121,32 @@ def init_db():
     db_session.add(shahbaz_paris_trip_2019)
     db_session.commit()
 
-    trip_days = [
-        models.TripDay(date=date(2019, 1, 1), trip=shahbaz_paris_trip_2019),
-        models.TripDay(date=date(2019, 1, 2), trip=shahbaz_paris_trip_2019),
-        models.TripDay(date=date(2019, 1, 3), trip=shahbaz_paris_trip_2019),
-        models.TripDay(date=date(2019, 1, 4), trip=shahbaz_paris_trip_2019),
+    daily_plans = [
+        models.DailyPlan(
+            date=date(2019, 1, 1), trip_plan=shahbaz_paris_trip_2019
+        ),
+        models.DailyPlan(
+            date=date(2019, 1, 2), trip_plan=shahbaz_paris_trip_2019
+        ),
+        models.DailyPlan(
+            date=date(2019, 1, 3), trip_plan=shahbaz_paris_trip_2019
+        ),
+        models.DailyPlan(
+            date=date(2019, 1, 4), trip_plan=shahbaz_paris_trip_2019
+        ),
     ]
-    for v in trip_days:
+    for v in daily_plans:
         db_session.add(v)
     db_session.commit()
 
     for i, v in enumerate(activities):
         db_session.add(
-            models.ItineraryItem(
-                order=i + 1, trip_day=trip_days[0], activity=v
+            models.PlanItem(
+                order=i + 1, daily_plan=daily_plans[0], activity=v
             )
         )
-    for i, v in enumerate(trip_days[1:]):
+    for i, v in enumerate(daily_plans[1:]):
         db_session.add(
-            models.ItineraryItem(order=1, trip_day=v, activity=activities[0])
+            models.PlanItem(order=1, daily_plan=v, activity=activities[0])
         )
     db_session.commit()

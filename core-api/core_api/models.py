@@ -9,7 +9,7 @@ from sqlalchemy import (
     Integer,
     String,
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 from .database import Base
 
@@ -91,10 +91,10 @@ class User(Base):
     last_name = Column(String)
 
 
-class Trip(Base):
+class TripPlan(Base):
     """Add trip entity model."""
 
-    __tablename__ = "trip"
+    __tablename__ = "trip_plan"
     id = Column(Integer, primary_key=True)
     start_date = Column(Date)
     end_date = Column(Date)
@@ -109,25 +109,31 @@ class Trip(Base):
     user = relationship("User")
 
 
-class TripDay(Base):
+class DailyPlan(Base):
     """Add trip day entity model."""
 
-    __tablename__ = "trip_day"
+    __tablename__ = "daily_plan"
     id = Column(Integer, primary_key=True)
     date = Column(Date)
-    trip_id = Column(Integer, ForeignKey("trip.id"))
+    trip_plan_id = Column(Integer, ForeignKey("trip_plan.id"))
 
-    trip = relationship(Trip)
+    trip_plan = relationship(
+        TripPlan,
+        backref=backref("daily_plans", uselist=True, cascade="delete,all"),
+    )
 
 
-class ItineraryItem(Base):
+class PlanItem(Base):
     """Class to define an itinerary item."""
 
-    __tablename__ = "itinerary_item"
+    __tablename__ = "plan_item"
     id = Column(Integer, primary_key=True)
     order = Column(Integer)
-    trip_day_id = Column(Integer, ForeignKey("trip_day.id"))
+    daily_plan_id = Column(Integer, ForeignKey("daily_plan.id"))
     activity_id = Column(Integer, ForeignKey("activity.id"))
 
-    trip_day = relationship(TripDay)
+    daily_plan = relationship(
+        DailyPlan,
+        backref=backref("plan_items", uselist=True, cascade="delete,all"),
+    )
     activity = relationship(Activity)

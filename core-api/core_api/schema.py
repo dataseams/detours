@@ -72,7 +72,7 @@ class Trip(SQLAlchemyObjectType):
     class Meta:
         """Meta class."""
 
-        model = models.Trip
+        model = models.TripPlan
         interfaces = (relay.Node,)
 
 
@@ -82,7 +82,7 @@ class TripDay(SQLAlchemyObjectType):
     class Meta:
         """Meta class."""
 
-        model = models.TripDay
+        model = models.DailyPlan
         interfaces = (relay.Node,)
 
 
@@ -92,7 +92,7 @@ class ItineraryItem(SQLAlchemyObjectType):
     class Meta:
         """Meta class."""
 
-        model = models.ItineraryItem
+        model = models.PlanItem
         interfaces = (relay.Node,)
 
 
