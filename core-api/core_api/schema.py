@@ -56,17 +56,17 @@ class City(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
-class User(SQLAlchemyObjectType):
-    """User entity."""
+class Traveler(SQLAlchemyObjectType):
+    """Traveler entity."""
 
     class Meta:
         """Meta data."""
 
-        model = models.User
+        model = models.Traveler
         interfaces = (relay.Node,)
 
 
-class Trip(SQLAlchemyObjectType):
+class TripPlan(SQLAlchemyObjectType):
     """Trip entity."""
 
     class Meta:
@@ -76,7 +76,7 @@ class Trip(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
-class TripDay(SQLAlchemyObjectType):
+class DailyPlan(SQLAlchemyObjectType):
     """TripDay entity."""
 
     class Meta:
@@ -86,7 +86,7 @@ class TripDay(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
-class ItineraryItem(SQLAlchemyObjectType):
+class PlanItem(SQLAlchemyObjectType):
     """ItineraryItem entity."""
 
     class Meta:
@@ -101,11 +101,9 @@ class Query(graphene.ObjectType):
 
     node = relay.Node.Field()
     # Allow only single column sorting
-    all_trips = SQLAlchemyConnectionField(Trip, sort=Trip.sort_argument())
+    get_all_trips = SQLAlchemyConnectionField(TripPlan)
     # Allow sorting over multiple columns, by default over the primary key
-    all_activities = SQLAlchemyConnectionField(Activity)
-    # Disable sorting over this field
-    all_trip_days = SQLAlchemyConnectionField(TripDay, sort=None)
+    get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
 
 
-schema = graphene.Schema(query=Query, types=[Trip, Activity, TripDay])
+schema = graphene.Schema(query=Query, types=[City, TripPlan])

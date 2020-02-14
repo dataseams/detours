@@ -94,19 +94,28 @@ def init_db():
         db_session.add(v)
     db_session.commit()
 
-    new_york = models.City(name="New York", state="New York", country="USA")
+    new_york = models.City(
+        name="New York", state="New York", state_abbr="NY", country="USA"
+    )
     db_session.add(new_york)
     frisco = models.City(
-        name="San Francisco", state="California", country="USA"
+        name="San Francisco",
+        state="California",
+        state_abbr="CA",
+        country="USA",
     )
     db_session.add(frisco)
-    paris = models.City(name="Paris", state="", country="France")
+    paris = models.City(
+        name="Paris", state="", state_abbr="", country="France"
+    )
     db_session.add(paris)
-    barcelona = models.City(name="Barcelona", state="", country="Spain")
+    barcelona = models.City(
+        name="Barcelona", state="", state_abbr="", country="Spain"
+    )
     db_session.add(barcelona)
     db_session.commit()
 
-    shahbaz = models.User(first_name="Shahboo", last_name="Khan")
+    shahbaz = models.Traveler(first_name="Shahboo", last_name="Khan")
     db_session.add(shahbaz)
     db_session.commit()
 
@@ -116,7 +125,7 @@ def init_db():
         start_time_of_day=time_of_day["morning"],
         # end_time_of_day=time_of_day["evening"],
         city=paris,
-        user=shahbaz,
+        traveler=shahbaz,
     )
     db_session.add(shahbaz_paris_trip_2019)
     db_session.commit()
@@ -141,9 +150,7 @@ def init_db():
 
     for i, v in enumerate(activities):
         db_session.add(
-            models.PlanItem(
-                order=i + 1, daily_plan=daily_plans[0], activity=v
-            )
+            models.PlanItem(order=i + 1, daily_plan=daily_plans[0], activity=v)
         )
     for i, v in enumerate(daily_plans[1:]):
         db_session.add(

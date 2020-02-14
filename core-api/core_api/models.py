@@ -78,13 +78,14 @@ class City(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     state = Column(String)
+    state_abbr = Column(String)
     country = Column(String)
 
 
-class User(Base):
-    """Add user entity model."""
+class Traveler(Base):
+    """Add traveler entity model."""
 
-    __tablename__ = "user"
+    __tablename__ = "traveler"
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     middle_name = Column(String)
@@ -101,12 +102,12 @@ class TripPlan(Base):
     start_time = Column(Integer, ForeignKey("time_of_day.id"))
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
-    user_id = Column(Integer, ForeignKey("user.id"))
+    traveler_id = Column(Integer, ForeignKey("traveler.id"))
 
     start_time_of_day = relationship("TimeOfDay")
     # end_time_of_day = relationship("TimeOfDay")
     city = relationship("City")
-    user = relationship("User")
+    traveler = relationship("Traveler")
 
 
 class DailyPlan(Base):
