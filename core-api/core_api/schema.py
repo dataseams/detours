@@ -3,16 +3,46 @@ import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
 
-import models
+from . import models
 
 
-class User(SQLAlchemyObjectType):
-    """User entity."""
+class TimeOfDay(SQLAlchemyObjectType):
+    """TimeOfDay entity."""
 
     class Meta:
         """Meta data."""
 
-        model = models.User
+        model = models.TimeOfDay
+        interfaces = (relay.Node,)
+
+
+class ActivityType(SQLAlchemyObjectType):
+    """ActivityType entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.ActivityType
+        interfaces = (relay.Node,)
+
+
+class Place(SQLAlchemyObjectType):
+    """Place entity."""
+
+    class Meta:
+        """Meta class."""
+
+        model = models.Place
+        interfaces = (relay.Node,)
+
+
+class Activity(SQLAlchemyObjectType):
+    """Activity entity."""
+
+    class Meta:
+        """Meta data."""
+
+        model = models.Activity
         interfaces = (relay.Node,)
 
 
@@ -26,13 +56,13 @@ class City(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
-class TimeOfDay(SQLAlchemyObjectType):
-    """TimeOfDay entity."""
+class User(SQLAlchemyObjectType):
+    """User entity."""
 
     class Meta:
         """Meta data."""
 
-        model = models.TimeOfDay
+        model = models.User
         interfaces = (relay.Node,)
 
 
@@ -53,36 +83,6 @@ class TripDay(SQLAlchemyObjectType):
         """Meta class."""
 
         model = models.TripDay
-        interfaces = (relay.Node,)
-
-
-class MaterialIcon(SQLAlchemyObjectType):
-    """MaterialIcon entity."""
-
-    class Meta:
-        """Meta class."""
-
-        model = models.MaterialIcon
-        interfaces = (relay.Node,)
-
-
-class ActivityType(SQLAlchemyObjectType):
-    """ActivityType entity."""
-
-    class Meta:
-        """Meta class."""
-
-        model = models.ActivityType
-        interfaces = (relay.Node,)
-
-
-class Activity(SQLAlchemyObjectType):
-    """Activity entity."""
-
-    class Meta:
-        """Meta data."""
-
-        model = models.Activity
         interfaces = (relay.Node,)
 
 
