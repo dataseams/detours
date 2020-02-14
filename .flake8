@@ -1,4 +1,4 @@
 [flake8]
 docstring-convention=numpy
-exclude=_version.py,tests/*
+exclude=_version.py,*/tests/*
 select=D
