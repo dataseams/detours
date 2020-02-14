@@ -9,7 +9,7 @@ from sqlalchemy import (
     Integer,
     String,
 )
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import relationship
 
 from .database import Base
 

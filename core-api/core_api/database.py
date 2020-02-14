@@ -139,8 +139,6 @@ def init_db():
         )
     for i, v in enumerate(trip_days[1:]):
         db_session.add(
-            models.ItineraryItem(
-                order=1, trip_day=v, activity=activities[0]
-            )
+            models.ItineraryItem(order=1, trip_day=v, activity=activities[0])
         )
     db_session.commit()
