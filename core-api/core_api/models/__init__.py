@@ -1,8 +1,10 @@
 """Module for all data models logic."""
 from datetime import time
+from datetime import datetime
 
 from sqlalchemy import (
     Column,
+    DateTime,
     Date,
     Time,
     ForeignKey,
@@ -11,7 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship, backref
 
-from .database import Base
+from ..database import Base
 
 
 class TimeOfDay(Base):
@@ -90,6 +92,7 @@ class Traveler(Base):
     first_name = Column(String)
     middle_name = Column(String)
     last_name = Column(String)
+    time_stamp = Column(DateTime, default=datetime.now())
 
 
 class TripPlan(Base):

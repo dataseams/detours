@@ -19,6 +19,7 @@ Base.query = db_session.query_property()
 def init_db():
     """Import modules that need to be registered properly on the metadata."""
     from . import models
+    from .models import survey
 
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -156,4 +157,17 @@ def init_db():
         db_session.add(
             models.PlanItem(order=1, daily_plan=v, activity=activities[0])
         )
+    db_session.commit()
+
+    import json
+    import os
+
+    this_path = os.path.abspath(os.path.dirname(__file__))
+    json_path = os.path.join(this_path, "models/survey_result_template.json")
+    with open(json_path, "r") as f:
+        survey_result_template = json.loads(f.read())
+
+    db_session.add(
+        survey.SurveyResult(traveler_id=1, json=survey_result_template)
+    )
     db_session.commit()
