@@ -37,6 +37,7 @@ profiles:
   deploy:
     kubectl:
       manifests:
+      - k8s/minikube/ui-api/secret.yml
       - k8s/minikube/ui-api/deployment.yml
       - k8s/minikube/ui-api/service.yml
       - k8s/minikube/ui-api/ingress.yml
@@ -88,6 +89,7 @@ deploy:
     - k8s/minikube/core-api/deployment.yml
     - k8s/minikube/core-api/service.yml
     - k8s/minikube/core-api/ingress.yml
+    - k8s/minikube/ui-api/secret.yml
     - k8s/minikube/ui-api/deployment.yml
     - k8s/minikube/ui-api/service.yml
     - k8s/minikube/ui-api/ingress.yml

@@ -9,6 +9,7 @@ resources:
 - core-api/deployment.yml
 - core-api/service.yml
 - core-api/ingress.yml
+- ui-api/secret.yml
 - ui-api/deployment.yml
 - ui-api/service.yml
 - ui-api/ingress.yml

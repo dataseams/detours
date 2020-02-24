@@ -18,6 +18,12 @@ spec:
       - name: ui-api
         image: detours/ui-api:latest
         imagePullPolicy: IfNotPresent
+        env:
+          - name: GOOGLE_MAPS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: ui-api
+                key: GOOGLE_MAPS_API_KEY
         ports:
           - name: ui-api
             containerPort: 3000

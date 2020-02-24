@@ -59,7 +59,7 @@ const ItineraryDescription = props => {
       </Typography>
       <Box className={classes.tags}>
         {summary.interestsMatched.map((interest, index) => (
-          <TagBox classes={classes}>{interest}</TagBox>
+          <TagBox classes={classes} key={index}>{interest}</TagBox>
         ))}
       </Box>
     </Box>
