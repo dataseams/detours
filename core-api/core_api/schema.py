@@ -96,6 +96,27 @@ class PlanItem(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
+class AddTraveler(graphene.Mutation):
+    """Create mutation to add a new traveler."""
+
+    class Arguments:
+        """Declare input arguments."""
+
+        first_name = graphene.String(
+            required=True, description="The traveler's first name."
+        )
+        middle_name = graphene.String(
+            required=False, description="The traveler's middle name."
+        )
+        last_name = graphene.String(
+            required=False, description="The traveler's last name."
+        )
+
+    def mutate(root, info, **args):
+        """Add traveler to the database."""
+        print("Hello")
+
+
 class Query(graphene.ObjectType):
     """Graphene root node."""
 
@@ -106,4 +127,6 @@ class Query(graphene.ObjectType):
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
 
 
-schema = graphene.Schema(query=Query, types=[City, TripPlan])
+schema = graphene.Schema(
+    query=Query, mutation=AddTraveler, types=[City, TripPlan]
+)
