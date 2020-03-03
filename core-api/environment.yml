@@ -7,6 +7,7 @@ dependencies:
   - pip:
     - flake8==3.7.9
     - flake8-docstrings==1.5.0
+    - pep8-naming==0.9.1
     - black==19.10b0
     - flask==1.1.1
     - flask-graphql==2.0.1

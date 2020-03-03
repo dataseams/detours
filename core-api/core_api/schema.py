@@ -4,6 +4,7 @@ from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
 
 from . import models
+from .config import db_session
 
 
 class TimeOfDay(SQLAlchemyObjectType):
@@ -105,20 +106,16 @@ class AddTraveler(graphene.Mutation):
         first_name = graphene.String(
             required=True, description="The traveler's first name."
         )
-        middle_name = graphene.String(
-            required=False, description="The traveler's middle name."
-        )
-        last_name = graphene.String(
-            required=False, description="The traveler's last name."
-        )
 
-    def mutate(root, info, **args):
+    def mutate(self, info, first_name):
         """Add traveler to the database."""
-        print("Hello")
+        traveler = Traveler(first_name=first_name)
+        db_session.add(traveler)
+        db_session.commit()
 
 
 class Query(graphene.ObjectType):
-    """Graphene root node."""
+    """Graphene root query node."""
 
     node = relay.Node.Field()
     # Allow only single column sorting

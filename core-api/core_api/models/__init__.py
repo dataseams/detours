@@ -12,7 +12,6 @@ from sqlalchemy import (
     String,
 )
 from sqlalchemy.orm import relationship, backref
-import graphene
 
 from ..database import Base
 
