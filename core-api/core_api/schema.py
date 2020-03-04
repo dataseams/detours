@@ -100,6 +100,10 @@ class PlanItem(SQLAlchemyObjectType):
 class AddTraveler(graphene.Mutation):
     """Create mutation to add a new traveler."""
 
+    traveler = graphene.Field(
+        lambda: Traveler, description="Traveler created by this mutation."
+    )
+
     class Arguments:
         """Declare input arguments."""
 
@@ -109,9 +113,17 @@ class AddTraveler(graphene.Mutation):
 
     def mutate(self, info, first_name):
         """Add traveler to the database."""
-        traveler = Traveler(first_name=first_name)
+        traveler = models.Traveler(first_name=first_name)
         db_session.add(traveler)
         db_session.commit()
+
+        return AddTraveler(traveler=traveler)
+
+
+class Mutation(graphene.ObjectType):
+    """Update database entities."""
+
+    add_traveler = AddTraveler.Field()
 
 
 class Query(graphene.ObjectType):
@@ -122,8 +134,7 @@ class Query(graphene.ObjectType):
     get_all_trips = SQLAlchemyConnectionField(TripPlan)
     # Allow sorting over multiple columns, by default over the primary key
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
+    get_all_travelers = SQLAlchemyConnectionField(Traveler)
 
 
-schema = graphene.Schema(
-    query=Query, mutation=AddTraveler, types=[City, TripPlan]
-)
+schema = graphene.Schema(query=Query, mutation=Mutation)
