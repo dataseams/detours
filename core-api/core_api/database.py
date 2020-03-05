@@ -12,7 +12,6 @@ Base.query = db_session.query_property()
 def init_db():
     """Import modules that need to be registered properly on the metadata."""
     from . import models
-    from .models import survey
 
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -161,6 +160,6 @@ def init_db():
         survey_result_template = json.loads(f.read())
 
     db_session.add(
-        survey.SurveyResult(traveler_id=1, json=survey_result_template)
+        models.SurveyResponse(traveler_id=1, json=survey_result_template)
     )
     db_session.commit()

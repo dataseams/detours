@@ -10,6 +10,7 @@ from sqlalchemy import (
     ForeignKey,
     Integer,
     String,
+    JSON,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -141,3 +142,18 @@ class PlanItem(Base):
         backref=backref("plan_items", uselist=True, cascade="delete,all"),
     )
     activity = relationship(Activity)
+
+
+class SurveyResponse(Base):
+    """Add survey response entity model."""
+
+    __tablename__ = "personality_survey"
+    id = Column(Integer, primary_key=True)
+    traveler_id = Column(Integer, ForeignKey("traveler.id"))
+    json = Column(JSON)
+    time_stamp = Column(DateTime, default=datetime.now())
+
+    traveler = relationship(
+        Traveler,
+        backref=backref("survey_response", uselist=True, cascade="delete,all"),
+    )
