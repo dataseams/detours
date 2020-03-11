@@ -12,7 +12,7 @@ class Mutation(graphene.ObjectType):
     """Update database entities."""
 
     add_traveler = AddTraveler.Field()
-    add_survey_respons = AddSurveryResponse.Field()
+    add_survey_response = AddSurveryResponse.Field()
 
 
 class Query(graphene.ObjectType):

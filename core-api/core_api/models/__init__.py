@@ -147,7 +147,7 @@ class PlanItem(Base):
 class SurveyResponse(Base):
     """Add survey response entity model."""
 
-    __tablename__ = "personality_survey"
+    __tablename__ = "survey_response"
     id = Column(Integer, primary_key=True)
     traveler_id = Column(Integer, ForeignKey("traveler.id"))
     json = Column(JSON)

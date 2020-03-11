@@ -37,7 +37,7 @@ class AddSurveryResponse(graphene.Mutation):
 
     def mutate(self, info, traveler_id, json):
         """Add survey answers to the database."""
-        survey_response = models.survey.SurveyResponse(
+        survey_response = models.SurveyResponse(
             traveler_id=traveler_id, json=json
         )
         db_session.add(survey_response)
