@@ -123,7 +123,7 @@ class DailyPlan(Base):
     trip_plan_id = Column(Integer, ForeignKey("trip_plan.id"))
 
     trip_plan = relationship(
-        TripPlan,
+        "TripPlan",
         backref=backref("daily_plans", uselist=True, cascade="delete,all"),
     )
 
@@ -138,7 +138,7 @@ class PlanItem(Base):
     activity_id = Column(Integer, ForeignKey("activity.id"))
 
     daily_plan = relationship(
-        DailyPlan,
+        "DailyPlan",
         backref=backref("plan_items", uselist=True, cascade="delete,all"),
     )
     activity = relationship(Activity)
@@ -154,6 +154,6 @@ class SurveyResponse(Base):
     time_stamp = Column(DateTime, default=datetime.now())
 
     traveler = relationship(
-        Traveler,
+        "Traveler",
         backref=backref("survey_response", uselist=True, cascade="delete,all"),
     )
