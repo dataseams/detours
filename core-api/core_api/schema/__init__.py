@@ -5,6 +5,8 @@ from graphene_sqlalchemy import SQLAlchemyConnectionField
 from .city import City
 from .traveler import Traveler, AddTraveler
 from .trip_plan import TripPlan
+from .daily_plan import DailyPlan
+from .plan_item import PlanItem
 from .survey_response import AddSurveryResponse
 
 
@@ -23,6 +25,8 @@ class Query(graphene.ObjectType):
     # Allow sorting over multiple columns, by default over the primary key
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
     get_all_travelers = SQLAlchemyConnectionField(Traveler)
+    get_daily_plans = SQLAlchemyConnectionField(DailyPlan)
+    get_plan_items = SQLAlchemyConnectionField(PlanItem)
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

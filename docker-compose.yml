@@ -1,14 +1,18 @@
-version: '3'
+version: "3.7"
 services:
-  core:
-    build: ./core
-    image: core:0.1
-    container_name: core
+  postgres-api:
+    image: postgres:12.1-alpine
     ports:
-      - "5000:5000"
-  ui:
-    build: ./ui
-    image:  ui:0.1
-    container_name: ui
-    ports:
-      - "80:3000"
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "detours"
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: "sam"
+      POSTGRES_PASSWORD: "abcd"
+    networks:
+      detours:
+        aliases:
+          - postgres-api
+
+networks:
+  detours:
