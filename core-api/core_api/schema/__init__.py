@@ -20,13 +20,9 @@ class Mutation(graphene.ObjectType):
 class Query(graphene.ObjectType):
     """Graphene root query node."""
 
-    # Allow only single column sorting
     get_all_trips = SQLAlchemyConnectionField(TripPlan)
-    # Allow sorting over multiple columns, by default over the primary key
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
     get_all_travelers = SQLAlchemyConnectionField(Traveler)
-    get_daily_plans = SQLAlchemyConnectionField(DailyPlan)
-    get_plan_items = SQLAlchemyConnectionField(PlanItem)
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

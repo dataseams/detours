@@ -18,7 +18,7 @@ from ..database import Base
 
 
 class TimeOfDay(Base):
-    """Add time of day entity model."""
+    """Define a time of day entity."""
 
     VALUES = {
         "early_moring": (time(1, 0, 0), time(4, 59, 59)),
@@ -37,7 +37,7 @@ class TimeOfDay(Base):
 
 
 class ActivityType(Base):
-    """Add activity type entity model."""
+    """Define an activity type entity."""
 
     # key = category, value = material icon code
     VALUES = {
@@ -52,30 +52,8 @@ class ActivityType(Base):
     material_icon = Column(String)
 
 
-class Place(Base):
-    """Add place entity model."""
-
-    __tablename__ = "place"
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    description = Column(String)
-
-
-class Activity(Base):
-    """Add activity entity model."""
-
-    __tablename__ = "activity"
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    place_id = Column(Integer, ForeignKey("place.id"))
-    type_id = Column(Integer, ForeignKey("activity_type.id"))
-
-    place = relationship("Place")
-    activity_type = relationship("ActivityType")
-
-
 class City(Base):
-    """Add city entity model."""
+    """Define a city entity."""
 
     __tablename__ = "city"
     id = Column(Integer, primary_key=True)
@@ -86,7 +64,7 @@ class City(Base):
 
 
 class Traveler(Base):
-    """Add traveler entity model."""
+    """Define a traveler entity."""
 
     __tablename__ = "traveler"
     id = Column(Integer, primary_key=True)
@@ -97,7 +75,7 @@ class Traveler(Base):
 
 
 class TripPlan(Base):
-    """Add trip entity model."""
+    """Define a trip plan entity."""
 
     __tablename__ = "trip_plan"
     id = Column(Integer, primary_key=True)
@@ -115,7 +93,7 @@ class TripPlan(Base):
 
 
 class DailyPlan(Base):
-    """Add trip day entity model."""
+    """Define a day's plan in the trip."""
 
     __tablename__ = "daily_plan"
     id = Column(Integer, primary_key=True)
@@ -129,7 +107,7 @@ class DailyPlan(Base):
 
 
 class PlanItem(Base):
-    """Class to define an itinerary item."""
+    """Define an itinerary item."""
 
     __tablename__ = "plan_item"
     id = Column(Integer, primary_key=True)
@@ -141,11 +119,33 @@ class PlanItem(Base):
         "DailyPlan",
         backref=backref("plan_items", uselist=True, cascade="delete,all"),
     )
-    activity = relationship(Activity)
+    activity = relationship("Activity")
+
+
+class Activity(Base):
+    """Define an activity entity."""
+
+    __tablename__ = "activity"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    place_id = Column(Integer, ForeignKey("place.id"))
+    type_id = Column(Integer, ForeignKey("activity_type.id"))
+
+    place = relationship("Place")
+    activity_type = relationship("ActivityType")
+
+
+class Place(Base):
+    """Define a place entity."""
+
+    __tablename__ = "place"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    description = Column(String)
 
 
 class SurveyResponse(Base):
-    """Add survey response entity model."""
+    """Define a personality survey response entity."""
 
     __tablename__ = "survey_response"
     id = Column(Integer, primary_key=True)
