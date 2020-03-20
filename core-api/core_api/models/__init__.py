@@ -36,22 +36,6 @@ class TimeOfDay(Base):
     end_time = Column(Time)
 
 
-class ActivityType(Base):
-    """Define an activity type entity."""
-
-    # key = category, value = material icon code
-    VALUES = {
-        "hotel": "hotel",
-        "food": "restaurant",
-        "tour": "directions_bike",
-    }
-
-    __tablename__ = "activity_type"
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    material_icon = Column(String)
-
-
 class City(Base):
     """Define a city entity."""
 
@@ -90,6 +74,7 @@ class TripPlan(Base):
     # end_time_of_day = relationship("TimeOfDay")
     city = relationship("City")
     traveler = relationship("Traveler")
+    daily_plans = relationship("DailyPlan", back_populates="trip_plan")
 
 
 class DailyPlan(Base):
@@ -100,10 +85,8 @@ class DailyPlan(Base):
     date = Column(Date)
     trip_plan_id = Column(Integer, ForeignKey("trip_plan.id"))
 
-    trip_plan = relationship(
-        "TripPlan",
-        backref=backref("daily_plans", uselist=True, cascade="delete,all"),
-    )
+    trip_plan = relationship("TripPlan", back_populates="daily_plans")
+    plan_items = relationship("PlanItem", back_populates="daily_plan")
 
 
 class PlanItem(Base):
@@ -115,11 +98,8 @@ class PlanItem(Base):
     daily_plan_id = Column(Integer, ForeignKey("daily_plan.id"))
     activity_id = Column(Integer, ForeignKey("activity.id"))
 
-    daily_plan = relationship(
-        "DailyPlan",
-        backref=backref("plan_items", uselist=True, cascade="delete,all"),
-    )
-    activity = relationship("Activity")
+    daily_plan = relationship("DailyPlan", back_populates="plan_items")
+    activity = relationship("Activity", back_populates="related_items")
 
 
 class Activity(Base):
@@ -131,8 +111,25 @@ class Activity(Base):
     place_id = Column(Integer, ForeignKey("place.id"))
     type_id = Column(Integer, ForeignKey("activity_type.id"))
 
-    place = relationship("Place")
+    related_items = relationship("PlanItem", back_populates="activity")
     activity_type = relationship("ActivityType")
+    place = relationship("Place")
+
+
+class ActivityType(Base):
+    """Define an activity type entity."""
+
+    # key = category, value = material icon code
+    VALUES = {
+        "hotel": "hotel",
+        "food": "restaurant",
+        "tour": "directions_bike",
+    }
+
+    __tablename__ = "activity_type"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    material_icon = Column(String)
 
 
 class Place(Base):
