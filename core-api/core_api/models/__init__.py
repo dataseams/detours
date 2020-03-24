@@ -99,7 +99,6 @@ class PlanItem(Base):
     activity_id = Column(Integer, ForeignKey("activity.id"))
 
     daily_plan = relationship("DailyPlan", back_populates="plan_items")
-    activity = relationship("Activity", back_populates="related_items")
 
 
 class Activity(Base):
@@ -111,7 +110,9 @@ class Activity(Base):
     place_id = Column(Integer, ForeignKey("place.id"))
     type_id = Column(Integer, ForeignKey("activity_type.id"))
 
-    related_items = relationship("PlanItem", back_populates="activity")
+    plan_items = relationship(
+        "PlanItem", backref=backref("activity", cascade="delete,all"),
+    )
     activity_type = relationship("ActivityType")
     place = relationship("Place")
 
