@@ -21,8 +21,7 @@ class AddTraveler(graphene.Mutation):
     """Create mutation to add a new traveler."""
 
     traveler = graphene.Field(
-        lambda: Traveler,
-        description="Traveler created by this mutation.",
+        lambda: Traveler, description="Traveler created by this mutation.",
     )
 
     class Arguments:

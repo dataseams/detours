@@ -1,4 +1,11 @@
-"""GrapphQL schema."""
+"""
+GrapphQL schema.
+
+All model objects should be imported here otherwise the nodes won't work
+as expected.
+This is why you might see imported but unsued objects.
+
+"""
 import graphene
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 

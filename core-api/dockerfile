@@ -1,7 +1,8 @@
 FROM python:3.8.1-alpine3.11
 
 RUN apk add build-base \
-            postgresql-dev
+            postgresql-dev \
+            bash
 
 RUN mkdir /app
 WORKDIR /app
@@ -11,5 +12,7 @@ COPY . /app/
 RUN pip install -r requirements.txt
 
 ENV FLASK_APP=/app/core/src_sql/app.py
+
+RUN chmod 550 wait-for-it.sh
 
 CMD ["gunicorn", "--bind=:5000", "--timeout=300", "app:app"]
