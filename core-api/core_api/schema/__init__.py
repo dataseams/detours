@@ -9,6 +9,8 @@ from .daily_plan import DailyPlan
 from .plan_item import PlanItem
 from .activity import Activity
 from .survey_response import AddSurveryResponse
+from .activity_type import ActivityType
+from .place import Place
 
 
 class Mutation(graphene.ObjectType):
@@ -25,6 +27,8 @@ class Query(graphene.ObjectType):
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
     get_all_travelers = SQLAlchemyConnectionField(Traveler)
     get_all_activities = SQLAlchemyConnectionField(Activity)
+    get_all_activity_types = SQLAlchemyConnectionField(ActivityType)
+    get_all_places = SQLAlchemyConnectionField(Place)
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

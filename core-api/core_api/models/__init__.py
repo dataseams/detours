@@ -108,13 +108,12 @@ class Activity(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     place_id = Column(Integer, ForeignKey("place.id"))
-    type_id = Column(Integer, ForeignKey("activity_type.id"))
+    activity_type_id = Column(Integer, ForeignKey("activity_type.id"))
 
     plan_items = relationship(
-        "PlanItem", backref=backref("activity", cascade="delete,all"),
+        "PlanItem",
+        backref=backref("activity", uselist=False, cascade="delete,all"),
     )
-    activity_type = relationship("ActivityType")
-    place = relationship("Place")
 
 
 class ActivityType(Base):
@@ -132,6 +131,11 @@ class ActivityType(Base):
     name = Column(String)
     material_icon = Column(String)
 
+    activities = relationship(
+        "Activity",
+        backref=backref("activity_type", uselist=False, cascade="delete,all"),
+    )
+
 
 class Place(Base):
     """Define a place entity."""
@@ -140,6 +144,11 @@ class Place(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
+
+    activities = relationship(
+        "Activity",
+        backref=backref("place", uselist=False, cascade="delete,all"),
+    )
 
 
 class SurveyResponse(Base):
