@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 
 import Meta from "../components/Head";
@@ -33,19 +34,21 @@ const reducer = combineReducers({
 
 const store = createStore(reducer);
 
-const showResults = values =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-      resolve();
-    }, 100);
-    console.log(store.getState());
-  });
-
 function Survey() {
   const classes = useStyles();
   const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
     .default;
+  const router = useRouter();
+
+  const showResults = values =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+        resolve();
+      }, 100);
+      console.log(store.getState());
+      router.push("/itinerary");
+    });
 
   return (
     <div>
