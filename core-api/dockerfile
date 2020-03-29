@@ -1,15 +1,15 @@
 FROM python:3.8.1-alpine3.11
 
 RUN apk add build-base \
-            postgresql-dev \
-            bash
+    postgresql-dev \
+    bash
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY . /app/
 
-RUN pip install -r requirements.txt
+RUN pip install $(python -c "import requirements; print(requirements.get_ssv(['#prod']))")
 
 ENV FLASK_APP=/app/core/src_sql/app.py
 

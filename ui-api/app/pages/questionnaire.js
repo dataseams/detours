@@ -4,6 +4,7 @@ import { createStore, combineReducers } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
+import { createApolloFetch } from "apollo-fetch";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -39,6 +40,8 @@ function Survey() {
   const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
     .default;
   const router = useRouter();
+  const graphQl = "http://localhost:5000/graphql"
+  const fetch = createApolloFetch({ uri: graphQl });
 
   const showResults = values =>
     new Promise(resolve => {
@@ -47,6 +50,23 @@ function Survey() {
         resolve();
       }, 100);
       console.log(store.getState());
+
+      fetch({
+        query: `query{
+          getAllCities{
+            edges{
+              node{
+                name
+                state
+                stateAbbr
+                country
+              }
+            }
+          }
+        }`
+      }).then(res => {
+        console.log(res.data)
+      });
       router.push("/itinerary");
     });
 

@@ -2,11 +2,7 @@
 import os
 from setuptools import setup, find_packages
 
-
-def requirements():
-    """Add dependencies requirements."""
-    with open("requirements.txt", "r") as file:
-        return file.read().splitlines()
+import requirements
 
 
 def readme():
@@ -45,9 +41,9 @@ setup(
     license="Proprietary",
     packages=find_packages(exclude=["tests"]),
     python_requires=">=3.7",
-    install_requires=requirements(),
+    install_requires=requirements.get(["#prod"]),
     include_package_data=False,
     zip_safe=False,
-    setup_requires=["pytest-runner", "flake8", "black"],
+    setup_requires=requirements.get(["#dev"]),
     tests_require=["pytest"],
 )

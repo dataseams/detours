@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/pickers": "^3.2.7",
     "@material-ui/styles": "latest",
+    "apollo-fetch": "^0.7.0",
     "clsx": "latest",
     "date-fns": "^2.1.0",
     "dotenv": "^8.2.0",
