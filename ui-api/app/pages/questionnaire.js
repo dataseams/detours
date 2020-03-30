@@ -41,6 +41,17 @@ function Survey() {
     .default;
   const router = useRouter();
   const graphQl = "http://localhost:5000/graphql"
+  const query = `
+    mutation addSurveyResp($travelerId: Int!, $json: JSONString!) {
+      addSurveyResponse(travelerId: $travelerId, json: $json){
+        surveyResponse{
+          id
+          travelerId
+          json
+        }
+      }
+    }
+  `;
   const fetch = createApolloFetch({ uri: graphQl });
 
   const showResults = values =>
@@ -49,25 +60,15 @@ function Survey() {
         window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         resolve();
       }, 100);
+      const variables = {
+        travelerId: 1, json: JSON.stringify(values, null, 2)
+      }
       console.log(store.getState());
 
-      fetch({
-        query: `query{
-          getAllCities{
-            edges{
-              node{
-                name
-                state
-                stateAbbr
-                country
-              }
-            }
-          }
-        }`
-      }).then(res => {
+      fetch({ query: query, variables: variables }).then(res => {
         console.log(res.data)
       });
-      router.push("/itinerary");
+      router.push("/itinerary?surveyId=2");
     });
 
   return (

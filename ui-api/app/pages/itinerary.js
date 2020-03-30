@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Container } from "@material-ui/core";
 
 import Meta from "../components/Head";
@@ -15,12 +16,14 @@ const resultsList = Array(10)
 
 const Itinerary = props => {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <div>
       <Meta />
       <LogoNavigationBar />
       <Container className={classes.root}>
+        <p>{router.query.surveyId}</p>
         <ItineraryDescription summary={itineraryTemplate.summary} />
         <DailyTabs classes={classes} plan={itineraryTemplate.plan} />
         <PurchaseBox classes={classes} />
