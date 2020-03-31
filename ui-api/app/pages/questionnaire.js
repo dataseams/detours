@@ -8,6 +8,7 @@ import { createApolloFetch } from "apollo-fetch";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
+import { string } from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,8 +38,9 @@ const store = createStore(reducer);
 
 function Survey() {
   const classes = useStyles();
-  const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
-    .default;
+  const QuestionnaireForm = require(
+    "../components/Questionnaire/QuestionnaireForm"
+  ).default;
   const router = useRouter();
   const graphQl = "http://localhost:5000/graphql"
   const query = `
@@ -66,9 +68,11 @@ function Survey() {
       console.log(store.getState());
 
       fetch({ query: query, variables: variables }).then(res => {
-        console.log(res.data)
+        console.log(res.data.addSurveyResponse.surveyResponse.id)
+        router.push("/itinerary?surveyId=".concat(
+          res.data.addSurveyResponse.surveyResponse.id
+        ));
       });
-      router.push("/itinerary?surveyId=2");
     });
 
   return (
