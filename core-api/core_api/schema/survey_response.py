@@ -1,5 +1,5 @@
 """SurveyResponse schema."""
-import graphene
+from graphene import Mutation, Field, Int, JSONString
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
@@ -14,13 +14,14 @@ class SurveyResponse(SQLAlchemyObjectType):
         """Meta class."""
 
         model = models.SurveyResponse
+        exclude_fields = "traveler_id"
         interfaces = (relay.Node,)
 
 
-class AddSurveryResponse(graphene.Mutation):
+class AddSurveryResponse(Mutation):
     """Create mutation to add a new traveler."""
 
-    survey_response = graphene.Field(
+    survey_response = Field(
         lambda: SurveyResponse,
         description="Survey answers created by this mutation.",
     )
@@ -28,10 +29,10 @@ class AddSurveryResponse(graphene.Mutation):
     class Arguments:
         """Declare input arguments."""
 
-        traveler_id = graphene.Int(
+        traveler_id = Int(
             required=True, description="The traveler id in the database."
         )
-        json = graphene.JSONString(
+        json = JSONString(
             required=True, description="The survey answers."
         )
 

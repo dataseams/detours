@@ -12,4 +12,5 @@ class PlanItem(SQLAlchemyObjectType):
         """Meta class."""
 
         model = models.PlanItem
+        exclude_fields = ("daily_plan_id", "activity_id")
         interfaces = (relay.Node,)

@@ -12,4 +12,5 @@ class Activity(SQLAlchemyObjectType):
         """Meta data."""
 
         model = models.Activity
+        exclude_fields = ("place_id", "activity_type_id")
         interfaces = (relay.Node,)

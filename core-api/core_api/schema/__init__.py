@@ -6,28 +6,29 @@ as expected.
 This is why you might see imported but unsued objects.
 
 """
-import graphene
+from graphene import ObjectType, String, Schema
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 
+from .time_of_day import TimeOfDay
 from .city import City
 from .traveler import Traveler, AddTraveler
+from .survey_response import SurveyResponse, AddSurveryResponse
 from .trip_plan import TripPlan
 from .daily_plan import DailyPlan
 from .plan_item import PlanItem
 from .activity import Activity
-from .survey_response import AddSurveryResponse
 from .activity_type import ActivityType
 from .place import Place
 
 
-class Mutation(graphene.ObjectType):
+class Mutation(ObjectType):
     """Update database entities."""
 
     add_traveler = AddTraveler.Field()
     add_survey_response = AddSurveryResponse.Field()
 
 
-class Query(graphene.ObjectType):
+class Query(ObjectType):
     """Graphene root query node."""
 
     get_all_trips = SQLAlchemyConnectionField(TripPlan)
@@ -36,6 +37,18 @@ class Query(graphene.ObjectType):
     get_all_activities = SQLAlchemyConnectionField(Activity)
     get_all_activity_types = SQLAlchemyConnectionField(ActivityType)
     get_all_places = SQLAlchemyConnectionField(Place)
+    get_all_survey_responses = SQLAlchemyConnectionField(SurveyResponse)
+
+    hello = String(name=String(default_value="Stranger"))
+    goodbye = String()
+
+    def resolve_hello(root, info, name):
+        """Greet on entry."""
+        return f"Hello {name}"
+
+    def resolve_goodbye(root, info):
+        """Greet on exit."""
+        return "See ya!"
 
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = Schema(query=Query, mutation=Mutation)

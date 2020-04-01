@@ -12,4 +12,5 @@ class DailyPlan(SQLAlchemyObjectType):
         """Meta class."""
 
         model = models.DailyPlan
+        exclude_fields = "trip_plan_id"
         interfaces = (relay.Node,)

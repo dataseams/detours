@@ -58,11 +58,27 @@ class Traveler(Base):
     time_stamp = Column(DateTime, default=datetime.now())
 
 
+class SurveyResponse(Base):
+    """Define a personality survey response entity."""
+
+    __tablename__ = "survey_response"
+    id = Column(Integer, primary_key=True)
+    traveler_id = Column(Integer, ForeignKey("traveler.id"))
+    json = Column(JSON)
+    time_stamp = Column(DateTime, default=datetime.now())
+
+    traveler = relationship(
+        "Traveler",
+        backref=backref("survey_response", uselist=True, cascade="delete,all"),
+    )
+
+
 class TripPlan(Base):
     """Define a trip plan entity."""
 
     __tablename__ = "trip_plan"
     id = Column(Integer, primary_key=True)
+    survey_response_id = Column(Integer, ForeignKey("survey_response.id"))
     start_date = Column(Date)
     end_date = Column(Date)
     start_time = Column(Integer, ForeignKey("time_of_day.id"))
@@ -75,6 +91,10 @@ class TripPlan(Base):
     city = relationship("City")
     traveler = relationship("Traveler")
     daily_plans = relationship("DailyPlan", back_populates="trip_plan")
+    survey_response = relationship(
+        "SurveyResponse",
+        backref=backref("trip_plans", uselist=True, cascade="delete,all"),
+    )
 
 
 class DailyPlan(Base):
@@ -148,19 +168,4 @@ class Place(Base):
     activities = relationship(
         "Activity",
         backref=backref("place", uselist=False, cascade="delete,all"),
-    )
-
-
-class SurveyResponse(Base):
-    """Define a personality survey response entity."""
-
-    __tablename__ = "survey_response"
-    id = Column(Integer, primary_key=True)
-    traveler_id = Column(Integer, ForeignKey("traveler.id"))
-    json = Column(JSON)
-    time_stamp = Column(DateTime, default=datetime.now())
-
-    traveler = relationship(
-        "Traveler",
-        backref=backref("survey_response", uselist=True, cascade="delete,all"),
     )
