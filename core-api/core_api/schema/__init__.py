@@ -6,7 +6,7 @@ as expected.
 This is why you might see imported but unsued objects.
 
 """
-from graphene import ObjectType, String, Schema
+from graphene import ObjectType, String, Schema, Int, List
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 
 from .time_of_day import TimeOfDay
@@ -19,6 +19,7 @@ from .plan_item import PlanItem
 from .activity import Activity
 from .activity_type import ActivityType
 from .place import Place
+from .. import models
 
 
 class Mutation(ObjectType):
@@ -49,6 +50,20 @@ class Query(ObjectType):
     def resolve_goodbye(root, info):
         """Greet on exit."""
         return "See ya!"
+
+    last_trip_plan_for_survey_response = List(
+        lambda: TripPlan, surveyResponseId=Int()
+    )
+
+    def resolve_last_trip_plan_for_survey_response(
+        root, info, surveyResponseId
+    ):
+        """Query trip plan by survey response id."""
+        query = TripPlan.get_query(info)
+        trip_plans = query.filter(
+            models.TripPlan.survey_response_id == surveyResponseId
+        )
+        return trip_plans
 
 
 schema = Schema(query=Query, mutation=Mutation)

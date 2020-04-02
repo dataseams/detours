@@ -132,6 +132,15 @@ def init_db():
         # end_time_of_day=time_of_day["evening"],
         city=paris,
         traveler=shahbaz,
+        spending_per_day="176",
+        hours_saved="20-30",
+        interests_matched=[
+            "Intimate, authentic dining",
+            "Markets",
+            "Massages",
+            "Walking tours",
+            "Wine bars",
+        ],
     )
     db_session.add(shahbaz_paris_trip_2019)
     db_session.commit()

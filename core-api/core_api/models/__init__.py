@@ -11,6 +11,7 @@ from sqlalchemy import (
     Integer,
     String,
     JSON,
+    ARRAY,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -85,6 +86,9 @@ class TripPlan(Base):
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
     traveler_id = Column(Integer, ForeignKey("traveler.id"))
+    spending_per_day = Column(Integer)
+    hours_saved = Column(String)
+    interests_matched = Column(ARRAY(String))
 
     start_time_of_day = relationship("TimeOfDay")
     # end_time_of_day = relationship("TimeOfDay")
