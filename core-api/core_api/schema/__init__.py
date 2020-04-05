@@ -6,7 +6,9 @@ as expected.
 This is why you might see imported but unsued objects.
 
 """
-from graphene import ObjectType, String, Schema, Int, List
+import base64
+
+from graphene import ObjectType, String, Schema, Int, List, Field
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 
 from .time_of_day import TimeOfDay
@@ -51,18 +53,28 @@ class Query(ObjectType):
         """Greet on exit."""
         return "See ya!"
 
-    last_trip_plan_for_survey_response = List(
-        lambda: TripPlan, surveyResponseId=Int()
+    get_last_trip_plan_for_survey_response = Field(
+        lambda: TripPlan, surveyResponseNodeId=String()
     )
 
-    def resolve_last_trip_plan_for_survey_response(
-        root, info, surveyResponseId
+    def resolve_get_last_trip_plan_for_survey_response(
+        root, info, surveyResponseNodeId
     ):
         """Query trip plan by survey response id."""
-        query = TripPlan.get_query(info)
-        trip_plans = query.filter(
-            models.TripPlan.survey_response_id == surveyResponseId
+        survey_response_id = int(
+            base64.b64decode(surveyResponseNodeId)
+            .decode("utf-8")
+            .split(":")[-1]
         )
+        query = TripPlan.get_query(info)
+        trip_plans = (
+            query.filter(
+                models.TripPlan.survey_response_id == survey_response_id
+            )
+            .order_by(models.TripPlan.time_stamp.desc())
+            .first()
+        )
+
         return trip_plans
 
 

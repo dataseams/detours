@@ -9,10 +9,13 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import itineraryTemplate from "../components/Itinerary/itineraryTemplate";
+import itineraryTemplateNew from "../components/Itinerary/itineraryTemplateNew";
 
 const resultsList = Array(10)
   .fill()
   .map((_, idx) => 10);
+
+var itinerarySummary = itineraryTemplateNew.data.getLastTripPlanForSurveyResponse;
 
 const Itinerary = props => {
   const classes = useStyles();
@@ -24,7 +27,7 @@ const Itinerary = props => {
       <LogoNavigationBar />
       <Container className={classes.root}>
         <p>{router.query.surveyId}</p>
-        <ItineraryDescription summary={itineraryTemplate.summary} />
+        <ItineraryDescription summary={itinerarySummary} />
         <DailyTabs classes={classes} plan={itineraryTemplate.plan} />
         <PurchaseBox classes={classes} />
       </Container>

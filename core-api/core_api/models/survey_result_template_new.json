@@ -1,6 +1,6 @@
 {
   "data": {
-    "lastTripPlanForSurveyResponse": {
+    "getLastTripPlanForSurveyResponse": {
       "id": "VHJpcFBsYW46MQ==",
       "city": {
         "name": "Paris",
@@ -12,6 +12,7 @@
       "interestsMatched": "[\"Intimate, authentic dining\", \"Markets\", \"Massages\", \"Walking tours\", \"Wine bars\"]",
       "startDate": "2019-01-01",
       "endDate": "2019-01-04",
+      "timeStamp": "2020-04-05T11:21:50.321261",
       "dailyPlans": {
         "edges": [
           {

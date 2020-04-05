@@ -89,6 +89,7 @@ class TripPlan(Base):
     spending_per_day = Column(Integer)
     hours_saved = Column(String)
     interests_matched = Column(ARRAY(String))
+    time_stamp = Column(DateTime, default=datetime.now())
 
     start_time_of_day = relationship("TimeOfDay")
     # end_time_of_day = relationship("TimeOfDay")
