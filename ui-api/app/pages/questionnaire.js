@@ -5,6 +5,9 @@ import { reducer as reduxFormReducer } from "redux-form";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
+import { execute, makePromise } from "apollo-link";
+import { HttpLink } from "apollo-link-http";
+import gql from "graphql-tag";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -41,7 +44,8 @@ function Survey() {
     "../components/Questionnaire/QuestionnaireForm"
   ).default;
   const router = useRouter();
-  const graphQl = "http://localhost:5000/graphql"
+  const graphQlUri = "http://localhost:5000/graphql";
+  const link = new HttpLink({ graphQlUri });
   const query = `
     mutation addSurveyResp($travelerId: Int!, $json: JSONString!) {
       addSurveyResponse(travelerId: $travelerId, json: $json){
@@ -53,7 +57,29 @@ function Survey() {
       }
     }
   `;
-  const fetch = createApolloFetch({ uri: graphQl });
+  const queryQ = gql`
+    mutation addSurveyResp($travelerId: Int, $json: JSONString) {
+      addSurveyResponse(travelerId: $travelerId, json: $json){
+        surveyResponse{
+          id
+          timeStamp
+          json
+        }
+      }
+    }
+  `;
+  const operation = {
+    query: gql`query { hello }`,
+    variables: {},
+    operationName: {},
+    context: {},
+    extensions: {}
+  };
+  const fetch = createApolloFetch({ uri: graphQlUri });
+
+  makePromise(execute(link, operation))
+    .then(data => console.log(`received data ${JSON.stringify(data, null, 2)}`))
+    .catch(error => console.log(`received error ${error}`));
 
   const showResults = values =>
     new Promise(resolve => {
@@ -61,11 +87,11 @@ function Survey() {
         window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         resolve();
       }, 100);
+
+      console.log(store.getState());
       const variables = {
         travelerId: 1, json: JSON.stringify(values, null, 2)
-      }
-      console.log(store.getState());
-
+      };
       fetch({ query: query, variables: variables }).then(res => {
         console.log(res.data.addSurveyResponse.surveyResponse.id)
         router.push("/itinerary?surveyId=".concat(
