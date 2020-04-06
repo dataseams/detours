@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Container } from "@material-ui/core";
+import { createApolloFetch } from "apollo-fetch";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -21,6 +22,57 @@ var irinerarySummary = {
 const Itinerary = props => {
   const classes = useStyles();
   const router = useRouter();
+  const graphQl = "http://localhost:5000/graphql"
+  const variables = { "surveyResponseNodeId": "U3VydmV5UmVzcG9uc2U6MQ==" };
+  const query = `
+    query getItinerary($surveyResponseNodeId: String!){
+      getLastTripPlanForSurveyResponse(
+        surveyResponseNodeId: $surveyResponseNodeId
+      ){
+        id
+        city{
+          name
+          state
+          country
+        }
+        spendingPerDay
+        hoursSaved
+        interestsMatched
+        startDate
+        endDate
+        timeStamp
+        dailyPlans{
+          edges{
+            node{
+              date
+              planItems{
+                edges{
+                  node{
+                    order
+                    activity{
+                      activityType{
+                        name
+                        materialIcon
+                      }
+                      place{
+                        name
+                        description
+                      }
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const fetch = createApolloFetch({ uri: graphQl });
+  fetch({ query: query, variables: variables }).then(res => {
+    console.log(res.data.getLastTripPlanForSurveyResponse.city.name)
+  });
 
   return (
     <div>

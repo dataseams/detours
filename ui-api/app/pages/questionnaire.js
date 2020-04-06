@@ -8,7 +8,6 @@ import { createApolloFetch } from "apollo-fetch";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
-import { string } from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +47,7 @@ function Survey() {
       addSurveyResponse(travelerId: $travelerId, json: $json){
         surveyResponse{
           id
-          travelerId
+          timeStamp
           json
         }
       }
