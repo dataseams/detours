@@ -35,26 +35,22 @@ const TagBox = props => {
 const ItineraryDescription = props => {
   const { summary } = props;
   const classes = useStyles();
-  var cityName = summary.city.name + (summary.city.state | summary.city.country);
-  var spendingPerDay = summary.spendingPerDay;
-  var hoursSaved = summary.hoursSaved;
-  var interestsMatched = JSON.parse(summary.interestsMatched);
 
   return (
     <Box marginTop={10} marginLeft={10} marginRight={10} marginBottom={5}>
       <Typography variant="h3" paragraph={true}>
-        Your trip to {cityName}
+        Your trip to {summary.cityName}
       </Typography>
       <Divider className={classes.divider}></Divider>
       <Typography className={classes.descParagraph}>
         This is a preview of your itinerary.
       </Typography>
       <Typography className={classes.descItem}>
-        - You would spend a total of {spendingPerDay} per day including
+        - You would spend a total of {summary.spendingPerDay} per day including
         hotel, restaurant, and activities, for a total of 4 days.
       </Typography>
       <Typography className={classes.descItem}>
-        - You would save an average of <b>{hoursSaved} </b>planning your
+        - You would save an average of <b>{summary.hoursSaved} </b>planning your
         trip.
       </Typography>
       <Typography className={classes.descItem}>
@@ -62,7 +58,7 @@ const ItineraryDescription = props => {
         directly match with your following interests.
       </Typography>
       <Box className={classes.tags}>
-        {interestsMatched.map((interest, index) => (
+        {summary.interestsMatched.map((interest, index) => (
           <TagBox classes={classes} key={index}>{interest}</TagBox>
         ))}
       </Box>

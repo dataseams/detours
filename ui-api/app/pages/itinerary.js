@@ -11,11 +11,13 @@ import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import itineraryTemplate from "../components/Itinerary/itineraryTemplate";
 import itineraryTemplateNew from "../components/Itinerary/itineraryTemplateNew";
 
-const resultsList = Array(10)
-  .fill()
-  .map((_, idx) => 10);
-
-var itinerarySummary = itineraryTemplateNew.data.getLastTripPlanForSurveyResponse;
+var fullItinerary = itineraryTemplateNew.data.getLastTripPlanForSurveyResponse;
+var irinerarySummary = {
+  "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
+  "spendingPerDay": fullItinerary.spendingPerDay,
+  "hoursSaved": fullItinerary.hoursSaved,
+  "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
+}
 
 const Itinerary = props => {
   const classes = useStyles();
@@ -27,7 +29,7 @@ const Itinerary = props => {
       <LogoNavigationBar />
       <Container className={classes.root}>
         <p>{router.query.surveyId}</p>
-        <ItineraryDescription summary={itinerarySummary} />
+        <ItineraryDescription summary={irinerarySummary} />
         <DailyTabs classes={classes} plan={itineraryTemplate.plan} />
         <PurchaseBox classes={classes} />
       </Container>
