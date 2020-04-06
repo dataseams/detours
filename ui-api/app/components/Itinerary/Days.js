@@ -40,22 +40,22 @@ const DailyTabs = props => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs"
         >
-          {plan.days.map((day, index) => (
+          {plan.edges.map((day, index) => (
             <Tab
-              key={day.order}
-              label={"Day " + (day.order + 1)}
-              {...a11yProps(day.order)}
+              key={index}
+              label={"Day " + (index + 1)}
+              {...a11yProps(index)}
             />
           ))}
         </Tabs>
       </AppBar>
-      {plan.days.map((day, index) => (
+      {plan.edges.map((day, index) => (
         <TabPanel
-          key={day.order}
+          key={index}
           value={value}
-          index={day.order}
+          index={index}
           classes={classes}
-          data={day}
+          data={day.node}
         />
       ))}
     </div>

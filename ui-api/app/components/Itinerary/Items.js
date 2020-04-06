@@ -27,19 +27,19 @@ function AlignItemsList(props) {
 
   return (
     <List className={classes.root}>
-      {events.map((event, index) => (
-        <div key={event.order}>
+      {events.edges.map((event, index) => (
+        <div key={event.node.order}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <i
                 className="material-icons"
                 style={{ fontSize: "30px", color: "#5865bc" }}
               >
-                {event.materialIcon}
+                {event.node.activity.activityType.materialIcon}
               </i>
             </ListItemAvatar>
             <ListItemText
-              primary={event.title}
+              primary={event.node.activity.place.name}
               secondary={
                 <React.Fragment>
                   <Typography
@@ -48,9 +48,9 @@ function AlignItemsList(props) {
                     className={classes.inline}
                     color="textPrimary"
                   >
-                    {event.activity}
+                    {event.node.activity.name}
                   </Typography>
-                  {" — " + event.description}
+                  {" — " + event.node.activity.place.description}
                 </React.Fragment>
               }
             />

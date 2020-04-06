@@ -9,9 +9,8 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import itineraryTemplate from "../components/Itinerary/itineraryTemplate";
-import itineraryTemplateNew from "../components/Itinerary/itineraryTemplateNew";
 
-var fullItinerary = itineraryTemplateNew.data.getLastTripPlanForSurveyResponse;
+var fullItinerary = itineraryTemplate.data.getLastTripPlanForSurveyResponse;
 var irinerarySummary = {
   "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
   "spendingPerDay": fullItinerary.spendingPerDay,
@@ -30,7 +29,7 @@ const Itinerary = props => {
       <Container className={classes.root}>
         <p>{router.query.surveyId}</p>
         <ItineraryDescription summary={irinerarySummary} />
-        <DailyTabs classes={classes} plan={itineraryTemplate.plan} />
+        <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
         <PurchaseBox classes={classes} />
       </Container>
     </div>
