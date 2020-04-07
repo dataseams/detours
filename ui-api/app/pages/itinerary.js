@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
 
@@ -9,21 +8,27 @@ import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
-import itineraryTemplate from "../components/Itinerary/itineraryTemplate";
 
-var fullItinerary = itineraryTemplate.data.getLastTripPlanForSurveyResponse;
-var irinerarySummary = {
-  "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
-  "spendingPerDay": fullItinerary.spendingPerDay,
-  "hoursSaved": fullItinerary.hoursSaved,
-  "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
-}
-
-const Itinerary = props => {
+function Itinerary(props) {
   const classes = useStyles();
-  const router = useRouter();
-  const graphQl = "http://localhost:5000/graphql"
-  const variables = { "surveyResponseNodeId": "U3VydmV5UmVzcG9uc2U6MQ==" };
+  const { itinerarySummary, fullItinerary } = props;
+
+  return (
+    <div>
+      <Meta />
+      <LogoNavigationBar />
+      <Container className={classes.root}>
+        <ItineraryDescription summary={itinerarySummary} />
+        <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
+        <PurchaseBox classes={classes} />
+      </Container>
+    </div>
+  );
+};
+
+export async function getServerSideProps(context) {
+  const graphQlUri = "http://localhost:5000/graphql";
+  const variables = { "surveyResponseNodeId": context.query.surveyId };
   const query = `
     query getItinerary($surveyResponseNodeId: String!){
       getLastTripPlanForSurveyResponse(
@@ -69,23 +74,17 @@ const Itinerary = props => {
       }
     }
   `;
-  const fetch = createApolloFetch({ uri: graphQl });
-  fetch({ query: query, variables: variables }).then(res => {
-    console.log(res.data.getLastTripPlanForSurveyResponse.city.name)
-  });
+  const fetch = createApolloFetch({ uri: graphQlUri });
+  const res = await fetch({ query: query, variables: variables });
+  const fullItinerary = res.data.getLastTripPlanForSurveyResponse;
+  const itinerarySummary = {
+    "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
+    "spendingPerDay": fullItinerary.spendingPerDay,
+    "hoursSaved": fullItinerary.hoursSaved,
+    "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
+  }
 
-  return (
-    <div>
-      <Meta />
-      <LogoNavigationBar />
-      <Container className={classes.root}>
-        <p>{router.query.surveyId}</p>
-        <ItineraryDescription summary={irinerarySummary} />
-        <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
-        <PurchaseBox classes={classes} />
-      </Container>
-    </div>
-  );
-};
+  return { props: { fullItinerary: fullItinerary, itinerarySummary: itinerarySummary } }
+}
 
 export default Itinerary;

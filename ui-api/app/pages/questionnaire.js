@@ -1,13 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
-import { reducer as reduxFormReducer } from "redux-form";
+import { reducer as reduxFormReducer, isAsyncValidating } from "redux-form";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
-import { execute, makePromise } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
-import gql from "graphql-tag";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -45,7 +42,6 @@ function Survey() {
   ).default;
   const router = useRouter();
   const graphQlUri = "http://localhost:5000/graphql";
-  const link = new HttpLink({ graphQlUri });
   const query = `
     mutation addSurveyResp($travelerId: Int!, $json: JSONString!) {
       addSurveyResponse(travelerId: $travelerId, json: $json){
@@ -57,29 +53,7 @@ function Survey() {
       }
     }
   `;
-  const queryQ = gql`
-    mutation addSurveyResp($travelerId: Int, $json: JSONString) {
-      addSurveyResponse(travelerId: $travelerId, json: $json){
-        surveyResponse{
-          id
-          timeStamp
-          json
-        }
-      }
-    }
-  `;
-  const operation = {
-    query: gql`query { hello }`,
-    variables: {},
-    operationName: {},
-    context: {},
-    extensions: {}
-  };
   const fetch = createApolloFetch({ uri: graphQlUri });
-
-  makePromise(execute(link, operation))
-    .then(data => console.log(`received data ${JSON.stringify(data, null, 2)}`))
-    .catch(error => console.log(`received error ${error}`));
 
   const showResults = values =>
     new Promise(resolve => {
@@ -95,7 +69,7 @@ function Survey() {
       fetch({ query: query, variables: variables }).then(res => {
         console.log(res.data.addSurveyResponse.surveyResponse.id)
         router.push("/itinerary?surveyId=".concat(
-          res.data.addSurveyResponse.surveyResponse.id
+          "U3VydmV5UmVzcG9uc2U6MQ=="
         ));
       });
     });
