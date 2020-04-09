@@ -28,7 +28,7 @@ def version():
 setup(
     name=package_name,
     version=version(),
-    description="Detours' core service.",
+    description="Detours' restaurants service.",
     long_description=readme(),
     classifiers=[
         "Development status :: 3 - Alpha",
