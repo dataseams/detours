@@ -19,6 +19,7 @@ class Zomato:
             "discovery_enabled": 1,
         }
     }
+    CITY_IDS = {"Los Angeles": "281"}
 
     def __init__(
         self, api_url: str = ZOMATO_API_URL, api_key: str = ZOMATO_API_KEY

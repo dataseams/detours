@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import Mock
+from unittest.mock import Mock, patch, MagicMock
 
 from restaurant_api.zomato import Zomato
 
@@ -7,10 +7,18 @@ from restaurant_api.zomato import Zomato
 class TestZomato(TestCase):
     """Zomato class unit tests."""
 
-    def test_get_cities_happy_path(self):
+    def setUp(self):
+        with open("tests/data/cities.json", "r") as f:
+            self.cities_response = f.read()
+
+    @patch("requests.get")
+    def test_get_cities_happy_path(self, requests_get_mock):
+        requests_response = Mock()
+        requests_response.text = self.cities_response
+        requests_get_mock.return_value = requests_response
         zomato = Zomato()
-        city = zomato.get_cities(q="Los Angeles")
-        self.assertEqual(len(city), 8)
+        cities = zomato.get_cities(q="Los Angeles")
+        self.assertEqual(len(cities), 8)
 
     def test_get_city_happy_path(self):
         zomato = Zomato()
