@@ -114,12 +114,14 @@ def init_db():
     db_session.add(shahbaz)
     db_session.commit()
 
-    this_path = os.path.abspath(os.path.dirname(__file__))
-    json_path = os.path.join(this_path, "models/survey_result_template.json")
+    this_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    json_path = os.path.join(
+        this_path, "tests/data/sample_survey_response.json"
+    )
     with open(json_path, "r") as f:
-        survey_result_template = json.loads(f.read())
+        sample_survey_response = json.loads(f.read())
     survey_response = models.SurveyResponse(
-        traveler=shahbaz, json=survey_result_template
+        traveler=shahbaz, json=sample_survey_response
     )
     db_session.add(survey_response)
     db_session.commit()
