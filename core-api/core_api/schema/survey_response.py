@@ -32,9 +32,7 @@ class AddSurveryResponse(Mutation):
         traveler_id = Int(
             required=True, description="The traveler id in the database."
         )
-        json = JSONString(
-            required=True, description="The survey answers."
-        )
+        json = JSONString(required=True, description="The survey answers.")
 
     def mutate(self, info, traveler_id, json):
         """Add survey answers to the database."""

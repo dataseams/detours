@@ -1,0 +1,77 @@
+{
+    "nightlife": {
+        "nightclubs": false,
+        "cocktailBars": true,
+        "wineBars": true,
+        "dancing": true
+    },
+    "city": "Los Angeles",
+    "arrivalDate": "2020-04-16T16:43:00.000Z",
+    "returnDate": "2020-04-20T16:43:00.000Z",
+    "arrivalTime": "12:00 PM",
+    "returnTime": "12:00 PM",
+    "occasion": "honeymoon",
+    "age": "35",
+    "gender": "Male",
+    "companion": "significant other",
+    "priorvisits": "never",
+    "generalPreferences": {
+        "foodnbeverages": true,
+        "museums": true,
+        "localculture": true
+    },
+    "dining": {
+        "pricePoint": "moderate",
+        "environment": {
+            "holeInTheWall": true,
+            "intimate": true,
+            "cozyAndRomantic": true
+        },
+        "features": {
+            "noWait": true,
+            "authenticEthnic": true,
+            "craftBeer": true
+        },
+        "dietaryConstraintsFilter": "yes",
+        "dietaryConstraints": {
+            "vegetarianFriendly": true
+        }
+    },
+    "museum": {
+        "science": true,
+        "history": true
+    },
+    "relaxationMethods": {
+        "spaTreatments": true,
+        "massages": true
+    },
+    "outdoorActivities": {
+        "scenicViews": true,
+        "hiking": true
+    },
+    "tours": {
+        "bikingTours": true,
+        "walkingTours": true,
+        "busTours": true
+    },
+    "shopping": {
+        "pricePoint": "moderate",
+        "storeType": {
+            "thriftShopsVintage": false,
+            "boutiques": true
+        },
+        "fashionStyle": {
+            "trendy": true
+        }
+    },
+    "shows": {
+        "musicals": true,
+        "plays": true
+    },
+    "adventureSports": {
+        "kayaking": true,
+        "ziplining": true,
+        "skiing": true,
+        "surfing": true
+    }
+}

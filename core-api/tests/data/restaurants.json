@@ -1,0 +1,114 @@
+{
+    "restaurant": {
+        "R": {
+            "has_menu_status": {
+                "delivery": -1,
+                "takeaway": -1
+            },
+            "res_id": 17965498
+        },
+        "apikey": "8c2044fc79d2ab5fdccf64a5218ae45c",
+        "id": "17965498",
+        "name": "Ardrossan Seafood & Schnitzels",
+        "url": "https://www.zomato.com/ardrossan-sa/ardrossan-seafood-schnitzels-ardrossan-ardrossan?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+            "address": "24 North Terrace, Ardrossan, SA",
+            "locality": "Ardrossan",
+            "city": "Ardrossan",
+            "city_id": 1824,
+            "latitude": "-34.4223071143",
+            "longitude": "137.9187574933",
+            "zipcode": "5571",
+            "country_id": 14,
+            "locality_verbose": "Ardrossan, Ardrossan"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Australian, Fish and Chips, Seafood, Burger",
+        "timings": "11:30 AM to 3 PM, 5 PM to 8:30 PM (Mon, Wed-Sun), Tue Closed",
+        "average_cost_for_two": 45,
+        "price_range": 4,
+        "currency": "$",
+        "highlights": [
+            "No Alcohol Available",
+            "Dinner",
+            "Cash",
+            "Credit Card",
+            "Lunch",
+            "Takeaway Available",
+            "Debit Card",
+            "Outdoor Seating",
+            "Indoor Seating",
+            "Street Parking"
+        ],
+        "offers": [],
+        "opentable_support": 0,
+        "is_zomato_book_res": 0,
+        "mezzo_provider": "OTHER",
+        "is_book_form_web_view": 0,
+        "book_form_web_view_url": "",
+        "book_again_url": "",
+        "thumb": "https://b.zmtcdn.com/data/pictures/8/17965498/b7117e24a9aff28e0043feebb924f4d3.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+            "aggregate_rating": 0,
+            "rating_text": "Not rated",
+            "rating_color": "CBCBCB",
+            "rating_obj": {
+                "title": {
+                    "text": "NEW"
+                },
+                "bg_color": {
+                    "type": "grey",
+                    "tint": "400"
+                }
+            },
+            "votes": 2,
+            "custom_rating_text": "NEW",
+            "custom_rating_text_background": "#89959B",
+            "rating_tool_tip": "This restaurant is newly opened. The rating will appear once the restaurant completes 60 days in operation."
+        },
+        "all_reviews_count": 0,
+        "photos_url": "https://www.zomato.com/ardrossan-sa/ardrossan-seafood-schnitzels-ardrossan-ardrossan/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "photo_count": 4,
+        "photos": [
+            {
+                "photo": {
+                    "id": "u_YzNDE1ODkzNDI2",
+                    "url": "https://b.zmtcdn.com/data/reviews_photos/886/3e4d9573562be416aa4afa99bfcac886_1582895553.jpg",
+                    "thumb_url": "https://b.zmtcdn.com/data/reviews_photos/886/3e4d9573562be416aa4afa99bfcac886_1582895553.jpg?impolicy=newcropandfit&cropw=556&croph=556&cropoffsetx=0&cropoffsety=58&cropgravity=NorthWest&fitw=200&fith=200&fittype=ignore",
+                    "user": {
+                        "name": "Aussian Asian Street Food",
+                        "zomato_handle": "",
+                        "foodie_level": "Foodie",
+                        "foodie_level_num": 2,
+                        "foodie_color": "ffd35d",
+                        "profile_url": "https://www.zomato.com/users/aussian-asian-street-food-103873712?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+                        "profile_image": "https://b.zmtcdn.com/data/user_profile_pictures/276/9b54e07c2c4d19385e13bb715f0b7276.jpg?fit=around%7C100%3A100&crop=100%3A100%3B%2A%2C%2A",
+                        "profile_deeplink": "zomato://u/103873712"
+                    },
+                    "res_id": 17965498,
+                    "caption": "Another special, Thai style Grilled Fish",
+                    "timestamp": 1582895553,
+                    "friendly_time": "one month ago",
+                    "width": 556,
+                    "height": 614
+                }
+            }
+        ],
+        "menu_url": "https://www.zomato.com/ardrossan-sa/ardrossan-seafood-schnitzels-ardrossan-ardrossan/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/pictures/8/17965498/b7117e24a9aff28e0043feebb924f4d3.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "store_type": "",
+        "include_bogo_offers": true,
+        "deeplink": "zomato://restaurant/17965498",
+        "is_table_reservation_supported": 0,
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/ardrossan-sa/ardrossan-seafood-schnitzels-ardrossan-ardrossan/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "phone_numbers": "0466 238 638",
+        "all_reviews": {
+            "reviews": []
+        },
+        "establishment": [],
+        "establishment_types": []
+    }
+}

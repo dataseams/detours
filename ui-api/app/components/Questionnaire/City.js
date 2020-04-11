@@ -8,8 +8,8 @@ import renderFormHelper from "./RenderFormHelper";
 const cityOptions = [
   { value: "", label: "" },
   { value: "Paris", label: "Paris, France" },
-  { value: "SF", label: "San Francisco, CA" },
-  { value: "LA", label: "Los Angeles, CA" },
+  { value: "San Francisco", label: "San Francisco, CA" },
+  { value: "Los Angeles", label: "Los Angeles, CA" },
   { value: "Habana", label: "Habana, Cuba" }
 ];
 
