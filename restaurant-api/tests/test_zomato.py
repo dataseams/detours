@@ -51,3 +51,11 @@ class TestZomato(TestCase):
             **zomato.CITY_FILTERS[city_name]
         )
         self.assertEqual(city_id, 281)
+
+    def test_search(self):
+        zomato = Zomato()
+        zomato.search = Mock(return_value=["restaurants"])
+        res = zomato.search(
+            entity_id=281, q="Lebanese", sort="rating", order="desc"
+        )
+        self.assertEqual(res, ["restaurants"])

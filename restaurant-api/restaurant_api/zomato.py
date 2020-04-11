@@ -125,3 +125,98 @@ class Zomato:
         """Get zomato city id by name."""
         kwargs = self.CITY_FILTERS[city_name]
         return self.get_city(**kwargs)["id"]
+
+    def search(
+        self,
+        entity_id: Optional[int] = None,
+        entity_type: Optional[str] = None,
+        q: Optional[str] = None,
+        start: Optional[int] = None,
+        count: Optional[int] = None,
+        lat: Optional[float] = None,
+        lon: Optional[float] = None,
+        radius: Optional[float] = None,
+        cuisines: Optional[str] = None,
+        establishment_type: Optional[str] = None,
+        collection_id: Optional[str] = None,
+        category: Optional[str] = None,
+        sort: Optional[str] = None,
+        order: Optional[str] = None,
+    ):
+        """Call zomato's search endpoint.
+
+        Parameters
+        ----------
+        entity_id: int
+            Location id.
+        entity_type: str
+            Location type.
+            One of 'city', 'subzone', 'zone', 'landmark', 'metro', 'group'.
+        q: str
+            Search keyword.
+        start: int
+            Fetch results after offset.
+        count: int
+            Max number of results to display.
+        lat: float
+            Latitude.
+        lon: float
+            Longitude.
+        radius: float
+            Radius around (lat,lon); to define search area, in meters(M).
+        cuisines: str
+            List of cuisine id's separated by comma.
+        establishment_type: str
+            Estblishment id obtained from establishments call.
+        collection_id: str
+            Collection id obtained from collections call.
+        category: str
+            Category ids obtained from categories call.
+        sort: str
+            One of 'cost', 'rating', or 'real_distance'.
+        order: str
+            One of 'asc' or 'desc'.
+
+        Returns
+        -------
+        res: list[dict]
+            List of restaurants matching the input parmaters.
+
+        """
+        endpoint = self.endpoints["search"]
+        params = ""
+        if entity_id:
+            params += f"&entity_id={entity_id}"
+        if entity_type:
+            params += f"&entity_type={entity_type}"
+        if q:
+            params += f"&q={q}"
+        if start:
+            params += f"&start={start}"
+        if count:
+            params += f"&count={count}"
+        if lat:
+            params += f"&lat={lat}"
+        if lon:
+            params += f"&lon={lon}"
+        if radius:
+            params += f"&radius={radius}"
+        if cuisines:
+            params += f"&cuisines={cuisines}"
+        if establishment_type:
+            params += f"&establishment_type={establishment_type}"
+        if collection_id:
+            params += f"&collection_id={collection_id}"
+        if category:
+            params += f"&category={category}"
+        if sort:
+            params += f"&sort={sort}"
+        if order:
+            params += f"&order={order}"
+        request_url = self.url + endpoint + "?" + params
+
+        response = requests.get(request_url, headers=self.headers)
+        results = json.loads(response.text)
+        restaurants = results["restaurants"]
+
+        return restaurants
