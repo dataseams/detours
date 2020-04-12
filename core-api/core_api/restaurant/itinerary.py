@@ -9,8 +9,14 @@ import json
 import random
 from datetime import datetime
 
+from sqlalchemy.ext.declarative import declarative_base
+
+# from ..config import engine, db_session
+# from .. import models
 from .zomato import Zomato
 
+# Base = declarative_base()
+# Base.query = db_session.query_property()
 
 DATE_FORMAT = "%Y-%m-%d"
 

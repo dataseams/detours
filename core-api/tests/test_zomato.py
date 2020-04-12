@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
 
-from core_api.restaurant_api.zomato import Zomato
+from core_api.restaurant.zomato import Zomato
 
 
 class TestZomato(TestCase):

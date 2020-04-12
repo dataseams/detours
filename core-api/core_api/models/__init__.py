@@ -18,17 +18,32 @@ from sqlalchemy.orm import relationship, backref
 from ..database import Base
 
 
+class TableValues:
+    """Creates create attributes for initial table values for easy access."""
+
+    def __init__(self, values: dict):
+        self._values = values
+        for k, v in values.items():
+            setattr(self, v, k)
+
+    def __iter__(self):
+        """Return the iterator object."""
+        return self._values
+
+
 class TimeOfDay(Base):
     """Define a time of day entity."""
 
-    VALUES = {
-        "early_moring": (time(1, 0, 0), time(4, 59, 59)),
-        "morning": (time(5, 0, 0), time(8, 59, 59)),
-        "noon": (time(9, 0, 0), time(12, 59, 59)),
-        "afternoon": (time(13, 0, 0), time(16, 59, 59)),
-        "evening": (time(17, 0, 0), time(20, 59, 59)),
-        "night": (time(21, 0, 0), time(12, 59, 59)),
-    }
+    VALUES = TableValues(
+        {
+            "early_moring": (time(1, 0, 0), time(4, 59, 59)),
+            "morning": (time(5, 0, 0), time(8, 59, 59)),
+            "noon": (time(9, 0, 0), time(12, 59, 59)),
+            "afternoon": (time(13, 0, 0), time(16, 59, 59)),
+            "evening": (time(17, 0, 0), time(20, 59, 59)),
+            "night": (time(21, 0, 0), time(12, 59, 59)),
+        }
+    )
 
     __tablename__ = "time_of_day"
     id = Column(Integer, primary_key=True)
@@ -145,11 +160,9 @@ class ActivityType(Base):
     """Define an activity type entity."""
 
     # key = category, value = material icon code
-    VALUES = {
-        "hotel": "hotel",
-        "food": "restaurant",
-        "tour": "directions_bike",
-    }
+    VALUES = TableValues(
+        {"hotel": "hotel", "food": "restaurant", "tour": "directions_bike",}
+    )
 
     __tablename__ = "activity_type"
     id = Column(Integer, primary_key=True)
