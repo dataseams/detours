@@ -34,16 +34,14 @@ class TableValues:
 class TimeOfDay(Base):
     """Define a time of day entity."""
 
-    VALUES = TableValues(
-        {
-            "early_moring": (time(1, 0, 0), time(4, 59, 59)),
-            "morning": (time(5, 0, 0), time(8, 59, 59)),
-            "noon": (time(9, 0, 0), time(12, 59, 59)),
-            "afternoon": (time(13, 0, 0), time(16, 59, 59)),
-            "evening": (time(17, 0, 0), time(20, 59, 59)),
-            "night": (time(21, 0, 0), time(12, 59, 59)),
-        }
-    )
+    VALUES = {
+        "early_moring": (time(1, 0, 0), time(4, 59, 59)),
+        "morning": (time(5, 0, 0), time(8, 59, 59)),
+        "noon": (time(9, 0, 0), time(12, 59, 59)),
+        "afternoon": (time(13, 0, 0), time(16, 59, 59)),
+        "evening": (time(17, 0, 0), time(20, 59, 59)),
+        "night": (time(21, 0, 0), time(12, 59, 59)),
+    }
 
     __tablename__ = "time_of_day"
     id = Column(Integer, primary_key=True)
@@ -160,9 +158,11 @@ class ActivityType(Base):
     """Define an activity type entity."""
 
     # key = category, value = material icon code
-    VALUES = TableValues(
-        {"hotel": "hotel", "food": "restaurant", "tour": "directions_bike",}
-    )
+    VALUES = {
+        "hotel": "hotel",
+        "food": "restaurant",
+        "tour": "directions_bike",
+    }
 
     __tablename__ = "activity_type"
     id = Column(Integer, primary_key=True)
