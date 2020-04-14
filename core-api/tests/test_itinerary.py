@@ -14,5 +14,7 @@ class TestItinerary(TestCase):
             self.survey_response = f.read()
 
     def test_get_itinerary(self):
-        # itinerary.get_restaurants(survey_response=self.survey_response)
-        print("hello")
+        restaurants = itinerary.get_restaurants(
+            survey_response=self.survey_response
+        )
+        print(restaurants)
