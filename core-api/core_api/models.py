@@ -24,7 +24,7 @@ class TableValues(dict):
     def __init__(self, values: dict):
         for k, v in values.items():
             if hasattr(self, k):
-                raise KeyError(f"{k} attribute cannot be created."'s)
+                raise KeyError(f"{k} attribute cannot be created.")
             setattr(self, k, v)
             self.__setitem__(k, v)
 

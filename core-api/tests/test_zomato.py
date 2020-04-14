@@ -1,5 +1,6 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
+import os
 
 from core_api.restaurant.zomato import Zomato
 
@@ -8,7 +9,9 @@ class TestZomato(TestCase):
     """Zomato class unit tests."""
 
     def setUp(self):
-        with open("tests/data/cities.json", "r") as f:
+        tests_dir = os.path.dirname(__file__)
+        cities_file_path = os.path.join(tests_dir, "data/cities.json")
+        with open(cities_file_path, "r") as f:
             self.cities_response = f.read()
 
     @patch("requests.get")
