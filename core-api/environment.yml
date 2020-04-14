@@ -1,4 +1,4 @@
-name: detours-core
+name: detours
 channels:
   - defaults
 dependencies:
