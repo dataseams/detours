@@ -10,6 +10,8 @@ import json
 import random
 from datetime import datetime, date
 
+import pandas as pd
+
 from .zomato import Zomato
 from ..config import engine, db_session, Base
 from .. import models
@@ -44,9 +46,8 @@ def get_restaurants(survey_response: str):
     return filtered_restaurants
 
 
-def store_restaurants():
-    """Import modules that need to be registered properly on the metadata."""
-    # Create the fixtures
+def store_restaurants(restaurants: list, survey_response_id: int = 1):
+    """Create all itinerary items and save to database."""
     time_of_day = {}
     for k, v in models.TimeOfDay.VALUES.items():
         time_of_day[k] = models.TimeOfDay(
@@ -57,106 +58,50 @@ def store_restaurants():
     for k, v in models.ActivityType.VALUES.items():
         activity_types[k] = models.ActivityType(name=k, material_icon=v)
 
-    places = {
-        "maison_natale": models.Place(
-            name="Maison Natale Bernard Buffet",
-            description="Featuring a low-key art deco style, this conservative"
-            " hotel is a 1-minute walk from the Cadet metro "
-            "station.",
-        ),
-        "pain_quotidien": models.Place(
-            name="Le Pain Quotidien",
-            description="A historical landmark with breakfast experience.",
-        ),
-        "holland_bikes": models.Place(
-            name="Le Soufle",
-            description="A self-guided bike tour in the old city.",
-        ),
-        "le_soufle": models.Place(
-            name="Le Soufle",
-            description="A local favorite, known for its generosity and tasty "
-            "souffles.",
-        ),
-    }
+    for place in restaurants:
+        restaurant = place["restaurant"]
+        places = {
+            restaurant["name"]: models.Place(
+                name=restaurant["name"],
+                description="Featuring a low-key art deco style, this conservative"
+                " hotel is a 1-minute walk from the Cadet metro "
+                "station.",
+            )
+        }
     for v in places.values():
         db_session.add(v)
     db_session.commit()
 
-    activities = [
-        models.Activity(
-            name="wake-up",
-            place=places["maison_natale"],
-            activity_type=activity_types["hotel"],
-        ),
-        models.Activity(
-            name="breakfast",
-            place=places["pain_quotidien"],
-            activity_type=activity_types["food"],
-        ),
-        models.Activity(
-            name="biking",
-            place=places["holland_bikes"],
-            activity_type=activity_types["tour"],
-        ),
-        models.Activity(
-            name="lunch",
-            place=places["le_soufle"],
-            activity_type=activity_types["food"],
-        ),
-        models.Activity(
-            name="sleep",
-            place=places["maison_natale"],
-            activity_type=activity_types["hotel"],
-        ),
-    ]
+    activities = []
+    for k, v in places.items():
+        activities.append(
+            models.Activity(
+                name="eat",
+                place=v,
+                activity_type=activity_types["restaurant"],
+            )
+        )
     for v in activities:
         db_session.add(v)
     db_session.commit()
 
-    new_york = models.City(
-        name="New York", state="New York", state_abbr="NY", country="USA"
+    los_angeles = models.City(
+        name="Los Angeles", state="California", state_abbr="CA", country="USA"
     )
-    db_session.add(new_york)
-    frisco = models.City(
-        name="San Francisco",
-        state="California",
-        state_abbr="CA",
-        country="USA",
-    )
-    db_session.add(frisco)
-    paris = models.City(
-        name="Paris", state="", state_abbr="", country="France"
-    )
-    db_session.add(paris)
-    barcelona = models.City(
-        name="Barcelona", state="", state_abbr="", country="Spain"
-    )
-    db_session.add(barcelona)
+    db_session.add(los_angeles)
     db_session.commit()
 
     shahbaz = models.Traveler(first_name="Shahboo", last_name="Khan")
     db_session.add(shahbaz)
     db_session.commit()
 
-    this_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-    json_path = os.path.join(
-        this_path, "tests/data/sample_survey_response.json"
-    )
-    with open(json_path, "r") as f:
-        sample_survey_response = json.loads(f.read())
-    survey_response = models.SurveyResponse(
-        traveler=shahbaz, json=sample_survey_response
-    )
-    db_session.add(survey_response)
-    db_session.commit()
-
-    shahbaz_paris_trip_2019 = models.TripPlan(
-        survey_response=survey_response,
-        start_date=date(2019, 1, 1),
-        end_date=date(2019, 1, 4),
+    shahbaz_paris_trip_2020 = models.TripPlan(
+        survey_response_id=survey_response_id,
+        start_date=date(2020, 5, 1),
+        end_date=date(2020, 5, 4),
         start_time_of_day=time_of_day["morning"],
         # end_time_of_day=time_of_day["evening"],
-        city=paris,
+        city=los_angeles,
         traveler=shahbaz,
         spending_per_day="176",
         hours_saved="20-30",
@@ -168,33 +113,31 @@ def store_restaurants():
             "Wine bars",
         ],
     )
-    db_session.add(shahbaz_paris_trip_2019)
+    db_session.add(shahbaz_paris_trip_2020)
     db_session.commit()
 
-    daily_plans = [
-        models.DailyPlan(
-            date=date(2019, 1, 1), trip_plan=shahbaz_paris_trip_2019
-        ),
-        models.DailyPlan(
-            date=date(2019, 1, 2), trip_plan=shahbaz_paris_trip_2019
-        ),
-        models.DailyPlan(
-            date=date(2019, 1, 3), trip_plan=shahbaz_paris_trip_2019
-        ),
-        models.DailyPlan(
-            date=date(2019, 1, 4), trip_plan=shahbaz_paris_trip_2019
-        ),
-    ]
+    daily_plans = []
+    for trip_date in pd.date_range(
+        start="2020-05-01", end="2020-05-04", freq="D"
+    ):
+        daily_plans.append(
+            models.DailyPlan(date=trip_date, trip_plan=shahbaz_paris_trip_2020)
+        )
     for v in daily_plans:
         db_session.add(v)
     db_session.commit()
 
-    for i, v in enumerate(activities):
-        db_session.add(
-            models.PlanItem(order=i + 1, daily_plan=daily_plans[0], activity=v)
-        )
-    for i, v in enumerate(daily_plans[1:]):
-        db_session.add(
-            models.PlanItem(order=1, daily_plan=v, activity=activities[0])
-        )
+    for i, daily_plan in enumerate(daily_plans):
+        for j in range(3):
+            for v in activities:
+                k = (i + 1) * (j + 1)
+                db_session.add(
+                    models.PlanItem(
+                        order=i + 1,
+                        daily_plan=daily_plan,
+                        activity=activities[k],
+                    )
+                )
     db_session.commit()
+
+    return survey_response_id
