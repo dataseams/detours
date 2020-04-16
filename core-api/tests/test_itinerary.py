@@ -1,4 +1,5 @@
 from unittest import TestCase
+from unittest.mock import patch, Mock
 import os
 import json
 
@@ -17,11 +18,17 @@ class TestItinerary(TestCase):
         with open(restaurants_path, "r") as f:
             self.restaurants = json.load(f)
 
-    def test_get_restaurants_happy_path(self):
+    @patch("core_api.restaurant.zomato.Zomato.search")
+    def test_get_restaurants_happy_path(self, zomato_search_mock):
+        zomato_search_mock.return_value = self.restaurants
         restaurants = itinerary.get_restaurants(
             survey_response=self.survey_response
         )
-        print(restaurants)
+        self.assertEqual(
+            sorted(restaurants, key=lambda x: x["restaurant"]["id"]),
+            sorted(self.restaurants, key=lambda x: x["restaurant"]["id"]),
+        )
 
     def test_store_restaurants_happy_path(self):
-        results = itinerary.store_restaurants(self.restaurants)
+        res = itinerary.store_restaurants(self.restaurants, 1)
+        self.assertEqual(res, 1)

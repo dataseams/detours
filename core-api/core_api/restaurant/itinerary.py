@@ -5,7 +5,6 @@ The itinerary is created based on:
 - Survey reponse.
 - Queried APIs.
 """
-import os
 import json
 import random
 from datetime import datetime, date
@@ -46,7 +45,7 @@ def get_restaurants(survey_response: str):
     return filtered_restaurants
 
 
-def store_restaurants(restaurants: list, survey_response_id: int = 1):
+def store_restaurants(restaurants: list, survey_response_id: int):
     """Create all itinerary items and save to database."""
     time_of_day = {}
     for k, v in models.TimeOfDay.VALUES.items():
@@ -58,27 +57,26 @@ def store_restaurants(restaurants: list, survey_response_id: int = 1):
     for k, v in models.ActivityType.VALUES.items():
         activity_types[k] = models.ActivityType(name=k, material_icon=v)
 
+    places = []
     for place in restaurants:
         restaurant = place["restaurant"]
-        places = {
-            restaurant["name"]: models.Place(
+        places.append(
+            models.Place(
                 name=restaurant["name"],
                 description="Featuring a low-key art deco style, this conservative"
                 " hotel is a 1-minute walk from the Cadet metro "
                 "station.",
             )
-        }
-    for v in places.values():
-        db_session.add(v)
+        )
+    for place in places:
+        db_session.add(place)
     db_session.commit()
 
     activities = []
-    for k, v in places.items():
+    for place in places:
         activities.append(
             models.Activity(
-                name="eat",
-                place=v,
-                activity_type=activity_types["restaurant"],
+                name="eat", place=place, activity_type=activity_types["food"],
             )
         )
     for v in activities:
@@ -135,7 +133,7 @@ def store_restaurants(restaurants: list, survey_response_id: int = 1):
                     models.PlanItem(
                         order=i + 1,
                         daily_plan=daily_plan,
-                        activity=activities[k],
+                        activity=activities[k - 1],
                     )
                 )
     db_session.commit()
