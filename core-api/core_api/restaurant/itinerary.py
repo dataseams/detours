@@ -27,7 +27,7 @@ def parse_survey_response(survey_response: str):
 def get_restaurants(survey_response: str):
     """Return a list of restaurants based in the itinerary length in days."""
     zomato = Zomato()
-    parsed_survey_response = parse_survey_response(survey_response)
+    parsed_survey_response = survey_response
     city_id = zomato.CITY_IDS[parsed_survey_response["city"]]
     arrival_date = datetime.strptime(
         parsed_survey_response["arrivalDate"][:10], DATE_FORMAT

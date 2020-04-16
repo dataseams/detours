@@ -69,7 +69,8 @@ function Survey() {
       fetch({ query: query, variables: variables }).then(res => {
         console.log(res.data.addSurveyResponse.surveyResponse.id)
         router.push("/itinerary?surveyId=".concat(
-          "U3VydmV5UmVzcG9uc2U6MQ=="
+          res.data.addSurveyResponse.surveyResponse.id
+          // "U3VydmV5UmVzcG9uc2U6MQ=="
         ));
       });
     });

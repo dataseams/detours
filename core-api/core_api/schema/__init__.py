@@ -22,6 +22,7 @@ from .activity import Activity
 from .activity_type import ActivityType
 from .place import Place
 from .. import models
+from ..restaurant import itinerary
 
 
 class Mutation(ObjectType):
@@ -66,6 +67,14 @@ class Query(ObjectType):
             .decode("utf-8")
             .split(":")[-1]
         )
+        # Create itinerary
+        survey_response_query = SurveyResponse.get_query(info)
+        survey_response_obj = survey_response_query.get(survey_response_id)
+        survey_response_json = survey_response_obj.json
+
+        restaurants = itinerary.get_restaurants(survey_response_json)
+        itinerary.store_restaurants(restaurants, survey_response_id)
+
         query = TripPlan.get_query(info)
         trip_plans = (
             query.filter(
