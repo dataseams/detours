@@ -60,7 +60,7 @@ function Survey() {
       setTimeout(() => {
         window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         resolve();
-      }, 100);
+      }, 1000);
 
       console.log(store.getState());
       const variables = {

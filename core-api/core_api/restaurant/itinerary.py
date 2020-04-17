@@ -35,7 +35,7 @@ def get_restaurants(survey_response: str):
     return_date = datetime.strptime(
         parsed_survey_response["returnDate"][:10], DATE_FORMAT
     )
-    n_days = (return_date - arrival_date).days
+    n_days = (return_date - arrival_date).days + 1
     n_restaurants_per_day = 3
     restaurants = zomato.search(entity_id=city_id)
     filtered_restaurants = random.sample(
@@ -127,15 +127,14 @@ def store_restaurants(restaurants: list, survey_response_id: int):
 
     for i, daily_plan in enumerate(daily_plans):
         for j in range(3):
-            for v in activities:
-                k = (i + 1) * (j + 1)
-                db_session.add(
-                    models.PlanItem(
-                        order=i + 1,
-                        daily_plan=daily_plan,
-                        activity=activities[k - 1],
-                    )
+            k = (i + 1) * (j + 1)
+            db_session.add(
+                models.PlanItem(
+                    order=i + 1,
+                    daily_plan=daily_plan,
+                    activity=activities[k - 1],
                 )
+            )
     db_session.commit()
 
     return survey_response_id

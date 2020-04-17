@@ -43,12 +43,20 @@ class Query(ObjectType):
     get_all_places = SQLAlchemyConnectionField(Place)
     get_all_survey_responses = SQLAlchemyConnectionField(SurveyResponse)
 
-    hello = String(name=String(default_value="Stranger"))
+    hello = String(surveyResponseNodeId=Int())
     goodbye = String()
 
-    def resolve_hello(root, info, name):
+    def resolve_hello(root, info, surveyResponseNodeId):
         """Greet on entry."""
-        return f"Hello {name}"
+        # Create itinerary
+        survey_response_query = SurveyResponse.get_query(info)
+        survey_response_obj = survey_response_query.get(surveyResponseNodeId)
+        survey_response_json = survey_response_obj.json
+
+        restaurants = itinerary.get_restaurants(survey_response_json)
+        itinerary.store_restaurants(restaurants, surveyResponseNodeId)
+
+        return f"Hello {surveyResponseNodeId}"
 
     def resolve_goodbye(root, info):
         """Greet on exit."""
@@ -67,13 +75,6 @@ class Query(ObjectType):
             .decode("utf-8")
             .split(":")[-1]
         )
-        # Create itinerary
-        survey_response_query = SurveyResponse.get_query(info)
-        survey_response_obj = survey_response_query.get(survey_response_id)
-        survey_response_json = survey_response_obj.json
-
-        restaurants = itinerary.get_restaurants(survey_response_json)
-        itinerary.store_restaurants(restaurants, survey_response_id)
 
         query = TripPlan.get_query(info)
         trip_plans = (
