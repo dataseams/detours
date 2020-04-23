@@ -9,7 +9,7 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
-function Itinerary(props) {
+const Itinerary = props => {
   const classes = useStyles();
   const { itinerarySummary, fullItinerary } = props;
 

@@ -26,3 +26,4 @@ dependencies:
     - psycopg2==2.8.4  #prod
     - rope==0.16.0  #dev
     - pandas==1.0.3  #prod
+    - requests==2.23.0  #prod
