@@ -23,28 +23,28 @@ const Index = props => {
           </Link>
         </p>
       ) : (
-        <div>
-          <p>You're signed in. Email: {AuthUser.email}</p>
-          <p
-            style={{
-              display: 'inlinelock',
-              color: 'blue',
-              textDecoration: 'underline',
-              cursor: 'pointer',
-            }}
-            onClick={async () => {
-              try {
-                await logout()
-                Router.push('/auth')
-              } catch (e) {
-                console.error(e)
-              }
-            }}
-          >
-            Log out
+          <div>
+            <p>You're signed in. Email: {AuthUser.email}</p>
+            <p
+              style={{
+                display: 'inlinelock',
+                color: 'blue',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+              onClick={async () => {
+                try {
+                  await logout()
+                  Router.push('/auth')
+                } catch (e) {
+                  console.error(e)
+                }
+              }}
+            >
+              Log out
           </p>
-        </div>
-      )}
+          </div>
+        )}
       <div>
         <Link href={'/example'}>
           <a>Another example page</a>
