@@ -1,6 +1,7 @@
 import { Box, Divider, Typography, Grid } from "@material-ui/core";
 
 import { Purchase } from "../Buttons";
+import Auth from "../../pages/auth";
 
 const PurchaseBox = props => {
   const { classes } = props;
@@ -15,6 +16,7 @@ const PurchaseBox = props => {
           <Divider variant="middle" className={classes.divider} />
         </Box>
         <Purchase className={classes.purchaseItem}>Purchase</Purchase>
+        <Auth />
       </Box>
     </Box>
 

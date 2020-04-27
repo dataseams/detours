@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'isomorphic-unfetch'
+import { Button } from "@material-ui/core";
 import clientCredentials from '../credentials/client'
 
 export async function getServerSideProps({ req, query }) {
@@ -26,14 +27,7 @@ export default class Index extends Component {
     super(props)
     this.state = {
       user: this.props.user,
-      value: '',
-      messages: this.props.messages,
     }
-
-    this.addDbListener = this.addDbListener.bind(this)
-    this.removeDbListener = this.removeDbListener.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -56,57 +50,15 @@ export default class Index extends Component {
               body: JSON.stringify({ token }),
             })
           })
-          .then(res => this.addDbListener())
       } else {
         this.setState({ user: null })
         // eslint-disable-next-line no-undef
         fetch('/api/logout', {
           method: 'POST',
           credentials: 'same-origin',
-        }).then(() => this.removeDbListener())
+        })
       }
     })
-  }
-
-  addDbListener() {
-    var db = firebase.firestore()
-    let unsubscribe = db.collection('messages').onSnapshot(
-      querySnapshot => {
-        var messages = {}
-        querySnapshot.forEach(function (doc) {
-          messages[doc.id] = doc.data()
-        })
-        if (messages) this.setState({ messages })
-      },
-      error => {
-        console.error(error)
-      }
-    )
-    this.setState({ unsubscribe })
-  }
-
-  removeDbListener() {
-    // firebase.database().ref('messages').off()
-    if (this.state.unsubscribe) {
-      this.state.unsubscribe()
-    }
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value })
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    var db = firebase.firestore()
-    const date = new Date().getTime()
-    db.collection('messages')
-      .doc(`${date}`)
-      .set({
-        id: date,
-        text: this.state.value,
-      })
-    this.setState({ value: '' })
   }
 
   handleLogin() {
@@ -118,33 +70,19 @@ export default class Index extends Component {
   }
 
   render() {
-    const { user, value, messages } = this.state
+    const { user } = this.state
+    console.log(user)
 
     return (
       <div>
         {user ? (
-          <button onClick={this.handleLogout}>Logout</button>
-        ) : (
-            <button onClick={this.handleLogin}>Login</button>
-          )}
-        {user && (
           <div>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type={'text'}
-                onChange={this.handleChange}
-                placeholder={'add message...'}
-                value={value}
-              />
-            </form>
-            <ul>
-              {messages &&
-                Object.keys(messages).map(key => (
-                  <li key={key}>{messages[key].text}</li>
-                ))}
-            </ul>
+            <Button onClick={this.handleLogout}>Logout</Button>
+            <p>{user.displayName}</p>
           </div>
-        )}
+        ) : (
+            <Button onClick={this.handleLogin}>Login</Button>
+          )}
       </div>
     )
   }
