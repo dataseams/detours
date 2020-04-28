@@ -1,7 +1,7 @@
 import React from "react";
 import { reduxForm } from "redux-form";
 
-import QuestionComp from "./QuestionBank";
+import { QuestionComp, questionnaireLength } from "./QuestionBank";
 import { Back, Next, Submit } from "../Buttons";
 
 const validate = values => {
@@ -39,7 +39,7 @@ class QuestionnaireForm extends React.Component {
 
   toggleNext(e) {
     let index = this.state.index + 1;
-    let hiddenNext = index === 16;
+    let hiddenNext = index === questionnaireLength;
 
     this.setState({
       index: index,

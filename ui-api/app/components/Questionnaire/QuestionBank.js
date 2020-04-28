@@ -18,9 +18,9 @@ import NightlifeField from "./Nightlife";
 import AdventureSportsField from "./AdventureSports";
 import NeighborhoodsField from "./Neighborhoods";
 
-function QuestionComp(props) {
-  const questionnaireLength = 16;
+const questionnaireLength = 5;
 
+function QuestionComp(props) {
   var comp = {
     1: (
       <div>
@@ -40,25 +40,25 @@ function QuestionComp(props) {
         </div>
       </div>
     ),
+    // 3: (
+    //   <div>
+    //     <span>STEP 3/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>What occasion are you celebrating?</h1>
+    //       <OccasionField />
+    //     </div>
+    //   </div>
+    // ),
+    // 4: (
+    //   <div>
+    //     <span>STEP 4/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>What is your age and gender?</h1>
+    //       <AgeGenderField />
+    //     </div>
+    //   </div>
+    // ),
     3: (
-      <div>
-        <span>STEP 3/{questionnaireLength}</span>
-        <div>
-          <h1>What occasion are you celebrating?</h1>
-          <OccasionField />
-        </div>
-      </div>
-    ),
-    4: (
-      <div>
-        <span>STEP 4/{questionnaireLength}</span>
-        <div>
-          <h1>What is your age and gender?</h1>
-          <AgeGenderField />
-        </div>
-      </div>
-    ),
-    5: (
       <div>
         <span>STEP 5/{questionnaireLength}</span>
         <div>
@@ -67,16 +67,16 @@ function QuestionComp(props) {
         </div>
       </div>
     ),
-    6: (
-      <div>
-        <span>STEP 6/{questionnaireLength}</span>
-        <div>
-          <h1>Have you traveled to this location before?</h1>
-          <PriorVisitsField />
-        </div>
-      </div>
-    ),
-    7: (
+    // 6: (
+    //   <div>
+    //     <span>STEP 6/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Have you traveled to this location before?</h1>
+    //       <PriorVisitsField />
+    //     </div>
+    //   </div>
+    // ),
+    4: (
       <div>
         <span>STEP 7/{questionnaireLength}</span>
         <div>
@@ -85,7 +85,7 @@ function QuestionComp(props) {
         </div>
       </div>
     ),
-    8: (
+    5: (
       <div>
         <span>STEP 8/{questionnaireLength}</span>
         <div>
@@ -94,78 +94,78 @@ function QuestionComp(props) {
         </div>
       </div>
     ),
-    9: (
-      <div>
-        <span>STEP 9/{questionnaireLength}</span>
-        <div>
-          <h1>Which museums do you enjoy the most?</h1>
-          <MuseumsField />
-        </div>
-      </div>
-    ),
-    10: (
-      <div>
-        <span>STEP 10/{questionnaireLength}</span>
-        <div>
-          <h1>What are your favorite ways to relax?</h1>
-          <RelaxationMethodsField />
-        </div>
-      </div>
-    ),
-    11: (
-      <div>
-        <span>STEP 11/{questionnaireLength}</span>
-        <div>
-          <h1>What are your favorite outdoor activities?</h1>
-          <OutdoorActivitiesField />
-        </div>
-      </div>
-    ),
-    12: (
-      <div>
-        <span>STEP 12/{questionnaireLength}</span>
-        <div>
-          <h1>Which tours do you enjoy the most?</h1>
-          <ToursField />
-        </div>
-      </div>
-    ),
-    13: (
-      <div>
-        <span>STEP 13/{questionnaireLength}</span>
-        <div>
-          <h1>Shopping</h1>
-          <ShoppingField />
-        </div>
-      </div>
-    ),
-    14: (
-      <div>
-        <span>STEP 14/{questionnaireLength}</span>
-        <div>
-          <h1>Which shows and performances do you enjoy the most?</h1>
-          <ShowsField />
-        </div>
-      </div>
-    ),
-    15: (
-      <div>
-        <span>STEP 15/{questionnaireLength}</span>
-        <div>
-          <h1>Which type of nightlife do you enjoy the most?</h1>
-          <NightlifeField />
-        </div>
-      </div>
-    ),
-    16: (
-      <div>
-        <span>STEP 16/{questionnaireLength}</span>
-        <div>
-          <h1>Which adventure sports do you enjoy the most?</h1>
-          <AdventureSportsField />
-        </div>
-      </div>
-    ),
+    // 9: (
+    //   <div>
+    //     <span>STEP 9/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Which museums do you enjoy the most?</h1>
+    //       <MuseumsField />
+    //     </div>
+    //   </div>
+    // ),
+    // 10: (
+    //   <div>
+    //     <span>STEP 10/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>What are your favorite ways to relax?</h1>
+    //       <RelaxationMethodsField />
+    //     </div>
+    //   </div>
+    // ),
+    // 11: (
+    //   <div>
+    //     <span>STEP 11/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>What are your favorite outdoor activities?</h1>
+    //       <OutdoorActivitiesField />
+    //     </div>
+    //   </div>
+    // ),
+    // 12: (
+    //   <div>
+    //     <span>STEP 12/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Which tours do you enjoy the most?</h1>
+    //       <ToursField />
+    //     </div>
+    //   </div>
+    // ),
+    // 13: (
+    //   <div>
+    //     <span>STEP 13/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Shopping</h1>
+    //       <ShoppingField />
+    //     </div>
+    //   </div>
+    // ),
+    // 14: (
+    //   <div>
+    //     <span>STEP 14/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Which shows and performances do you enjoy the most?</h1>
+    //       <ShowsField />
+    //     </div>
+    //   </div>
+    // ),
+    // 15: (
+    //   <div>
+    //     <span>STEP 15/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Which type of nightlife do you enjoy the most?</h1>
+    //       <NightlifeField />
+    //     </div>
+    //   </div>
+    // ),
+    // 16: (
+    //   <div>
+    //     <span>STEP 16/{questionnaireLength}</span>
+    //     <div>
+    //       <h1>Which adventure sports do you enjoy the most?</h1>
+    //       <AdventureSportsField />
+    //     </div>
+    //   </div>
+    // ),
     // 17: (
     //   <div>
     //     <span>STEP 17/{questionnaireLength}</span>
@@ -180,4 +180,4 @@ function QuestionComp(props) {
   return comp[props.index];
 }
 
-export default QuestionComp;
+export { QuestionComp, questionnaireLength };
