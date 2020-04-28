@@ -1,11 +1,13 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box } from "@material-ui/core";
+import { AppBar, Toolbar, Box, IconButton } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import LogoButton from "./LogoButton";
+import Auth from "../pages/auth";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -25,7 +27,7 @@ ElevationScroll.propTypes = {
 
 const StyledAppBar = withStyles({
   root: {
-    backgroundColor: "white"
+    backgroundColor: "red"
   }
 })(AppBar);
 
@@ -49,6 +51,10 @@ const useStyles = makeStyles(theme => ({
 
 function LogoNavigationBar(props) {
   const classes = useStyles();
+  const menuId = 'primary-search-account-menu';
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return (
     <React.Fragment>
@@ -57,8 +63,19 @@ function LogoNavigationBar(props) {
         <StyledAppBar>
           <Toolbar>
             <Box className={classes.box}>
-              <LogoButton name="DETOURS"/>
+              <LogoButton name="DETOURS" />
             </Box>
+            <Auth />
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Toolbar>
         </StyledAppBar>
       </ElevationScroll>

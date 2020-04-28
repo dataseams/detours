@@ -3,7 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'isomorphic-unfetch'
-import { Button } from "@material-ui/core";
+import { Button, Typography, Box } from "@material-ui/core";
 import clientCredentials from '../credentials/client'
 
 export async function getServerSideProps({ req, query }) {
@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, query }) {
   }
 }
 
-export default class Index extends Component {
+export default class Auth extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,16 +74,16 @@ export default class Index extends Component {
     console.log(user)
 
     return (
-      <div>
+      <Box flexDirection="row" flexWrap="nowrap">
         {user ? (
-          <div>
+          <Box flexDirection="row" flexWrap="nowrap">
+            <Typography>{user.displayName}</Typography>
             <Button onClick={this.handleLogout}>Logout</Button>
-            <p>{user.displayName}</p>
-          </div>
+          </Box>
         ) : (
             <Button onClick={this.handleLogin}>Login</Button>
           )}
-      </div>
+      </Box>
     )
   }
 }

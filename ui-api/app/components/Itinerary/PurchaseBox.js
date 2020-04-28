@@ -16,7 +16,6 @@ const PurchaseBox = props => {
           <Divider variant="middle" className={classes.divider} />
         </Box>
         <Purchase className={classes.purchaseItem}>Purchase</Purchase>
-        <Auth />
       </Box>
     </Box>
 
