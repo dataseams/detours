@@ -22,13 +22,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AlignItemsList(props) {
-  var { events } = props;
+  const { events } = props;
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
       {events.edges.map((event, index) => (
-        <div key={event.node.order}>
+        <div key={(index + 1) * event.node.order}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <i

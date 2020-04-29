@@ -62,12 +62,10 @@ function Survey() {
         resolve();
       }, 1000);
 
-      console.log(store.getState());
       const variables = {
         travelerId: 1, json: JSON.stringify(values, null, 2)
       };
       fetch({ query: query, variables: variables }).then(res => {
-        console.log(res.data.addSurveyResponse.surveyResponse.id)
         router.push("/itinerary?surveyId=".concat(
           res.data.addSurveyResponse.surveyResponse.id
           // "U3VydmV5UmVzcG9uc2U6MQ=="

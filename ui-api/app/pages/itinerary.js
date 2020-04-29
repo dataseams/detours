@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
 
@@ -8,7 +8,6 @@ import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
-import Auth from "./auth";
 
 const Itinerary = props => {
   const classes = useStyles();
@@ -17,16 +16,14 @@ const Itinerary = props => {
   return (
     <div>
       <Meta />
-      <Auth>
-        <div>
-          <LogoNavigationBar />
-          <Container className={classes.root}>
-            <ItineraryDescription summary={itinerarySummary} />
-            <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
-            <PurchaseBox classes={classes} />
-          </Container>
-        </div>
-      </Auth>
+      <div>
+        <LogoNavigationBar />
+        <Container className={classes.root}>
+          <ItineraryDescription summary={itinerarySummary} />
+          <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
+          <PurchaseBox classes={classes} />
+        </Container>
+      </div>
     </div>
   );
 };
@@ -88,7 +85,6 @@ export async function getServerSideProps(context) {
     "hoursSaved": fullItinerary.hoursSaved,
     "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
   }
-
   return { props: { fullItinerary: fullItinerary, itinerarySummary: itinerarySummary } }
 }
 

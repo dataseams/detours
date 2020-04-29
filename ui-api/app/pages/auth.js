@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'isomorphic-unfetch'
+import React, { Component } from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "isomorphic-unfetch";
 import { Button, Typography, Box } from "@material-ui/core";
-import clientCredentials from '../credentials/client'
+import clientCredentials from "../credentials/client";
 
 export async function getServerSideProps({ req, query }) {
   // const user = req && req.session ? req.session.decodedToken : null
@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, query }) {
   }
 }
 
-export default class Auth extends Component {
+class Auth extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -71,10 +71,16 @@ export default class Auth extends Component {
 
   render() {
     const { user } = this.state
-    console.log(user)
+    console.log("User: " + user)
 
     return (
-      <div>{this.props.children}</div>
+      <div>
+        {user ? (
+          <Button onClick={this.handleLogout}>Log out</Button>
+        ) : (<Button onClick={this.handleLogin}>Log in</Button>)}
+      </div>
     )
   }
 }
+
+export default Auth;
