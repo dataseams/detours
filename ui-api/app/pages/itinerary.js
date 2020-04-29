@@ -8,6 +8,7 @@ import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
+import Auth from "./auth";
 
 const Itinerary = props => {
   const classes = useStyles();
@@ -16,12 +17,16 @@ const Itinerary = props => {
   return (
     <div>
       <Meta />
-      <LogoNavigationBar />
-      <Container className={classes.root}>
-        <ItineraryDescription summary={itinerarySummary} />
-        <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
-        <PurchaseBox classes={classes} />
-      </Container>
+      <Auth>
+        <div>
+          <LogoNavigationBar />
+          <Container className={classes.root}>
+            <ItineraryDescription summary={itinerarySummary} />
+            <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
+            <PurchaseBox classes={classes} />
+          </Container>
+        </div>
+      </Auth>
     </div>
   );
 };

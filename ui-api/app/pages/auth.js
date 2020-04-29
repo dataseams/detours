@@ -74,16 +74,7 @@ export default class Auth extends Component {
     console.log(user)
 
     return (
-      <Box flexDirection="row" flexWrap="nowrap">
-        {user ? (
-          <Box flexDirection="row" flexWrap="nowrap">
-            <Typography>{user.displayName}</Typography>
-            <Button onClick={this.handleLogout}>Logout</Button>
-          </Box>
-        ) : (
-            <Button onClick={this.handleLogin}>Login</Button>
-          )}
-      </Box>
+      <div>{this.props.children}</div>
     )
   }
 }
