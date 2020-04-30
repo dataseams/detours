@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
 import "isomorphic-unfetch";
-import { Button, Typography, Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+
 import clientCredentials from "../credentials/client";
 
 export async function getServerSideProps({ req, query }) {
@@ -27,14 +27,14 @@ class Auth extends Component {
     super(props)
     this.state = {
       user: this.props.user,
+      firebase: this.firebase
     }
   }
 
   componentDidMount() {
-    firebase.initializeApp(clientCredentials)
-
-    if (this.state.user) this.addDbListener()
-
+    if (!firebase.apps.length) {
+      firebase.initializeApp(clientCredentials)
+    }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user: user })
@@ -71,7 +71,11 @@ class Auth extends Component {
 
   render() {
     const { user } = this.state
-    console.log("User: " + user)
+    if (user) {
+      console.log("User: " + user.displayName)
+    } else {
+      console.log("User: anonymous")
+    }
 
     return (
       <div>
