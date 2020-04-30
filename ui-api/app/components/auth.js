@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "isomorphic-unfetch";
 import { Button } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import clientCredentials from "../credentials/client";
 
@@ -73,6 +74,7 @@ class Auth extends Component {
     const { user } = this.state
     if (user) {
       console.log("User: " + user.displayName)
+      console.log("Email: " + user.email)
     } else {
       console.log("User: anonymous")
     }
@@ -87,4 +89,8 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+const mapStateToProps = state => {
+  return {user: state.user}
+}
+
+export default connect(mapStateToProps)(Auth);

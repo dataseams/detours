@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import LogoButton from "./LogoButton";
-import Auth from "../pages/auth";
+import Auth from "./auth";
 
 function ElevationScroll(props) {
   const { children } = props;

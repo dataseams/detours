@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
+import { Provider } from "react-redux";
+import { createStore, combineReducers } from "redux";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -9,22 +11,33 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
+const initialState = {
+  user: "Moe Shmoe"
+}
+function userReducer(state = initialState) {
+  return state
+}
+const store = createStore(userReducer);
+console.log("Redux: " + store);
+
 const Itinerary = props => {
   const classes = useStyles();
   const { itinerarySummary, fullItinerary } = props;
 
   return (
-    <div>
-      <Meta />
+    <Provider store={store}>
       <div>
-        <LogoNavigationBar />
-        <Container className={classes.root}>
-          <ItineraryDescription summary={itinerarySummary} />
-          <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
-          <PurchaseBox classes={classes} />
-        </Container>
+        <Meta />
+        <div>
+          <LogoNavigationBar />
+          <Container className={classes.root}>
+            <ItineraryDescription summary={itinerarySummary} />
+            <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
+            <PurchaseBox classes={classes} />
+          </Container>
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 };
 
