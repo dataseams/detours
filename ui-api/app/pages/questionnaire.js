@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const reducer = combineReducers({
-  form: reduxFormReducer
+  form: reduxFormReducer,
+  user: null
 });
 
 const store = createStore(reducer);
@@ -74,15 +75,15 @@ function Survey() {
     });
 
   return (
-    <div>
-      <Meta />
-      <LogoNavigationBar />
-      <Provider store={store}>
+    <Provider store={store}>
+      <div>
+        <Meta />
+        <LogoNavigationBar />
         <div className={classes.surveyPage}>
           <QuestionnaireForm classes={classes} onSubmit={showResults} />
         </div>
-      </Provider>
-    </div>
+      </div>
+    </Provider>
   );
 }
 

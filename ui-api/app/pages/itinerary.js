@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Container } from "@material-ui/core";
+import React from "react";
+import { Container, Box } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
-import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -12,13 +12,13 @@ import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
 const initialState = {
-  user: "Moe Shmoe"
+  user: "Moe Shmoe",
+  myself: "Jeanette Beverly"
 }
 function userReducer(state = initialState) {
   return state
 }
 const store = createStore(userReducer);
-console.log("Redux: " + store);
 
 const Itinerary = props => {
   const classes = useStyles();
@@ -34,6 +34,7 @@ const Itinerary = props => {
             <ItineraryDescription summary={itinerarySummary} />
             <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
             <PurchaseBox classes={classes} />
+            <Box>Hi: {store.myself}</Box>
           </Container>
         </div>
       </div>
