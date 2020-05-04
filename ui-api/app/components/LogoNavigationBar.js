@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
+import { AppBar, Toolbar, Box } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import { useSelector } from "react-redux";
 
 import LogoButton from "./LogoButton";
 import Auth from "./auth";
@@ -52,22 +52,8 @@ const useStyles = makeStyles(theme => ({
 function LogoNavigationBar(props) {
   const classes = useStyles();
 
-  const [auth, setAuth] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+  const userEmail = useSelector(state => state.userEmail);
+  console.log("From nav: " + userEmail);
 
   return (
     <React.Fragment>

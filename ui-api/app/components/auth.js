@@ -3,7 +3,10 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "isomorphic-unfetch";
 import { Button } from "@material-ui/core";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { MenuIcon, AccountCircle } from '@material-ui/icons';
+import { Menu, MenuItem, IconButton } from '@material-ui/core';
 
 import clientCredentials from "../credentials/client";
 
@@ -17,76 +20,101 @@ export async function getServerSideProps({ req, query }) {
   }
 }
 
-class Auth extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: this.props.user,
-      firebase: this.firebase
-    }
-  }
+const handleLogin = props => {
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+}
 
-  componentDidMount() {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(clientCredentials)
-    }
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user: user })
-        return user
-          .getIdToken()
-          .then(token => {
-            // eslint-disable-next-line no-undef
-            return fetch('/api/login', {
-              method: 'POST',
-              // eslint-disable-next-line no-undef
-              headers: new Headers({ 'Content-Type': 'application/json' }),
-              credentials: 'same-origin',
-              body: JSON.stringify({ token }),
-            })
-          })
-      } else {
-        this.setState({ user: null })
-        // eslint-disable-next-line no-undef
-        fetch('/api/logout', {
-          method: 'POST',
-          credentials: 'same-origin',
-        })
-      }
-    })
-  }
+const handleLogout = props => {
+  firebase.auth().signOut()
+}
 
-  handleLogin() {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-  }
+const Auth = props => {
+  const dispatch = useDispatch();
 
-  handleLogout() {
-    firebase.auth().signOut()
-  }
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-  render() {
-    const { user } = this.state
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(clientCredentials)
+  }
+  firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      console.log("User: " + user.displayName)
-      console.log("Email: " + user.email)
+      const updateUserEmail = { type: "UPDATE_USER", value: user.email };
+      dispatch(updateUserEmail);
+
+      return user
+        .getIdToken()
+        .then(token => {
+          // eslint-disable-next-line no-undef
+          return fetch('/api/login', {
+            method: 'POST',
+            // eslint-disable-next-line no-undef
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            credentials: 'same-origin',
+            body: JSON.stringify({ token }),
+          })
+        })
     } else {
-      console.log("User: anonymous")
+      const updateUserEmail = { type: "UPDATE_USER", value: null };
+      dispatch(updateUserEmail);
+
+      // eslint-disable-next-line no-undef
+      fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'same-origin',
+      })
     }
+  })
 
-    return (
-      <div>
-        {user ? (
-          <Button onClick={this.handleLogout}>Log out</Button>
-        ) : (<Button onClick={this.handleLogin}>Log in</Button>)}
-      </div>
-    )
-  }
+  const userEmail = useSelector(state => state.userEmail);
+  console.log("User: " + userEmail);
+
+  return (
+    <div>
+      <IconButton
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleMenu}
+        color="primary"
+      >
+        <AccountCircle />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={open}
+        onClose={handleClose}
+      >
+        {userEmail ? (
+          <MenuItem onClick={handleLogout}>Log out</MenuItem>) : (
+            <MenuItem onClick={handleLogin}>Log in</MenuItem>)}
+      </Menu>
+    </div >
+  )
 }
 
-const mapStateToProps = state => {
-  return {
-    user: "Jello"
-  }
-}
-
-export default connect(mapStateToProps)(Auth);
+export default Auth;

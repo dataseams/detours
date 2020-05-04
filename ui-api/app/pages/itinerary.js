@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Box } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
 import { createStore } from "redux";
-import { Provider, useSelector, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -11,14 +11,16 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
-const initialState = {
-  user: "Moe Shmoe",
-  myself: "Jeanette Beverly"
+
+const rootReducer = (state = { userEmail: null }, action) => {
+  switch (action.type) {
+    case "UPDATE_USER":
+      return { ...state, userEmail: action.value }
+    default:
+      return state
+  }
 }
-function userReducer(state = initialState) {
-  return state
-}
-const store = createStore(userReducer);
+const store = createStore(rootReducer);
 
 const Itinerary = props => {
   const classes = useStyles();

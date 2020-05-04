@@ -22,12 +22,10 @@ function Counter() {
   const count = useSelector(state => state.count)
   const dispatch = useDispatch();
 
-  const countUp = { type: "COUNT_UP" };
-
   return <div>
     <p>Count: {count}</p>
     <button onClick={() => dispatch(countUp)}>Count Up</button>
-    <button onClick={() => { dispatch({ type: "COUNT_DOWN" }) }}>Count Down</button>
+    <button onClick={() => { dispatch(countDown) }}>Count Down</button>
   </div>
 }
 
