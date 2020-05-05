@@ -29,21 +29,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-const rootReducer = (state = { userEmail: null }, action) => {
+const initialState = {
+  email: null,
+  displayName: null,
+  photoUrl: null
+};
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_USER":
-      return { ...state, userEmail: action.value }
+      return {
+        ...state,
+        email: action.value.userEmail,
+        displayName: action.value.userDisplayName,
+        photoUrl: action.value.userPhotoUrl
+      }
     default:
       return state
   }
 }
 const allReducers = {
-  rootReducer,
-  form: reduxFormReducer,
+  user: rootReducer,
+  form: reduxFormReducer
 }
 const reducer = combineReducers(allReducers);
-
 const store = createStore(reducer);
 
 function Survey() {
@@ -83,6 +91,7 @@ function Survey() {
         ));
       });
     });
+  console.log(store.getState());
 
   return (
     <Provider store={store}>

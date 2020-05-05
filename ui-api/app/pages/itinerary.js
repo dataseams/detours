@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Box } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 import Meta from "../components/Head";
@@ -12,24 +12,27 @@ import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
 const initialState = {
-  userEmail: null,
-  userDisplayName: null,
-  userPhotoUrl: null
+  email: null,
+  displayName: null,
+  photoUrl: null
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_USER":
       return {
         ...state,
-        userEmail: action.value.userEmail,
-        userDisplayName: action.value.userDisplayName,
-        userPhotoUrl: action.value.userPhotoUrl
+        email: action.value.userEmail,
+        displayName: action.value.userDisplayName,
+        photoUrl: action.value.userPhotoUrl
       }
     default:
       return state
   }
 }
-const store = createStore(rootReducer);
+const allReducers = { user: rootReducer }
+const reducer = combineReducers(allReducers);
+const store = createStore(reducer);
+console.log(store.getState())
 
 const Itinerary = props => {
   const classes = useStyles();

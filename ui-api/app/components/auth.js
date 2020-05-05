@@ -104,9 +104,9 @@ const Auth = props => {
     }
   })
 
-  const userEmail = useSelector(state => state.userEmail);
-  const userDisplayName = useSelector(state => state.userDisplayName);
-  const userPhotoUrl = useSelector(state => state.userPhotoUrl);
+  const userEmail = useSelector(state => state.user.email);
+  const userDisplayName = useSelector(state => state.user.displayName);
+  const userPhotoUrl = useSelector(state => state.user.photoUrl);
   console.log("User: " + userEmail);
 
   return (
