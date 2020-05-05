@@ -29,10 +29,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const reducer = combineReducers({
+
+const rootReducer = (state = { userEmail: null }, action) => {
+  switch (action.type) {
+    case "UPDATE_USER":
+      return { ...state, userEmail: action.value }
+    default:
+      return state
+  }
+}
+const allReducers = {
+  rootReducer,
   form: reduxFormReducer,
-  user: null
-});
+}
+const reducer = combineReducers(allReducers);
 
 const store = createStore(reducer);
 

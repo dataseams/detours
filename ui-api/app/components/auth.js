@@ -2,13 +2,30 @@ import React, { Component } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "isomorphic-unfetch";
-import { Button } from "@material-ui/core";
+import { Button, Divider, Avatar } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import { makeStyles } from '@material-ui/core/styles';
 
-import { MenuIcon, AccountCircle } from '@material-ui/icons';
 import { Menu, MenuItem, IconButton } from '@material-ui/core';
 
 import clientCredentials from "../credentials/client";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 export async function getServerSideProps({ req, query }) {
   const user = req.session && req.session.decodedToken ? req.session.decodedToken : null
@@ -29,6 +46,7 @@ const handleLogout = props => {
 }
 
 const Auth = props => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [auth, setAuth] = React.useState(true);
@@ -53,7 +71,13 @@ const Auth = props => {
   }
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      const updateUserEmail = { type: "UPDATE_USER", value: user.email };
+      const updateUserEmail = {
+        type: "UPDATE_USER", value: {
+          userEmail: user.email,
+          userDisplayName: user.displayName,
+          userPhotoUrl: user.photoURL
+        }
+      };
       dispatch(updateUserEmail);
 
       return user
@@ -69,7 +93,7 @@ const Auth = props => {
           })
         })
     } else {
-      const updateUserEmail = { type: "UPDATE_USER", value: null };
+      const updateUserEmail = { type: "UPDATE_USER", value: { userEmail: null, userDisplayName: null } };
       dispatch(updateUserEmail);
 
       // eslint-disable-next-line no-undef
@@ -81,6 +105,8 @@ const Auth = props => {
   })
 
   const userEmail = useSelector(state => state.userEmail);
+  const userDisplayName = useSelector(state => state.userDisplayName);
+  const userPhotoUrl = useSelector(state => state.userPhotoUrl);
   console.log("User: " + userEmail);
 
   return (
@@ -94,7 +120,7 @@ const Auth = props => {
             onClick={handleMenu}
             color="primary"
           >
-            <AccountCircle />
+            <Avatar alt={userDisplayName} src={userPhotoUrl} className={classes.small} />
           </IconButton>
           <Menu
             id="menu-appbar"
@@ -111,6 +137,8 @@ const Auth = props => {
             open={open}
             onClose={handleClose}
           >
+            <MenuItem disabled={true}>{userDisplayName}</MenuItem>
+            <Divider />
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
         </div>

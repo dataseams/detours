@@ -11,11 +11,20 @@ import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 
-
-const rootReducer = (state = { userEmail: null }, action) => {
+const initialState = {
+  userEmail: null,
+  userDisplayName: null,
+  userPhotoUrl: null
+};
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_USER":
-      return { ...state, userEmail: action.value }
+      return {
+        ...state,
+        userEmail: action.value.userEmail,
+        userDisplayName: action.value.userDisplayName,
+        userPhotoUrl: action.value.userPhotoUrl
+      }
     default:
       return state
   }
@@ -36,7 +45,6 @@ const Itinerary = props => {
             <ItineraryDescription summary={itinerarySummary} />
             <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
             <PurchaseBox classes={classes} />
-            <Box>Hi: {store.myself}</Box>
           </Container>
         </div>
       </div>
