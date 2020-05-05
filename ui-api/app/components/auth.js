@@ -85,35 +85,37 @@ const Auth = props => {
 
   return (
     <div>
-      <IconButton
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="primary"
-      >
-        <AccountCircle />
-      </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={open}
-        onClose={handleClose}
-      >
-        {userEmail ? (
-          <MenuItem onClick={handleLogout}>Log out</MenuItem>) : (
-            <MenuItem onClick={handleLogin}>Log in</MenuItem>)}
-      </Menu>
-    </div >
+      {userEmail ? (
+        <div>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="primary"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleLogout}>Log out</MenuItem>
+          </Menu>
+        </div>
+      ) : (<Button onClick={handleLogin}>Log in</Button>)}
+    </div>
   )
 }
 

@@ -52,9 +52,6 @@ const useStyles = makeStyles(theme => ({
 function LogoNavigationBar(props) {
   const classes = useStyles();
 
-  const userEmail = useSelector(state => state.userEmail);
-  console.log("From nav: " + userEmail);
-
   return (
     <React.Fragment>
       <CssBaseline />
