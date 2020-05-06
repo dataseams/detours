@@ -37,34 +37,18 @@ export async function getServerSideProps({ req, query }) {
   }
 }
 
-const handleLogin = props => {
-  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-}
-
-const handleLogout = props => {
-  firebase.auth().signOut()
-}
-
 const Auth = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget)
   };
-
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(null)
   };
-
+  const open = Boolean(anchorEl);
 
   if (!firebase.apps.length) {
     firebase.initializeApp(clientCredentials)
@@ -107,6 +91,16 @@ const Auth = props => {
   const userEmail = useSelector(state => state.user.email);
   const userDisplayName = useSelector(state => state.user.displayName);
   const userPhotoUrl = useSelector(state => state.user.photoUrl);
+
+  const handleLogin = props => {
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    setAnchorEl(null);
+  }
+
+  const handleLogout = props => {
+    firebase.auth().signOut()
+  }
+
   console.log("User: " + userEmail);
 
   return (
