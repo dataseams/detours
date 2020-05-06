@@ -1,5 +1,5 @@
 """SurveyResponse schema."""
-from graphene import Mutation, Field, Int, JSONString
+from graphene import Mutation, Field, String, JSONString
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
@@ -15,12 +15,11 @@ class SurveyResponse(SQLAlchemyObjectType):
         """Meta class."""
 
         model = models.SurveyResponse
-        exclude_fields = "traveler_id"
         interfaces = (relay.Node,)
 
 
-class AddSurveryResponse(Mutation):
-    """Create mutation to add a new traveler."""
+class CreatePlanForSurveryResponse(Mutation):
+    """Create mutation to add a new survey response."""
 
     survey_response = Field(
         lambda: SurveyResponse,
@@ -30,15 +29,15 @@ class AddSurveryResponse(Mutation):
     class Arguments:
         """Declare input arguments."""
 
-        traveler_id = Int(
-            required=True, description="The traveler id in the database."
+        traveler_email = String(
+            required=True, description="The traveler email from Firebase auth."
         )
         json = JSONString(required=True, description="The survey answers.")
 
-    def mutate(self, info, traveler_id, json):
+    def mutate(self, info, traveler_email, json):
         """Add survey answers to the database."""
         survey_response = models.SurveyResponse(
-            traveler_id=traveler_id, json=json
+            traveler_email=traveler_email, json=json
         )
         db_session.add(survey_response)
         db_session.commit()
@@ -50,4 +49,6 @@ class AddSurveryResponse(Mutation):
         restaurants = itinerary.get_restaurants(survey_response_json)
         itinerary.store_restaurants(restaurants, survey_response.id)
 
-        return AddSurveryResponse(survey_response=survey_response)
+        return CreatePlanForSurveryResponse(
+            survey_response=survey_response
+        )

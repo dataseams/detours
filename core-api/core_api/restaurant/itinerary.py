@@ -89,10 +89,6 @@ def store_restaurants(restaurants: list, survey_response_id: int):
     db_session.add(los_angeles)
     db_session.commit()
 
-    shahbaz = models.Traveler(first_name="Shahboo", last_name="Khan")
-    db_session.add(shahbaz)
-    db_session.commit()
-
     shahbaz_paris_trip_2020 = models.TripPlan(
         survey_response_id=survey_response_id,
         start_date=date(2020, 5, 1),
@@ -100,7 +96,6 @@ def store_restaurants(restaurants: list, survey_response_id: int):
         start_time_of_day=time_of_day["morning"],
         # end_time_of_day=time_of_day["evening"],
         city=los_angeles,
-        traveler=shahbaz,
         spending_per_day="176",
         hours_saved="20-30",
         interests_matched=[

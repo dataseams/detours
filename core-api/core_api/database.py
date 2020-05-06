@@ -105,10 +105,6 @@ def init_db():
     db_session.add(barcelona)
     db_session.commit()
 
-    shahbaz = models.Traveler(first_name="Shahboo", last_name="Khan")
-    db_session.add(shahbaz)
-    db_session.commit()
-
     this_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     json_path = os.path.join(
         this_path, "tests/data/sample_survey_response.json"
@@ -116,7 +112,7 @@ def init_db():
     with open(json_path, "r") as f:
         sample_survey_response = json.loads(f.read())
     survey_response = models.SurveyResponse(
-        traveler=shahbaz, json=sample_survey_response
+        traveler_email="shaboo@gmail.com", json=sample_survey_response
     )
     db_session.add(survey_response)
     db_session.commit()
@@ -128,7 +124,6 @@ def init_db():
         start_time_of_day=time_of_day["morning"],
         # end_time_of_day=time_of_day["evening"],
         city=paris,
-        traveler=shahbaz,
         spending_per_day="176",
         hours_saved="20-30",
         interests_matched=[

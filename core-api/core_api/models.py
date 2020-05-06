@@ -61,30 +61,14 @@ class City(Base):
     country = Column(String)
 
 
-class Traveler(Base):
-    """Define a traveler entity."""
-
-    __tablename__ = "traveler"
-    id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    middle_name = Column(String)
-    last_name = Column(String)
-    time_stamp = Column(DateTime, default=datetime.now())
-
-
 class SurveyResponse(Base):
     """Define a personality survey response entity."""
 
     __tablename__ = "survey_response"
     id = Column(Integer, primary_key=True)
-    traveler_id = Column(Integer, ForeignKey("traveler.id"))
+    traveler_email = Column(String)
     json = Column(JSON)
     time_stamp = Column(DateTime, default=datetime.now())
-
-    traveler = relationship(
-        "Traveler",
-        backref=backref("survey_response", uselist=True, cascade="delete,all"),
-    )
 
 
 class TripPlan(Base):
@@ -98,7 +82,6 @@ class TripPlan(Base):
     start_time = Column(Integer, ForeignKey("time_of_day.id"))
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
-    traveler_id = Column(Integer, ForeignKey("traveler.id"))
     spending_per_day = Column(Integer)
     hours_saved = Column(String)
     interests_matched = Column(ARRAY(String))
@@ -107,7 +90,6 @@ class TripPlan(Base):
     start_time_of_day = relationship("TimeOfDay")
     # end_time_of_day = relationship("TimeOfDay")
     city = relationship("City")
-    traveler = relationship("Traveler")
     daily_plans = relationship("DailyPlan", back_populates="trip_plan")
     survey_response = relationship(
         "SurveyResponse",

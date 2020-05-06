@@ -39,8 +39,8 @@ function Survey() {
   const router = useRouter();
   const graphQlUri = "http://localhost:5000/graphql";
   const query = `
-    mutation addSurveyResp($travelerId: Int!, $json: JSONString!) {
-      addSurveyResponse(travelerId: $travelerId, json: $json){
+    mutation createPlanForSurveyResp($travelerEmail: String!, $json: JSONString!) {
+      createPlanForSurveyResponse(travelerEmail: $travelerEmail, json: $json){
         surveyResponse{
           id
           timeStamp
@@ -59,11 +59,11 @@ function Survey() {
       }, 1000);
 
       const variables = {
-        travelerId: 1, json: JSON.stringify(values, null, 2)
+        travelerEmail: "", json: JSON.stringify(values, null, 2)
       };
       fetch({ query: query, variables: variables }).then(res => {
         router.push("/itinerary?surveyId=".concat(
-          res.data.addSurveyResponse.surveyResponse.id
+          res.data.createPlanForSurveyResponse.surveyResponse.id
           // "U3VydmV5UmVzcG9uc2U6MQ=="
         ));
       });

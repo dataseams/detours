@@ -8,13 +8,12 @@ This is why you might see imported but unsued objects.
 """
 import base64
 
-from graphene import ObjectType, String, Schema, Int, List, Field
+from graphene import ObjectType, String, Schema, Int, Field
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 
 from .time_of_day import TimeOfDay
 from .city import City
-from .traveler import Traveler, AddTraveler
-from .survey_response import SurveyResponse, AddSurveryResponse
+from .survey_response import SurveyResponse, CreatePlanForSurveryResponse
 from .trip_plan import TripPlan
 from .daily_plan import DailyPlan
 from .plan_item import PlanItem
@@ -28,8 +27,7 @@ from ..restaurant import itinerary
 class Mutation(ObjectType):
     """Update database entities."""
 
-    add_traveler = AddTraveler.Field()
-    add_survey_response = AddSurveryResponse.Field()
+    create_plan_for_survey_response = CreatePlanForSurveryResponse.Field()
 
 
 class Query(ObjectType):
@@ -37,7 +35,6 @@ class Query(ObjectType):
 
     get_all_trips = SQLAlchemyConnectionField(TripPlan)
     get_all_cities = SQLAlchemyConnectionField(City, sort=City.sort_argument())
-    get_all_travelers = SQLAlchemyConnectionField(Traveler)
     get_all_activities = SQLAlchemyConnectionField(Activity)
     get_all_activity_types = SQLAlchemyConnectionField(ActivityType)
     get_all_places = SQLAlchemyConnectionField(Place)
