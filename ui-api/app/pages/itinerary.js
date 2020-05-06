@@ -13,7 +13,6 @@ import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import { itineraryReducer } from "../redux/reducers";
 
 const store = createStore(itineraryReducer);
-console.log(store.getState())
 
 const Itinerary = props => {
   const classes = useStyles();

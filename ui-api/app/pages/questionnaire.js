@@ -55,7 +55,7 @@ function Survey() {
   const showResults = values =>
     new Promise(resolve => {
       setTimeout(() => {
-        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+        // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
         resolve();
       }, 1000);
 
@@ -69,7 +69,6 @@ function Survey() {
         ));
       });
     });
-  console.log(store.getState());
 
   return (
     <Provider store={store}>
