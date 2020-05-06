@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
@@ -10,28 +10,9 @@ import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
 import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
+import { itineraryReducer } from "../redux/reducers";
 
-const initialState = {
-  email: null,
-  displayName: null,
-  photoUrl: null
-};
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "UPDATE_USER":
-      return {
-        ...state,
-        email: action.value.userEmail,
-        displayName: action.value.userDisplayName,
-        photoUrl: action.value.userPhotoUrl
-      }
-    default:
-      return state
-  }
-}
-const allReducers = { user: rootReducer }
-const reducer = combineReducers(allReducers);
-const store = createStore(reducer);
+const store = createStore(itineraryReducer);
 console.log(store.getState())
 
 const Itinerary = props => {

@@ -8,6 +8,7 @@ import { createApolloFetch } from "apollo-fetch";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
+import { questionnaireReducer } from "../redux/reducers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,30 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const initialState = {
-  email: null,
-  displayName: null,
-  photoUrl: null
-};
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "UPDATE_USER":
-      return {
-        ...state,
-        email: action.value.userEmail,
-        displayName: action.value.userDisplayName,
-        photoUrl: action.value.userPhotoUrl
-      }
-    default:
-      return state
-  }
-}
-const allReducers = {
-  user: rootReducer,
-  form: reduxFormReducer
-}
-const reducer = combineReducers(allReducers);
-const store = createStore(reducer);
+const store = createStore(questionnaireReducer);
 
 function Survey() {
   const classes = useStyles();
