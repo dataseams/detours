@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import { reducer as reduxFormReducer, isAsyncValidating } from "redux-form";
+import { createStore } from "redux";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";

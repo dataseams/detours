@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 import Meta from "../components/Head";
