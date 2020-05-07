@@ -100,7 +100,7 @@ function Purchase(props) {
   const classes = useStyles();
 
   return (
-    <Button variant="contained" className={classes.purchaseButton}>
+    <Button variant="contained" className={classes.purchaseButton} onClick={props.onClick}>
       Purchase
     </Button>
   );

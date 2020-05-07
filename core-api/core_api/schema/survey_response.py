@@ -1,5 +1,5 @@
 """SurveyResponse schema."""
-from graphene import Mutation, Field, String, Int, JSONString
+from graphene import Mutation, Field, String, JSONString
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from graphql_relay.node.node import from_global_id
@@ -20,11 +20,11 @@ class SurveyResponse(SQLAlchemyObjectType):
 
 
 class CreatePlanForSurveryResponse(Mutation):
-    """Create mutation to add a new survey response."""
+    """Create a new survey response."""
 
     survey_response = Field(
         lambda: SurveyResponse,
-        description="Survey answers created by this mutation.",
+        description="Survey response record created by this mutation.",
     )
 
     class Arguments:
@@ -36,7 +36,7 @@ class CreatePlanForSurveryResponse(Mutation):
         json = JSONString(required=True, description="The survey answers.")
 
     def mutate(self, info, traveler_email, json):
-        """Add survey answers to the database."""
+        """Add survey response record to the database."""
         survey_response = models.SurveyResponse(
             traveler_email=traveler_email, json=json
         )
@@ -54,11 +54,11 @@ class CreatePlanForSurveryResponse(Mutation):
 
 
 class UpdateTravelerEmailForSurveryResponse(Mutation):
-    """Create mutation to update traveler email on for survey response."""
+    """Update traveler email on for survey response."""
 
-    survey_response_traveler = Field(
+    survey_response = Field(
         lambda: SurveyResponse,
-        description="Survey response record updated by this mutationz.",
+        description="Survey response record updated by this mutation.",
     )
 
     class Arguments:
@@ -73,15 +73,20 @@ class UpdateTravelerEmailForSurveryResponse(Mutation):
             required=True, description="The traveler email from Firebase auth."
         )
 
-    def mutate(self, info, survey_response_id, traveler_email, json):
-        """Add survey answers to the database."""
-        local_survey_response_id = from_global_id(survey_response_id)[0]
-        survey_response = models.SurveyResponse(
-            id=local_survey_response_id, traveler_email=traveler_email
+    def mutate(self, info, survey_response_id, traveler_email):
+        """Update traveler email for survey response record in the database."""
+        local_survey_response_id = int(from_global_id(survey_response_id)[1])
+        survey_response = db_session.query(models.SurveyResponse).filter_by(
+            id=local_survey_response_id
         )
-        db_session.add(survey_response)
+        survey_response.update({"traveler_email": traveler_email})
         db_session.commit()
+        survey_response = (
+            db_session.query(models.SurveyResponse).filter_by(
+                id=local_survey_response_id
+            )
+        ).first()
 
         return UpdateTravelerEmailForSurveryResponse(
-            survey_response_traveler=survey_response
+            survey_response=survey_response
         )

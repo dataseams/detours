@@ -12,7 +12,7 @@ from datetime import datetime, date
 import pandas as pd
 
 from .zomato import Zomato
-from ..config import engine, db_session, Base
+from ..config import db_session
 from .. import models
 
 DATE_FORMAT = "%Y-%m-%d"

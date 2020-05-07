@@ -13,7 +13,11 @@ from graphene_sqlalchemy import SQLAlchemyConnectionField
 
 from .time_of_day import TimeOfDay
 from .city import City
-from .survey_response import SurveyResponse, CreatePlanForSurveryResponse
+from .survey_response import (
+    SurveyResponse,
+    CreatePlanForSurveryResponse,
+    UpdateTravelerEmailForSurveryResponse,
+)
 from .trip_plan import TripPlan
 from .daily_plan import DailyPlan
 from .plan_item import PlanItem
@@ -28,6 +32,9 @@ class Mutation(ObjectType):
     """Update database entities."""
 
     create_plan_for_survey_response = CreatePlanForSurveryResponse.Field()
+    update_traveler_email_for_survey_response = (
+        UpdateTravelerEmailForSurveryResponse.Field()
+    )
 
 
 class Query(ObjectType):
