@@ -1,19 +1,25 @@
 import { Box, Divider, Typography, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import ApolloClient from 'apollo-boost';
+import { gql } from "apollo-boost";
+import { useRouter } from "next/router";
 
 import { Purchase } from "../Buttons";
 
 const PurchaseBox = props => {
   const { classes } = props;
   const userEmail = useSelector(state => state.user.email);
+  const { query: { surveyId } } = useRouter();
 
-  async function handleSave(context) {
-    const graphQlUri = "http://localhost:5000/graphql";
-    const variables = { "surveyResponseId": context.query.surveyId, "travelerEmail": userEmail };
-    const query = `
+  const handleSave = props => {
+    const client = new ApolloClient({
+      uri: 'http://localhost:5000/graphql',
+    });
+    const variables = { "surveyResponseId": props.surveyResponseId, "travelerEmail": props.travelerEmail };
+    const UPDATE_USER = gql`
       mutation updateEmail(
         $surveyResponseId: String!,
-        $travelerEmail: String=!
+        $travelerEmail: String!
       ){
         updateTravelerEmailForSurveyResponse(surveyResponseId: $surveyResponseId, travelerEmail: $travelerEmail){
           surveyResponse{
@@ -23,26 +29,42 @@ const PurchaseBox = props => {
         }
       }
     `;
-    const fetch = createApolloFetch({ uri: graphQlUri });
-    const res = await fetch({ query: query, variables: variables });
-    const updatedEmail = res.data.updateTravelerEmailForSurveyResponse.surveyResponse.travelerEmail;
-    return { props: { updatedEmail: updatedEmail } }
+    client.mutate(
+      {
+        mutation: UPDATE_USER,
+        variables: variables
+      }
+    ).then(results => console.log(results))
   }
 
   return (
     <Box>
-      <Box className={classes.purchaseContainer} m={5}>
-        <Typography className={classes.purchaseItem}>
-          Get complete access to your itinerary for <b>just $10</b>.
-        </Typography>
-        <Box className={classes.purchaseSubContainer}>
-          <Divider variant="middle" className={classes.divider} />
+      {userEmail ?
+        <Box className={classes.purchaseContainer} m={5}>
+          <Typography className={classes.purchaseItem}>
+            Log in to save your itinerary.
+          </Typography>
+          <Box className={classes.purchaseSubContainer}>
+            <Divider variant="middle" className={classes.divider} />
+          </Box>
+          <Purchase className={classes.purchaseItem} onClick={handleSave({ surveyResponseId: surveyId, travelerEmail: userEmail })}>
+            Save
+          </Purchase>
         </Box>
-        <Purchase className={classes.purchaseItem} onClick={handleSave}>
-          Purchase
-        </Purchase>
-      </Box>
-    </Box>
+        :
+        <Box className={classes.purchaseContainer} m={5}>
+          <Typography className={classes.purchaseItem}>
+            Log in to save your itinerary.
+          </Typography>
+          <Box className={classes.purchaseSubContainer}>
+            <Divider variant="middle" className={classes.divider} />
+          </Box>
+          <Purchase className={classes.purchaseItem} disabled={true}>
+            Save
+          </Purchase>
+        </Box>
+      }
+    </Box >
 
   );
 };

@@ -98,10 +98,11 @@ function Submit(props) {
 
 function Purchase(props) {
   const classes = useStyles();
+  const { className, ...otherProps } = props;
 
   return (
-    <Button variant="contained" className={classes.purchaseButton} onClick={props.onClick}>
-      Purchase
+    <Button variant="contained" className={classes.purchaseButton} {...otherProps}>
+      {props.children}
     </Button>
   );
 }
