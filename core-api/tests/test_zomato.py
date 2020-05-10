@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
 import os
+import json
 
 from core_api.restaurant.zomato import Zomato
 
@@ -55,10 +56,16 @@ class TestZomato(TestCase):
         )
         self.assertEqual(city_id, 281)
 
-    def test_search(self):
+    @patch("core_api.restaurant.zomato.requests")
+    def test_search(self, mock_requests):
         zomato = Zomato()
-        zomato.search = Mock(return_value=["restaurants"])
+        mock_requests_get_response = Mock()
+        expected_results = "foo bar"
+        mock_requests_get_response.text = json.dumps(
+            {"restaurants": expected_results}
+        )
+        mock_requests.get.return_value = mock_requests_get_response
         res = zomato.search(
             entity_id=281, q="Lebanese", sort="rating", order="desc"
         )
-        self.assertEqual(res, ["restaurants"])
+        self.assertEqual(res, expected_results)

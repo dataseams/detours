@@ -28,7 +28,7 @@ app.prepare().then(() => {
       store: new FileStore({ secret: 'geheimnis' }),
       resave: false,
       rolling: true,
-      cookie: { maxAge: 604800000, httpOnly: true }, // week
+      cookie: { maxAge: 1000 * 60 * 60, httpOnly: true }, // 1 hour
     })
   )
 

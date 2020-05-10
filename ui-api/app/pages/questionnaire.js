@@ -37,7 +37,7 @@ function Survey() {
     "../components/Questionnaire/QuestionnaireForm"
   ).default;
   const router = useRouter();
-  const graphQlUri = "http://localhost:5000/graphql";
+  const graphQlUri = process.env.CORE_API_URL;
   const query = `
     mutation createPlanForSurveyResp($travelerEmail: String!, $json: JSONString!) {
       createPlanForSurveyResponse(travelerEmail: $travelerEmail, json: $json){

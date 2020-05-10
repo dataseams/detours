@@ -36,7 +36,7 @@ const Itinerary = props => {
 };
 
 export async function getServerSideProps(context) {
-  const graphQlUri = "http://localhost:5000/graphql";
+  const graphQlUri = process.env.CORE_API_URL;
   const variables = { "surveyResponseNodeId": context.query.surveyId };
   const query = `
     query getItinerary($surveyResponseNodeId: String!){

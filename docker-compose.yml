@@ -5,10 +5,10 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: "detours"
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: "sam"
-      POSTGRES_PASSWORD: "abcd"
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       detours:
         aliases:
@@ -17,7 +17,7 @@ services:
     build: ./core-api
     image: detours/core-api
     ports:
-      - "5000:5000"
+      - 5000:5000
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -31,7 +31,21 @@ services:
         aliases:
           - core-api
     depends_on:
-      - "postgres-api"
+      - postgres-api
+  ui-api:
+    build: ./ui-api
+    image: detours/ui-api
+    ports:
+      - 3000:3000
+    environment:
+      ZOMATO_API_KEY: ${ZOMATO_API_KEY}
+      ZOMATO_API_URL: ${ZOMATO_API_URL}
+    networks:
+      detours:
+        aliases:
+          - ui-api
+    depends_on:
+      - core-api
 
 networks:
   detours:

@@ -3,6 +3,7 @@ import requests
 import json
 from typing import List, Optional
 from warnings import warn
+from urllib.parse import urljoin, quote
 
 from .config import ZOMATO_API_URL, ZOMATO_API_KEY
 
@@ -28,19 +29,19 @@ class Zomato:
         self.key = api_key
         self.headers = {"user-key": self.key, "Accept": "application/json"}
         self.endpoints = {
-            "categories": "/categories",
-            "cities": "/cities",
-            "categories": "/categories",
-            "collections": "/collections",
-            "cuisines": "/cuisines",
-            "establishments": "/establishments",
-            "geocode": "/geocode",
-            "location_details": "/location_details",
-            "locations": "/locations",
-            "dailymenu": "/dailymenu",
-            "restaurant": "/restaurant",
-            "reviews": "/reviews",
-            "search": "/search",
+            "categories": "categories",
+            "cities": "cities",
+            "categories": "categories",
+            "collections": "collections",
+            "cuisines": "cuisines",
+            "establishments": "establishments",
+            "geocode": "geocode",
+            "location_details": "location_details",
+            "locations": "locations",
+            "dailymenu": "dailymenu",
+            "restaurant": "restaurant",
+            "reviews": "reviews",
+            "search": "search",
         }
 
     def get_cities(
@@ -184,38 +185,42 @@ class Zomato:
 
         """
         endpoint = self.endpoints["search"]
-        params = ""
+        params = {}
         if entity_id:
-            params += f"&entity_id={entity_id}"
+            params["entity_id"] = entity_id
         if entity_type:
-            params += f"&entity_type={entity_type}"
+            params["entity_type"] = entity_type
         if q:
-            params += f"&q={q}"
+            params["q"] = q
         if start:
-            params += f"&start={start}"
+            params["start"] = start
         if count:
-            params += f"&count={count}"
+            params["count"] = count
         if lat:
-            params += f"&lat={lat}"
+            params["lat"] = lat
         if lon:
-            params += f"&lon={lon}"
+            params["lon"] = lon
         if radius:
-            params += f"&radius={radius}"
+            params["radius"] = radius
         if cuisines:
-            params += f"&cuisines={cuisines}"
+            params["cuisines"] = cuisines
         if establishment_type:
-            params += f"&establishment_type={establishment_type}"
+            params["establishment_type"] = establishment_type
         if collection_id:
-            params += f"&collection_id={collection_id}"
+            params["collection_id"] = collection_id
         if category:
-            params += f"&category={category}"
+            params["category"] = category
         if sort:
-            params += f"&sort={sort}"
+            params["sort"] = sort
         if order:
-            params += f"&order={order}"
-        request_url = self.url + endpoint + "?" + params
+            params["order"] = order
 
-        response = requests.get(request_url, headers=self.headers)
+        request_url = f"{self.url}/{endpoint}"
+
+        response = requests.get(
+            request_url, params=params, headers=self.headers
+        )
+
         results = json.loads(response.text)
         restaurants = results["restaurants"]
 
