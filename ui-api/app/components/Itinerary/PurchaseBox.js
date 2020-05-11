@@ -11,9 +11,10 @@ const PurchaseBox = props => {
   const userEmail = useSelector(state => state.user.email);
   const { query: { surveyId } } = useRouter();
 
-  const handleSave = props => {
+  function handleSave(props) {
+    const graphQlUri = process.env.CORE_API_URL;
     const client = new ApolloClient({
-      uri: 'http://localhost:5000/graphql',
+      uri: graphQlUri,
     });
     const variables = { "surveyResponseId": props.surveyResponseId, "travelerEmail": props.travelerEmail };
     const UPDATE_USER = gql`
@@ -47,7 +48,7 @@ const PurchaseBox = props => {
           <Box className={classes.purchaseSubContainer}>
             <Divider variant="middle" className={classes.divider} />
           </Box>
-          <Purchase className={classes.purchaseItem} onClick={handleSave({ surveyResponseId: surveyId, travelerEmail: userEmail })}>
+          <Purchase className={classes.purchaseItem} onClick={() => handleSave({ surveyResponseId: surveyId, travelerEmail: userEmail })}>
             Save
           </Purchase>
         </Box>
