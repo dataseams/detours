@@ -3,6 +3,8 @@ import { Container } from "@material-ui/core";
 import { createApolloFetch } from "apollo-fetch";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import ApolloClient from "apollo-boost";
+import { gql } from "apollo-boost";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -38,7 +40,52 @@ const Itinerary = props => {
 export async function getServerSideProps(context) {
   const graphQlUri = process.env.CORE_API_URL;
   const variables = { "surveyResponseNodeId": context.query.surveyId };
-  const query = `
+  const GET_ITINERARY = `
+    query getItinerary($surveyResponseNodeId: String!){
+      getLastTripPlanForSurveyResponse(
+        surveyResponseNodeId: $surveyResponseNodeId
+      ){
+        id
+        city{
+          name
+          state
+          country
+        }
+        spendingPerDay
+        hoursSaved
+        interestsMatched
+        startDate
+        endDate
+        timeStamp
+        dailyPlans{
+          edges{
+            node{
+              date
+              planItems{
+                edges{
+                  node{
+                    order
+                    activity{
+                      activityType{
+                        name
+                        materialIcon
+                      }
+                      place{
+                        name
+                        description
+                      }
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const GET_ITINERARY2 = gql`
     query getItinerary($surveyResponseNodeId: String!){
       getLastTripPlanForSurveyResponse(
         surveyResponseNodeId: $surveyResponseNodeId
@@ -84,7 +131,14 @@ export async function getServerSideProps(context) {
     }
   `;
   const fetch = createApolloFetch({ uri: graphQlUri });
-  const res = await fetch({ query: query, variables: variables });
+  const res = await fetch({ query: GET_ITINERARY, variables: variables });
+  const client = new ApolloClient({ uri: graphQlUri });
+  // const results = client.query(
+  //   {
+  //     query: GET_ITINERARY2,
+  //     variables: variables
+  //   }
+  // )
   const fullItinerary = res.data.getLastTripPlanForSurveyResponse;
   const itinerarySummary = {
     "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),

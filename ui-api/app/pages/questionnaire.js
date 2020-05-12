@@ -3,7 +3,8 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
-import { createApolloFetch } from "apollo-fetch";
+import ApolloClient from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -38,7 +39,10 @@ function Survey() {
   ).default;
   const router = useRouter();
   const graphQlUri = process.env.CORE_API_URL;
-  const query = `
+  const client = new ApolloClient({
+    uri: graphQlUri,
+  });
+  const CREATE_PLAN = gql`
     mutation createPlanForSurveyResp($travelerEmail: String!, $json: JSONString!) {
       createPlanForSurveyResponse(travelerEmail: $travelerEmail, json: $json){
         surveyResponse{
@@ -49,25 +53,23 @@ function Survey() {
       }
     }
   `;
-  const fetch = createApolloFetch({ uri: graphQlUri });
 
-  const showResults = values =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-        resolve();
-      }, 1000);
-
-      const variables = {
-        travelerEmail: "", json: JSON.stringify(values, null, 2)
-      };
-      fetch({ query: query, variables: variables }).then(res => {
-        router.push("/itinerary?surveyId=".concat(
-          res.data.createPlanForSurveyResponse.surveyResponse.id
-          // "U3VydmV5UmVzcG9uc2U6MQ=="
-        ));
-      });
+  const showResults = values => {
+    const variables = {
+      travelerEmail: "", json: JSON.stringify(values, null, 2)
+    };
+    client.mutate(
+      {
+        mutation: CREATE_PLAN,
+        variables: variables
+      }
+    ).then(res => {
+      router.push("/itinerary?surveyId=".concat(
+        res.data.createPlanForSurveyResponse.surveyResponse.id
+        // "U3VydmV5UmVzcG9uc2U6MQ=="
+      ));
     });
+  };
 
   return (
     <Provider store={store}>
