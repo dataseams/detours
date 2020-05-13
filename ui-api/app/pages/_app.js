@@ -4,8 +4,11 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-export default class MyApp extends App {
+import withData from "../utils/apolloclient";
+
+class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -15,7 +18,7 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, apollo } = this.props;
 
     return (
       <React.Fragment>
@@ -26,9 +29,13 @@ export default class MyApp extends App {
           {/* CssBaseline kickstart an elegant, consistent,
           and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <ApolloProvider client={apollo}>
+            <Component {...pageProps} client={apollo}/>
+          </ApolloProvider>
         </ThemeProvider>
       </React.Fragment>
     );
   }
 }
+
+export default withData(MyApp);

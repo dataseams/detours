@@ -5,10 +5,12 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 import ApolloClient from 'apollo-boost';
 import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import { questionnaireReducer } from "../redux/reducers";
+import CREATE_PLAN_MUTATION from "../utils/queries/CreatePlan";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,35 +34,37 @@ const useStyles = makeStyles(theme => ({
 
 const store = createStore(questionnaireReducer);
 
-function Survey() {
+function Survey(props) {
+  const { client } = props;
   const classes = useStyles();
   const QuestionnaireForm = require(
     "../components/Questionnaire/QuestionnaireForm"
   ).default;
   const router = useRouter();
-  const graphQlUri = process.env.CORE_API_URL;
-  const client = new ApolloClient({
-    uri: graphQlUri,
-  });
-  const CREATE_PLAN = gql`
-    mutation createPlanForSurveyResp($travelerEmail: String!, $json: JSONString!) {
-      createPlanForSurveyResponse(travelerEmail: $travelerEmail, json: $json){
-        surveyResponse{
-          id
-          timeStamp
-          json
-        }
-      }
-    }
-  `;
+  // const graphQlUri = process.env.CORE_API_URL;
+  // const client = new ApolloClient({
+  //   uri: graphQlUri,
+  // });
+  // const CREATE_PLAN = gql`
+  //   mutation createPlanForSurveyResp($travelerEmail: String!, $json: JSONString!) {
+  //     createPlanForSurveyResponse(travelerEmail: $travelerEmail, json: $json){
+  //       surveyResponse{
+  //         id
+  //         timeStamp
+  //         json
+  //       }
+  //     }
+  //   }
+  // `;
 
   const showResults = values => {
+    console.log("OK");
     const variables = {
       travelerEmail: "", json: JSON.stringify(values, null, 2)
     };
     client.mutate(
       {
-        mutation: CREATE_PLAN,
+        mutation: CREATE_PLAN_MUTATION,
         variables: variables
       }
     ).then(res => {
