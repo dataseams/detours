@@ -68,23 +68,23 @@ const Auth = props => {
         .getIdToken()
         .then(token => {
           // eslint-disable-next-line no-undef
-          return fetch('/api/login', {
+          return fetch(process.env.LOGIN_API_URL, {
             method: 'POST',
             // eslint-disable-next-line no-undef
             headers: new Headers({ 'Content-Type': 'application/json' }),
             credentials: 'same-origin',
             body: JSON.stringify({ token }),
-          })
+          }).catch(e => console.log(e))
         })
     } else {
       const updateUserEmail = { type: "UPDATE_USER", value: { userEmail: null, userDisplayName: null } };
       dispatch(updateUserEmail);
 
       // eslint-disable-next-line no-undef
-      fetch('/api/logout', {
+      fetch(process.env.LOGOUT_API_URL, {
         method: 'POST',
         credentials: 'same-origin',
-      })
+      }).catch(e => console.log(e))
     }
   })
 

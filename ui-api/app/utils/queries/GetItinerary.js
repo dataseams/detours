@@ -45,4 +45,5 @@ const GET_ITINERARY = gql`
       }
     }
   `;
+
 export default GET_ITINERARY;

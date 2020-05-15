@@ -33,8 +33,14 @@ const TagBox = props => {
 };
 
 const ItineraryDescription = props => {
-  const { summary } = props;
+  const { fullItinerary } = props;
   const classes = useStyles();
+  const summary = {
+    "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
+    "spendingPerDay": fullItinerary.spendingPerDay,
+    "hoursSaved": fullItinerary.hoursSaved,
+    "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
+  }
 
   return (
     <Box marginTop={10} marginLeft={10} marginRight={10} marginBottom={5}>

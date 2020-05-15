@@ -57,7 +57,7 @@ function Survey() {
         res.data.createPlanForSurveyResponse.surveyResponse.id
         // "U3VydmV5UmVzcG9uc2U6MQ=="
       ));
-    });
+    }).catch(e => console.log(e));
   };
 
   return (

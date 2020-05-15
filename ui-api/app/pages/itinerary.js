@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import { createApolloFetch } from "apollo-fetch";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import ApolloClient from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
+import { useRouter } from "next/router";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -16,9 +16,11 @@ import GET_ITINERARY from "../utils/queries/GetItinerary";
 
 const store = createStore(itineraryReducer);
 
-const Itinerary = props => {
+const Itinerary = () => {
+  const router = useRouter();
   const classes = useStyles();
-  const { itinerarySummary, fullItinerary } = props;
+  const variables = { "surveyResponseNodeId": router.query.surveyId };
+  const { loading, error, data } = useQuery(GET_ITINERARY, { variables: variables });
 
   return (
     <Provider store={store}>
@@ -26,38 +28,16 @@ const Itinerary = props => {
         <Meta />
         <div>
           <LogoNavigationBar />
-          <Container className={classes.root}>
-            <ItineraryDescription summary={itinerarySummary} />
-            <DailyTabs classes={classes} plan={fullItinerary.dailyPlans} />
-            <PurchaseBox classes={classes} />
-          </Container>
+          {loading ? <p>Loading...</p> :
+            <Container className={classes.root}>
+              <ItineraryDescription fullItinerary={data.getLastTripPlanForSurveyResponse} />
+              <DailyTabs classes={classes} plan={data.getLastTripPlanForSurveyResponse.dailyPlans} />
+              <PurchaseBox classes={classes} />
+            </Container>}
         </div>
       </div>
     </Provider>
   );
 };
-
-export async function getServerSideProps(context) {
-  const graphQlUri = process.env.CORE_API_URL;
-  const variables = { "surveyResponseNodeId": context.query.surveyId };
-
-  const fetch = createApolloFetch({ uri: graphQlUri });
-  const res = await fetch({ query: GET_ITINERARY, variables: variables });
-  // const client = new ApolloClient({ uri: graphQlUri });
-  // const results = client.query(
-  //   {
-  //     query: GET_ITINERARY,
-  //     variables: variables
-  //   }
-  // )
-  const fullItinerary = res.data.getLastTripPlanForSurveyResponse;
-  const itinerarySummary = {
-    "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
-    "spendingPerDay": fullItinerary.spendingPerDay,
-    "hoursSaved": fullItinerary.hoursSaved,
-    "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
-  }
-  return { props: { fullItinerary: fullItinerary, itinerarySummary: itinerarySummary } }
-}
 
 export default Itinerary;
