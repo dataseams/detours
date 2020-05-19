@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Box } from "@material-ui/core";
-import { makeStyle, makeStyles } from "@material-ui/styles";
+import { Box, Paper } from "@material-ui/core";
 
 const AnyReactComponent = props => (
   <Box border={1} borderColor="primary.main" borderRadius="borderRadius">

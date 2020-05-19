@@ -28,8 +28,8 @@ function TabPanel(props) {
           <Grid item xs={4}>
             <AlignItemsList events={data.planItems} />
           </Grid>
-          <Grid item xs={8}>
-            <ItineraryMap containerStyle={{ height: "35vh", width: "100%" }} />
+          <Grid item xs={8} className={classes.mapContainer}>
+            <ItineraryMap containerStyle={{ height: "35vh", width: "100%"}} />
           </Grid>
         </Grid>
       </Box>

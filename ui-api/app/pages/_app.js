@@ -30,7 +30,7 @@ class MyApp extends App {
           and simple baseline to build upon. */}
           <CssBaseline />
           <ApolloProvider client={apollo}>
-            <Component {...pageProps} client={apollo}/>
+            <Component {...pageProps} client={apollo} />
           </ApolloProvider>
         </ThemeProvider>
       </React.Fragment>

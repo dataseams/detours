@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +20,12 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     flexDirection: "row",
     height: "400px"
+  },
+  mapContainer: {
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "row",
+    padding: "0 0 0 0.25em"
   },
   purchaseContainer: {
     display: "flex",
