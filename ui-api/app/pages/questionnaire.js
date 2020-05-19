@@ -1,9 +1,9 @@
 import React from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { createStore } from "redux";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
-import ApolloClient from 'apollo-boost';
+import { useMutation } from "@apollo/react-hooks";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -32,45 +32,42 @@ const useStyles = makeStyles(theme => ({
 
 const store = createStore(questionnaireReducer);
 
-function Survey() {
+function SurveyWithoutRedux() {
   const classes = useStyles();
   const QuestionnaireForm = require(
     "../components/Questionnaire/QuestionnaireForm"
   ).default;
   const router = useRouter();
-  const graphQlUri = process.env.CORE_API_URL;
-  const client = new ApolloClient({
-    uri: graphQlUri,
-  });
-
-  const showResults = values => {
-    const variables = {
-      travelerEmail: "", json: JSON.stringify(values, null, 2)
-    };
-    client.mutate(
-      {
-        mutation: CREATE_PLAN_MUTATION,
-        variables: variables
-      }
-    ).then(res => {
-      router.push("/itinerary?surveyId=".concat(
-        res.data.createPlanForSurveyResponse.surveyResponse.id
-        // "U3VydmV5UmVzcG9uc2U6MQ=="
-      ));
-    }).catch(e => console.log(e));
-  };
+  const [createPlan, { data }] = useMutation(CREATE_PLAN_MUTATION);
+  const travelerEmail = useSelector(state => state.user.email) || "";
 
   return (
-    <Provider store={store}>
-      <div>
-        <Meta />
-        <LogoNavigationBar />
-        <div className={classes.surveyPage}>
-          <QuestionnaireForm classes={classes} onSubmit={showResults} />
-        </div>
+    <div>
+      <Meta />
+      <LogoNavigationBar />
+      <div className={classes.surveyPage}>
+        <QuestionnaireForm classes={classes} onSubmit={
+          values => createPlan({
+            variables: {
+              travelerEmail: travelerEmail, json: JSON.stringify(values, null, 2)
+            }
+          }).then(res => {
+            router.push("/itinerary?surveyId=".concat(
+              res.data.createPlanForSurveyResponse.surveyResponse.id
+            ))
+          }).catch(e => console.log(e))
+        } />
       </div>
-    </Provider>
+    </div>
   );
+}
+
+function Survey() {
+  return (
+    <Provider store={store}>
+      <SurveyWithoutRedux />
+    </Provider>
+  )
 }
 
 export default Survey;
