@@ -61,9 +61,9 @@ function NavigationBar(props) {
             <Box className={classes.box}>
               <LogoButton name="DETOURS"/>
             </Box>
-            <NavigationBarButton name="How it works" />
+            {/* <NavigationBarButton name="How it works" />
             <NavigationBarButton name="Pricing" />
-            <NavigationBarButton name="About us" />
+            <NavigationBarButton name="About us" /> */}
             <GetStartedButton />
           </Toolbar>
         </StyledAppBar>

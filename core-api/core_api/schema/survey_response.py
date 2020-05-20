@@ -48,7 +48,9 @@ class CreatePlanForSurveryResponse(Mutation):
         survey_response_json = survey_response_obj.json
 
         restaurants = itinerary.get_restaurants(survey_response_json)
-        itinerary.store_restaurants(restaurants, survey_response.id)
+        itinerary.store_restaurants(
+            restaurants, survey_response.id, survey_response.json
+        )
 
         return CreatePlanForSurveryResponse(survey_response=survey_response)
 

@@ -45,7 +45,9 @@ def get_restaurants(survey_response: str):
     return filtered_restaurants
 
 
-def store_restaurants(restaurants: list, survey_response_id: int):
+def store_restaurants(
+    restaurants: list, survey_response_id: int, survey_response: dict
+):
     """Create all itinerary items and save to database."""
     time_of_day = {}
     for k, v in models.TimeOfDay.VALUES.items():
@@ -91,8 +93,8 @@ def store_restaurants(restaurants: list, survey_response_id: int):
 
     shahbaz_paris_trip_2020 = models.TripPlan(
         survey_response_id=survey_response_id,
-        start_date=date(2020, 5, 1),
-        end_date=date(2020, 5, 4),
+        start_date=survey_response.get("arrivalDate"),
+        end_date=survey_response.get("returnDate"),
         start_time_of_day=time_of_day["morning"],
         # end_time_of_day=time_of_day["evening"],
         city=los_angeles,
@@ -111,7 +113,9 @@ def store_restaurants(restaurants: list, survey_response_id: int):
 
     daily_plans = []
     for trip_date in pd.date_range(
-        start="2020-05-01", end="2020-05-04", freq="D"
+        start=survey_response.get("arrivalDate"),
+        end=survey_response.get("returnDate"),
+        freq="D",
     ):
         daily_plans.append(
             models.DailyPlan(date=trip_date, trip_plan=shahbaz_paris_trip_2020)

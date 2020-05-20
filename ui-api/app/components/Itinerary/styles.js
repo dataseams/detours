@@ -33,7 +33,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   purchaseItem: {
-    padding: "1em"
+    padding: "1em",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   },
   paper: {
     height: "5em",
