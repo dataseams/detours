@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexGrow: 1,
     flexDirection: "row",
-    height: "400px"
+    height: "35vh"
   },
   mapContainer: {
     display: "flex",

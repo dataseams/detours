@@ -49,7 +49,7 @@ function SurveyWithoutRedux() {
         <QuestionnaireForm classes={classes} onSubmit={
           values => createPlan({
             variables: {
-              travelerEmail: travelerEmail, json: JSON.stringify(values, null, 2)
+              travelerEmail: "", json: JSON.stringify(values, null, 2)
             }
           }).then(res => {
             router.push("/itinerary?surveyId=".concat(
