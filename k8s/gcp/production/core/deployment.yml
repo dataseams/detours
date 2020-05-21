@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: core
-          image: detours/core:latest
+          image: gcr.io/robocation/core:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: postgres
+                  name: postgres-
                   key: POSTGRES_HOST
             - name: POSTGRES_PORT
               valueFrom:

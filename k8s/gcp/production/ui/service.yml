@@ -17,7 +17,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ui-ingress
+  name: ui
   annotations:
     kubernetes.io/ingress.global-static-ip-name:  "robocation-static-ip"
 spec:

@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ui-api
+  name: ui
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   backend:
-    serviceName: ui-api
+    serviceName: ui
     servicePort: 3000
   rules:
   - host: ui.dataseams.local
@@ -14,5 +14,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: ui-api
+          serviceName: ui
           servicePort: 3000

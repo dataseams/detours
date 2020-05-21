@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ui
-        image: detours/ui:latest
+        image: gcr.io/robocation/ui:latest
         imagePullPolicy: IfNotPresent
         env:
           - name: GOOGLE_MAPS_API_KEY
