@@ -4,74 +4,74 @@ metadata:
   name: detours-dev
 
 profiles:
-- name: core-api
+- name: core
   build:
     artifacts:
-    - image: detours/core-api
-      context: core-api/.
+    - image: detours/core
+      context: core/.
       sync:
         manual:
-        - src: "core-api/*"
+        - src: "core/*"
           dest: "app/"
       docker:
         dockerfile: dockerfile
   deploy:
     kubectl:
       manifests:
-      - k8s/minikube/core-api/deployment.yml
-      - k8s/minikube/core-api/service.yml
-      - k8s/minikube/core-api/ingress.yml
+      - k8s/minikube/core/deployment.yml
+      - k8s/minikube/core/service.yml
+      - k8s/minikube/core/ingress.yml
       flags:
         global: [-n,development]
-- name: ui-api
+- name: ui
   build:
     artifacts:
-    - image: detours/ui-api
-      context: ui-api/.
+    - image: detours/ui
+      context: ui/.
       sync:
         manual:
-        - src: "ui-api/*"
+        - src: "ui/*"
           dest: "app/"
       docker:
         dockerfile: dockerfile
   deploy:
     kubectl:
       manifests:
-      - k8s/minikube/ui-api/secret.yml
-      - k8s/minikube/ui-api/deployment.yml
-      - k8s/minikube/ui-api/service.yml
-      - k8s/minikube/ui-api/ingress.yml
+      - k8s/minikube/ui/secret.yml
+      - k8s/minikube/ui/deployment.yml
+      - k8s/minikube/ui/service.yml
+      - k8s/minikube/ui/ingress.yml
       flags:
         global: [-n,development]
-- name: postgres-api
+- name: postgres
   deploy:
     kubectl:
       manifests:
       - k8s/minikube/postgres/configmap.yml
-      - k8s/minikube/postgres-api/secret.yml
-      - k8s/minikube/postgres-api/pv.yml
-      - k8s/minikube/postgres-api/pvc.yml
-      - k8s/minikube/postgres-api/deployment.yml
-      - k8s/minikube/postgres-api/service.yml
+      - k8s/minikube/postgres/secret.yml
+      - k8s/minikube/postgres/pv.yml
+      - k8s/minikube/postgres/pvc.yml
+      - k8s/minikube/postgres/deployment.yml
+      - k8s/minikube/postgres/service.yml
       flags:
         global: [-n,development]
 build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: detours/core-api
-    context: core-api/.
+  - image: detours/core
+    context: core/.
     sync:
       manual:
-      - src: "core-api/*"
+      - src: "core/*"
         dest: "app/"
     docker:
       dockerfile: dockerfile
-  - image: detours/ui-api
-    context: ui-api/.
+  - image: detours/ui
+    context: ui/.
     sync:
       manual:
-      - src: "ui-api/*"
+      - src: "ui/*"
         dest: "app/"
     docker:
       dockerfile: dockerfile
@@ -80,18 +80,18 @@ build:
 deploy:
   kubectl:
     manifests:
-    - k8s/minikube/postgres-api/configmap.yml
-    - k8s/minikube/postgres-api/secret.yml
-    - k8s/minikube/postgres-api/pv.yml
-    - k8s/minikube/postgres-api/pvc.yml
-    - k8s/minikube/postgres-api/deployment.yml
-    - k8s/minikube/postgres-api/service.yml
-    - k8s/minikube/core-api/deployment.yml
-    - k8s/minikube/core-api/service.yml
-    - k8s/minikube/core-api/ingress.yml
-    - k8s/minikube/ui-api/secret.yml
-    - k8s/minikube/ui-api/deployment.yml
-    - k8s/minikube/ui-api/service.yml
-    - k8s/minikube/ui-api/ingress.yml
+    - k8s/minikube/postgres/configmap.yml
+    - k8s/minikube/postgres/secret.yml
+    - k8s/minikube/postgres/pv.yml
+    - k8s/minikube/postgres/pvc.yml
+    - k8s/minikube/postgres/deployment.yml
+    - k8s/minikube/postgres/service.yml
+    - k8s/minikube/core/deployment.yml
+    - k8s/minikube/core/service.yml
+    - k8s/minikube/core/ingress.yml
+    - k8s/minikube/ui/secret.yml
+    - k8s/minikube/ui/deployment.yml
+    - k8s/minikube/ui/service.yml
+    - k8s/minikube/ui/ingress.yml
     flags:
       global: [-n,development]

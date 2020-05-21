@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: core
-        image: gcr.io/robocation/core:production
+        image: gcr.io/robocation/core
         imagePullPolicy: Always
         ports:
           - containerPort: 5000

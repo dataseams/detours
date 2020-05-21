@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  postgres-api:
+  postgres:
     image: postgres:12.1-alpine
     ports:
       - "5432:5432"
@@ -12,14 +12,14 @@ services:
     networks:
       detours:
         aliases:
-          - postgres-api
-  core-api:
-    build: ./core-api
-    image: detours/core-api
+          - postgres
+  core:
+    build: ./core
+    image: detours/core
     ports:
       - 5000:5000
     environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_HOST: postgres
       POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -29,12 +29,12 @@ services:
     networks:
       detours:
         aliases:
-          - core-api
+          - core
     depends_on:
-      - postgres-api
-  ui-api:
-    build: ./ui-api
-    image: detours/ui-api
+      - postgres
+  ui:
+    build: ./ui
+    image: detours/ui
     ports:
       - 3000:3000
     environment:
@@ -43,9 +43,9 @@ services:
     networks:
       detours:
         aliases:
-          - ui-api
+          - ui
     depends_on:
-      - core-api
+      - core
 
 networks:
   detours:
