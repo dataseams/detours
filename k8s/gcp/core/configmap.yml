@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: core
 data:
-  POSTGRES_HOST: "35.247.105.49"
+  POSTGRES_HOST: "127.0.0.1"
   POSTGRES_PORT: "5432"
   POSTGRES_DB: detours

@@ -7,8 +7,7 @@ SVC_ACCOUNT=svc-$PROJECT_NAME
 # Create gcp cluster
 gcloud container clusters create $CLUSTER \
 --num-nodes 1 \
---machine-type n1-standard-1 \
---scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
+--machine-type n1-standard-1
 
 # Fetch cluster endpoints and auth data into kubeconfig
 gcloud container clusters get-credentials $CLUSTER
