@@ -61,11 +61,14 @@ spec:
             periodSeconds: 10
         - name: cloud-sql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.17
+          imagePullPolicy: IfNotPresent
           command:
             - "/cloud_sql_proxy"
             - "-instances=robocation:us-west1:detours=tcp:5432"
           securityContext:
             runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
           resources:
             limits:
               memory: "100M"
