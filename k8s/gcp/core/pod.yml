@@ -38,12 +38,9 @@ spec:
       ports:
         - containerPort: 5000
       resources:
-        requests:
-          memory: "256Mi"
-          cpu: "100m"
         limits:
           memory: "1Gi"
-          cpu: "100m"
+          cpu: "500m"
       livenessProbe:
         httpGet:
           path: /test
@@ -68,5 +65,5 @@ spec:
         runAsGroup: 65532
       resources:
         limits:
-          memory: "100M"
-          cpu: "25m"
+          memory: "500M"
+          cpu: "250m"

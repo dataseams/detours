@@ -4,6 +4,8 @@ metadata:
   name: core
   labels:
     app: core
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
   selector:

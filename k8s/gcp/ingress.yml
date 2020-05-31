@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: detours
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: detours
+spec:
+  rules:
+  - host: graphql.dataseams.com
+    http:
+      paths:
+      - backend:
+          serviceName: core
+          servicePort: 5000
+  - host: app.dataseams.com
+    http:
+      paths:
+      - backend:
+          serviceName: ui
+          servicePort: 3000
