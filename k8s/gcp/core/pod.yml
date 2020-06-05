@@ -37,6 +37,16 @@ spec:
             secretKeyRef:
               name: core
               key: POSTGRES_PASSWORD
+        - name: ZOMATO_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: core
+              key: ZOMATO_API_KEY
+        - name: ZOMATO_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: core
+              key: ZOMATO_API_URL
       ports:
         - containerPort: 5000
           protocol: TCP
