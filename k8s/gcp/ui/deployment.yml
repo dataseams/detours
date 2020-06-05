@@ -27,6 +27,7 @@ spec:
         ports:
           - name: ui
             containerPort: 3000
+            protocol: TCP
         resources:
           requests:
             memory: "1G"
