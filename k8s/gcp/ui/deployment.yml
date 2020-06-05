@@ -17,13 +17,18 @@ spec:
       containers:
       - name: ui
         image: gcr.io/robocation/ui:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
           - name: GOOGLE_MAPS_API_KEY
             valueFrom:
               secretKeyRef:
-                name: google-maps
+                name: ui
                 key: GOOGLE_MAPS_API_KEY
+          - name: CORE_API_URL
+            valueFrom:
+                configMapKeyRef:
+                  name: ui
+                  key: CORE_API_URL
         ports:
           - name: ui
             containerPort: 3000
