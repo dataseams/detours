@@ -1,9 +1,19 @@
 FROM node:12.12.0-alpine
 
 WORKDIR /app
-ADD app/. /app/
-
+RUN mkdir pages components credentials src utils static redux
+COPY app/.babelrc app/next.config.js app/package*.json app/server.js /app/
 RUN npm install
+
+COPY app/pages /app/pages/
+COPY app/components /app/components/
+COPY app/credentials /app/credentials/
+COPY app/src /app/src/
+COPY app/utils /app/utils/
+COPY app/static /app/static/
+COPY app/redux /app/redux/
+COPY app/.env.local app/.env.gcp /app/
+
 RUN npm run build
 
 EXPOSE 3000

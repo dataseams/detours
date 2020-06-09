@@ -63,7 +63,7 @@ const Auth = props => {
         }
       };
       dispatch(updateUserEmail);
-
+      console.log(process.env.LOGIN_API_URL)
       return user
         .getIdToken()
         .then(token => {
@@ -80,6 +80,7 @@ const Auth = props => {
       const updateUserEmail = { type: "UPDATE_USER", value: { userEmail: null, userDisplayName: null } };
       dispatch(updateUserEmail);
 
+      console.log(process.env.LOGOUT_API_URL)
       // eslint-disable-next-line no-undef
       fetch(process.env.LOGOUT_API_URL, {
         method: 'POST',

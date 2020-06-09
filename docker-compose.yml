@@ -37,8 +37,8 @@ services:
     image: detours/ui
     ports:
       - 3000:3000
-    environment:
-      CORE_API_URL: ${CORE_API_URL}
+    env_file:
+      - ./ui/app/.env.local
     networks:
       detours:
         aliases:
