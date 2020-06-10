@@ -33,8 +33,10 @@ app.prepare().then(() => {
   )
 
   server.use((req, res, next) => {
-    req.firebaseServer = firebase
-    next()
+    req.firebaseServer = firebase;
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
   })
 
   server.post('/api/login', (req, res) => {
@@ -63,6 +65,6 @@ app.prepare().then(() => {
 
   server.listen(port, err => {
     if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
+    console.log(`> Ready on port localhost:${port}`)
   })
 })

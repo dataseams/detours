@@ -29,6 +29,11 @@ spec:
                 configMapKeyRef:
                   name: ui
                   key: CORE_API_URL
+          - name: NODE_ENV
+            valueFrom:
+                configMapKeyRef:
+                  name: ui
+                  key: NODE_ENV
         ports:
           - name: ui
             containerPort: 3000

@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-  const { parsed: localEnv } = require("dotenv").config({ path: "./.env.local" });
+  const { parsed: localEnv } = require("dotenv").config({ path: "./.env.dev" });
   const webpack = require("webpack");
 
   module.exports = {

@@ -1,5 +1,6 @@
 FROM node:12.12.0-alpine
 
+ARG NODE_ENV=production
 WORKDIR /app
 RUN mkdir pages components credentials src utils static redux
 COPY app/.babelrc app/next.config.js app/package*.json app/server.js /app/
@@ -12,7 +13,7 @@ COPY app/src /app/src/
 COPY app/utils /app/utils/
 COPY app/static /app/static/
 COPY app/redux /app/redux/
-COPY app/.env.local app/.env.gcp /app/
+COPY app/.env.dev app/.env.gcp /app/
 
 RUN npm run build
 

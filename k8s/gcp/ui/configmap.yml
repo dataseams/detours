@@ -4,3 +4,4 @@ metadata:
   name: ui
 data:
   CORE_API_URL: "http://graphql.dataseams.com/graphql"
+  NODE_ENV: "production"

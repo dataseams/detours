@@ -33,12 +33,15 @@ services:
     depends_on:
       - postgres
   ui:
-    build: ./ui
+    build:
+      context: ./ui
+      args:
+        NODE_ENV: production
     image: detours/ui
     ports:
       - 3000:3000
     env_file:
-      - ./ui/app/.env.local
+      - ./ui/app/.env.gcp
     networks:
       detours:
         aliases:
