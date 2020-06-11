@@ -49,15 +49,8 @@ def store_restaurants(
     restaurants: list, survey_response_id: int, survey_response: dict
 ):
     """Create all itinerary items and save to database."""
-    time_of_day = {}
-    for k, v in models.TimeOfDay.VALUES.items():
-        time_of_day[k] = models.TimeOfDay(
-            name=k, start_time=v[0], end_time=v[1]
-        )
-
-    activity_types = {}
-    for k, v in models.ActivityType.VALUES.items():
-        activity_types[k] = models.ActivityType(name=k, material_icon=v)
+    time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
+    activity_type = models.ActivityType.query.filter_by(name="food").first()
 
     places = []
     for place in restaurants:
@@ -65,8 +58,8 @@ def store_restaurants(
         places.append(
             models.Place(
                 name=restaurant["name"],
-                description="Featuring a low-key art deco style, this conservative"
-                " hotel is a 1-minute walk from the Cadet metro "
+                description="Featuring a low-key art deco style, this "
+                "conservative hotel is a 1-minute walk from the Cadet metro "
                 "station.",
             )
         )
@@ -78,24 +71,20 @@ def store_restaurants(
     for place in places:
         activities.append(
             models.Activity(
-                name="eat", place=place, activity_type=activity_types["food"],
+                name="eat", place=place, activity_type=activity_type,
             )
         )
     for v in activities:
         db_session.add(v)
     db_session.commit()
 
-    los_angeles = models.City(
-        name="Los Angeles", state="California", state_abbr="CA", country="USA"
-    )
-    db_session.add(los_angeles)
-    db_session.commit()
+    los_angeles = models.City.query.filter_by(name="Los Angeles").first()
 
-    shahbaz_paris_trip_2020 = models.TripPlan(
+    trip_plan = models.TripPlan(
         survey_response_id=survey_response_id,
         start_date=survey_response.get("arrivalDate"),
         end_date=survey_response.get("returnDate"),
-        start_time_of_day=time_of_day["morning"],
+        start_time_of_day=time_of_day,
         # end_time_of_day=time_of_day["evening"],
         city=los_angeles,
         spending_per_day="176",
@@ -108,7 +97,7 @@ def store_restaurants(
             "Wine bars",
         ],
     )
-    db_session.add(shahbaz_paris_trip_2020)
+    db_session.add(trip_plan)
     db_session.commit()
 
     daily_plans = []
@@ -118,7 +107,7 @@ def store_restaurants(
         freq="D",
     ):
         daily_plans.append(
-            models.DailyPlan(date=trip_date, trip_plan=shahbaz_paris_trip_2020)
+            models.DailyPlan(date=trip_date, trip_plan=trip_plan)
         )
     for v in daily_plans:
         db_session.add(v)

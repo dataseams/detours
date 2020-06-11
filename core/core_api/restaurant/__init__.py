@@ -1,1 +1,1 @@
-"""Root of the package."""
+"""Logic to call and filter restaurant APIs."""

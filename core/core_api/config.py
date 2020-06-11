@@ -22,8 +22,3 @@ db_session = scoped_session(
 )
 Base = declarative_base()
 Base.query = db_session.query_property()
-
-
-def init_db():
-    """Import modules that need to be registered properly on the metadata."""
-    Base.metadata.create_all(bind=engine)

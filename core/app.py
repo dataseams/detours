@@ -3,7 +3,8 @@ from flask_graphql import GraphQLView
 from flask import Flask
 from flask_cors import CORS
 
-from core_api.config import db_session, init_db
+from core_api.config import db_session
+from core_api.models import sync_db
 from core_api.schema import schema
 
 app = Flask(__name__)
@@ -28,4 +29,4 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 
-init_db()
+sync_db()

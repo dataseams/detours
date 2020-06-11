@@ -15,7 +15,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship, backref
 
-from .config import Base
+from .config import Base, db_session, engine
 
 
 class TableValues(dict):
@@ -45,7 +45,7 @@ class TimeOfDay(Base):
 
     __tablename__ = "time_of_day"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String(20))
     start_time = Column(Time)
     end_time = Column(Time)
 
@@ -53,12 +53,51 @@ class TimeOfDay(Base):
 class City(Base):
     """Define a city entity."""
 
+    VALUES = [
+        {
+            "code": "LA",
+            "name": "Los Angeles",
+            "state": "California",
+            "state_abbr": "CA",
+            "country": "USA",
+        },
+        {
+            "code": "SF",
+            "name": "San Francisco",
+            "state": "California",
+            "state_abbr": "CA",
+            "country": "USA",
+        },
+        {
+            "code": "SD",
+            "name": "San Diego",
+            "state": "California",
+            "state_abbr": "CA",
+            "country": "USA",
+        },
+        {
+            "code": "NYC",
+            "name": "New York",
+            "state": "New York",
+            "state_abbr": "NY",
+            "country": "USA",
+        },
+        {
+            "code": "CHI",
+            "name": "Chicagp",
+            "state": "Illinois",
+            "state_abbr": "IL",
+            "country": "USA",
+        },
+    ]
+
     __tablename__ = "city"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    state = Column(String)
-    state_abbr = Column(String)
-    country = Column(String)
+    code = Column(String(3))
+    name = Column(String(20))
+    state = Column(String(20))
+    state_abbr = Column(String(2))
+    country = Column(String(20))
 
 
 class SurveyResponse(Base):
@@ -66,7 +105,7 @@ class SurveyResponse(Base):
 
     __tablename__ = "survey_response"
     id = Column(Integer, primary_key=True)
-    traveler_email = Column(String)
+    traveler_email = Column(String(100))
     json = Column(JSON)
     time_stamp = Column(DateTime, default=datetime.now())
 
@@ -83,8 +122,8 @@ class TripPlan(Base):
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
     spending_per_day = Column(Integer)
-    hours_saved = Column(String)
-    interests_matched = Column(ARRAY(String))
+    hours_saved = Column(String(20))
+    interests_matched = Column(ARRAY(String(100)))
     time_stamp = Column(DateTime, default=datetime.now())
 
     start_time_of_day = relationship("TimeOfDay")
@@ -126,7 +165,7 @@ class Activity(Base):
 
     __tablename__ = "activity"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String(20))
     place_id = Column(Integer, ForeignKey("place.id"))
     activity_type_id = Column(Integer, ForeignKey("activity_type.id"))
 
@@ -146,8 +185,8 @@ class ActivityType(Base):
 
     __tablename__ = "activity_type"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    material_icon = Column(String)
+    name = Column(String(20))
+    material_icon = Column(String(20))
 
     activities = relationship(
         "Activity",
@@ -160,10 +199,41 @@ class Place(Base):
 
     __tablename__ = "place"
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    description = Column(String)
+    name = Column(String(50))
+    description = Column(String(500))
 
     activities = relationship(
         "Activity",
         backref=backref("place", uselist=False, cascade="delete,all"),
     )
+
+
+def sync_db():
+    """Import modules need to be registered properly on the metadata."""
+    Base.metadata.create_all(bind=engine)
+    time_of_day = []
+    existing_time_of_day = TimeOfDay.query.all()
+    for k, v in TimeOfDay.VALUES.items():
+        time_of_day.append(TimeOfDay(name=k, start_time=v[0], end_time=v[1]))
+    for item in time_of_day:
+        if item.name not in [x.name for x in existing_time_of_day]:
+            db_session.add(item)
+    db_session.commit()
+
+    activity_types = []
+    existing_acitivity_types = ActivityType.query.all()
+    for k, v in ActivityType.VALUES.items():
+        activity_types.append(ActivityType(name=k, material_icon=v))
+    for item in activity_types:
+        if item.name not in [x.name for x in existing_acitivity_types]:
+            db_session.add(item)
+    db_session.commit()
+
+    cities = []
+    existing_cities = City.query.all()
+    for item in City.VALUES:
+        cities.append(City(**item))
+    for item in cities:
+        if item.code not in [x.code for x in existing_cities]:
+            db_session.add(item)
+    db_session.commit()
