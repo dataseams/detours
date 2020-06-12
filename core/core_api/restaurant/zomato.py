@@ -1,9 +1,8 @@
 """Main zomato object to get needed restaurant data from the zomato api."""
 import requests
-import json
 from typing import List, Optional
 from warnings import warn
-from urllib.parse import urljoin, quote
+import math
 
 from .config import ZOMATO_API_URL, ZOMATO_API_KEY
 
@@ -78,7 +77,7 @@ class Zomato:
         request_url = self.url + endpoint + "?" + params
 
         results = requests.get(request_url, headers=self.headers)
-        results = json.loads(results.text)["location_suggestions"]
+        results = results.json()["location_suggestions"]
         city = [x for x in results]
 
         return city
@@ -158,7 +157,7 @@ class Zomato:
         start: int
             Fetch results after offset.
         count: int
-            Max number of results to display.
+            Max number of results to display. Up to 20.
         lat: float
             Latitude.
         lon: float
@@ -221,7 +220,32 @@ class Zomato:
             request_url, params=params, headers=self.headers
         )
 
-        results = json.loads(response.text)
+        results = response.json()
         restaurants = results["restaurants"]
 
         return restaurants
+
+    def search_(
+        self,
+        entity_id: int,
+        entity_type: str,
+        cuisines: str,
+        establishment_type: str,
+        count: int,
+    ):
+        """Search for `count` restaurants in zomato's api. Count up to 100."""
+        batch_size = 20
+        n_batches = math.ceil(count / batch_size)
+        restaurants = []
+        for i in range(n_batches):
+            start = (i * batch_size)
+            restaurants_batch = self.search(
+                entity_id=entity_id,
+                entity_type=entity_type,
+                cuisines=cuisines,
+                establishment_type=None,
+                start=start,
+                count=batch_size,
+            )
+            restaurants.extend(restaurants_batch)
+            return restaurants

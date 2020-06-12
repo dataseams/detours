@@ -7,7 +7,7 @@ The itinerary is created based on:
 """
 import json
 import random
-from datetime import datetime, date
+from datetime import datetime
 
 import pandas as pd
 
@@ -37,7 +37,15 @@ def get_restaurants(survey_response: str):
     )
     n_days = (return_date - arrival_date).days + 1
     n_restaurants_per_day = 3
-    restaurants = zomato.search(entity_id=city_id)
+    restaurants = zomato.search_(
+        entity_id=city_id,
+        entity_type="city",
+        establishment_type="18",
+        cuisines=(
+            "1,175,3,131,956,45,140,66,73,137,995,162,82,320,83,972,141,997"
+        ),
+        count=20,
+    )
     filtered_restaurants = random.sample(
         restaurants, n_days * n_restaurants_per_day
     )
@@ -78,7 +86,7 @@ def store_restaurants(
         db_session.add(v)
     db_session.commit()
 
-    los_angeles = models.City.query.filter_by(name="Los Angeles").first()
+    los_angeles = models.City.query.filter_by(code="LA").first()
 
     trip_plan = models.TripPlan(
         survey_response_id=survey_response_id,
