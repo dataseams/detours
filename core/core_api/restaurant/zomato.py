@@ -248,10 +248,10 @@ class Zomato:
             restaurants_batch = self.search(
                 entity_id=entity_id,
                 entity_type=entity_type,
-                cuisines=cuisines,
+                cuisines=None,
                 establishment_type=None,
                 start=start,
                 count=batch_size,
             )
             restaurants.extend(restaurants_batch)
-            return restaurants
+        return restaurants

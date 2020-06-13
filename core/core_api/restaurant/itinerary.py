@@ -37,6 +37,7 @@ def get_restaurants(survey_response: str):
     )
     n_days = (return_date - arrival_date).days + 1
     n_restaurants_per_day = 3
+    n_total_restaurants = n_days * n_restaurants_per_day
     restaurants = zomato.search_(
         entity_id=city_id,
         entity_type="city",
@@ -44,7 +45,7 @@ def get_restaurants(survey_response: str):
         cuisines=(
             "1,175,3,131,956,45,140,66,73,137,995,162,82,320,83,972,141,997"
         ),
-        count=20,
+        count=n_total_restaurants,
     )
     filtered_restaurants = random.sample(
         restaurants, n_days * n_restaurants_per_day
