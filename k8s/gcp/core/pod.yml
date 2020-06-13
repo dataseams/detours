@@ -10,7 +10,7 @@ spec:
   containers:
     - name: core
       image: gcr.io/robocation/core:latest
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       env:
         - name: POSTGRES_HOST
           valueFrom:
