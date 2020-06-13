@@ -4,15 +4,25 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
+import { makeStyles } from "@material-ui/styles";
 
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
-import useStyles from "../components/Itinerary/styles";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import { itineraryReducer } from "../redux/reducers";
 import GET_ITINERARY from "../utils/queries/GetItinerary";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    paddingTop: theme.spacing(10),
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "column",
+    justifyContent: "center"
+  }
+}));
 
 const store = createStore(itineraryReducer);
 
@@ -31,8 +41,8 @@ const Itinerary = () => {
           {loading ? <p>Loading...</p> :
             <Container className={classes.root}>
               <ItineraryDescription fullItinerary={data.getLastTripPlanForSurveyResponse} />
-              <DailyTabs classes={classes} plan={data.getLastTripPlanForSurveyResponse.dailyPlans} />
-              <PurchaseBox classes={classes} />
+              <DailyTabs plan={data.getLastTripPlanForSurveyResponse.dailyPlans} />
+              <PurchaseBox />
             </Container>}
         </div>
       </div>

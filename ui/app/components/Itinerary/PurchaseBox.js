@@ -2,13 +2,38 @@ import { Box, Divider, Typography, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
+import { makeStyles } from "@material-ui/styles";
 
 import { Purchase } from "../Buttons";
 import Auth from "../auth";
 import UPDATE_USER from "../../utils/queries/UpdateUser";
 
+const useStyles = makeStyles(theme => ({
+  purchaseContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  purchaseItem: {
+    padding: "1em",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  divider: {
+    height: "2px",
+    backgroundColor: "#5865bc",
+    margin: "1em"
+  },
+  purchaseSubContainer: {
+    width: "90px",
+    padding: "0px",
+    margin: "0px"
+  }
+}));
+
 const PurchaseBox = props => {
-  const { classes } = props;
+  const classes = useStyles();
   const userEmail = useSelector(state => state.user.email);
   const { query: { surveyId } } = useRouter();
   const [savePlan, { data }] = useMutation(UPDATE_USER);
@@ -39,8 +64,9 @@ const PurchaseBox = props => {
         </Box>
         :
         <Box className={classes.purchaseContainer} m={5}>
+          <Auth />
           <Typography className={classes.purchaseItem}>
-            <Auth /> to save your itinerary.
+            to save your itinerary.
           </Typography>
           <Box className={classes.purchaseSubContainer}>
             <Divider variant="middle" className={classes.divider} />

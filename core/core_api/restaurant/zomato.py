@@ -19,7 +19,13 @@ class Zomato:
             "discovery_enabled": 1,
         }
     }
-    CITY_IDS = {"Los Angeles": "281"}
+    CITY_IDS = {
+        "Los Angeles": "281",
+        "San Francisco": "306",
+        "New York": "280",
+        "Chicago": "292",
+        "San Diego": "302",
+    }
 
     def __init__(
         self, api_url: str = ZOMATO_API_URL, api_key: str = ZOMATO_API_KEY
@@ -238,7 +244,7 @@ class Zomato:
         n_batches = math.ceil(count / batch_size)
         restaurants = []
         for i in range(n_batches):
-            start = (i * batch_size)
+            start = i * batch_size
             restaurants_batch = self.search(
                 entity_id=entity_id,
                 entity_type=entity_type,
