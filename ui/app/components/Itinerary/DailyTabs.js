@@ -21,9 +21,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    borderColor: theme.palette.primary.main,
-    borderWidth: "0px 1px 1px 1px",
-    borderStyle: "solid",
+    backgroundColor: "#F6F6F6",
     padding: "2em"
   },
   itineraryContainer: {
