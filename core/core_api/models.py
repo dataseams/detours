@@ -78,7 +78,7 @@ class City(Base):
         },
         {
             "code": "NYC",
-            "name": "New York",
+            "name": "New York City",
             "state": "New York",
             "state_abbr": "NY",
             "country": "USA",
