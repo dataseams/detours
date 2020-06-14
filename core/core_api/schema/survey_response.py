@@ -49,7 +49,10 @@ class CreatePlanForSurveryResponse(Mutation):
 
         restaurants = itinerary.get_restaurants(survey_response_json)
         itinerary.store_restaurants(
-            restaurants, survey_response.id, survey_response.json
+            restaurants=restaurants,
+            city_code=survey_response_json["city"],
+            survey_response_id=survey_response.id,
+            survey_response=survey_response.json,
         )
 
         return CreatePlanForSurveryResponse(survey_response=survey_response)

@@ -55,7 +55,10 @@ def get_restaurants(survey_response: str):
 
 
 def store_restaurants(
-    restaurants: list, survey_response_id: int, survey_response: dict
+    restaurants: list,
+    city_code: str,
+    survey_response_id: int,
+    survey_response: dict,
 ):
     """Create all itinerary items and save to database."""
     time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
@@ -90,7 +93,7 @@ def store_restaurants(
         db_session.add(v)
     db_session.commit()
 
-    los_angeles = models.City.query.filter_by(code="LA").first()
+    destination_city = models.City.query.filter_by(code=city_code).first()
 
     trip_plan = models.TripPlan(
         survey_response_id=survey_response_id,
@@ -98,7 +101,7 @@ def store_restaurants(
         end_date=survey_response.get("returnDate"),
         start_time_of_day=time_of_day,
         # end_time_of_day=time_of_day["evening"],
-        city=los_angeles,
+        city=destination_city,
         spending_per_day="176",
         hours_saved="20-30",
         interests_matched=[

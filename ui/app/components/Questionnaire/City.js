@@ -7,11 +7,11 @@ import renderFormHelper from "./RenderFormHelper";
 
 const cityOptions = [
   { value: "", label: "" },
-  { value: "Los Angeles", label: "Los Angeles, CA" },
-  { value: "San Diego", label: "San Diego, CA" },
-  { value: "San Francisco", label: "San Francisco, CA" },
-  { value: "New York", label: "New York, NY" },
-  { value: "Chicago", label: "Chicago, IL" }
+  { value: "LA", label: "Los Angeles, CA" },
+  { value: "SD", label: "San Diego, CA" },
+  { value: "SF", label: "San Francisco, CA" },
+  { value: "NYC", label: "New York, NY" },
+  { value: "CHI", label: "Chicago, IL" }
 ];
 
 const useStyles = makeStyles(theme => ({

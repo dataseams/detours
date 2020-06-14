@@ -20,11 +20,11 @@ class Zomato:
         }
     }
     CITY_IDS = {
-        "Los Angeles": "281",
-        "San Francisco": "306",
-        "New York": "280",
-        "Chicago": "292",
-        "San Diego": "302",
+        "LA": "281",
+        "SF": "306",
+        "NYC": "280",
+        "CHI": "292",
+        "SD": "302",
     }
 
     def __init__(

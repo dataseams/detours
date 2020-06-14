@@ -6,11 +6,11 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 DATABASE = {
-    "user": os.getenv("POSTGRES_USER", "sam"),
-    "password": os.getenv("POSTGRES_PASSWORD", "abcd"),
-    "host": os.getenv("POSTGRES_HOST", "localhost"),
-    "port": os.getenv("POSTGRES_PORT", "5432"),
-    "name": os.getenv("POSTGRES_DB", "detours"),
+    "user": os.environ.get("POSTGRES_USER", "sam"),
+    "password": os.environ.get("POSTGRES_PASSWORD", "abcd"),
+    "host": os.environ.get("POSTGRES_HOST", "localhost"),
+    "port": os.environ.get("POSTGRES_PORT", "5432"),
+    "name": os.environ.get("POSTGRES_DB", "detours"),
 }
 DB_URL = (
     f"postgres://{DATABASE['user']}:{DATABASE['password']}"
