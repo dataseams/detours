@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { Box, Grid, Typography } from "@material-ui/core";
 
 import AlignItemsList from "./Items";
-import ItineraryMap from "./Map";
+import ItineraryMap from "./ItineraryMap";
 
 var moment = require("moment");
 
 function TabPanel(props) {
   const { children, value, index, classes, data, ...other } = props;
+  const locations = data.planItems;
 
   return (
     <Typography
@@ -29,7 +30,10 @@ function TabPanel(props) {
             <AlignItemsList events={data.planItems} />
           </Grid>
           <Grid item xs={8} className={classes.mapContainer}>
-            <ItineraryMap containerStyle={{ height: "35vh", width: "100%" }} />
+            <ItineraryMap
+              containerStyle={{ height: "35vh", width: "100%" }}
+              events={data.planItems}
+            />
           </Grid>
         </Grid>
       </Box>

@@ -9,6 +9,7 @@ from sqlalchemy import (
     Time,
     ForeignKey,
     Integer,
+    Numeric,
     String,
     JSON,
     ARRAY,
@@ -94,10 +95,10 @@ class City(Base):
     __tablename__ = "city"
     id = Column(Integer, primary_key=True)
     code = Column(String(3))
-    name = Column(String(20))
+    name = Column(String(50))
     state = Column(String(20))
     state_abbr = Column(String(2))
-    country = Column(String(20))
+    country = Column(String(50))
 
 
 class SurveyResponse(Base):
@@ -122,7 +123,7 @@ class TripPlan(Base):
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
     spending_per_day = Column(Integer)
-    hours_saved = Column(String(20))
+    hours_saved = Column(String(50))
     interests_matched = Column(ARRAY(String(100)))
     time_stamp = Column(DateTime, default=datetime.now())
 
@@ -165,7 +166,7 @@ class Activity(Base):
 
     __tablename__ = "activity"
     id = Column(Integer, primary_key=True)
-    name = Column(String(20))
+    name = Column(String(50))
     place_id = Column(Integer, ForeignKey("place.id"))
     activity_type_id = Column(Integer, ForeignKey("activity_type.id"))
 
@@ -185,8 +186,8 @@ class ActivityType(Base):
 
     __tablename__ = "activity_type"
     id = Column(Integer, primary_key=True)
-    name = Column(String(20))
-    material_icon = Column(String(20))
+    name = Column(String(50))
+    material_icon = Column(String(50))
 
     activities = relationship(
         "Activity",
@@ -199,8 +200,13 @@ class Place(Base):
 
     __tablename__ = "place"
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
+    name = Column(String(100))
     description = Column(String(500))
+    address = Column(String(200))
+    locality = Column(String(200))
+    zipcode = Column(String(10))
+    latitude = Column(Numeric(precision=10, scale=6))
+    longitude = Column(Numeric(precision=10, scale=6))
 
     activities = relationship(
         "Activity",

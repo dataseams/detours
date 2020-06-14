@@ -33,6 +33,8 @@ const GET_ITINERARY = gql`
                       place{
                         name
                         description
+                        longitude
+                        latitude
                       }
                       name
                     }

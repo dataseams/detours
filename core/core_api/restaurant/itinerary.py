@@ -67,9 +67,12 @@ def store_restaurants(
         places.append(
             models.Place(
                 name=restaurant["name"],
-                description="Featuring a low-key art deco style, this "
-                "conservative hotel is a 1-minute walk from the Cadet metro "
-                "station.",
+                description=restaurant["cuisines"],
+                address=restaurant["location"]["address"],
+                locality=restaurant["location"]["locality"],
+                zipcode=restaurant["location"]["zipcode"],
+                latitude=restaurant["location"]["latitude"],
+                longitude=restaurant["location"]["longitude"],
             )
         )
     for place in places:
