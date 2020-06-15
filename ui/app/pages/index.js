@@ -10,21 +10,45 @@ import Pricing from "../components/Landing/Pricing";
 import Testimonials from "../components/Landing/Testimonials";
 import Copyright from "../components/Landing/Copyright";
 
-function Index() {
-  return (
-    <div>
-      <Meta />
-      <NavigationBar />
-      <Container maxWidth="xl" component="div">
-        <LandingTitle />
-        <SampleItineraries />
-        <HowItWorks />
-        <Pricing />
-        <Testimonials />
-      </Container>
-      <Copyright />
-    </div>
-  );
+class Index extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: 800
+    };
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    this.setState(() => {
+      return { width: window.innerWidth }
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Meta />
+        <NavigationBar />
+        <Container maxWidth="xl" component="div">
+          <LandingTitle />
+          <SampleItineraries isMobile={this.state.width <= 500} />
+          <HowItWorks />
+          <Pricing />
+          <Testimonials />
+        </Container>
+        <Copyright />
+      </div>
+    );
+  }
 }
 
 export default Index;
