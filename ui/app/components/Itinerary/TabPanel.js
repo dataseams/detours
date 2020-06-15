@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Grid, Typography } from "@material-ui/core";
 
-import AlignItemsList from "./Items";
+import AlignItemsList from "./ItineraryItems";
 import ItineraryMap from "./ItineraryMap";
 
 var moment = require("moment");

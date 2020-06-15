@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   List,
   ListItem,
-  Divider,
   ListItemText,
   ListItemAvatar,
   Typography,
@@ -13,7 +12,6 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
     margin: "0 3px 0 0"
   },
@@ -22,10 +20,15 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     color: theme.palette.primary.main
+  },
+  listItem: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main
+    }
   }
 }));
 
-function AlignItemsList(props) {
+function ItineraryItems(props) {
   const { events } = props;
   const classes = useStyles();
 
@@ -33,8 +36,8 @@ function AlignItemsList(props) {
     <Paper style={{ height: "100%" }}>
       <List className={classes.root}>
         {events.edges.map((event, index) => (
-          <div key={(index + 1) * event.node.order}>
-            <ListItem alignItems="flex-start">
+          <div key={(index + 1) * event.node.order} className={classes.listItem}>
+            <ListItem alignItems="flex-start" divider={true}>
               <ListItemAvatar>
                 <i
                   className={`material-icons ${classes.icon}`}
@@ -59,11 +62,10 @@ function AlignItemsList(props) {
                 }
               />
             </ListItem>
-            <Divider variant="inset" component="li" />
           </div>
         ))}
       </List>
     </Paper>
   );
 }
-export default AlignItemsList;
+export default ItineraryItems;
