@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   inline: {
     display: "inline"
+  },
+  icon: {
+    color: theme.palette.primary.main
   }
 }));
 
@@ -34,8 +37,7 @@ function AlignItemsList(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <i
-                  className="material-icons"
-                  style={{ fontSize: "30px", color: "#5865bc" }}
+                  className={`material-icons ${classes.icon}`}
                 >
                   {event.node.activity.activityType.materialIcon}
                 </i>

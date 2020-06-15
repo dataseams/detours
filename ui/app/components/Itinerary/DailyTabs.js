@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    backgroundColor: "#F6F6F6",
+    backgroundColor: theme.palette.secondary.main,
     padding: "2em"
   },
   itineraryContainer: {

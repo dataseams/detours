@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   divider: {
     height: "2px",
-    backgroundColor: "#5865bc",
+    backgroundColor: theme.palette.primary.main,
     margin: "1em"
   },
   purchaseSubContainer: {

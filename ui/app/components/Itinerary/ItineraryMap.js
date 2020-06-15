@@ -1,14 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
-import { Box } from "@material-ui/core";
+import { Box, Icon } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
-const AnyReactComponent = props => {
+const useStyles = makeStyles(theme => ({
+  iconContainer: {
+    display: "flex",
+    flexDirection: "column",
+    minWidth: "33px",
+    padding: "2px",
+    borderColor: theme.palette.primary.main,
+    borderRadius: "20%"
+  },
+  icon: {
+    display: "flex",
+    flexDirection: "column",
+    color: theme.palette.primary.main
+  }
+}))
+
+const MapIcon = props => {
   const { materialIcon } = props;
+  const classes = useStyles();
+
   return (
-    <Box border={1} borderColor="primary.main" borderRadius="5%">
-      <i className="material-icons" style={{ fontSize: "26px", color: "#5865bc" }}>
+    <Box className={classes.iconContainer} border={2}>
+      <Icon color="primary">
         {materialIcon}
-      </i>
+      </Icon>
     </Box>
   )
 };
@@ -31,11 +50,11 @@ const ItineraryMap = props => {
     <div style={containerStyle}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-        defaultCenter={center}
-        defaultZoom={zoom}
+        center={center}
+        zoom={zoom}
       >
         {events.edges.map((event, index) => (
-          <AnyReactComponent
+          <MapIcon
             key={index}
             lat={event.node.activity.place.latitude}
             lng={event.node.activity.place.longitude}
