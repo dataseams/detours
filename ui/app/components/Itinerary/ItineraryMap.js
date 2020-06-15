@@ -10,11 +10,12 @@ const useStyles = makeStyles(theme => ({
     minWidth: "33px",
     padding: "2px",
     borderColor: theme.palette.primary.main,
-    borderRadius: "20%"
+    borderRadius: "20%",
+    "&:hover": {
+      borderColor: "red"
+    }
   },
   icon: {
-    display: "flex",
-    flexDirection: "column",
     color: theme.palette.primary.main
   }
 }))
@@ -25,7 +26,7 @@ const MapIcon = props => {
 
   return (
     <Box className={classes.iconContainer} border={2}>
-      <Icon color="primary">
+      <Icon className={classes.icon}>
         {materialIcon}
       </Icon>
     </Box>
