@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box } from "@material-ui/core";
+import { AppBar, Toolbar, Box, IconButton, Menu } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -59,12 +60,15 @@ function NavigationBar(props) {
         <StyledAppBar>
           <Toolbar>
             <Box className={classes.box}>
-              <LogoButton name="DETOURS"/>
+              <LogoButton name="DETOURS" />
             </Box>
             {/* <NavigationBarButton name="How it works" />
             <NavigationBarButton name="Pricing" />
             <NavigationBarButton name="About us" /> */}
-            <GetStartedButton />
+            {/* <GetStartedButton /> */}
+            <IconButton aria-label="menu">
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
         </StyledAppBar>
       </ElevationScroll>

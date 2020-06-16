@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Link } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-const StyledButton = withStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: "none",
     textTransform: "none",
     fontSize: 16,
     lineHeight: 1,
-    backgroundColor: "#5865bc",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
       boxShadow: "none",
@@ -22,30 +22,39 @@ const StyledButton = withStyles({
     transitionDuration: "0.4",
     WebkitTransitionDuration: "0.4",
     height: "2.5em",
-    width: "8em"
-  }
-})(Button);
-
-const useStyles = makeStyles(theme => ({
-  margin: {
+    width: "8em",
     margin: theme.spacing(1)
   }
 }));
 
-function GetStartedButton() {
-  const classes = useStyles();
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    flexGrow: 1,
+    textTransform: "none",
+    fontSize: 16,
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    height: "3.5em",
+    borderRadius: "2px"
+  }
+}));
+
+function GetStartedButton(props) {
+  const { isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
 
   return (
-    <div>
-      <StyledButton
-        component={Link}
-        href="/questionnaire"
-        size="large"
-        className={classes.margin}
-      >
-        Get Started
-      </StyledButton>
-    </div>
+    <Button
+      variant="contained"
+      component={Link}
+      href="/questionnaire"
+      className={classes.root}
+      fullWidth={true}
+    >
+      Get Started
+    </Button>
   );
 }
 export default GetStartedButton;

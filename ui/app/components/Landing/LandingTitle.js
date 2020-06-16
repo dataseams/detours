@@ -28,8 +28,35 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LandingTitle() {
-  const classes = useStyles();
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    flexGrow: 1,
+    padding: theme.spacing(10, 0, 10, 0),
+  },
+  grid: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  title: {
+    fontWeight: "bold",
+    textAlign: "center",
+    maxWidth: "750px",
+    fontSize: 26
+  },
+  subtitle: {
+    fontSize: 18,
+    padding: theme.spacing(3, 0),
+    textAlign: "center"
+  }
+}));
+
+function LandingTitle(props) {
+  const { isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
 
   return (
     <Box className={classes.root}>
@@ -42,7 +69,7 @@ function LandingTitle() {
           <br />
           No credit card or commitment required.
         </Typography>
-        <GetStartedButton />
+        <GetStartedButton isMobile={isMobile} />
       </Grid>
     </Box>
   );
