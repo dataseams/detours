@@ -34,7 +34,7 @@ const useMobileStyles = makeStyles(theme => ({
     flexDirection: "row",
     justifyContent: "center",
     flexGrow: 1,
-    padding: theme.spacing(10, 0, 10, 0),
+    padding: theme.spacing(10, 0, 5, 0),
   },
   grid: {
     display: "flex",
@@ -49,7 +49,7 @@ const useMobileStyles = makeStyles(theme => ({
   },
   subtitle: {
     fontSize: 18,
-    padding: theme.spacing(3, 0),
+    padding: theme.spacing(4, 0, 4, 0),
     textAlign: "center"
   }
 }));
