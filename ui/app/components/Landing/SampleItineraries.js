@@ -11,13 +11,14 @@ import {
 } from "@material-ui/core";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
 import { makeStyles, useTheme } from "@material-ui/styles";
+import SwipeableViews from "react-swipeable-views";
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexFlow: "row",
     justifyContent: "center",
-    backgroundColor: "#5865bc"
+    backgroundColor: theme.palette.primary.main
   },
   title: {
     color: "white",
@@ -58,9 +59,18 @@ const useMobileStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     flexGrow: 1
   },
+  title: {
+    color: "white",
+    paddingTop: theme.spacing(1),
+    paddingLeft: "20%"
+  },
+  cardContainer: {
+    width: "100%",
+    paddingLeft: "20%",
+    padding: theme.spacing(2, 0, 4, 0)
+  },
   card: {
-    width: "60%",
-    margin: theme.spacing(2)
+    width: "75%"
   },
   media: {
     height: 140
@@ -111,49 +121,46 @@ function SampleItineraries(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = itineraries.length;
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleStepChange = (step) => {
+    setActiveStep(step);
   };
 
   return (
     (isMobile) ? (
       <div className={classes.root}>
-        <Box display="flex" alignItems="center">
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={itineraries[activeStep].image}
-                title={itineraries[activeStep].title}
-              />
-              <CardContent className={classes.content}>
-                <Typography className={classes.text}>
-                  {itineraries[activeStep].title}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Box>
+        <Typography className={classes.title}>
+          See sample itineraries to:
+        </Typography>
+        <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
+          {itineraries.map((itinerary, index) => (
+            <Box key={index} className={classes.cardContainer}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={itinerary.image}
+                    title={itinerary.title}
+                  />
+                  <CardContent className={classes.content}>
+                    <Typography className={classes.text}>
+                      {itinerary.title}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Box>
+          ))}
+        </SwipeableViews>
         <MobileStepper
           steps={maxSteps}
           position="static"
-          variant="text"
+          variant="dots"
           activeStep={activeStep}
           nextButton={
-            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-              Next
-            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </Button>
+            <div />
           }
           backButton={
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            Back
-          </Button>
+            <div />
           }
         />
       </div>
@@ -162,7 +169,7 @@ function SampleItineraries(props) {
           <Grid className={classes.mainGrid}>
             <Typography className={classes.title}>
               See sample itineraries to:
-          </Typography>
+            </Typography>
             <Grid className={classes.grid}>
               <Itineraries isMobile={isMobile} />
             </Grid>
