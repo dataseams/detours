@@ -41,7 +41,7 @@ class Index extends React.Component {
         <Container maxWidth="xl" component="div">
           <LandingTitle isMobile={this.state.width <= 500} />
           <SampleItineraries isMobile={this.state.width <= 500} />
-          <HowItWorks />
+          <HowItWorks isMobile={this.state.width <= 500} />
           <Pricing />
           <Testimonials />
         </Container>

@@ -6,11 +6,9 @@ import {
   CardMedia,
   CardActionArea,
   CardContent,
-  MobileStepper,
-  Button
+  MobileStepper
 } from "@material-ui/core";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
-import { makeStyles, useTheme } from "@material-ui/styles";
+import { makeStyles, useTheme, withStyles } from "@material-ui/styles";
 import SwipeableViews from "react-swipeable-views";
 
 const useStyles = makeStyles(theme => ({
@@ -57,12 +55,14 @@ const useStyles = makeStyles(theme => ({
 const useMobileStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    flexGrow: 1
+    flexGrow: 1,
+    fontSize: 18
   },
   title: {
     color: "white",
     paddingTop: theme.spacing(1),
-    paddingLeft: "20%"
+    paddingLeft: "20%",
+    fontSize: "1.22em"
   },
   cardContainer: {
     width: "100%",
@@ -80,16 +80,31 @@ const useMobileStyles = makeStyles(theme => ({
     padding: 10
   },
   text: {
-    fontSize: "1.1em"
+    fontSize: "1em"
   }
 }));
+
+const StyledMobileStepper = withStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.main
+  },
+  dot: {
+    backgroundColor: "white",
+    width: "17px",
+    height: "17px",
+    margin: "5px"
+  },
+  dotActive: {
+    backgroundColor: theme.palette.secondary.dark
+  }
+}))(MobileStepper);
 
 const itineraries = [
   { title: "Paris, France", image: "static/paris.png" },
   { title: "New York, NY", image: "static/nyc.png" },
   { title: "San Francisco, CA", image: "static/goldengate.png" },
   { title: "Barcelona, Spain", image: "static/barcelona.png" },
-]
+];
 
 const Itineraries = props => {
   const { isMobile } = props;
@@ -111,13 +126,12 @@ const Itineraries = props => {
       </Card>
     ))
   )
-}
+};
 
 function SampleItineraries(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
 
-  const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = itineraries.length;
 
@@ -151,7 +165,7 @@ function SampleItineraries(props) {
             </Box>
           ))}
         </SwipeableViews>
-        <MobileStepper
+        <StyledMobileStepper
           steps={maxSteps}
           position="static"
           variant="dots"
