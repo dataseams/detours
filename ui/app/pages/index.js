@@ -38,12 +38,12 @@ class Index extends React.Component {
       <div>
         <Meta />
         <NavigationBar />
-        <Container maxWidth="xl" component="div">
+        <Container maxWidth="xl" component="div" disableGutters={this.state.width <= 500}>
           <LandingTitle isMobile={this.state.width <= 500} />
           <SampleItineraries isMobile={this.state.width <= 500} />
           <HowItWorks isMobile={this.state.width <= 500} />
-          <Pricing />
-          <Testimonials />
+          <Pricing isMobile={this.state.width <= 500} />
+          <Testimonials isMobile={this.state.width <= 500} />
         </Container>
         <Copyright />
       </div>

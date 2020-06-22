@@ -35,17 +35,19 @@ const useMobileStyles = makeStyles(theme => ({
     justifyContent: "center",
     flexGrow: 1,
     padding: theme.spacing(10, 0, 5, 0),
+    fontSize: 18
   },
   grid: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    padding: theme.spacing(3)
   },
   title: {
     fontWeight: "bold",
     textAlign: "center",
     maxWidth: "750px",
-    fontSize: 26
+    fontSize: "1.44em"
   },
   subtitle: {
     fontSize: 18,

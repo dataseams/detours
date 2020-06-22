@@ -65,43 +65,39 @@ const useMobileStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexFlow: "column",
-    justifyContent: "center",
+    justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
-    fontSize: 18
+    fontSize: 18,
+    padding: theme.spacing(3)
   },
   title: {
     alignSelf: "flex-start",
-    padding: theme.spacing(2, 0, 0, 5),
+    padding: theme.spacing(2, 0, 0, 0),
     fontWeight: "bold",
     fontSize: "1.22em"
   },
+  content: {
+    display: "flex",
+    flexDirection: "column"
+  },
   subtitle: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(1, 0),
     fontSize: "1em",
     textTransform: "uppercase",
     color: theme.palette.primary.main
   },
   text: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(1, 0, 0, 0),
     fontSize: "1em"
   },
   card: {
     display: "flex",
     flexDirection: "column",
-    width: 300,
-    margin: theme.spacing(2, 2, 0, 2),
     background: "none",
     boxShadow: "none"
   },
   media: {
-    height: 300,
     objectFit: "scale-down"
-  },
-  content: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: 150,
-    padding: 10
   }
 }));
 
@@ -199,7 +195,7 @@ function HowItWorks(props) {
             <div />
           }
         />
-      </Box >
+      </Box>
     ) : (
         <Box className={classes.root}>
           <Grid className={classes.mainGrid}>
