@@ -10,8 +10,7 @@ import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-  KeyboardTimePicker
+  KeyboardDatePicker
 } from "@material-ui/pickers";
 
 const renderFromHelper = ({ touched, error }) => {
@@ -50,33 +49,6 @@ const renderDateComponent = ({
   );
 };
 
-const renderTimeComponent = ({
-  input,
-  label,
-  meta: { touched, invalid, error },
-  children,
-  ...custom
-}) => {
-  return (
-    <FormControl error={touched && error}>
-      <InputLabel htmlFor="city">{label}</InputLabel>
-      <KeyboardTimePicker
-        label={label}
-        error={touched && invalid}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-        disableToolbar
-        margin="normal"
-        variant="inline"
-      >
-        {children}
-      </KeyboardTimePicker>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  );
-};
-
 const TravelDateFields = props => {
   const { classes } = props;
 
@@ -95,20 +67,6 @@ const TravelDateFields = props => {
             name="returnDate"
             classes={classes}
             component={renderDateComponent}
-          ></Field>
-        </Grid>
-        <Grid item xs={6}>
-          <Field
-            name="arrivalTime"
-            classes={classes}
-            component={renderTimeComponent}
-          ></Field>
-        </Grid>
-        <Grid item xs={6}>
-          <Field
-            name="returnTime"
-            classes={classes}
-            component={renderTimeComponent}
           ></Field>
         </Grid>
       </Grid>

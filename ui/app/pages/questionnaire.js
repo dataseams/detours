@@ -20,11 +20,33 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(5)
   },
   surveyPage: {
+    display: "flex",
     paddingTop: theme.spacing(25),
     textAlign: "center",
     justifyText: "center",
     width: "100%",
+    justifyContent: "center",
+    alignItems: "center"
+  }
+}));
+
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    textAlign: "left",
+    width: "80%"
+  },
+  surveyButtons: {
     display: "flex",
+    flexDirection: "column-reverse",
+    textAlign: "center",
+    paddingTop: theme.spacing(5)
+  },
+  surveyPage: {
+    display: "flex",
+    paddingTop: theme.spacing(15),
+    textAlign: "center",
+    justifyText: "center",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center"
   }
@@ -32,8 +54,9 @@ const useStyles = makeStyles(theme => ({
 
 const store = createStore(questionnaireReducer);
 
-function SurveyWithoutRedux() {
-  const classes = useStyles();
+function SurveyWithoutRedux(props) {
+  const { isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
   const QuestionnaireForm = require(
     "../components/Questionnaire/QuestionnaireForm"
   ).default;
@@ -62,12 +85,44 @@ function SurveyWithoutRedux() {
   );
 }
 
-function Survey() {
+function Survey(props) {
+  const { isMobile } = props;
+
   return (
     <Provider store={store}>
-      <SurveyWithoutRedux />
+      <SurveyWithoutRedux isMobile={isMobile} />
     </Provider>
   )
 }
 
-export default Survey;
+class SurveyWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: 800
+    };
+  }
+
+  handleWindowSizeChange = () => {
+      this.setState({ width: window.innerWidth });
+    };
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    this.setState(() => {
+      return { width: window.innerWidth }
+    })
+  }
+
+  render() {
+    return (
+      <Survey isMobile={this.state.width <= 500} />
+    )
+  }
+}
+
+export default SurveyWrapper;

@@ -18,13 +18,13 @@ class Index extends React.Component {
     };
   }
 
+  handleWindowSizeChange = () => {
+      this.setState({ width: window.innerWidth });
+    };
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
   }
-
-  handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
-  };
 
   componentDidMount() {
     window.addEventListener('resize', this.handleWindowSizeChange);
