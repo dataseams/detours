@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box, IconButton, Menu } from "@material-ui/core";
+import { AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -52,6 +52,15 @@ const useStyles = makeStyles(theme => ({
 
 function NavigationBar(props) {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleClose = (event) => {
+    setAnchorEl(null);
+  };
 
   return (
     <React.Fragment>
@@ -66,9 +75,22 @@ function NavigationBar(props) {
             <NavigationBarButton name="Pricing" />
             <NavigationBarButton name="About us" /> */}
             {/* <GetStartedButton /> */}
-            <IconButton aria-label="menu">
+            <IconButton aria-label="menu" onClick={handleClick}>
               <MenuIcon />
             </IconButton>
+            <Menu
+              id="main-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>How it works</MenuItem>
+              <MenuItem onClick={handleClose}>Pricing</MenuItem>
+              <MenuItem onClick={handleClose}>About us</MenuItem>
+              <GetStartedButton />
+              <Button>Logout</Button>
+            </Menu>
           </Toolbar>
         </StyledAppBar>
       </ElevationScroll>

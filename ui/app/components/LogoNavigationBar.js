@@ -4,7 +4,6 @@ import { AppBar, Toolbar, Box } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import { useSelector } from "react-redux";
 
 import LogoButton from "./LogoButton";
 import Auth from "./auth";

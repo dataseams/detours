@@ -68,17 +68,23 @@ const useMobileStyles = makeStyles(theme => ({
     justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
     fontSize: 18,
-    padding: theme.spacing(3)
+    padding: theme.spacing(2, 3, 0, 3)
   },
   title: {
     alignSelf: "flex-start",
-    padding: theme.spacing(2, 0, 0, 0),
+    padding: theme.spacing(0),
     fontWeight: "bold",
     fontSize: "1.22em"
   },
   content: {
     display: "flex",
     flexDirection: "column"
+  },
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    background: "none",
+    boxShadow: "none"
   },
   subtitle: {
     padding: theme.spacing(1, 0),
@@ -87,14 +93,8 @@ const useMobileStyles = makeStyles(theme => ({
     color: theme.palette.primary.main
   },
   text: {
-    padding: theme.spacing(1, 0, 0, 0),
+    padding: theme.spacing(0, 0, 0, 0),
     fontSize: "1em"
-  },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    background: "none",
-    boxShadow: "none"
   },
   media: {
     objectFit: "scale-down"
