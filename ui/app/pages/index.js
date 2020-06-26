@@ -19,8 +19,8 @@ class Index extends React.Component {
   }
 
   handleWindowSizeChange = () => {
-      this.setState({ width: window.innerWidth });
-    };
+    this.setState({ width: window.innerWidth });
+  };
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
@@ -37,7 +37,7 @@ class Index extends React.Component {
     return (
       <div>
         <Meta />
-        <NavigationBar />
+        <NavigationBar isMobile={this.state.width <= 500} />
         <Container maxWidth="xl" component="div" disableGutters={this.state.width <= 500}>
           <LandingTitle isMobile={this.state.width <= 500} />
           <SampleItineraries isMobile={this.state.width <= 500} />

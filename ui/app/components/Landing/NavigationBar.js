@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Button } from "@material-ui/core";
+import { Paper, AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Button, duration, Divider } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -50,9 +50,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  box: {
+    flexGrow: 1,
+    xs: 4
+  },
+  appBar: {
+    color: "white",
+    backgroundColor: "white"
+  },
+  toolBar: {
+    justifyContent: "flex-end",
+    flexDirection: "row"
+  }
+}));
+
 function NavigationBar(props) {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -81,15 +100,19 @@ function NavigationBar(props) {
             <Menu
               id="main-menu"
               anchorEl={anchorEl}
-              keepMounted
+              getContentAnchorEl={null}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              transformOrigin={{ vertical: "top", horizontal: "center" }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>How it works</MenuItem>
+              <Divider style={{ backgroundColor: "blue", width: "80%" }} />
               <MenuItem onClick={handleClose}>Pricing</MenuItem>
+              <Divider style={{ backgroundColor: "blue", width: "80%" }} />
               <MenuItem onClick={handleClose}>About us</MenuItem>
-              <GetStartedButton />
-              <Button>Logout</Button>
+              <MenuItem><GetStartedButton /></MenuItem>
+              <MenuItem><Button>Log in</Button></MenuItem>
             </Menu>
           </Toolbar>
         </StyledAppBar>
