@@ -1,5 +1,7 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
+import { Provider, useSelector } from "react-redux";
+import { createStore, combineReducers } from "redux";
 
 import Meta from "../components/Head";
 import NavigationBar from "../components/Landing/NavigationBar";
@@ -9,6 +11,29 @@ import HowItWorks from "../components/Landing/HowItWorks";
 import Pricing from "../components/Landing/Pricing";
 import Testimonials from "../components/Landing/Testimonials";
 import Copyright from "../components/Landing/Copyright";
+
+const initialUserState = {
+  email: null,
+  displayName: null,
+  photoUrl: null
+};
+const userReducer = (state = initialUserState, action) => {
+  switch (action.type) {
+    case "UPDATE_USER":
+      return {
+        ...state,
+        email: action.value.userEmail,
+        displayName: action.value.userDisplayName,
+        photoUrl: action.value.userPhotoUrl
+      }
+    default:
+      return state
+  }
+}
+const userReducers = combineReducers({
+  user: userReducer
+});
+const store = createStore(userReducers);
 
 class Index extends React.Component {
   constructor(props) {
@@ -35,7 +60,7 @@ class Index extends React.Component {
 
   render() {
     return (
-      <div>
+      <Provider store={store}>
         <Meta />
         <NavigationBar isMobile={this.state.width <= 500} />
         <Container maxWidth="xl" component="div" disableGutters={this.state.width <= 500}>
@@ -46,7 +71,7 @@ class Index extends React.Component {
           <Testimonials isMobile={this.state.width <= 500} />
         </Container>
         <Copyright />
-      </div>
+      </Provider>
     );
   }
 }

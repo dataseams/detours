@@ -1,6 +1,19 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Paper, AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Button, duration, Divider } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Button,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,6 +22,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
+import Auth from "../auth";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -68,53 +82,108 @@ const useMobileStyles = makeStyles(theme => ({
   }
 }));
 
+const useDrawerStyles = makeStyles(theme => ({
+  root: {
+    width: "100%"
+  },
+  paper: {
+    width: "100%"
+  }
+}));
+
+const useListStyles = makeStyles(theme => ({
+  root: {
+    width: "100%"
+  }
+}));
+
+function MobileToolbar(props) {
+  const { isMobile, classes } = props;
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false
+  });
+  const drawerClasses = useDrawerStyles();
+  const listClasses = useListStyles();
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === "keydown" && (event.key === "tab" || event.key === "shift")) {
+      return
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      padding={5}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List classes={listClasses}>
+        <ListItem button alignItems="center">
+          <ListItemText />
+          <ListItemText primary={"How It Works"} />
+        </ListItem>
+        <ListItem button alignItems="center">
+          <ListItemText />
+          <ListItemText primary={"Pricing"} />
+        </ListItem>
+        <ListItem button alignItems="center">
+          <ListItemText />
+          <ListItemText primary={"About Us"} />
+        </ListItem>
+        <GetStartedButton isMobile={isMobile} />
+        <Button variant="outlined" fullWidth={true}><Auth /></Button>
+      </List>
+      <Divider />
+    </Box >
+  );
+
+  return (
+    <Toolbar>
+      <Box className={classes.box}>
+        <LogoButton name="DETOURS" />
+      </Box>
+      <IconButton aria-label="menu" onClick={toggleDrawer("right", true)}>
+        <MenuIcon />
+      </IconButton>
+      <Drawer
+        anchor="right"
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
+        classes={drawerClasses}
+      >
+        {list("right")}
+      </Drawer>
+    </Toolbar>
+  )
+}
+
 function NavigationBar(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(false);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  }
-
-  const handleClose = (event) => {
-    setAnchorEl(null);
-  };
 
   return (
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
         <StyledAppBar>
-          <Toolbar>
-            <Box className={classes.box}>
-              <LogoButton name="DETOURS" />
-            </Box>
-            {/* <NavigationBarButton name="How it works" />
-            <NavigationBarButton name="Pricing" />
-            <NavigationBarButton name="About us" /> */}
-            {/* <GetStartedButton /> */}
-            <IconButton aria-label="menu" onClick={handleClick}>
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="main-menu"
-              anchorEl={anchorEl}
-              getContentAnchorEl={null}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              transformOrigin={{ vertical: "top", horizontal: "center" }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>How it works</MenuItem>
-              <Divider style={{ backgroundColor: "blue", width: "80%" }} />
-              <MenuItem onClick={handleClose}>Pricing</MenuItem>
-              <Divider style={{ backgroundColor: "blue", width: "80%" }} />
-              <MenuItem onClick={handleClose}>About us</MenuItem>
-              <MenuItem><GetStartedButton /></MenuItem>
-              <MenuItem><Button>Log in</Button></MenuItem>
-            </Menu>
-          </Toolbar>
+          {isMobile ? (
+            <MobileToolbar isMobile={isMobile} classes={classes} />
+          ) : (
+              <Toolbar>
+                <Box className={classes.box}>
+                  <LogoButton name="DETOURS" />
+                </Box>
+                <NavigationBarButton name="How it works" />
+                <NavigationBarButton name="Pricing" />
+                <NavigationBarButton name="About us" />
+                <GetStartedButton />
+              </Toolbar>
+            )}
         </StyledAppBar>
       </ElevationScroll>
     </React.Fragment>
