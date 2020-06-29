@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   divider: {
     width: "90px",
     height: "2px",
-    backgroundColor: "#5865bc"
+    backgroundColor: theme.palette.primary.main
   },
   tags: {
     display: "flex",
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   tag: {
-    color: "#5865bc"
+    color: theme.palette.primary.main
   }
 }));
 

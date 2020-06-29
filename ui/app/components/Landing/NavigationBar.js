@@ -5,9 +5,6 @@ import {
   Toolbar,
   Box,
   IconButton,
-  Menu,
-  MenuItem,
-  Button,
   Divider,
   Drawer,
   List,
@@ -22,7 +19,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
-import Auth from "../auth";
+import Auth from "../autht";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -97,6 +94,21 @@ const useListStyles = makeStyles(theme => ({
   }
 }));
 
+const useDividerStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.main
+  }
+}));
+
+const useTextStyles = makeStyles(theme => ({
+  root: {
+    fontSize: 18
+  },
+  primary: {
+    fontSize: "1.167em"
+  }
+}));
+
 function MobileToolbar(props) {
   const { isMobile, classes } = props;
   const [state, setState] = React.useState({
@@ -107,6 +119,8 @@ function MobileToolbar(props) {
   });
   const drawerClasses = useDrawerStyles();
   const listClasses = useListStyles();
+  const dividerClasses = useDividerStyles();
+  const textclasses = useTextStyles();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === "keydown" && (event.key === "tab" || event.key === "shift")) {
@@ -125,20 +139,27 @@ function MobileToolbar(props) {
       <List classes={listClasses}>
         <ListItem button alignItems="center">
           <ListItemText />
-          <ListItemText primary={"How It Works"} />
+          <ListItemText classes={textclasses} primary={"How It Works"} />
         </ListItem>
+        <Divider variant="middle" classes={dividerClasses} />
         <ListItem button alignItems="center">
           <ListItemText />
-          <ListItemText primary={"Pricing"} />
+          <ListItemText classes={textclasses} primary={"Pricing"} />
         </ListItem>
+        <Divider variant="middle" classes={dividerClasses} />
         <ListItem button alignItems="center">
           <ListItemText />
-          <ListItemText primary={"About Us"} />
+          <ListItemText classes={textclasses} primary={"About Us"} />
         </ListItem>
-        <GetStartedButton isMobile={isMobile} />
-        <Button variant="outlined" fullWidth={true}><Auth /></Button>
+        <ListItem />
+        <ListItem />
+        <ListItem>
+          <GetStartedButton isMobile={isMobile} />
+        </ListItem>
+        <ListItem>
+          <Auth />
+        </ListItem>
       </List>
-      <Divider />
     </Box >
   );
 
