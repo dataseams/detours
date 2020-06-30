@@ -24,11 +24,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    paddingTop: theme.spacing(1),
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "column",
+    justifyContent: "center"
+  }
+}));
+
 const store = createStore(itineraryReducer);
 
-const Itinerary = () => {
+function Itinerary(props) {
+  const { isMobile } = props;
   const router = useRouter();
-  const classes = useStyles();
+  const classes = isMobile ? useMobileStyles() : useStyles();
   const variables = { "surveyResponseNodeId": router.query.surveyId };
   const { loading, error, data } = useQuery(GET_ITINERARY, { variables: variables });
 
@@ -40,7 +51,10 @@ const Itinerary = () => {
           <LogoNavigationBar />
           {loading ? <p>Loading...</p> :
             <Container className={classes.root}>
-              <ItineraryDescription fullItinerary={data.getLastTripPlanForSurveyResponse} />
+              <ItineraryDescription
+                fullItinerary={data.getLastTripPlanForSurveyResponse}
+                isMobile={isMobile}
+              />
               <DailyTabs plan={data.getLastTripPlanForSurveyResponse.dailyPlans} />
               <PurchaseBox />
             </Container>}
@@ -50,4 +64,34 @@ const Itinerary = () => {
   );
 };
 
-export default Itinerary;
+class ItineraryClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: 800
+    }
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    this.setState(() => {
+      return { width: window.innerWidth }
+    })
+  }
+
+  render() {
+    return (
+      <Itinerary isMobile={this.state.width <= 500} />
+    )
+  }
+}
+
+export default ItineraryClass;

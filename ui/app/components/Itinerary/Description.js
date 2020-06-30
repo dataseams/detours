@@ -2,20 +2,55 @@ import { Typography, Box, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
-  descParagraph: {
-    paddingTop: "1em"
+  root: {
+    margin: theme.spacing(10, 10, 5, 10),
+    fontSize: 18
   },
-  descItem: {
-    paddingLeft: "1em"
+  title: {
+    fontSize: "2.68em"
   },
   divider: {
     width: "90px",
     height: "2px",
     backgroundColor: theme.palette.primary.main
   },
+  descParagraph: {
+    paddingTop: "1em"
+  },
+  descItem: {
+    paddingLeft: "1em"
+  },
   tags: {
     display: "flex",
     padding: "1em 0 1em 2em",
+    flexWrap: "wrap"
+  },
+  tag: {
+    color: theme.palette.primary.main
+  }
+}));
+
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    margin: theme.spacing(10, 2, 5, 2)
+  },
+  title: {
+    fontSize: "2em"
+  },
+  divider: {
+    width: "25%",
+    height: "2px",
+    backgroundColor: theme.palette.primary.main
+  },
+  descParagraph: {
+    paddingTop: "1em"
+  },
+  descItem: {
+    paddingLeft: "0em"
+  },
+  tags: {
+    display: "flex",
+    padding: theme.spacing(1, 0, 0, 0),
     flexWrap: "wrap"
   },
   tag: {
@@ -33,8 +68,8 @@ const TagBox = props => {
 };
 
 const ItineraryDescription = props => {
-  const { fullItinerary } = props;
-  const classes = useStyles();
+  const { fullItinerary, isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
   const summary = {
     "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
     "spendingPerDay": fullItinerary.spendingPerDay,
@@ -43,8 +78,8 @@ const ItineraryDescription = props => {
   }
 
   return (
-    <Box marginTop={10} marginLeft={10} marginRight={10} marginBottom={5}>
-      <Typography variant="h3" paragraph={true}>
+    <Box className={classes.root}>
+      <Typography className={classes.title} variant="h3" paragraph={true}>
         Your trip to {summary.cityName}
       </Typography>
       <Divider className={classes.divider}></Divider>
