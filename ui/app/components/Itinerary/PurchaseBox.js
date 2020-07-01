@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
 
 import { Purchase } from "../Buttons";
-import Auth from "../auth";
 import UPDATE_USER from "../../utils/queries/UpdateUser";
 
 const useStyles = makeStyles(theme => ({
@@ -41,7 +40,7 @@ const PurchaseBox = props => {
   return (
     <Box>
       {userEmail ?
-        <Box className={classes.purchaseContainer} m={5}>
+        <Box className={classes.purchaseContainer}>
           <Typography className={classes.purchaseItem}>
             Do you like this itinerary? Save it to your account.
           </Typography>
@@ -63,10 +62,9 @@ const PurchaseBox = props => {
           </Purchase>
         </Box>
         :
-        <Box className={classes.purchaseContainer} m={5}>
-          <Auth />
+        <Box className={classes.purchaseContainer}>
           <Typography className={classes.purchaseItem}>
-            to save your itinerary.
+            Log in to save your itinerary.
           </Typography>
           <Box className={classes.purchaseSubContainer}>
             <Divider variant="middle" className={classes.divider} />

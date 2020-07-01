@@ -40,9 +40,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const useMobileStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    backgroundColor: theme.palette.background.paper
+  },
+  itineraryBox: {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    borderColor: theme.palette.primary.main,
+    borderWidth: "0px 1px 1px 1px",
+    borderStyle: "solid",
+    padding: theme.spacing(1)
+  },
+  itineraryContainer: {
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "row",
+    height: "35vh"
+  },
+  mapContainer: {
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "row",
+    padding: "0 0 0 0.25em"
+  }
+}));
+
 const DailyTabs = props => {
-  const { plan } = props;
-  const classes = useStyles();
+  const { plan, isMobile } = props;
+  const classes = isMobile ? useMobileStyles() : useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -77,6 +106,7 @@ const DailyTabs = props => {
           index={index}
           classes={classes}
           data={day.node}
+          isMobile={isMobile}
         />
       ))}
     </div>

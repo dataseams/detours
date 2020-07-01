@@ -55,7 +55,10 @@ function Itinerary(props) {
                 fullItinerary={data.getLastTripPlanForSurveyResponse}
                 isMobile={isMobile}
               />
-              <DailyTabs plan={data.getLastTripPlanForSurveyResponse.dailyPlans} />
+              <DailyTabs
+                plan={data.getLastTripPlanForSurveyResponse.dailyPlans}
+                isMobile={isMobile}
+              />
               <PurchaseBox />
             </Container>}
         </div>

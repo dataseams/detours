@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 const useMobileStyles = makeStyles(theme => ({
   root: {
-    margin: theme.spacing(10, 2, 5, 2)
+    margin: theme.spacing(10, 0, 3, 0)
   },
   title: {
     fontSize: "2em"
