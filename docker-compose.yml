@@ -26,6 +26,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       ZOMATO_API_KEY: ${ZOMATO_API_KEY}
       ZOMATO_API_URL: ${ZOMATO_API_URL}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
     networks:
       detours:
         aliases:
