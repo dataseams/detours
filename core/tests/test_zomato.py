@@ -13,12 +13,12 @@ class TestZomato(TestCase):
         tests_dir = os.path.dirname(__file__)
         cities_file_path = os.path.join(tests_dir, "data/cities.json")
         with open(cities_file_path, "r") as f:
-            self.cities_response = f.read()
+            self.cities_response = json.load(f)
 
     @patch("requests.get")
     def test_get_cities_happy_path(self, requests_get_mock):
         requests_response = Mock()
-        requests_response.text = self.cities_response
+        requests_response.json.return_value = self.cities_response
         requests_get_mock.return_value = requests_response
         zomato = Zomato()
         cities = zomato.get_cities(q="Los Angeles")
@@ -61,9 +61,9 @@ class TestZomato(TestCase):
         zomato = Zomato()
         mock_requests_get_response = Mock()
         expected_results = "foo bar"
-        mock_requests_get_response.text = json.dumps(
-            {"restaurants": expected_results}
-        )
+        mock_requests_get_response.json.return_value = {
+            "restaurants": expected_results
+        }
         mock_requests.get.return_value = mock_requests_get_response
         res = zomato.search(
             entity_id=281, q="Lebanese", sort="rating", order="desc"

@@ -5,9 +5,9 @@
         "wineBars": true,
         "dancing": true
     },
-    "city": "Los Angeles",
+    "city": "LA",
     "arrivalDate": "2020-04-16T16:43:00.000Z",
-    "returnDate": "2020-04-20T16:43:00.000Z",
+    "returnDate": "2020-04-19T16:43:00.000Z",
     "arrivalTime": "12:00 PM",
     "returnTime": "12:00 PM",
     "occasion": "honeymoon",

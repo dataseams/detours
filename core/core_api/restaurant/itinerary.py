@@ -47,9 +47,7 @@ def get_restaurants(survey_response: str):
         ),
         count=n_total_restaurants,
     )
-    filtered_restaurants = random.sample(
-        restaurants, n_days * n_restaurants_per_day
-    )
+    filtered_restaurants = random.sample(restaurants, n_total_restaurants)
 
     return filtered_restaurants
 
