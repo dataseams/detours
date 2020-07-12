@@ -10,6 +10,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+
 const firebase = admin.initializeApp(
   {
     credential: admin.credential.cert(require('./credentials/server')),
@@ -19,16 +20,18 @@ const firebase = admin.initializeApp(
 
 app.prepare().then(() => {
   const server = express()
+  const sessionTtl = 60000;
+  const sessionFileSecret = "lLImc85gngl45N77"
 
   server.use(bodyParser.json())
   server.use(
     session({
-      secret: 'geheimnis',
+      secret: sessionFileSecret,
       saveUninitialized: true,
-      store: new FileStore({ secret: 'geheimnis' }),
+      store: new FileStore({ secret: sessionFileSecret, ttl: sessionTtl }),
       resave: false,
       rolling: true,
-      cookie: { maxAge: 1000 * 60 * 60, httpOnly: true }, // 1 hour
+      cookie: { maxAge: sessionTtl, httpOnly: true },
     })
   )
 
@@ -55,7 +58,7 @@ app.prepare().then(() => {
   })
 
   server.post('/api/logout', (req, res) => {
-    req.session.decodedToken = null
+    req.session.destroy();
     res.json({ status: true })
   })
 

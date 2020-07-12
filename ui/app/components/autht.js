@@ -48,7 +48,13 @@ const Auth = props => {
           }).catch(e => console.log(e))
         })
     } else {
-      const updateUserEmail = { type: "UPDATE_USER", value: { userEmail: null, userDisplayName: null } };
+      const updateUserEmail = {
+        type: "UPDATE_USER",
+        value: {
+          userEmail: null,
+          userDisplayName: null
+        }
+      };
       dispatch(updateUserEmail);
 
       // eslint-disable-next-line no-undef
