@@ -17,7 +17,7 @@ class Client:
         self.headers = {"Accept": "application/json"}
         self.output = "json"
 
-    def find(
+    def search(
         self, query: str, input_type: str = "textquery", language: str = "en"
     ) -> dict:
         """Make an API call to Google Places with a search query.
@@ -25,16 +25,16 @@ class Client:
         Parameters
         ----------
         query : str
-            [description]
+            Activity and city to query for
         input_type : str, optional
-            [description], by default "textquery"
+            Textquery or phonenumber, by default "textquery"
         language : str, optional
-            [description], by default "en"
+            Natural language, by default "en"
 
         Returns
         -------
         dict
-            [description]
+            Response object containins the search results as a list of places
         """
         fields = "formatted_address,name,rating,geometry"
         params = {}
