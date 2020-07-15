@@ -6,7 +6,8 @@ from graphql_relay.node.node import from_global_id
 
 from .. import models
 from ..config import db_session
-from ..restaurant import itinerary
+from ..restaurant import itinerary as restaurant_itinerary
+from .. import itinerary
 
 
 class SurveyResponse(SQLAlchemyObjectType):
@@ -47,9 +48,11 @@ class CreatePlanForSurveryResponse(Mutation):
         survey_response_obj = survey_response_query.get(survey_response.id)
         survey_response_json = survey_response_obj.json
 
-        restaurants = itinerary.get_restaurants(survey_response_json)
-        itinerary.store_restaurants(
-            restaurants=restaurants,
+        restaurants = restaurant_itinerary.get_restaurants(
+            survey_response_json
+        )
+        itinerary.store_activities(
+            itinerary_items=restaurants,
             city_code=survey_response_json["city"],
             survey_response_id=survey_response.id,
             survey_response=survey_response.json,

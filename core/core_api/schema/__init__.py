@@ -25,7 +25,8 @@ from .activity import Activity
 from .activity_type import ActivityType
 from .place import Place
 from .. import models
-from ..restaurant import itinerary
+from ..restaurant import itinerary as restaurant_itinerary
+from .. import itinerary
 
 
 class Mutation(ObjectType):
@@ -57,8 +58,10 @@ class Query(ObjectType):
         survey_response_obj = survey_response_query.get(surveyResponseNodeId)
         survey_response_json = survey_response_obj.json
 
-        restaurants = itinerary.get_restaurants(survey_response_json)
-        itinerary.store_restaurants(restaurants, surveyResponseNodeId)
+        restaurants = restaurant_itinerary.get_restaurants(
+            survey_response_json
+        )
+        itinerary.store_activities(restaurants, surveyResponseNodeId)
 
         return f"Hello {surveyResponseNodeId}"
 
