@@ -32,6 +32,8 @@ def get_activities(survey_response: str):
     ][0]
 
     activities = google_places.search(query=f"bicycle rental in {city_name}")
-    filtered_activities = random.sample(activities, 1)
+    filtered_activities = (
+        random.sample(activities, 1) if activities else activities
+    )
 
     return filtered_activities

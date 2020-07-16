@@ -5,17 +5,19 @@ The itinerary is created based on:
 - Survey reponse.
 - Queried APIs.
 """
-from typing import List
+from typing import List, Dict
 
 import pandas as pd
 
 from .config import db_session
 from . import models
+from .restaurant import itinerary as restaurant_itinerary
+from .activity import itinerary as activity_itinerary
 
 DATE_FORMAT = "%Y-%m-%d"
 
 
-def get_activities(survey_response: dict) -> List[dict]:
+def build_itinerary(survey_response: dict) -> Dict[str, List[dict]]:
     """Query external APIs to formulate all itinerary activities.
 
     Parameters
@@ -25,13 +27,20 @@ def get_activities(survey_response: dict) -> List[dict]:
 
     Returns
     -------
-    List[dict]
-        List of itinerary items.
+    Dict[str, List[dict]]
+        Dict of itinerary items.
     """
-    pass
+    itinerary_items = {}
+    itinerary_items.update(
+        {"restaurants": restaurant_itinerary.get_restaurants(survey_response)}
+    )
+    itinerary_items.update(
+        {"bicycles": activity_itinerary.get_activities(survey_response)}
+    )
+    return itinerary_items
 
 
-def store_activities(
+def save_itinerary(
     itinerary_items: list,
     city_code: str,
     survey_response_id: int,
@@ -39,35 +48,60 @@ def store_activities(
 ):
     """Create all itinerary items and save to database."""
     time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
-    activity_type = models.ActivityType.query.filter_by(name="food").first()
+    activity_type_food = models.ActivityType.query.filter_by(
+        name="food"
+    ).first()
+    activity_type_tour = models.ActivityType.query.filter_by(
+        name="tour"
+    ).first()
 
     places = []
-    for place in itinerary_items:
+    for place in itinerary_items["restaurants"]:
         restaurant = place["restaurant"]
         places.append(
-            models.Place(
-                name=restaurant["name"],
-                description=restaurant["cuisines"],
-                address=restaurant["location"]["address"],
-                locality=restaurant["location"]["locality"],
-                zipcode=restaurant["location"]["zipcode"],
-                latitude=restaurant["location"]["latitude"],
-                longitude=restaurant["location"]["longitude"],
-            )
+            {
+                "place": models.Place(
+                    name=restaurant["name"],
+                    description=restaurant["cuisines"],
+                    address=restaurant["location"]["address"],
+                    locality=restaurant["location"]["locality"],
+                    zipcode=restaurant["location"]["zipcode"],
+                    latitude=restaurant["location"]["latitude"],
+                    longitude=restaurant["location"]["longitude"],
+                ),
+                "type": activity_type_food,
+            }
+        )
+    for place in itinerary_items["bicycles"]:
+        places.append(
+            {
+                "place": models.Place(
+                    name=place["name"],
+                    description=place["name"],
+                    address=place["formatted_address"],
+                    locality=None,
+                    zipcode=None,
+                    latitude=place["geometry"]["location"]["lat"],
+                    longitude=place["geometry"]["location"]["lng"],
+                ),
+                "type": activity_type_tour,
+            }
         )
     for place in places:
-        db_session.add(place)
+        db_session.add(place["place"])
     db_session.commit()
 
     activities = []
     for place in places:
         activities.append(
             models.Activity(
-                name="eat", place=place, activity_type=activity_type,
+                name=place["type"].name,
+                place=place["place"],
+                activity_type=place["type"],
             )
         )
-    for v in activities:
-        db_session.add(v)
+    for activity in activities:
+        db_session.add(activity)
     db_session.commit()
 
     destination_city = models.City.query.filter_by(code=city_code).first()
@@ -105,16 +139,41 @@ def store_activities(
         db_session.add(v)
     db_session.commit()
 
+    foods = [
+        activity
+        for activity in activities
+        if activity.activity_type.name == "food"
+    ]
+    tours = [
+        activity
+        for activity in activities
+        if activity.activity_type.name == "tour"
+    ]
+    all_items = []
+    for i in range(len(foods)):
+        item = [foods[i]]
+        if i < len(tours):
+            item.append(tours[i])
+        all_items.append(item)
+    order = 0
     for i, daily_plan in enumerate(daily_plans):
         for j in range(3):
             k = (i + 1) * (j + 1)
+            food = all_items[k - 1][0]
+            tour = all_items[k - 1][1] if len(all_items[k - 1]) == 2 else None
+            order = order + 1
             db_session.add(
                 models.PlanItem(
-                    order=i + 1,
-                    daily_plan=daily_plan,
-                    activity=activities[k - 1],
+                    order=order, daily_plan=daily_plan, activity=food,
                 )
             )
+            if tour:
+                order = order + 1
+                db_session.add(
+                    models.PlanItem(
+                        order=order, daily_plan=daily_plan, activity=tour,
+                    )
+                )
     db_session.commit()
 
     return survey_response_id
