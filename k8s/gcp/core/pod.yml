@@ -47,6 +47,11 @@ spec:
             configMapKeyRef:
               name: core
               key: ZOMATO_API_URL
+        - name: GOOGLE_MAPS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: core
+              key: GOOGLE_MAPS_API_KEY
       ports:
         - containerPort: 5000
           protocol: TCP
