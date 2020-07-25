@@ -39,7 +39,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800
+      width: 801
     };
   }
 
