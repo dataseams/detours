@@ -1,6 +1,11 @@
 FROM node:12.12.0-alpine
 
 ARG NODE_ENV=production
+ARG LOGIN_API_URL
+ARG LOGOUT_API_URL
+ENV LOGIN_API_URL=$LOGIN_API_URL \
+    LOGOUT_API_URL=$LOGOUT_API_URL
+
 WORKDIR /app
 RUN mkdir pages components credentials src utils static redux
 COPY app/.babelrc app/next.config.js app/package*.json app/server.js /app/
