@@ -13,7 +13,6 @@ COPY app/src /app/src/
 COPY app/utils /app/utils/
 COPY app/static /app/static/
 COPY app/redux /app/redux/
-COPY app/.env.dev app/.env.gcp /app/
 
 RUN npm run build
 
