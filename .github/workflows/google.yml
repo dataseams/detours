@@ -50,10 +50,12 @@ jobs:
             --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
             --build-arg CORE_API_URL="$CORE_API_URL" \
             --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
+            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
             ./"$IMAGE_UI"/.
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
             ./"$IMAGE_CORE"/.
 
       - name: Publish
