@@ -34,6 +34,81 @@ spec:
                 configMapKeyRef:
                   name: ui
                   key: NODE_ENV
+          - name: SESSION_SECRET_CURRENT
+            valueFrom:
+              secretKeyRef:
+                name: ui
+                key: SESSION_SECRET_CURRENT
+          - name: SESSION_SECRET_PREVIOUS
+            valueFrom:
+              secretKeyRef:
+                name: ui
+                key: SESSION_SECRET_PREVIOUS
+          - name: LOGIN_API_URL
+            valueFrom:
+              secretKeyRef:
+                name: ui
+                key: LOGIN_API_URL
+          - name: LOGOUT_API_URL
+            valueFrom:
+              secretKeyRef:
+                name: ui
+                key: LOGOUT_API_URL
+          - name: FIREBASE_CLIENT_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_CLIENT_EMAIL
+          - name: FIREBASE_PUBLIC_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_PUBLIC_API_KEY
+          - name: FIREBASE_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_PRIVATE_KEY
+          - name: FIREBASE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_API_KEY
+          - name: FIREBASE_AUTH_DOMAIN
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_AUTH_DOMAIN
+          - name: FIREBASE_DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_DATABASE_URL
+          - name: FIREBASE_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_PROJECT_ID
+          - name: FIREBASE_STORAGE_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_STORAGE_BUCKET
+          - name: FIREBASE_MESSAGING_SENDER_ID
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_MESSAGING_SENDER_ID
+          - name: FIREBASE_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_APP_ID
+          - name: FIREBASE_MEASUREMENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: firebase
+                key: FIREBASE_MEASUREMENT_ID
         ports:
           - name: ui
             containerPort: 3000
