@@ -1,3 +1,4 @@
+![Build and Deploy to GKE](https://github.com/sammo/detours/workflows/Build%20and%20Deploy%20to%20GKE/badge.svg)
 # robocation
 
 The Travel Robot
