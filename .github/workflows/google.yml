@@ -75,6 +75,7 @@ jobs:
             --build-arg GITHUB_REF="$GITHUB_REF" \
             --build-arg LOGIN_API_URL="$LOGIN_API_URL" \
             --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
+            --build-arg CORE_API_URL="$CORE_API_URL" \
             ./ui/.
 
       # Push the Docker image to Google Container Registry
