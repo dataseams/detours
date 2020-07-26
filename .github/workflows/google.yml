@@ -42,7 +42,6 @@ env:
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
   LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
 
-
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
@@ -76,6 +75,7 @@ jobs:
             --build-arg LOGIN_API_URL="$LOGIN_API_URL" \
             --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
             --build-arg CORE_API_URL="$CORE_API_URL" \
+            --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
             ./ui/.
 
       # Push the Docker image to Google Container Registry
