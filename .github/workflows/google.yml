@@ -25,19 +25,6 @@ env:
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: ui
   REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.REACT_APP_GOOGLE_MAPS_API_KEY }}
-  FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-  FIREBASE_PUBLIC_API_KEY: ${{ secrets.FIREBASE_PUBLIC_API_KEY }}
-  FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
-  FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-  FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
-  FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
-  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-  FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
-  FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
-  FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-  FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
-  SESSION_SECRET_CURRENT: ${{ secrets.SESSION_SECRET_CURRENT }}
-  SESSION_SECRET_PREVIOUS: ${{ secrets.SESSION_SECRET_PREVIOUS }}
   CORE_API_URL: ${{ secrets.CORE_API_URL }}
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
   LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
@@ -83,16 +70,16 @@ jobs:
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:latest
-    # # Set up kustomize
-    # - name: Set up Kustomize
-    #   run: |
-    #     curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-    #     chmod u+x ./kustomize
-    # # Deploy the Docker image to the GKE cluster
-    # - name: Deploy
-    #   run: |
-    #     gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-    #     ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
-    #     ./kustomize build . | kubectl apply -f -
-    #     kubectl rollout status deployment/$DEPLOYMENT_NAME
-    #     kubectl get services -o wide
+      # Set up kustomize
+      - name: Set up Kustomize
+        run: |
+          curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+      # # Deploy the Docker image to the GKE cluster
+      # - name: Deploy
+      #   run: |
+      #     gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+      #     ./kustomize edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
+      #     ./kustomize build . | kubectl apply -f -
+      #     kubectl rollout status deployment/$DEPLOYMENT_NAME
+      #     kubectl get services -o wide
