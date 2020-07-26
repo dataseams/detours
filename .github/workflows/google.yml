@@ -51,31 +51,31 @@ jobs:
           # via gcloud command-line tool.
           gcloud auth configure-docker
 
-      # Build the Docker image
-      - name: Build
-        run: |
-          docker build \
-            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
-            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":latest \
-            --build-arg GITHUB_SHA="$GITHUB_SHA" \
-            --build-arg GITHUB_REF="$GITHUB_REF" \
-            --build-arg LOGIN_API_URL="$LOGIN_API_URL" \
-            --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
-            --build-arg CORE_API_URL="$CORE_API_URL" \
-            --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
-            ./ui/.
+      # # Build the Docker image
+      # - name: Build
+      #   run: |
+      #     docker build \
+      #       -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+      #       -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":latest \
+      #       --build-arg GITHUB_SHA="$GITHUB_SHA" \
+      #       --build-arg GITHUB_REF="$GITHUB_REF" \
+      #       --build-arg LOGIN_API_URL="$LOGIN_API_URL" \
+      #       --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
+      #       --build-arg CORE_API_URL="$CORE_API_URL" \
+      #       --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
+      #       ./ui/.
 
-      # Push the Docker image to Google Container Registry
-      - name: Publish
-        run: |
-          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:latest
+      # # Push the Docker image to Google Container Registry
+      # - name: Publish
+      #   run: |
+      #     docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+      #     docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:latest
       # Set up kustomize
       - name: Set up Kustomize
         run: |
           curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
-          mv kustomize /usr/bin
+          sudo mv kustomize /usr/bin
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |
