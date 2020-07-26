@@ -54,6 +54,7 @@ jobs:
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            ./"$IMAGE_CORE"/.
 
       - name: Publish
         run: |
