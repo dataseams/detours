@@ -11,8 +11,7 @@ import pandas as pd
 
 from .config import db_session
 from . import models
-from .restaurant import itinerary as restaurant_itinerary
-from .activity import itinerary as activity_itinerary
+from .activites import Dining, Biking
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -31,12 +30,8 @@ def build_itinerary(survey_response: dict) -> Dict[str, List[dict]]:
         Dict of itinerary items.
     """
     itinerary_items = {}
-    itinerary_items.update(
-        {"restaurants": restaurant_itinerary.get_restaurants(survey_response)}
-    )
-    itinerary_items.update(
-        {"bicycles": activity_itinerary.get_activities(survey_response)}
-    )
+    itinerary_items.update({"restaurants": Dining(survey_response).get()})
+    itinerary_items.update({"bicycles": Biking(survey_response).get()})
     return itinerary_items
 
 
