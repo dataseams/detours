@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: ui
 data:
-  CORE_API_URL: "http://graphql.dataseams.com/graphql"
+  CORE_API_URL: "https://graphql.dataseams.com/graphql"
   NODE_ENV: "production"
   LOGIN_API_URL: "https://app.dataseams.com/api/login"
   LOGOUT_API_URL: "https://app.dataseams.com/api/logout"
