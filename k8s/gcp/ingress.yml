@@ -4,7 +4,7 @@ metadata:
   name: detours
   annotations:
     kubernetes.io/ingress.global-static-ip-name: detours
-    networking.gke.io/managed-certificates: app-dataseams-com
+    networking.gke.io/managed-certificates: app-graphql-dataseams
     kubernetes.io/ingress.allow-http: "false"
 spec:
   rules:
