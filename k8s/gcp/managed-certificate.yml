@@ -5,3 +5,4 @@ metadata:
 spec:
   domains:
     - app.dataseams.com
+    - graphql.dataseams.com
