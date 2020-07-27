@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch, MagicMock
 import os
 import json
 
-from core_api.restaurant.zomato import Zomato
+from core_api.service_partners.zomato import Client
 
 
 class TestZomato(TestCase):
@@ -11,7 +11,7 @@ class TestZomato(TestCase):
 
     def setUp(self):
         tests_dir = os.path.dirname(__file__)
-        cities_file_path = os.path.join(tests_dir, "data/cities.json")
+        cities_file_path = os.path.join(tests_dir, "../data/cities.json")
         with open(cities_file_path, "r") as f:
             self.cities_response = json.load(f)
 
@@ -20,12 +20,12 @@ class TestZomato(TestCase):
         requests_response = Mock()
         requests_response.json.return_value = self.cities_response
         requests_get_mock.return_value = requests_response
-        zomato = Zomato()
+        zomato = Client()
         cities = zomato.get_cities(q="Los Angeles")
         self.assertEqual(len(cities), 8)
 
     def test_get_city_happy_path(self):
-        zomato = Zomato()
+        zomato = Client()
         city_name = "Los Angeles"
         cities = [
             {
@@ -48,7 +48,7 @@ class TestZomato(TestCase):
 
     def test_get_city_id_happy_path(self):
         city_name = "Los Angeles"
-        zomato = Zomato()
+        zomato = Client()
         zomato.get_city = Mock(return_value={"id": 281})
         city_id = zomato.get_city_id(city_name=city_name)
         zomato.get_city.assert_called_once_with(
@@ -56,9 +56,9 @@ class TestZomato(TestCase):
         )
         self.assertEqual(city_id, 281)
 
-    @patch("core_api.restaurant.zomato.requests")
+    @patch("core_api.service_partners.zomato.requests")
     def test_search(self, mock_requests):
-        zomato = Zomato()
+        zomato = Client()
         mock_requests_get_response = Mock()
         expected_results = "foo bar"
         mock_requests_get_response.json.return_value = {

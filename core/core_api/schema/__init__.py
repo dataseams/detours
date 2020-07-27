@@ -25,7 +25,7 @@ from .activity import Activity
 from .activity_type import ActivityType
 from .place import Place
 from .. import models
-from ..restaurant import itinerary as restaurant_itinerary
+from ..activites import Dining
 from .. import itinerary
 
 
@@ -58,9 +58,7 @@ class Query(ObjectType):
         survey_response_obj = survey_response_query.get(surveyResponseNodeId)
         survey_response_json = survey_response_obj.json
 
-        restaurants = restaurant_itinerary.get_restaurants(
-            survey_response_json
-        )
+        restaurants = Dining(survey_response_json).get()
         itinerary.store_activities(restaurants, surveyResponseNodeId)
 
         return f"Hello {surveyResponseNodeId}"

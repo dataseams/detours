@@ -7,7 +7,7 @@ import math
 from .config import ZOMATO_API_URL, ZOMATO_API_KEY
 
 
-class Zomato:
+class Client:
     """Zomato api class."""
 
     CITY_FILTERS = {
