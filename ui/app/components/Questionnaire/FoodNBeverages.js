@@ -1,10 +1,7 @@
 import { Grid } from "@material-ui/core";
 
-import DiningEnvironmentsField from "./FoodNBeverages/DiningEnvironments";
-import DiningFeaturesField from "./FoodNBeverages/DiningFeatures";
-import DietaryConstraintsFilterField from "./FoodNBeverages/DietaryConstraintsFilter";
-import DietaryConstraintsField from "./FoodNBeverages/DietaryConstraints";
 import DiningPricePointsField from "./FoodNBeverages/PricePoints";
+import DiningEnvironmentsField from "./FoodNBeverages/DiningEnvironments";
 import { paperStyles } from "./styles/paper";
 
 const FoodNBeveragesField = props => {
@@ -34,44 +31,6 @@ const FoodNBeveragesField = props => {
           className={classes.cb}
         >
           <DiningEnvironmentsField />
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <p className={classes.q}>
-          3. Which features do you value in restaurants?
-        </p>
-        <Grid
-          container
-          justify="flex-start"
-          spacing={spacing}
-          className={classes.cb}
-        >
-          <DiningFeaturesField />
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <p className={classes.q}>
-          4. Do you or anyone you're traveling with have any dietary
-          constraints?
-        </p>
-        <Grid
-          container
-          justify="flex-start"
-          spacing={spacing}
-          className={classes.cb}
-        >
-          <DietaryConstraintsFilterField />
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <p className={classes.q}>5. What are those dietary constraints?</p>
-        <Grid
-          container
-          justify="flex-start"
-          spacing={spacing}
-          className={classes.cb}
-        >
-          <DietaryConstraintsField />
         </Grid>
       </Grid>
     </Grid>
