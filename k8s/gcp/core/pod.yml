@@ -25,22 +25,22 @@ spec:
         - name: POSTGRES_DB
           valueFrom:
             secretKeyRef:
-              name: core
+              name: postgres
               key: POSTGRES_DB
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: core
+              name: postgres
               key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: core
+              name: postgres
               key: POSTGRES_PASSWORD
         - name: ZOMATO_API_KEY
           valueFrom:
             secretKeyRef:
-              name: core
+              name: zomato
               key: ZOMATO_API_KEY
         - name: ZOMATO_API_URL
           valueFrom:
@@ -50,7 +50,7 @@ spec:
         - name: GOOGLE_MAPS_API_KEY
           valueFrom:
             secretKeyRef:
-              name: core
+              name: google
               key: GOOGLE_MAPS_API_KEY
       ports:
         - containerPort: 5000

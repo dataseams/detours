@@ -1,9 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: production
 resources:
+- core/configmap.yml
+- core/pod.yml
+- core/service-account.yml
+- core/service.yml
 - ui/configmap.yml
 - ui/deployment.yml
 - ui/service.yml
-- core/configmap.yml
-- core/pod.yml
-- core/service.yml
+- managed-certificate.yml
+- ingress.yml

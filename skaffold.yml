@@ -7,7 +7,7 @@ profiles:
 - name: core
   build:
     artifacts:
-    - image: detours/core
+    - image: gcr.io/robocation/core
       context: core/.
       sync:
         manual:
@@ -18,15 +18,15 @@ profiles:
   deploy:
     kubectl:
       manifests:
+      - k8s/minikube/core/configmap.yml
       - k8s/minikube/core/deployment.yml
       - k8s/minikube/core/service.yml
-      - k8s/minikube/core/ingress.yml
       flags:
         global: [-n,development]
 - name: ui
   build:
     artifacts:
-    - image: detours/ui
+    - image: gcr.io/robocation/ui
       context: ui/.
       sync:
         manual:
