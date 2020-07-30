@@ -80,5 +80,5 @@ jobs:
             $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:${GITHUB_SHA} \
             $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:${GITHUB_SHA}
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
-          kubectl get services -o wide
+          kubectl rollout status deployment/$DEPLOYMENT_NAME --namespace production
+          kubectl get services -o wide --namespace production
