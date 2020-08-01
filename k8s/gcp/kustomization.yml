@@ -3,8 +3,8 @@ kind: Kustomization
 namespace: production
 resources:
 - core/configmap.yml
-- core/pod.yml
 - core/service-account.yml
+- core/deployment.yml
 - core/service.yml
 - ui/configmap.yml
 - ui/deployment.yml

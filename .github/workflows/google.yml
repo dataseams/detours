@@ -13,7 +13,6 @@ env:
   IMAGE_UI: ui
   IMAGE_CORE: core
   REGISTRY_HOSTNAME: gcr.io
-  DEPLOYMENT_NAME: ui
   REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.REACT_APP_GOOGLE_MAPS_API_KEY }}
   CORE_API_URL: ${{ secrets.CORE_API_URL }}
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
@@ -80,5 +79,6 @@ jobs:
             $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:${GITHUB_SHA} \
             $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:${GITHUB_SHA}
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME --namespace production
+          kubectl rollout status deployment/ui --namespace production
+          kubectl rollout status deployment/core --namespace production
           kubectl get services -o wide --namespace production
