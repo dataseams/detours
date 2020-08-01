@@ -2,28 +2,28 @@ name: detours
 channels:
   - defaults
 dependencies:
-  - python=3.8
-  - pip
+  - python=3.8.3
+  - pip=20.1.1
   - pip:
-    - flake8==3.7.9  #dev
-    - flake8-docstrings==1.5.0  #dev
-    - pep8-naming==0.9.1  #dev
-    - black==19.10b0  #dev
-    - pytest==5.3.4  #dev
-    - pytest-benchmark==3.2.3  #dev
-    - pytest-asyncio==0.10.0  #dev
-    - pytest-cov==2.8.1  #dev
-    - flask==1.1.1  #prod
-    - flask-cors==3.0.8  #prod
-    - flask-graphql==2.0.1  #prod
-    - gunicorn==20.0.4  #prod
-    - graphene==2.1.8  #prod
-    - graphene-sqlalchemy==2.2.2  #prod
-    - coveralls==1.10.0  #dev
-    - snapshottest==0.5.1  #dev
-    - promise==2.3  #prod
-    - pytz==2019.3  #prod
-    - psycopg2==2.8.4  #prod
-    - rope==0.16.0  #dev
-    - pandas==1.0.3  #prod
-    - requests==2.23.0  #prod
+    - flake8==3.8.3 #dev
+    - flake8-docstrings==1.5.0 #dev
+    - pep8-naming==0.11.1 #dev
+    - black==19.10b0 #dev
+    - pytest==6.0.1 #dev
+    - pytest-benchmark==3.2.3 #dev
+    - pytest-asyncio==0.14.0 #dev
+    - pytest-cov==2.10.0 #dev
+    - coveralls==2.1.1 #dev
+    - snapshottest==0.5.1 #dev
+    - flask==1.1.2 #prod
+    - flask-cors==3.0.8 #prod
+    - flask-graphql==2.0.1 #prod
+    - gunicorn==20.0.4 #prod
+    - graphene==2.1.8 #prod
+    - graphene-sqlalchemy==2.3.0 #prod
+    - promise==2.3 #prod
+    - pytz==2020.1 #prod
+    - psycopg2==2.8.5 #prod
+    - rope==0.17.0 #prod
+    - pandas==1.1.0 #prod
+    - requests==2.24.0 #prod
