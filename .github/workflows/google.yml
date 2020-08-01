@@ -17,9 +17,9 @@ env:
   CORE_API_URL: ${{ secrets.CORE_API_URL }}
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
   LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
-  UI_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) ui/. | wc -l }}
-  CORE_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) core/. | wc -l }}
-  DEPLOYMENT_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) k8s/gcp/. | wc -l }}
+  UI_CHANGES: ${{ $(git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) ui/. | wc -l) }}
+  CORE_CHANGES: ${{ $(git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) core/. | wc -l) }}
+  DEPLOYMENT_CHANGES: ${{ $(git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) k8s/gcp/. | wc -l) }}
   ANY_CHANGES: ${{ UI_CHANGES + CORE_CHANGES + DEPLOYMENT_CHANGES }}
 
 jobs:
