@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core
+  labels:
+    app: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core
+  template:
+    metadata:
+      labels:
+        app: core
+    spec:
+      serviceAccountName: svc-detours
+      automountServiceAccountToken: false
+      containers:
+        - name: core
+          image: gcr.io/robocation/core:latest
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: core
+                  key: POSTGRES_HOST
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: core
+                  key: POSTGRES_PORT
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: POSTGRES_PASSWORD
+            - name: ZOMATO_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zomato
+                  key: ZOMATO_API_KEY
+            - name: ZOMATO_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: core
+                  key: ZOMATO_API_URL
+            - name: GOOGLE_MAPS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: google
+                  key: GOOGLE_MAPS_API_KEY
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /test
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /test
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        - name: cloud-sql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.17
+          imagePullPolicy: IfNotPresent
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances=robocation:us-west1:detours=tcp:5432"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+          resources:
+            limits:
+              memory: "250M"
+              cpu: "25m"
