@@ -2,7 +2,7 @@ name: detours
 channels:
   - defaults
 dependencies:
-  - python=3.8.3
+  - python=3.8.1
   - pip=20.1.1
   - pip:
     - flake8==3.8.3 #dev
