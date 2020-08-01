@@ -17,6 +17,10 @@ env:
   CORE_API_URL: ${{ secrets.CORE_API_URL }}
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
   LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
+  UI_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) ui/. | wc -l }}
+  CORE_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) core/. | wc -l }}
+  DEPLOYMENT_CHANGES: ${{ git --no-pager diff --name-only $(git merge-base FETCH_HEAD master) k8s/gcp/. | wc -l }}
+  ANY_CHANGES: ${{ UI_CHANGES + CORE_CHANGES + DEPLOYMENT_CHANGES }}
 
 jobs:
   setup-build-publish-deploy:
@@ -34,11 +38,19 @@ jobs:
           service_account_key: ${{ secrets.GKE_KEY }}
 
       - run: |
-          # Set up docker to authenticate
-          # via gcloud command-line tool.
           gcloud auth configure-docker
 
-      - name: Build
+      - name: Build core
+        if: ${{ CORE_CHANGES > 0 }}
+        run: |
+          docker build \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            ./"$IMAGE_CORE"/.
+
+      - name: Build ui
+        if: ${{ UI_CHANGES > 0 }}
         run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":"$GITHUB_SHA" \
@@ -51,33 +63,34 @@ jobs:
             --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
             --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
             ./"$IMAGE_UI"/.
-          docker build \
-            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
-            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
-            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
-            ./"$IMAGE_CORE"/.
-
-      - name: Publish
-        run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
+
+      - name: Publish core
+        if: ${{ CORE_CHANGES > 0 }}
+        run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest
 
-      - name: Set up Kustomize
+      - name: Publish ui
+        if: ${{ UI_CHANGES > 0 }}
+        run: |
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
+
+      - name: Set up kustomize
+        if: ${{ ANY_CHANGES > 0 }}
         run: |
           curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
           sudo mv kustomize /usr/bin
 
       - name: Deploy
+        if: ${{ ANY_CHANGES > 0 }}
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER \
             --zone $GKE_ZONE --project $GKE_PROJECT
           cd k8s/gcp
-          kustomize edit set image \
-            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:${GITHUB_SHA} \
-            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:${GITHUB_SHA}
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/ui --namespace production
           kubectl rollout status deployment/core --namespace production
