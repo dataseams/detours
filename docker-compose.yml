@@ -15,7 +15,7 @@ services:
           - postgres
   core:
     build: ./core
-    image: detours/core
+    image: gcr.io/robocation/core
     ports:
       - 5000:5000
     environment:
@@ -38,7 +38,7 @@ services:
       context: ./ui
       args:
         NODE_ENV: production
-    image: detours/ui
+    image: gcr.io/robocation/ui
     ports:
       - 3000:3000
     env_file:

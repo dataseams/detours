@@ -8,7 +8,19 @@ from core_api.models import sync_db
 from core_api.schema import schema
 
 app = Flask(__name__)
-CORS(app)
+CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": [
+                "http://localhost",
+                "http://127.0.0.1",
+                "http://app.dataseams.com",
+                "https://app.dataseams.com",
+            ]
+        }
+    },
+)
 
 
 @app.route("/test")
