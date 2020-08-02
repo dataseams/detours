@@ -11,7 +11,7 @@ import pandas as pd
 
 from .config import db_session
 from . import models
-from .activites import Dining, Biking
+from .activities import Dining, Biking
 
 DATE_FORMAT = "%Y-%m-%d"
 

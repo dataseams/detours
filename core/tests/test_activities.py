@@ -3,7 +3,7 @@ from unittest.mock import patch, Mock
 import os
 import json
 
-from core_api import activites
+from core_api import activities
 
 
 class TestDining(TestCase):
@@ -21,7 +21,7 @@ class TestDining(TestCase):
     @patch("core_api.service_partners.zomato.Client.search_")
     def test_get_restaurants_happy_path(self, zomato_search_mock):
         zomato_search_mock.return_value = self.restaurants
-        restaurants = activites.Dining(self.survey_response).get()
+        restaurants = activities.Dining(self.survey_response).get()
         self.assertEqual(
             sorted(restaurants, key=lambda x: x["restaurant"]["id"]),
             sorted(self.restaurants, key=lambda x: x["restaurant"]["id"]),
