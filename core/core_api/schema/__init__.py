@@ -25,7 +25,7 @@ from .activity import Activity
 from .activity_type import ActivityType
 from .place import Place
 from .. import models
-from ..activites import Dining
+from ..activities import Dining
 from .. import itinerary
 
 
