@@ -36,7 +36,26 @@ jobs:
       - run: |
           gcloud auth configure-docker
 
+      - uses: technote-space/get-diff-action@gh-actions
+        id: git-core-diff
+        with:
+          PREFIX_FILTER: |
+            core
+
+      - uses: technote-space/get-diff-action@gh-actions
+        id: git-ui-diff
+        with:
+          PREFIX_FILTER: |
+            ui
+
+      - uses: technote-space/get-diff-action@gh-actions
+        id: git-k8s-diff
+        with:
+          PREFIX_FILTER: |
+            k8s
+
       - name: Build core
+        if: steps.git-core-diff.output.diff
         run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
@@ -45,6 +64,7 @@ jobs:
             ./"$IMAGE_CORE"/.
 
       - name: Build ui
+        if: steps.git-ui-diff.output.diff
         run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":"$GITHUB_SHA" \
@@ -61,22 +81,26 @@ jobs:
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
 
       - name: Publish core
+        if: steps.git-core-diff.output.diff
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest
 
       - name: Publish ui
+        if: steps.git-ui-diff.output.diff
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
 
       - name: Set up kustomize
+        if: steps.git-core-diff.output.diff || steps.git-ui-diff.output.diff || steps.git-k8s-diff.output.diff
         run: |
           curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
           sudo mv kustomize /usr/bin
 
       - name: Deploy
+        if: steps.git-core-diff.output.diff || steps.git-ui-diff.output.diff || steps.git-k8s-diff.output.diff
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER \
             --zone $GKE_ZONE --project $GKE_PROJECT
