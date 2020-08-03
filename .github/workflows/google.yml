@@ -41,22 +41,25 @@ jobs:
         with:
           PREFIX_FILTER: |
             core
+        run: echo "The filter is $PREFIX_FILTER"
 
       - uses: technote-space/get-diff-action@gh-actions
         id: git-ui-diff
         with:
           PREFIX_FILTER: |
             ui
+        run: echo "The filter is $PREFIX_FILTER"
 
       - uses: technote-space/get-diff-action@gh-actions
         id: git-k8s-diff
         with:
           PREFIX_FILTER: |
             k8s
+        run: echo "The filter is $PREFIX_FILTER"
 
       - name: Build core
-        if: steps.git-core-diff.output.diff
         run: |
+          echo {{ steps.git-core-diff.output.diff }}
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
