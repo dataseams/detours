@@ -57,11 +57,15 @@ jobs:
           PREFIX_FILTER: |
             k8s
 
-      - name: Build core
+      - name: Debugstep check diffs
         run: |
-          echo ${{ steps.git-core-diff.outputs }}
-          echo ${{ steps.git-ui-diff.outputs }}
-          echo ${{ steps.git-k8s-diff.outputs }}
+          echo ${{ steps.git-core-diff.outputs.diff }}
+          echo ${{ steps.git-ui-diff.outputs.diff }}
+          echo ${{ steps.git-k8s-diff.outputs.diff }}
+
+      - name: Build core
+        if: steps.git-core-diff.outputs.diff
+        run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
