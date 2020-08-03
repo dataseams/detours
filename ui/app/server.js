@@ -31,7 +31,7 @@ app.prepare().then(() => {
       store: new FileStore({ secret: sessionFileSecret, ttl: sessionTtl }),
       resave: false,
       rolling: true,
-      cookie: { maxAge: sessionTtl, httpOnly: true },
+      cookie: { maxAge: sessionTtl, httpOnly: true, sameSite: "strict" },
     })
   )
 
