@@ -36,32 +36,32 @@ jobs:
       - run: |
           gcloud auth configure-docker
 
-      - name: Check diff in core
+      - name: Get diff in core
         uses: technote-space/get-diff-action@gh-actions
         id: git-core-diff
         with:
           PREFIX_FILTER: |
             core
 
-      - name: Check diff in ui
+      - name: Get diff in ui
         uses: technote-space/get-diff-action@gh-actions
         id: git-ui-diff
         with:
           PREFIX_FILTER: |
             ui
 
-      - name: Check diff in k8s
+      - name: Get diff in k8s
         uses: technote-space/get-diff-action@gh-actions
         id: git-k8s-diff
         with:
           PREFIX_FILTER: |
             k8s
 
-      - name: Debugstep check diffs
+      - name: Print diffs to build for
         run: |
-          echo ${{ steps.git-core-diff.outputs.diff }}
-          echo ${{ steps.git-ui-diff.outputs.diff }}
-          echo ${{ steps.git-k8s-diff.outputs.diff }}
+          echo "Core diffs: "${{ steps.git-core-diff.outputs.diff }}
+          echo "UI diffs: "${{ steps.git-ui-diff.outputs.diff }}
+          echo "k8s diffs: "${{ steps.git-k8s-diff.outputs.diff }}
 
       - name: Build core
         if: steps.git-core-diff.outputs.diff
