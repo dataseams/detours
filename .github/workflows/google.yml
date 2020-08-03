@@ -60,6 +60,8 @@ jobs:
       - name: Build core
         run: |
           echo ${{ steps.git-core-diff.output }}
+          echo ${{ steps.git-ui-diff.output }}
+          echo ${{ steps.git-k8s-diff.output }}
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
