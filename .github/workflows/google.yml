@@ -36,19 +36,22 @@ jobs:
       - run: |
           gcloud auth configure-docker
 
-      - uses: technote-space/get-diff-action@gh-actions
+      - name: Check diff in core
+        uses: technote-space/get-diff-action@gh-actions
         id: git-core-diff
         with:
           PREFIX_FILTER: |
             core
 
-      - uses: technote-space/get-diff-action@gh-actions
+      - name: Check diff in ui
+        uses: technote-space/get-diff-action@gh-actions
         id: git-ui-diff
         with:
           PREFIX_FILTER: |
             ui
 
-      - uses: technote-space/get-diff-action@gh-actions
+      - name: Check diff in k8s
+        uses: technote-space/get-diff-action@gh-actions
         id: git-k8s-diff
         with:
           PREFIX_FILTER: |
@@ -56,7 +59,7 @@ jobs:
 
       - name: Build core
         run: |
-          echo {{ steps.git-core-diff.output.diff }}
+          echo ${{ steps.git-core-diff.output }}
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
