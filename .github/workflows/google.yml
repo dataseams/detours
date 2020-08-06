@@ -108,6 +108,9 @@ jobs:
           gcloud container clusters get-credentials $GKE_CLUSTER \
             --zone $GKE_ZONE --project $GKE_PROJECT
           cd k8s/gcp
+          kustomize edit set image \
+            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:${GITHUB_SHA} \
+            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:${GITHUB_SHA}
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/ui --namespace production
           kubectl rollout status deployment/core --namespace production
