@@ -57,14 +57,13 @@ jobs:
           PREFIX_FILTER: |
             k8s
 
-      - name: Print diffs to build for
+      - name: Print diffs
         run: |
           echo "Core diffs: "${{ steps.git-core-diff.outputs.diff }}
           echo "UI diffs: "${{ steps.git-ui-diff.outputs.diff }}
           echo "k8s diffs: "${{ steps.git-k8s-diff.outputs.diff }}
 
       - name: Build core
-        if: steps.git-core-diff.outputs.diff
         run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
@@ -73,7 +72,6 @@ jobs:
             ./"$IMAGE_CORE"/.
 
       - name: Build ui
-        if: steps.git-ui-diff.outputs.diff
         run: |
           docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":"$GITHUB_SHA" \
@@ -90,26 +88,22 @@ jobs:
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
 
       - name: Publish core
-        if: steps.git-core-diff.outputs.diff
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest
 
       - name: Publish ui
-        if: steps.git-ui-diff.outputs.diff
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
 
       - name: Set up kustomize
-        if: steps.git-core-diff.outputs.diff || steps.git-ui-diff.outputs.diff || steps.git-k8s-diff.outputs.diff
         run: |
           curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
           sudo mv kustomize /usr/bin
 
       - name: Deploy
-        if: steps.git-core-diff.outputs.diff || steps.git-ui-diff.outputs.diff || steps.git-k8s-diff.outputs.diff
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER \
             --zone $GKE_ZONE --project $GKE_PROJECT
