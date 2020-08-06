@@ -74,7 +74,7 @@ const ItineraryDescription = props => {
     "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
     "spendingPerDay": fullItinerary.spendingPerDay,
     "hoursSaved": fullItinerary.hoursSaved,
-    "interestsMatched": JSON.parse(fullItinerary.interestsMatched),
+    "interestsMatched": fullItinerary.interestsMatched,
   }
 
   return (
