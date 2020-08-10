@@ -64,7 +64,7 @@ function LandingTitle(props) {
     <Box className={classes.root}>
       <Grid className={classes.grid}>
         <Typography variant="h2" className={classes.title}>
-          Plan your dream vacation, tailored just for you.
+          Your dream staycation, for the price of a cup of coffee.
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>
           Fill out a short questionnaire and get a personalized itinerary.
