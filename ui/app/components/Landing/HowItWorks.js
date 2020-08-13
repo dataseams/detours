@@ -115,7 +115,7 @@ const howItWorksSteps = [
   {
     title: "Step 3",
     image: "/static/howitworks3.svg",
-    description: "Finally, we match your preferences to the top-rated experiences within your destination and build an optimized itinerary for your vacation. We show you a preview of that itinerary, and if you think that it's worth it, you can prurchase it for just $10."
+    description: "Finally, we match your preferences to the top-rated experiences within your destination and build an optimized itinerary for your vacation. We show you a preview of that itinerary, and if you think that it's worth it, you can prurchase it for just $3."
   }
 ];
 
