@@ -2,6 +2,11 @@
 
 This guide will help you set up your development environment for each of Detours services.
 
+Before creating the conda environment, install the postgresql development package on your machine by running:
+```sh
+sudo apt install -y libpq-dev
+```
+
 ## Core service
 
 For local service-specific development, especially the core service, you can connect to the minikube postgres database by forwarding its port to your local machine. Use the following command to do so:
