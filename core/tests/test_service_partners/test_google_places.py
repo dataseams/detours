@@ -9,6 +9,7 @@ class TestGooglePlaces(TestCase):
     def test_client_happy_path(self):
         places = Client()
         # bicycle_rentals = places.search(query="Bicycle rental")
+        # self.assertIsInstance(bicycle_rentals, list)
         # self.assertIsNotNone(bicycle_rentals)
 
 
