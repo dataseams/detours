@@ -1,5 +1,6 @@
 """Main Google Places object to get activities from the api."""
 import requests
+from typing import List
 
 from .config import GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_API_URL
 
@@ -19,7 +20,7 @@ class Client:
 
     def search(
         self, query: str, input_type: str = "textquery", language: str = "en"
-    ) -> dict:
+    ) -> List[dict]:
         """Make an API call to Google Places with a search query.
 
         Parameters
@@ -33,7 +34,7 @@ class Client:
 
         Returns
         -------
-        dict
+        List[dict]
             Response object containins the search results as a list of places
         """
         fields = "formatted_address,name,rating,geometry"

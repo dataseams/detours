@@ -47,13 +47,11 @@ class CreatePlanForSurveryResponse(Mutation):
         survey_response_obj = survey_response_query.get(survey_response.id)
         survey_response_json = survey_response_obj.json
 
-        itinerary_items = itinerary.build_itinerary(survey_response_json)
-        itinerary.save_itinerary(
-            itinerary_items=itinerary_items,
-            city_code=survey_response_json["city"],
+        itinerary_builder = itinerary.Builder(
+            survey_response=survey_response_json,
             survey_response_id=survey_response.id,
-            survey_response=survey_response.json,
         )
+        itinerary_builder.save()
 
         return CreatePlanForSurveryResponse(survey_response=survey_response)
 
