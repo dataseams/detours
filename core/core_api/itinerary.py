@@ -76,21 +76,21 @@ class Builder:
                     "type": activity_type_food,
                 }
             )
-            for place in self.itinerary_items["bicycles"]:
-                places.append(
-                    {
-                        "place": models.Place(
-                            name=place["name"],
-                            description=place["name"],
-                            address=place["formatted_address"],
-                            locality=None,
-                            zipcode=None,
-                            latitude=place["geometry"]["location"]["lat"],
-                            longitude=place["geometry"]["location"]["lng"],
-                        ),
-                        "type": activity_type_tour,
-                    }
-                )
+        for place in self.itinerary_items["bicycles"]:
+            places.append(
+                {
+                    "place": models.Place(
+                        name=place["name"],
+                        description=place["name"],
+                        address=place["formatted_address"],
+                        locality=None,
+                        zipcode=None,
+                        latitude=place["geometry"]["location"]["lat"],
+                        longitude=place["geometry"]["location"]["lng"],
+                    ),
+                    "type": activity_type_tour,
+                }
+            )
         for place in places:
             db_session.add(place["place"])
         db_session.commit()
