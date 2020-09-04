@@ -39,3 +39,26 @@ This will automatically deploy any saved changes in your local environment. If y
 Follow the link below to access the ui in your local development environment.
 
 http://dataseams.local/
+
+## Set up a new developer user
+
+New developer / data scientist on the team will need their accounts set up on Gmail, notion.so, Slack, GCP, Google Maps, and the RDS (Postgres) database.
+
+### Add user email to GCP
+
+Add user as Project Editor on GCP IAM.
+
+### Create a Google Maps API key for the user
+
+In Google Maps service in GCP, create an API key for the user.
+
+### Create a database user and grant it access to the database
+
+In the SQL service in GCP, create a database user and grant it the following database access:
+
+```sql
+
+GRANT CONNECT ON DATABASE database_name TO username;
+GRANT USAGE ON SCHEMA public TO username;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO username;
+```
