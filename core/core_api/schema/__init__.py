@@ -51,22 +51,6 @@ class Query(ObjectType):
     hello = String(surveyResponseNodeId=Int())
     goodbye = String()
 
-    def resolve_hello(root, info, surveyResponseNodeId):
-        """Greet on entry."""
-        # Create itinerary
-        survey_response_query = SurveyResponse.get_query(info)
-        survey_response_obj = survey_response_query.get(surveyResponseNodeId)
-        survey_response_json = survey_response_obj.json
-
-        restaurants = Dining(survey_response_json).get()
-        itinerary.store_activities(restaurants, surveyResponseNodeId)
-
-        return f"Hello {surveyResponseNodeId}"
-
-    def resolve_goodbye(root, info):
-        """Greet on exit."""
-        return "See ya!"
-
     get_last_trip_plan_for_survey_response = Field(
         lambda: TripPlan, surveyResponseNodeId=String()
     )
