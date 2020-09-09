@@ -194,6 +194,14 @@ class ActivityType(Base):
         backref=backref("activity_type", uselist=False, cascade="delete,all"),
     )
 
+    @classmethod
+    def get_all(cls):
+        """Get all activity types and represent as TableValues."""
+        db_activity_types = cls.query.all()
+        activity_types = {x.name: x for x in db_activity_types}
+        activity_types_obj = TableValues(activity_types)
+        return activity_types_obj
+
 
 class Place(Base):
     """Define a place entity."""

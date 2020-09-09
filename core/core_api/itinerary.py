@@ -49,16 +49,10 @@ class Builder:
         )
         return itinerary_items
 
-    def save(self):
-        """Create all itinerary items and save to database."""
-        time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
-        activity_type_food = models.ActivityType.query.filter_by(
-            name="food"
-        ).first()
-        activity_type_tour = models.ActivityType.query.filter_by(
-            name="tour"
-        ).first()
-
+    def _save_return_places(
+        self, itinerary_items: list, activity_types: models.TableValues
+    ):
+        """Save places and return the list of places objects."""
         places = []
         for place in self.itinerary_items["restaurants"]:
             restaurant = place["restaurant"]
@@ -73,7 +67,7 @@ class Builder:
                         latitude=restaurant["location"]["latitude"],
                         longitude=restaurant["location"]["longitude"],
                     ),
-                    "type": activity_type_food,
+                    "type": activity_types.food,
                 }
             )
         for place in self.itinerary_items["bicycles"]:
@@ -88,13 +82,16 @@ class Builder:
                         latitude=place["geometry"]["location"]["lat"],
                         longitude=place["geometry"]["location"]["lng"],
                     ),
-                    "type": activity_type_tour,
+                    "type": activity_types.tour,
                 }
             )
         for place in places:
             db_session.add(place["place"])
         db_session.commit()
+        return places
 
+    def _save_return_activities(self, places: list):
+        """Save activities from list of place objects."""
         activities = []
         for place in places:
             activities.append(
@@ -107,15 +104,23 @@ class Builder:
         for activity in activities:
             db_session.add(activity)
         db_session.commit()
+        return activities
 
-        destination_city = models.City.query.filter_by(
-            code=self.city_code
-        ).first()
+    def _save_plans(
+        self,
+        city_code: str,
+        survey_response_id: int,
+        arrival_date,
+        return_date,
+    ):
+        """Save trip and daily plans."""
+        destination_city = models.City.query.filter_by(code=city_code).first()
 
+        time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
         trip_plan = models.TripPlan(
-            survey_response_id=self.survey_response_id,
-            start_date=self.arrival_date,
-            end_date=self.return_date,
+            survey_response_id=survey_response_id,
+            start_date=arrival_date,
+            end_date=return_date,
             start_time_of_day=time_of_day,
             # end_time_of_day=time_of_day["evening"],
             city=destination_city,
@@ -134,7 +139,7 @@ class Builder:
 
         daily_plans = []
         for trip_date in pd.date_range(
-            start=self.arrival_date, end=self.return_date, freq="D",
+            start=arrival_date, end=return_date, freq="D",
         ):
             daily_plans.append(
                 models.DailyPlan(date=trip_date, trip_plan=trip_plan)
@@ -142,7 +147,10 @@ class Builder:
         for v in daily_plans:
             db_session.add(v)
         db_session.commit()
+        return trip_plan, daily_plans
 
+    def _save_plan_items(self, activities: list, daily_plans: list):
+        """Save plan items from activities and daily plans."""
         foods = [
             activity
             for activity in activities
@@ -181,5 +189,22 @@ class Builder:
                         )
                     )
         db_session.commit()
+
+    def save(self):
+        """Create all itinerary items and save to database."""
+        activity_types = models.ActivityType.get_all()
+        places = self._save_return_places(
+            itinerary_items=self.itinerary_items, activity_types=activity_types
+        )
+        activities = self._save_return_activities(places=places)
+
+        trip_plan, daily_plans = self._save_plans(
+            city_code=self.city_code,
+            survey_response_id=self.survey_response_id,
+            arrival_date=self.arrival_date,
+            return_date=self.return_date,
+        )
+
+        self._save_plan_items(activities=activities, daily_plans=daily_plans)
 
         return self.survey_response_id
