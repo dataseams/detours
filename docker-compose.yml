@@ -47,8 +47,6 @@ services:
       detours:
         aliases:
           - ui
-    depends_on:
-      - core
 
 networks:
   detours:
