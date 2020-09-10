@@ -181,7 +181,12 @@ class ActivityType(Base):
 
     # key = category, value = material icon code
     VALUES = TableValues(
-        {"hotel": "hotel", "food": "restaurant", "tour": "directions_bike"}
+        {
+            "hotel": "hotel",
+            "food": "restaurant",
+            "tour": "directions_bike",
+            "museum": "museum",
+        }
     )
 
     __tablename__ = "activity_type"
