@@ -16,6 +16,28 @@ from .activities import Dining, Biking
 DATE_FORMAT = "%Y-%m-%d"
 
 
+def trip_length(arrival_date: str, return_date: str) -> int:
+    """Calculate trip length in days from arrival and return dates.
+
+    Parameters
+    ----------
+    arrival_date : str
+        Arrival date
+    return_date : str
+        Return date
+
+    Returns
+    -------
+    int
+        Length of trip in days
+    """
+    n_days = (
+        pd.to_datetime(return_date) - pd.to_datetime(arrival_date)
+    ).days + 1
+
+    return n_days
+
+
 class Builder:
     """Build an itinerary given the a user survey parameters."""
 
@@ -40,12 +62,20 @@ class Builder:
         Dict[str, List[dict]]
             Dict of itinerary items.
         """
-        itinerary_items = {}
-        itinerary_items.update(
-            {"restaurants": Dining(self.survey_response).get()}
+        n_days = trip_length(
+            arrival_date=self.arrival_date, return_date=self.return_date
         )
-        itinerary_items.update(
-            {"bicycles": Biking(self.survey_response).get()}
+        restaurants = Dining(self.survey_response).get()
+        breakfast = restaurants[:n_days]
+        lunch = restaurants[n_days : 2 * n_days]
+        dinner = restaurants[2 * n_days :]
+        itinerary_items = {
+            "morning": {"food": breakfast},
+            "noon": {"food": lunch},
+            "evening": {"food": dinner},
+        }
+        itinerary_items["morning"].update(
+            {"activities": Biking(self.survey_response).get()}
         )
         return itinerary_items
 
@@ -54,37 +84,42 @@ class Builder:
     ):
         """Save places and return the list of places objects."""
         places = []
-        for place in self.itinerary_items["restaurants"]:
-            restaurant = place["restaurant"]
-            places.append(
-                {
-                    "place": models.Place(
-                        name=restaurant["name"],
-                        description=restaurant["cuisines"],
-                        address=restaurant["location"]["address"],
-                        locality=restaurant["location"]["locality"],
-                        zipcode=restaurant["location"]["zipcode"],
-                        latitude=restaurant["location"]["latitude"],
-                        longitude=restaurant["location"]["longitude"],
-                    ),
-                    "type": activity_types.food,
-                }
-            )
-        for place in self.itinerary_items["bicycles"]:
-            places.append(
-                {
-                    "place": models.Place(
-                        name=place["name"],
-                        description=place["name"],
-                        address=place["formatted_address"],
-                        locality=None,
-                        zipcode=None,
-                        latitude=place["geometry"]["location"]["lat"],
-                        longitude=place["geometry"]["location"]["lng"],
-                    ),
-                    "type": activity_types.tour,
-                }
-            )
+
+        for day_period in self.itinerary_items:
+            for restaurant_obj in self.itinerary_items[day_period]["food"]:
+                restaurant = restaurant_obj["restaurant"]
+                places.append(
+                    {
+                        "place": models.Place(
+                            name=restaurant["name"],
+                            description=restaurant["cuisines"],
+                            address=restaurant["location"]["address"],
+                            locality=restaurant["location"]["locality"],
+                            zipcode=restaurant["location"]["zipcode"],
+                            latitude=restaurant["location"]["latitude"],
+                            longitude=restaurant["location"]["longitude"],
+                        ),
+                        "type": activity_types.food,
+                    }
+                )
+            for place in self.itinerary_items[day_period].get(
+                "activities", []
+            ):
+                places.append(
+                    {
+                        "place": models.Place(
+                            name=place["name"],
+                            description=place["name"],
+                            address=place["formatted_address"],
+                            locality=None,
+                            zipcode=None,
+                            latitude=place["geometry"]["location"]["lat"],
+                            longitude=place["geometry"]["location"]["lng"],
+                        ),
+                        "type": activity_types.tour,
+                    }
+                )
+
         for place in places:
             db_session.add(place["place"])
         db_session.commit()
