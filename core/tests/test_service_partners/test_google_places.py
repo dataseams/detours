@@ -1,5 +1,6 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch
+import pytest
 
 from core_api.service_partners.google_places import Client
 from core_api.activities import Biking
@@ -8,9 +9,7 @@ from core_api.activities import Biking
 class TestGooglePlaces(TestCase):
     def test_client_happy_path(self):
         places = Client()
-        # bicycle_rentals = places.search(query="Bicycle rental")
-        # self.assertIsInstance(bicycle_rentals, list)
-        # self.assertIsNotNone(bicycle_rentals)
+        self.assertIsNotNone(places)
 
 
 class TestGetActivities(TestCase):
