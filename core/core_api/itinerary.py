@@ -49,7 +49,7 @@ class Builder:
         self.return_date = survey_response.get("returnDate")
         self.itinerary_items = self._build()
 
-    def _build(self) -> Dict[str, List[dict]]:
+    def _build(self) -> Dict[str, Dict[str, List[dict]]]:
         """Query external APIs to formulate all itinerary activities.
 
         Parameters
@@ -70,25 +70,30 @@ class Builder:
         lunch = restaurants[n_days : 2 * n_days]
         dinner = restaurants[2 * n_days :]
         itinerary_items = {
-            "morning": {"food": breakfast},
-            "noon": {"food": lunch},
-            "evening": {"food": dinner},
+            "morning": {"food": breakfast, "activities": []},
+            "noon": {"food": lunch, "activities": []},
+            "evening": {"food": dinner, "activities": []},
         }
-        itinerary_items["morning"].update(
-            {"activities": Biking(self.survey_response).get()}
+        itinerary_items["morning"]["activities"].extend(
+            Biking(self.survey_response).get()
         )
+
         return itinerary_items
 
     def _save_return_places(
         self, itinerary_items: list, activity_types: models.TableValues
     ):
         """Save places and return the list of places objects."""
-        places = []
+        places = {
+            "morning": {"food": [], "activities": []},
+            "noon": {"food": [], "activities": []},
+            "evening": {"food": [], "activities": []},
+        }
 
         for day_period in self.itinerary_items:
             for restaurant_obj in self.itinerary_items[day_period]["food"]:
                 restaurant = restaurant_obj["restaurant"]
-                places.append(
+                places[day_period]["food"].append(
                     {
                         "place": models.Place(
                             name=restaurant["name"],
@@ -102,10 +107,8 @@ class Builder:
                         "type": activity_types.food,
                     }
                 )
-            for place in self.itinerary_items[day_period].get(
-                "activities", []
-            ):
-                places.append(
+            for place in self.itinerary_items[day_period]["activities"]:
+                places[day_period]["activities"].append(
                     {
                         "place": models.Place(
                             name=place["name"],
@@ -119,25 +122,35 @@ class Builder:
                         "type": activity_types.tour,
                     }
                 )
-
-        for place in places:
-            db_session.add(place["place"])
+        for day_period in places:
+            for partner_type in places[day_period]:
+                for place in places[day_period][partner_type]:
+                    db_session.add(place["place"])
         db_session.commit()
         return places
 
     def _save_return_activities(self, places: list):
         """Save activities from list of place objects."""
-        activities = []
-        for place in places:
-            activities.append(
-                models.Activity(
-                    name=place["type"].name,
-                    place=place["place"],
-                    activity_type=place["type"],
-                )
-            )
-        for activity in activities:
-            db_session.add(activity)
+        activities = {
+            "morning": {"food": [], "activities": []},
+            "noon": {"food": [], "activities": []},
+            "evening": {"food": [], "activities": []},
+        }
+        for day_period in places:
+            for partner_type in places[day_period]:
+                for place in places[day_period][partner_type]:
+                    activities[day_period][partner_type].append(
+                        models.Activity(
+                            name=place["type"].name,
+                            place=place["place"],
+                            activity_type=place["type"],
+                        )
+                    )
+
+        for day_period in activities:
+            for partner_type in activities[day_period]:
+                for activity in activities[day_period][partner_type]:
+                    db_session.add(activity)
         db_session.commit()
         return activities
 
@@ -186,43 +199,34 @@ class Builder:
 
     def _save_plan_items(self, activities: list, daily_plans: list):
         """Save plan items from activities and daily plans."""
-        foods = [
-            activity
-            for activity in activities
-            if activity.activity_type.name == "food"
-        ]
-        tours = [
-            activity
-            for activity in activities
-            if activity.activity_type.name == "tour"
-        ]
-        all_items = []
-        for i in range(len(foods)):
-            item = [foods[i]]
-            if i < len(tours):
-                item.append(tours[i])
-            all_items.append(item)
-        order = 0
-        for i, daily_plan in enumerate(daily_plans):
-            for j in range(3):
-                k = (i + 1) * (j + 1)
-                food = all_items[k - 1][0]
-                tour = (
-                    all_items[k - 1][1] if len(all_items[k - 1]) == 2 else None
-                )
-                order = order + 1
-                db_session.add(
-                    models.PlanItem(
-                        order=order, daily_plan=daily_plan, activity=food,
-                    )
-                )
-                if tour:
-                    order = order + 1
-                    db_session.add(
+        plan_items = []
+        for day_index, daily_plan in enumerate(daily_plans):
+            order = 0
+            for day_period in ["morning", "noon", "evening"]:
+                if day_index in range(len(activities[day_period]["food"])):
+                    plan_items.append(
                         models.PlanItem(
-                            order=order, daily_plan=daily_plan, activity=tour,
+                            order=order,
+                            daily_plan=daily_plan,
+                            activity=activities[day_period]["food"][day_index],
                         )
                     )
+                    order += 1
+                if day_index in range(
+                    len(activities[day_period]["activities"])
+                ):
+                    plan_items.append(
+                        models.PlanItem(
+                            order=order,
+                            daily_plan=daily_plan,
+                            activity=activities[day_period]["activities"][
+                                day_index
+                            ],
+                        )
+                    )
+                    order += 1
+        for plan_item in plan_items:
+            db_session.add(plan_item)
         db_session.commit()
 
     def save(self):
