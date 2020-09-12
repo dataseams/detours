@@ -45,8 +45,8 @@ class Builder:
         self.survey_response = survey_response
         self.survey_response_id = survey_response_id
         self.city_code = survey_response.get("city")
-        self.arrival_date = survey_response.get("arrivalDate")
-        self.return_date = survey_response.get("returnDate")
+        self.arrival_date = survey_response.get("travelDates")[0]
+        self.return_date = survey_response.get("travelDates")[1]
         self.itinerary_items = self._build()
 
     def _build(self) -> Dict[str, Dict[str, List[dict]]]:

@@ -16,8 +16,7 @@ class TestGetActivities(TestCase):
     @patch("core_api.activities.google_places")
     def test_happy_path(self, mock_google_places):
         survey_response = (
-            '{"city": "LA" , "arrivalDate": "2020-01-01", '
-            '"returnDate": "2020-01-02"}'
+            '{"city": "LA" , "travelDates": ["2020-01-01", "2020-01-02"]}'
         )
         client_object = Mock()
         mock_google_places.Client.return_value = client_object

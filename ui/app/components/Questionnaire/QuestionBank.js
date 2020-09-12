@@ -1,7 +1,7 @@
 import React from "react";
 
 import CitiesField from "./City";
-import TravelDateFields from "./TravelDates";
+import TravelDatesField from "./TravelDates";
 import OccasionField from "./Occasion";
 import AgeGenderField from "./AgeGender";
 import CompanionField from "./Companion";
@@ -36,7 +36,7 @@ function QuestionComp(props) {
         <span>STEP 2/{questionnaireLength}</span>
         <div>
           <h1>When are you planning to take your vacation?</h1>
-          <TravelDateFields />
+          <TravelDatesField />
         </div>
       </div>
     ),

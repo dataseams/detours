@@ -30,10 +30,10 @@ class Activity:
             if x["code"] == self.city_code
         ][0]
         self.arrival_date = datetime.strptime(
-            self.survey_response["arrivalDate"][:10], DATE_FORMAT
+            self.survey_response["travelDates"][0][:10], DATE_FORMAT
         )
         self.return_date = datetime.strptime(
-            self.survey_response["returnDate"][:10], DATE_FORMAT
+            self.survey_response["travelDates"][1][:10], DATE_FORMAT
         )
         self.n_days = (self.return_date - self.arrival_date).days + 1
 
