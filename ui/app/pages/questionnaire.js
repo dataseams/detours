@@ -53,6 +53,7 @@ const useMobileStyles = makeStyles(theme => ({
 }));
 
 const store = createStore(questionnaireReducer);
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 function SurveyWithoutRedux(props) {
   const { isMobile } = props;
