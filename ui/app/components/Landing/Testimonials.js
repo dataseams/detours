@@ -49,8 +49,9 @@ const useStyles = makeStyles(theme => ({
     objectFit: "contain"
   },
   content: {
-    height: 40,
-    padding: 10
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2, 2)
   },
   quote: {
     padding: theme.spacing(2, 0)
@@ -64,9 +65,9 @@ const useStyles = makeStyles(theme => ({
 
 const useMobileStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3),
     fontSize: theme.typography.fontSize,
-    color: theme.typography.color
+    color: theme.typography.color,
+    padding: theme.mainContainer.mobile.padding
   },
   card: {
     display: "flex",
@@ -93,15 +94,15 @@ const useMobileStyles = makeStyles(theme => ({
     objectFit: "contain"
   },
   content: {
-    height: 40,
-    padding: 10
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2, 0)
   },
   quote: {
     padding: theme.spacing(2)
   },
   signature: {
     fontStyle: "italic",
-    padding: theme.spacing(2, 0, 0, 0),
     color: theme.typography.color
   }
 }));
@@ -122,7 +123,7 @@ function Testimonial(props) {
         title={step.name}
         component="img"
       />
-      <CardContent>
+      <CardContent className={classes.content}>
         <Grid className={classes.gridQuote}>
           <img src="/static/left_quotes.svg" className={classes.quote}></img>
           <Typography className={classes.body}>
@@ -140,7 +141,6 @@ function Testimonial(props) {
 
 const StyledMobileStepper = withStyles(theme => ({
   root: {
-    padding: theme.spacing(0, 0, 2, 0),
     color: theme.typography.color
   },
   dot: {

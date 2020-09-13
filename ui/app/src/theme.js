@@ -55,6 +55,11 @@ const theme = createMuiTheme({
     fontSize: 18,
     textTransform: "uppercase",
     fontWeight: 600
+  },
+  mainContainer: {
+    mobile: {
+      padding: 8 * 3
+    }
   }
 });
 

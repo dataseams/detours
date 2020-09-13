@@ -65,24 +65,21 @@ const useMobileStyles = makeStyles(theme => ({
     justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
     color: theme.typography.color,
-    padding: theme.spacing(5, 3, 3, 3)
+    padding: theme.mainContainer.mobile.padding
   },
   h2: {
-    alignSelf: "flex-start",
-    padding: theme.spacing(0),
     ...theme.h2.mobile
   },
   h3: {
-    padding: theme.spacing(1, 0),
     ...theme.h3
   },
   body: {
-    padding: theme.spacing(0, 0, 0, 0),
     ...theme.body
   },
   content: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    padding: theme.spacing(2, 0, 0, 0)
   },
   card: {
     display: "flex",
@@ -116,8 +113,7 @@ const howItWorksSteps = [
 
 const StyledMobileStepper = withStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.secondary.light,
-    padding: theme.spacing(0, 0, 2, 0)
+    backgroundColor: theme.palette.secondary.light
   },
   dot: {
     backgroundColor: theme.palette.secondary.dark,
