@@ -32,17 +32,17 @@ const theme = createMuiTheme({
   h1: {
     mobile: {
       fontSize: 32,
-      lineHeight: "1.6em"
+      lineHeight: "1.4em"
     },
     desktop: {
       fontSize: 44,
       fontWeight: "bold",
-      lineHeight: "1.6em"
+      lineHeight: "1.3em"
     }
   },
   h2: {
     mobile: {
-      fontSize: 22,
+      fontSize: 24,
       fontWeight: 500
     },
     desktop: {
@@ -54,11 +54,12 @@ const theme = createMuiTheme({
     color: "#5865bc",
     fontSize: 18,
     textTransform: "uppercase",
-    fontWeight: 600
+    fontWeight: 600,
+    paddingBottom: 8 * 1
   },
   mainContainer: {
     mobile: {
-      padding: 8 * 3
+      padding: 8 * 4
     }
   }
 });

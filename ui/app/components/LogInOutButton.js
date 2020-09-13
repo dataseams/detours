@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Link } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -8,9 +8,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
     flexGrow: 1,
     textTransform: "none",
-    fontSize: 16,
     borderColor: theme.palette.primary.main,
-    height: "3.5em",
+    borderWidth: "2px",
+    color: theme.palette.primary.main,
+    height: "3.3em",
     borderRadius: "2px"
   }
 }));

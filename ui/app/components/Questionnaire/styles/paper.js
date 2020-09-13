@@ -19,8 +19,7 @@ const paperStyles = makeStyles(theme => ({
     padding: 0,
     margin: "10px",
     "&:hover": {
-      backgroundColor: "#5865bc",
-      opacity: 0.6
+      backgroundColor: theme.palette.primary.main
     }
   },
   paperSelected: {
@@ -34,12 +33,10 @@ const paperStyles = makeStyles(theme => ({
     cursor: "pointer",
     outline: "0px auto rgba(19,124,189,.6)",
     outlineOffset: 0,
-    backgroundColor: "#5865bc",
-    opacity: 0.8,
+    backgroundColor: theme.palette.primary.main,
     padding: 0,
     "&:hover": {
-      backgroundColor: "#5865bc",
-      opacity: 0.8
+      backgroundColor: theme.palette.primary.main
     }
   },
   q: {

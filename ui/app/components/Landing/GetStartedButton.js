@@ -36,7 +36,7 @@ const useMobileStyles = makeStyles(theme => ({
     ...theme.body,
     backgroundColor: theme.palette.primary.main,
     color: "white",
-    height: "3em",
+    height: "3.3em",
     borderRadius: "2px"
   }
 }));
