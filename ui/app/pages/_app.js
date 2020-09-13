@@ -8,7 +8,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 
 import withData from "../utils/apolloclient";
 
-class MyApp extends App {
+class DetoursApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -38,4 +38,4 @@ class MyApp extends App {
   }
 }
 
-export default withData(MyApp);
+export default withData(DetoursApp);

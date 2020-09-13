@@ -3,40 +3,36 @@ import makeStyles from "@material-ui/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(10, 5, 10, 10)
+    fontSize: theme.typography.fontSize,
+    color: theme.typography.color,
+    padding: theme.spacing(10, 15)
   },
-  mainGrid: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start"
-  },
-  gridL1: {
+  gridMain: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     flexWrap: "wrap",
     flexGrow: 1
   },
-  gridL2: {
+  gridLeft: {
     display: "flex",
     flexDirection: "column",
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "flex-start",
     alignContent: "center",
-    flexGrow: 1,
-    padding: theme.spacing(2, 3, 2, 2)
   },
-  gridL3: {
+  gridRight: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "column",
     flexGrow: 1,
-    padding: theme.spacing(0, 0, 0, 2)
+    justifyContent: "right",
+    alignItems: "flex-end",
+    alignContent: "center"
   },
-  title: {
-    fontWeight: "bold",
-    padding: theme.spacing(0, 0, 0, 2)
+  h2: {
+    ...theme.h2.desktop,
+    padding: theme.spacing(0, 0, 4, 0)
   },
   price: {
     fontSize: "100px",
@@ -44,18 +40,21 @@ const useStyles = makeStyles(theme => ({
   },
   priceUnit: {
     fontSize: "36px"
+  },
+  body: {
+    ...theme.body
   }
 }));
 
 const useMobileStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3),
-    fontSize: 18
+    fontSize: theme.typography.fontSize,
+    color: theme.typography.color
   },
-  title: {
-    fontWeight: "bold",
+  h2: {
     padding: theme.spacing(2, 0, 2, 0),
-    fontSize: "1.22em"
+    ...theme.h2.mobile
   },
   price: {
     fontSize: "2.22em",
@@ -72,6 +71,9 @@ const useMobileStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     margin: theme.spacing(5, 0)
   },
+  body: {
+    ...theme.body
+  }
 }));
 
 function Pricing(props) {
@@ -81,7 +83,7 @@ function Pricing(props) {
   return (
     isMobile ? (
       <Box className={classes.root} >
-        <Typography className={classes.title}>Pricing</Typography>
+        <Typography className={classes.h2}>Pricing</Typography>
 
         <Typography
           className={classes.price}
@@ -98,64 +100,56 @@ function Pricing(props) {
         >
           per month
         </Typography>
-        <Typography>
+        <Typography className={classes.body}>
           We believe that affordable and enjoyable travel should be
           accessible for anyone. We're also in beta. For these reasons,
           we've decided to make a full travel itinerary, regardless of
           destination or length of vacation, available for a subscription fee of
           $3.
-      </Typography>
+        </Typography>
         <br />
-        <Typography>
+        <Typography className={classes.body}>
           This small fee will save you an average of 20 to 30 hours of
           planning your vacation and will give you access to an itinerary of
           top-rated experiences personalized specifically for you.
-      </Typography>
+        </Typography>
         <Divider className={classes.divider}></Divider>
       </Box>
     ) : (
         <Box className={classes.root}>
-          <Grid className={classes.mainGrid}>
-            <Grid className={classes.gridL1}>
-              <Typography className={classes.title}>Pricing</Typography>
+          <Typography className={classes.h2}>Pricing</Typography>
+          <Grid className={classes.gridMain}>
+            <Grid className={classes.gridLeft} item xs={8}>
+              <Typography className={classes.body}>
+                We believe that affordable and enjoyable travel should be
+                accessible for anyone. We're also in beta. For these reasons,
+                we've decided to make a full travel itinerary, regardless of
+                destination or length of vacation, available for a subscription fee of
+                $3.
+                <br></br>
+                <br></br>
+                This small fee will save you an average of 20 to 30 hours of
+                planning your vacation and will give you access to an itinerary of
+                top-rated experiences personalized specifically for you.
+              </Typography>
             </Grid>
-            <Grid className={classes.gridL1}>
-              <Grid className={classes.gridL2} item xs={8}>
-                <Typography>
-                  We believe that affordable and enjoyable travel should be
-                  accessible for anyone. We're also in beta. For these reasons,
-                  we've decided to make a full travel itinerary, regardless of
-                  destination or length of vacation, available for a subscription fee of
-                  $3.
-            </Typography>
-                <br />
-                <Typography>
-                  This small fee will save you an average of 20 to 30 hours of
-                  planning your vacation and will give you access to an itinerary of
-                  top-rated experiences personalized specifically for you.
-            </Typography>
-              </Grid>
-              <Grid className={classes.gridL2}>
-                <Grid className={classes.gridL3}>
-                  <Typography
-                    className={classes.price}
-                    variant="h2"
-                    component="h2"
-                    color="primary"
-                  >
-                    $3
-              </Typography>
-                </Grid>
-                <Grid className={classes.gridL3}>
-                  <Typography
-                    className={classes.priceUnit}
-                    variant="h5"
-                    color="primary"
-                  >
-                    per month
-              </Typography>
-                </Grid>
-              </Grid>
+            <Grid className={classes.gridRight}>
+              <Typography
+                className={classes.price}
+                variant="h2"
+                component="h2"
+                color="primary"
+              >
+                $3
+                </Typography>
+              <Typography
+                className={classes.priceUnit}
+                variant="h3"
+                component="h3"
+                color="primary"
+              >
+                per month
+                </Typography>
             </Grid>
           </Grid>
         </Box>

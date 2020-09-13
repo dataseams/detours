@@ -12,38 +12,36 @@ import SwipeableViews from "react-swipeable-views";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(10)
+    padding: theme.spacing(10, 15),
+    fontSize: theme.typography.fontSize,
+    color: theme.typography.color
   },
-  mainGrid: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-  },
-  gridL1: {
+  testimonialsContainer: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     flexWrap: "wrap",
+    justifyContent: "space-between",
+    margin: theme.spacing(0, -2)
   },
   card: {
-    padding: theme.spacing(2, 2, 2, 2),
     display: "flex",
     flexDirection: "column",
     width: 300,
-    margin: theme.spacing(1),
     background: "none",
     boxShadow: "none"
   },
-  gridL3: {
+  gridQuote: {
     display: "flex",
     flexDirection: "column",
+    flexGrow: 1,
     justifyContent: "center",
-    alignItems: "center",
-    flexGrow: 1
+    alignItems: "center"
   },
-  title: {
-    fontWeight: "bold",
-    padding: theme.spacing(0, 0, 0, 2)
+  h2: {
+    ...theme.h2.desktop
+  },
+  body: {
+    ...theme.body
   },
   media: {
     height: "150px",
@@ -55,18 +53,20 @@ const useStyles = makeStyles(theme => ({
     padding: 10
   },
   quote: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2, 0)
   },
   signature: {
     fontStyle: "italic",
-    padding: theme.spacing(2, 0, 0, 0)
+    padding: theme.spacing(2, 0, 0, 0),
+    color: theme.typography.color
   }
 }));
 
 const useMobileStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3),
-    fontSize: 18
+    fontSize: theme.typography.fontSize,
+    color: theme.typography.color
   },
   card: {
     display: "flex",
@@ -74,16 +74,18 @@ const useMobileStyles = makeStyles(theme => ({
     background: "none",
     boxShadow: "none"
   },
-  gridL3: {
+  gridQuote: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     flexGrow: 1
   },
-  title: {
-    fontSize: "1.22em",
-    fontWeight: "bold"
+  h2: {
+    ...theme.h2.mobile
+  },
+  body: {
+    ...theme.body
   },
   media: {
     height: "150px",
@@ -99,7 +101,8 @@ const useMobileStyles = makeStyles(theme => ({
   },
   signature: {
     fontStyle: "italic",
-    padding: theme.spacing(2, 0, 0, 0)
+    padding: theme.spacing(2, 0, 0, 0),
+    color: theme.typography.color
   }
 }));
 
@@ -120,9 +123,9 @@ function Testimonial(props) {
         component="img"
       />
       <CardContent>
-        <Grid className={classes.gridL3}>
+        <Grid className={classes.gridQuote}>
           <img src="/static/left_quotes.svg" className={classes.quote}></img>
-          <Typography>
+          <Typography className={classes.body}>
             {step.quote}
           </Typography>
           <img src="/static/right_quotes.svg" className={classes.quote}></img>
@@ -137,7 +140,8 @@ function Testimonial(props) {
 
 const StyledMobileStepper = withStyles(theme => ({
   root: {
-    padding: theme.spacing(0, 0, 2, 0)
+    padding: theme.spacing(0, 0, 2, 0),
+    color: theme.typography.color
   },
   dot: {
     backgroundColor: theme.palette.secondary.dark,
@@ -162,7 +166,7 @@ function Testimonials(props) {
   return (
     isMobile ? (
       <Box className={classes.root}>
-        <Typography className={classes.title}>
+        <Typography className={classes.h2}>
           What our customers say
         </Typography>
         <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
@@ -185,17 +189,15 @@ function Testimonials(props) {
       </Box >
     ) : (
         <Box className={classes.root}>
-          <Grid className={classes.mainGrid}>
-            <Grid className={classes.title}>
-              <Typography className={classes.title}>
-                What our customers say
+          <Grid className={classes.h2}>
+            <Typography className={classes.h2}>
+              What our customers say
               </Typography>
-            </Grid>
-            <Grid className={classes.gridL1}>
-              {userTestimonials.map((step, index) => (
-                <Testimonial key={index} classes={classes} step={step} index={index} />
-              ))}
-            </Grid>
+          </Grid>
+          <Grid className={classes.testimonialsContainer}>
+            {userTestimonials.map((step, index) => (
+              <Testimonial key={index} classes={classes} step={step} index={index} />
+            ))}
           </Grid>
         </Box>
       )

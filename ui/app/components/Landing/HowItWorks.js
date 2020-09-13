@@ -13,41 +13,38 @@ import SwipableViews from "react-swipeable-views";
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    flexFlow: "row",
-    justifyContent: "center",
-    backgroundColor: theme.palette.secondary.light
+    flexFlow: "column",
+    justifyContent: "left",
+    fontSize: theme.body.fontSize,
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.typography.color,
+    padding: theme.spacing(5, 15)
   },
-  title: {
-    alignSelf: "flex-start",
-    paddingLeft: theme.spacing(5),
-    fontWeight: "bold"
+  h2: {
+    ...theme.h2.desktop
   },
-  subtitle: {
-    padding: theme.spacing(1, 1, 1, 1)
+  h3: {
+    padding: theme.spacing(1, 0),
+    ...theme.h3
   },
-  text: {
-    padding: theme.spacing(1, 1, 1, 1)
+  body: {
+    ...theme.body
   },
-  mainGrid: {
+  stepsContainer: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3)
-  },
-  grid: {
-    display: "flex",
+    flexDirection: "row",
     flexGrow: 1,
     flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    margin: theme.spacing(0, -1)
   },
   card: {
     display: "flex",
     flexDirection: "column",
     width: 300,
-    margin: theme.spacing(2),
     background: "none",
-    boxShadow: "none"
+    boxShadow: "none",
+    margin: theme.spacing(0, 1)
   },
   media: {
     height: 300,
@@ -67,14 +64,21 @@ const useMobileStyles = makeStyles(theme => ({
     flexFlow: "column",
     justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
-    fontSize: 18,
-    padding: theme.spacing(2, 3, 0, 3)
+    color: theme.typography.color,
+    padding: theme.spacing(5, 3, 3, 3)
   },
-  title: {
+  h2: {
     alignSelf: "flex-start",
     padding: theme.spacing(0),
-    fontWeight: "bold",
-    fontSize: "1.22em"
+    ...theme.h2.mobile
+  },
+  h3: {
+    padding: theme.spacing(1, 0),
+    ...theme.h3
+  },
+  body: {
+    padding: theme.spacing(0, 0, 0, 0),
+    ...theme.body
   },
   content: {
     display: "flex",
@@ -86,18 +90,9 @@ const useMobileStyles = makeStyles(theme => ({
     background: "none",
     boxShadow: "none"
   },
-  subtitle: {
-    padding: theme.spacing(1, 0),
-    fontSize: "1em",
-    textTransform: "uppercase",
-    color: theme.palette.primary.main
-  },
-  text: {
-    padding: theme.spacing(0, 0, 0, 0),
-    fontSize: "1em"
-  },
   media: {
-    objectFit: "scale-down"
+    objectFit: "scale-down",
+    height: "250px"
   }
 }));
 
@@ -105,17 +100,17 @@ const howItWorksSteps = [
   {
     title: "Step 1",
     image: "/static/howitworks1.svg",
-    description: "First, you fill out an approximately 2-minute long questionnaire to let us know about your vacation preferences, including dining, activities, transportation, and more."
+    description: "First, you fill out an approximately 2-minute long survey to let us know about your vacation preferences, including dining, activities, and more."
   },
   {
     title: "Step 2",
     image: "/static/howitworks2.svg",
-    description: "Then, our advanced data science model pulls data from thousands of outside sources (Yelp, Trip Advisor, Google Reviews) to aggregate the consistently top-rated experiences within your travel destination."
+    description: "Then, our advanced AI model pulls data from thousands of outside sources to aggregate the consistently top-rated experiences within your travel destination."
   },
   {
     title: "Step 3",
     image: "/static/howitworks3.svg",
-    description: "Finally, we match your preferences to the top-rated experiences within your destination and build an optimized itinerary for your vacation. We show you a preview of that itinerary, and if you think that it's worth it, you can prurchase it for just $3."
+    description: "Finally, we select results matching your preferences to build you an optimized itinerary. We show you a preview of it, and if you like it, you can subscribe for just $3."
   }
 ];
 
@@ -146,9 +141,9 @@ function HowItWorksComponent(props) {
         component="img"
       />
       <CardContent className={classes.content}>
-        <Typography className={classes.subtitle}>{step.title}</Typography>
+        <Typography className={classes.h3}>{step.title}</Typography>
         <Typography
-          className={classes.text}
+          className={classes.body}
           variant="body2"
           color="textSecondary"
           component="p"
@@ -172,7 +167,7 @@ function HowItWorks(props) {
   return (
     isMobile ? (
       <Box className={classes.root}>
-        <Typography className={classes.title}>How it works</Typography>
+        <Typography className={classes.h2}>How it works</Typography>
         <SwipableViews index={activeStep} onChangeIndex={handleStepChange}>
           {howItWorksSteps.map((step, index) => (
             <HowItWorksComponent
@@ -198,19 +193,17 @@ function HowItWorks(props) {
       </Box>
     ) : (
         <Box className={classes.root}>
-          <Grid className={classes.mainGrid}>
-            <Typography className={classes.title}>How it works</Typography>
-            <Grid className={classes.grid}>
-              {howItWorksSteps.map((step, index) => (
-                <HowItWorksComponent
-                  key={index}
-                  step={step}
-                  index={index}
-                  classes={classes}
-                />
-              ))}
-            </Grid>
-          </Grid>
+          <Typography className={classes.h2}>How it works</Typography>
+          <Box className={classes.stepsContainer}>
+            {howItWorksSteps.map((step, index) => (
+              <HowItWorksComponent
+                key={index}
+                step={step}
+                index={index}
+                classes={classes}
+              />
+            ))}
+          </Box>
         </Box >
       )
   );
