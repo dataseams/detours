@@ -6,10 +6,10 @@ import {
   CardMedia,
   CardActionArea,
   CardContent,
-  MobileStepper
+  GridList,
+  GridListTile
 } from "@material-ui/core";
-import { makeStyles, useTheme, withStyles } from "@material-ui/styles";
-import SwipeableViews from "react-swipeable-views";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,55 +54,43 @@ const useStyles = makeStyles(theme => ({
 const useMobileStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    flexGrow: 1,
     fontSize: theme.typography.fontSize,
-    color: theme.typography.color
+    color: theme.typography.color,
+    padding: theme.mainContainer.mobile.padding
   },
   h2: {
     color: "white",
-    paddingTop: theme.spacing(4),
-    paddingLeft: "20%",
     ...theme.h2.mobile
   },
+  scrollContainer: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  gridList: {
+    flexWrap: "nowrap",
+    transform: "translateZ(0)",
+    padding: theme.spacing(2, 0),
+    height: 274
+  },
   cardContainer: {
-    width: "100%",
-    paddingLeft: "20%",
-    padding: theme.spacing(3, 0, 3, 0)
+    padding: theme.spacing(0),
+    height: 234
   },
   card: {
-    width: "75%"
+    width: "100%"
   },
   media: {
-    height: 140
+    height: 170
   },
   content: {
-    height: 50,
-    padding: 10
+    height: 60,
+    paddingLeft: 10
   },
   body: {
     paddingLeft: theme.spacing(1),
     ...theme.body
-  },
-  stepper: {
-    paddingBottom: theme.spacing(4)
   }
 }));
-
-const StyledMobileStepper = withStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.typography.color
-  },
-  dot: {
-    backgroundColor: "white",
-    width: "17px",
-    height: "17px",
-    margin: "5px"
-  },
-  dotActive: {
-    backgroundColor: theme.palette.secondary.dark
-  }
-}))(MobileStepper);
 
 const itineraries = [
   { title: "Paris, France", image: "static/paris.png" },
@@ -111,38 +99,28 @@ const itineraries = [
   { title: "Barcelona, Spain", image: "static/barcelona.png" },
 ];
 
-const Itineraries = props => {
-  const { isMobile } = props;
-  const classes = isMobile ? useMobileStyles() : useStyles();
+const Itinerary = props => {
+  const { classes, itinerary, index } = props;
 
   return (
-    itineraries.map((step, index) => (
-      <Card key={index} className={classes.card}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={step.image}
-            title={step.title}
-          />
-          <CardContent className={classes.content}>
-            <Typography className={classes.body}>{step.title}</Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    ))
+    <Card key={index} className={classes.card}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={itinerary.image}
+          title={itinerary.title}
+        />
+        <CardContent className={classes.content}>
+          <Typography className={classes.body}>{itinerary.title}</Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   )
-};
+}
 
 function SampleItineraries(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
-
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = itineraries.length;
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
 
   return (
     (isMobile) ? (
@@ -150,39 +128,27 @@ function SampleItineraries(props) {
         <Typography className={classes.h2}>
           See sample itineraries to:
         </Typography>
-        <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
-          {itineraries.map((itinerary, index) => (
-            <Box key={index} className={classes.cardContainer}>
-              <Card className={classes.card}>
-                <CardActionArea>
-                  <CardMedia
-                    className={classes.media}
-                    image={itinerary.image}
-                    title={itinerary.title}
-                  />
-                  <CardContent className={classes.content}>
-                    <Typography className={classes.body}>
-                      {itinerary.title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Box>
-          ))}
-        </SwipeableViews>
-        <StyledMobileStepper
-          steps={maxSteps}
-          position="static"
-          variant="dots"
-          activeStep={activeStep}
-          nextButton={
-            <div />
-          }
-          backButton={
-            <div />
-          }
-          className={classes.stepper}
-        />
+        <Box className={classes.scrollContainer}>
+          <GridList
+            className={classes.gridList}
+            cols={1.5}
+            spacing={8 * 2}
+          >
+            {itineraries.map((itinerary, index) => (
+              <GridListTile
+                key={index}
+                className={classes.cardContainer}
+                classes={{tile: classes.cardContainer}}
+              >
+                <Itinerary
+                  classes={classes}
+                  itinerary={itinerary}
+                  index={index}
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+        </Box>
       </Box>
     ) : (
         <Box className={classes.root} >
@@ -190,7 +156,14 @@ function SampleItineraries(props) {
             See sample itineraries to:
             </Typography>
           <Grid className={classes.grid}>
-            <Itineraries isMobile={isMobile} />
+            {itineraries.map((itinerary, index) => (
+              <Itinerary
+                key={index}
+                classes={classes}
+                itinerary={itinerary}
+                index={index}
+              />
+            ))}
           </Grid>
         </Box>
       )

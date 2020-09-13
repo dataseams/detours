@@ -48,18 +48,17 @@ const useStyles = makeStyles(theme => ({
 
 const useMobileStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3),
     fontSize: theme.typography.fontSize,
-    color: theme.typography.color
+    color: theme.typography.color,
+    padding: theme.mainContainer.mobile.padding
   },
   h2: {
-    padding: theme.spacing(2, 0, 2, 0),
     ...theme.h2.mobile
   },
   price: {
     fontSize: "2.22em",
     fontWeight: "500",
-    padding: theme.spacing(1, 0, 1, 0)
+    padding: theme.spacing(3, 0, 1, 0)
   },
   priceUnit: {
     fontSize: "1.33em",
@@ -69,7 +68,7 @@ const useMobileStyles = makeStyles(theme => ({
     width: "90px",
     height: "2px",
     backgroundColor: theme.palette.primary.main,
-    margin: theme.spacing(5, 0)
+    margin: theme.spacing(3, 0, -3, 0)
   },
   body: {
     ...theme.body
