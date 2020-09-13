@@ -6,8 +6,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: "none",
     textTransform: "none",
-    fontSize: 16,
-    lineHeight: 1,
+    boxShadow: "3px 30px -10px rgba(0, 0, 0, 0.57)",
+    ...theme.body,
     backgroundColor: theme.palette.primary.main,
     color: "white",
     "&:hover": {
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
     },
     transitionDuration: "0.4",
     WebkitTransitionDuration: "0.4",
-    height: "2.5em",
-    width: "8em",
+    height: "3em",
+    width: "9em",
     margin: theme.spacing(1)
   }
 }));
@@ -33,10 +33,10 @@ const useMobileStyles = makeStyles(theme => ({
     flexDirection: "row",
     flexGrow: 1,
     textTransform: "none",
-    fontSize: 16,
+    ...theme.body,
     backgroundColor: theme.palette.primary.main,
     color: "white",
-    height: "3.5em",
+    height: "3em",
     borderRadius: "2px"
   }
 }));
@@ -53,7 +53,7 @@ function GetStartedButton(props) {
       className={classes.root}
       fullWidth={true}
     >
-      Get Started
+      Get started
     </Button>
   );
 }

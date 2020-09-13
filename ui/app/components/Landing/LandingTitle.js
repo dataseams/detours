@@ -9,17 +9,18 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "row",
     justifyContent: "center",
     flexGrow: 1,
-    padding: theme.spacing(20, 0, 10, 0),
+    padding: theme.spacing(20, 0, 7, 0),
+    color: theme.typography.color
   },
   grid: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
-  title: {
-    fontWeight: "bold",
+  h1: {
     textAlign: "center",
-    maxWidth: "750px"
+    maxWidth: "750px",
+    ...theme.h1.desktop
   },
   subtitle: {
     fontSize: 20,
@@ -34,24 +35,23 @@ const useMobileStyles = makeStyles(theme => ({
     flexDirection: "row",
     justifyContent: "center",
     flexGrow: 1,
-    padding: theme.spacing(10, 0, 5, 0),
-    fontSize: 18
+    padding: theme.spacing(10, 3, 3, 3),
+    color: theme.typography.color
   },
   grid: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3)
+    alignItems: "center"
   },
-  title: {
+  h1: {
     fontWeight: "bold",
     textAlign: "center",
     maxWidth: "750px",
-    fontSize: "1.44em"
+    ...theme.h1.mobile
   },
   subtitle: {
     fontSize: 18,
-    padding: theme.spacing(4, 0, 4, 0),
+    padding: theme.spacing(4, 0),
     textAlign: "center"
   }
 }));
@@ -63,8 +63,8 @@ function LandingTitle(props) {
   return (
     <Box className={classes.root}>
       <Grid className={classes.grid}>
-        <Typography variant="h2" className={classes.title}>
-          Your dream staycation, for the price of a cup of coffee.
+        <Typography variant="h2" className={classes.h1}>
+          Your dream vacation, for change money.
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>
           Fill out a short questionnaire and get a personalized itinerary.

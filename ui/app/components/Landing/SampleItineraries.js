@@ -14,41 +14,40 @@ import SwipeableViews from "react-swipeable-views";
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    flexFlow: "row",
-    justifyContent: "center",
-    backgroundColor: theme.palette.primary.main
+    flexFlow: "column",
+    justifyContent: "left",
+    fontSize: theme.typography.fontSize,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.typography.color,
+    padding: theme.spacing(5, 16)
   },
-  title: {
+  h2: {
     color: "white",
-    alignSelf: "flex-start",
-    paddingLeft: theme.spacing(2)
-  },
-  mainGrid: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3)
+    paddingBottom: theme.spacing(2),
+    ...theme.h2.desktop
   },
   grid: {
     display: "flex",
-    flexGrow: 1,
-    flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
+    flexGrow: 1,
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    margin: theme.spacing(0, -2)
   },
   card: {
     width: 200,
-    margin: theme.spacing(2)
+    margin: theme.spacing(2, 2)
   },
   media: {
     height: 140
   },
   content: {
-    height: 40,
+    height: 50,
     padding: 10
   },
-  text: {
-    fontSize: "1.1em"
+  body: {
+    paddingLeft: theme.spacing(1),
+    ...theme.body
   }
 }));
 
@@ -56,18 +55,19 @@ const useMobileStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     flexGrow: 1,
-    fontSize: 18
+    fontSize: theme.typography.fontSize,
+    color: theme.typography.color
   },
-  title: {
+  h2: {
     color: "white",
-    paddingTop: theme.spacing(1),
+    paddingTop: theme.spacing(4),
     paddingLeft: "20%",
-    fontSize: "1.22em"
+    ...theme.h2.mobile
   },
   cardContainer: {
     width: "100%",
     paddingLeft: "20%",
-    padding: theme.spacing(2, 0, 4, 0)
+    padding: theme.spacing(3, 0, 3, 0)
   },
   card: {
     width: "75%"
@@ -76,17 +76,22 @@ const useMobileStyles = makeStyles(theme => ({
     height: 140
   },
   content: {
-    height: 40,
+    height: 50,
     padding: 10
   },
-  text: {
-    fontSize: "1em"
+  body: {
+    paddingLeft: theme.spacing(1),
+    ...theme.body
+  },
+  stepper: {
+    paddingBottom: theme.spacing(4)
   }
 }));
 
 const StyledMobileStepper = withStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    color: theme.typography.color
   },
   dot: {
     backgroundColor: "white",
@@ -120,7 +125,7 @@ const Itineraries = props => {
             title={step.title}
           />
           <CardContent className={classes.content}>
-            <Typography className={classes.text}>{step.title}</Typography>
+            <Typography className={classes.body}>{step.title}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
@@ -141,8 +146,8 @@ function SampleItineraries(props) {
 
   return (
     (isMobile) ? (
-      <div className={classes.root}>
-        <Typography className={classes.title}>
+      <Box className={classes.root}>
+        <Typography className={classes.h2}>
           See sample itineraries to:
         </Typography>
         <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
@@ -156,7 +161,7 @@ function SampleItineraries(props) {
                     title={itinerary.title}
                   />
                   <CardContent className={classes.content}>
-                    <Typography className={classes.text}>
+                    <Typography className={classes.body}>
                       {itinerary.title}
                     </Typography>
                   </CardContent>
@@ -176,17 +181,16 @@ function SampleItineraries(props) {
           backButton={
             <div />
           }
+          className={classes.stepper}
         />
-      </div>
+      </Box>
     ) : (
         <Box className={classes.root} >
-          <Grid className={classes.mainGrid}>
-            <Typography className={classes.title}>
-              See sample itineraries to:
+          <Typography className={classes.h2}>
+            See sample itineraries to:
             </Typography>
-            <Grid className={classes.grid}>
-              <Itineraries isMobile={isMobile} />
-            </Grid>
+          <Grid className={classes.grid}>
+            <Itineraries isMobile={isMobile} />
           </Grid>
         </Box>
       )
