@@ -35,7 +35,7 @@ const useMobileStyles = makeStyles(theme => ({
     flexDirection: "row",
     justifyContent: "center",
     flexGrow: 1,
-    padding: theme.spacing(10, 3, 6, 3),
+    padding: theme.spacing(12, 3, 6, 3),
     color: theme.typography.color
   },
   grid: {

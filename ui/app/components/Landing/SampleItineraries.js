@@ -60,7 +60,8 @@ const useMobileStyles = makeStyles(theme => ({
   },
   h2: {
     color: "white",
-    ...theme.h2.mobile
+    ...theme.h2.mobile,
+    paddingBottom: theme.spacing(1)
   },
   scrollContainer: {
     display: "flex",
@@ -88,6 +89,7 @@ const useMobileStyles = makeStyles(theme => ({
   },
   body: {
     paddingLeft: theme.spacing(1),
+    fontWeight: 500,
     ...theme.body
   }
 }));

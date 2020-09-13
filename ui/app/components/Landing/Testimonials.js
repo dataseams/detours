@@ -83,7 +83,8 @@ const useMobileStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   h2: {
-    ...theme.h2.mobile
+    ...theme.h2.mobile,
+    paddingBottom: theme.spacing(2)
   },
   body: {
     ...theme.body
@@ -96,14 +97,20 @@ const useMobileStyles = makeStyles(theme => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    padding: theme.spacing(2, 0)
+    padding: theme.spacing(0),
+    textAlign: "center"
   },
-  quote: {
-    padding: theme.spacing(2)
+  quoteUp: {
+    padding: theme.spacing(0, 0, 2, 0)
+  },
+  quoteDown: {
+    padding: theme.spacing(2, 0, 2, 0)
   },
   signature: {
     fontStyle: "italic",
-    color: theme.typography.color
+    color: theme.typography.color,
+    opacity: 0.8,
+    paddingBottom: theme.spacing(2)
   }
 }));
 
@@ -125,11 +132,11 @@ function Testimonial(props) {
       />
       <CardContent className={classes.content}>
         <Grid className={classes.gridQuote}>
-          <img src="/static/left_quotes.svg" className={classes.quote}></img>
+          <img src="/static/left_quotes.svg" className={classes.quoteUp}></img>
           <Typography className={classes.body}>
             {step.quote}
           </Typography>
-          <img src="/static/right_quotes.svg" className={classes.quote}></img>
+          <img src="/static/right_quotes.svg" className={classes.quoteDown}></img>
           <Typography className={classes.signature}>
             {step.name}
           </Typography>

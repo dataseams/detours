@@ -68,7 +68,7 @@ const useMobileStyles = makeStyles(theme => ({
     width: "90px",
     height: "2px",
     backgroundColor: theme.palette.primary.main,
-    margin: theme.spacing(3, 0, -3, 0)
+    margin: theme.spacing(6, 0, -3, 0)
   },
   body: {
     ...theme.body

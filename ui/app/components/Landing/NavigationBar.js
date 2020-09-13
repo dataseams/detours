@@ -102,10 +102,13 @@ const useDividerStyles = makeStyles(theme => ({
 
 const useTextStyles = makeStyles(theme => ({
   root: {
-    fontSize: 18
+    fontSize: theme.typography.fontSize,
+    padding: theme.spacing(1, 0),
+    color: theme.typography.color
   },
   primary: {
-    fontSize: "1.167em"
+    fontSize: "1.167em",
+    fontWeight: 500
   }
 }));
 
@@ -131,7 +134,8 @@ function MobileToolbar(props) {
 
   const list = (anchor) => (
     <Box
-      padding={5}
+      padding={2}
+      marginTop={3}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}

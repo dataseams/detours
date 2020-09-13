@@ -4,7 +4,7 @@ import { Typography, makeStyles, Box } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   bottomBox: {
-    backgroundColor: "#7983c9",
+    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(5)
   },
   text: {
