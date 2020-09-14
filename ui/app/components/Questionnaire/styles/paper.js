@@ -19,8 +19,12 @@ const paperStyles = makeStyles(theme => ({
     padding: 0,
     margin: "10px",
     "&:hover": {
-      backgroundColor: theme.palette.primary.main
-    }
+      backgroundColor: theme.palette.primary.main,
+      color: "white",
+      opacity: 0.8
+    },
+    color: theme.typography.color,
+    fontWeight: "normal"
   },
   paperSelected: {
     borderRadius: "5px",
@@ -37,22 +41,23 @@ const paperStyles = makeStyles(theme => ({
     padding: 0,
     "&:hover": {
       backgroundColor: theme.palette.primary.main
-    }
+    },
   },
   q: {
-    fontSize: "1.125em",
+    fontSize: 26,
+    fontWeight: 500,
+    color: theme.typography.color,
     paddingBottom: theme.spacing(2)
   },
   cb: {
     paddingLeft: theme.spacing(1)
   },
   text: {
-    fontSize: "16px",
-    textTransform: "capitalize",
-    color: "black"
+    fontSize: theme.typography.fontSize,
+    textTransform: "capitalize"
   },
   textSelected: {
-    fontSize: "16px",
+    fontSize: theme.typography.fontSize,
     textTransform: "capitalize",
     color: "white"
   }

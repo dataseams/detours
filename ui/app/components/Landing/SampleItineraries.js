@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
   },
   body: {
     paddingLeft: theme.spacing(1),
-    ...theme.body
+    ...theme.body,
+    fontWeight: 500,
   }
 }));
 

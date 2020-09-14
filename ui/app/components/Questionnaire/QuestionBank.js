@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core";
 
 import CitiesField from "./City";
 import TravelDatesField from "./TravelDates";
@@ -18,24 +19,37 @@ import NightlifeField from "./Nightlife";
 import AdventureSportsField from "./AdventureSports";
 import NeighborhoodsField from "./Neighborhoods";
 
+const useStyles = makeStyles(theme => ({
+  h3: {
+    ...theme.h3
+  },
+  question: {
+    color: theme.typography.color,
+    fontSize: 38,
+    fontWeight: 600
+  }
+}));
+
 const questionnaireLength = 5;
 
 function QuestionComp(props) {
+  const classes = useStyles();
+
   var comp = {
     1: (
       <div>
-        <span>STEP 1/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP 1/{questionnaireLength}</span>
         <div>
-          <h1>Which city do you want to travel to?</h1>
+          <p className={classes.question}>Which city do you want to travel to?</p>
           <CitiesField />
         </div>
       </div>
     ),
     2: (
       <div>
-        <span>STEP 2/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP 2/{questionnaireLength}</span>
         <div>
-          <h1>When are you planning to take your vacation?</h1>
+          <p className={classes.question}>When are you planning to take your vacation?</p>
           <TravelDatesField />
         </div>
       </div>
@@ -60,9 +74,9 @@ function QuestionComp(props) {
     // ),
     3: (
       <div>
-        <span>STEP 5/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP 5/{questionnaireLength}</span>
         <div>
-          <h1>Who are you traveling with?</h1>
+          <p className={classes.question}>Who are you traveling with?</p>
           <CompanionField />
         </div>
       </div>
@@ -78,18 +92,18 @@ function QuestionComp(props) {
     // ),
     4: (
       <div>
-        <span>STEP 7/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP 7/{questionnaireLength}</span>
         <div>
-          <h1>What do you like to do when you travel?</h1>
+          <p className={classes.question}>What do you like to do when you travel?</p>
           <GeneralPreferencesField />
         </div>
       </div>
     ),
     5: (
       <div>
-        <span>STEP 8/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP 8/{questionnaireLength}</span>
         <div>
-          <h1>Food & Beverages</h1>
+          <p className={classes.question}>Food & Beverages</p>
           <FoodNBeveragesField />
         </div>
       </div>

@@ -12,7 +12,7 @@ import SwipeableViews from "react-swipeable-views";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(10, 15),
+    padding: theme.spacing(5, 15),
     fontSize: theme.typography.fontSize,
     color: theme.typography.color
   },

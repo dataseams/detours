@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
   select: {
     display: "flex",
     flexGrow: 1,
-    maxWidth: "450px",
-    height: "40px"
+    height: theme.spacing(7),
+    color: theme.typography.color
   }
 }));
 

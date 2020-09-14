@@ -65,7 +65,7 @@ const useMobileStyles = makeStyles(theme => ({
     justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
     color: theme.typography.color,
-    padding: theme.mainContainer.mobile.padding
+    padding: theme.spacing(3)
   },
   h2: {
     ...theme.h2.mobile
