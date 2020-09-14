@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     fontSize: theme.typography.fontSize,
     color: theme.typography.color,
-    padding: theme.spacing(10, 15)
+    padding: theme.spacing(5, 15)
   },
   gridMain: {
     display: "flex",
@@ -40,6 +40,12 @@ const useStyles = makeStyles(theme => ({
   },
   priceUnit: {
     fontSize: "36px"
+  },
+  divider: {
+    width: "90px",
+    height: "2px",
+    backgroundColor: theme.palette.primary.main,
+    margin: theme.spacing(10, 0, -4, 0)
   },
   body: {
     ...theme.body
@@ -151,6 +157,7 @@ function Pricing(props) {
                 </Typography>
             </Grid>
           </Grid>
+          <Divider className={classes.divider}></Divider>
         </Box>
       )
   )

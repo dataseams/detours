@@ -11,7 +11,7 @@ const FoodNBeveragesField = props => {
   return (
     <Grid container spacing={5}>
       <Grid item xs={12}>
-        <p className={classes.q}>1. What is your preferred price point?</p>
+        <p className={classes.q}>What is your preferred price point?</p>
         <Grid
           id="pricepoints"
           container
@@ -23,7 +23,7 @@ const FoodNBeveragesField = props => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <p className={classes.q}>2. Which dining environments do you prefer?</p>
+        <p className={classes.q}>Which dining environments do you prefer?</p>
         <Grid
           container
           justify="flex-start"
