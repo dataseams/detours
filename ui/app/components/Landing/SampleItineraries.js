@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.fontSize,
     backgroundColor: theme.palette.primary.main,
     color: theme.typography.color,
-    padding: theme.spacing(5, 16)
+    padding: theme.spacing(5, 15)
   },
   h2: {
     color: "white",
@@ -57,7 +57,7 @@ const useMobileStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     fontSize: theme.typography.fontSize,
     color: theme.typography.color,
-    padding: theme.mainContainer.mobile.padding
+    padding: theme.spacing(4, 0, 4, 4)
   },
   h2: {
     color: "white",
@@ -141,7 +141,7 @@ function SampleItineraries(props) {
               <GridListTile
                 key={index}
                 className={classes.cardContainer}
-                classes={{tile: classes.cardContainer}}
+                classes={{ tile: classes.cardContainer }}
               >
                 <Itinerary
                   classes={classes}
