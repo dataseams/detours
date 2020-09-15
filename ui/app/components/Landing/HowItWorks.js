@@ -1,6 +1,5 @@
 import {
   Box,
-  Grid,
   Card,
   Typography,
   CardMedia,
@@ -65,7 +64,7 @@ const useMobileStyles = makeStyles(theme => ({
     justifyContent: "left",
     backgroundColor: theme.palette.secondary.light,
     color: theme.typography.color,
-    padding: theme.spacing(3)
+    padding: theme.mainContainer.mobile.padding
   },
   h2: {
     ...theme.h2.mobile
