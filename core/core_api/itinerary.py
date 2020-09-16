@@ -11,7 +11,15 @@ import pandas as pd
 
 from .config import db_session
 from . import models
-from .activities import Dining, Biking
+from .activities import (
+    Dining,
+    Biking,
+    Museum,
+    Theater,
+    Beach,
+    Park,
+    HistoricBuilding,
+)
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -76,6 +84,24 @@ class Builder:
         }
         itinerary_items["morning"]["activities"].extend(
             Biking(self.survey_response).get()
+        )
+        itinerary_items["morning"]["activities"].extend(
+            Beach(self.survey_response).get()
+        )
+        itinerary_items["morning"]["activities"].extend(
+            HistoricBuilding(self.survey_response).get()
+        )
+        itinerary_items["noon"]["activities"].extend(
+            Museum(self.survey_response).get()
+        )
+        itinerary_items["noon"]["activities"].extend(
+            Park(self.survey_response).get()
+        )
+        itinerary_items["evening"]["activities"].extend(
+            Theater(self.survey_response).get(theater_type="art")
+        )
+        itinerary_items["evening"]["activities"].extend(
+            Theater(self.survey_response).get(theater_type="comedy")
         )
 
         return itinerary_items
