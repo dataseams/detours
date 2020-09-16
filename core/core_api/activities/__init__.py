@@ -58,6 +58,100 @@ class Biking(Activity):
         return filtered_activities
 
 
+class Museum(Activity):
+    """Get museum places in a city."""
+
+    def __init__(self, survey_response: Union[str, dict]):
+        super().__init__(
+            survey_response=survey_response, client_class=google_places.Client,
+        )
+
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(query=f"museum in {self.city_name}")
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+
+        return filtered_activities
+
+
+class Theater(Activity):
+    """Get theater places in a city."""
+
+    def __init__(self, survey_response: Union[str, dict]):
+        super().__init__(
+            survey_response=survey_response, client_class=google_places.Client,
+        )
+
+    def get(self, theater_type: str):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(
+            query=f"{theater_type} theater in {self.city_name}"
+        )
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+
+        return filtered_activities
+
+
+class Beach(Activity):
+    """Get beach places in a city."""
+
+    def __init__(self, survey_response: Union[str, dict]):
+        super().__init__(
+            survey_response=survey_response, client_class=google_places.Client,
+        )
+
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(query=f"beach in {self.city_name}")
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+
+        return filtered_activities
+
+
+class Park(Activity):
+    """Get park places in a city."""
+
+    def __init__(self, survey_response: Union[str, dict]):
+        super().__init__(
+            survey_response=survey_response, client_class=google_places.Client,
+        )
+
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(query=f"park in {self.city_name}")
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+
+        return filtered_activities
+
+
+class HistoricBuilding(Activity):
+    """Get histrocia buildings in a city."""
+
+    def __init__(self, survey_response: Union[str, dict]):
+        super().__init__(
+            survey_response=survey_response, client_class=google_places.Client,
+        )
+
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(
+            query=f"historic building in {self.city_name}"
+        )
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+
+        return filtered_activities
+
+
 class Dining(Activity):
     """Get restaurants in a city."""
 
