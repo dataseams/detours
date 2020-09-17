@@ -2,9 +2,9 @@ import React from "react";
 import { Field } from "redux-form";
 import {
   FormControl,
-  InputLabel,
   FormHelperText,
-  TextField
+  TextField,
+  makeStyles
 } from "@material-ui/core";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
@@ -13,6 +13,12 @@ import {
   StaticDateRangePicker,
   DateRangeDelimiter
 } from "@material-ui/pickers";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    textAlign: "center"
+  }
+}));
 
 const renderFromHelper = ({ touched, error }) => {
   if (!(touched && error)) {
@@ -26,13 +32,13 @@ const renderDateRangeComponent = ({
   input,
   label,
   meta: { touched, error },
+  children,
   ...custom
 }) => {
   const [value, setValue] = React.useState([null, null]);
 
   return (
     <FormControl>
-
       <LocalizationProvider dateAdapter={DateFnsUtils}>
         <StaticDateRangePicker
           label={label}
@@ -40,8 +46,8 @@ const renderDateRangeComponent = ({
           helperText={touched && error}
           {...input}
           {...custom}
-          displayStaticWrapperAs="mobile"
           value={value}
+          displayStaticWrapperAs="mobile"
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField {...startProps} />
@@ -49,7 +55,9 @@ const renderDateRangeComponent = ({
               <TextField {...endProps} />
             </React.Fragment>
           )}
-        />
+        >
+          {children}
+        </StaticDateRangePicker>
       </LocalizationProvider>
       {renderFromHelper({ touched, error })}
     </FormControl >
@@ -57,14 +65,15 @@ const renderDateRangeComponent = ({
 }
 
 const TravelDatesField = props => {
-  const { classes } = props;
+  const classes = useStyles();
 
   return (
-    <Field
-      name="travelDates"
-      classes={classes}
-      component={renderDateRangeComponent}
-    ></Field>
+    <div className={classes.root}>
+      <Field
+        name="travelDates"
+        component={renderDateRangeComponent}
+      ></Field>
+    </div>
   );
 };
 
