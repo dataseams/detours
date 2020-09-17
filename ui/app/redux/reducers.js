@@ -19,6 +19,7 @@ const userReducer = (state = initialUserState, action) => {
       return state
   }
 }
+
 const itinararyReducers = { user: userReducer }
 const itineraryReducer = combineReducers(itinararyReducers);
 
