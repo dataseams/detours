@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
+import { Container } from "@material-ui/core";
 import { Provider, useSelector } from "react-redux";
 import { createStore, combineReducers } from "redux";
 
@@ -62,8 +62,12 @@ class Index extends React.Component {
     return (
       <Provider store={store}>
         <Meta />
-        <NavigationBar isMobile={this.state.width <= 500} />
-        <Container maxWidth="xl" component="div" disableGutters={this.state.width <= 500}>
+        <Container
+          maxWidth="lg"
+          component="div"
+          disableGutters={true}
+        >
+          <NavigationBar isMobile={this.state.width <= 500} />
           <LandingTitle isMobile={this.state.width <= 500} />
           <SampleItineraries isMobile={this.state.width <= 500} />
           <HowItWorks isMobile={this.state.width <= 500} />
