@@ -25,7 +25,8 @@ const useStyles = makeStyles(theme => ({
   subtitle: {
     fontSize: 20,
     padding: theme.spacing(3, 0),
-    textAlign: "center"
+    textAlign: "center",
+    lineHeight: "1.7em"
   }
 }));
 
@@ -52,7 +53,8 @@ const useMobileStyles = makeStyles(theme => ({
   subtitle: {
     fontSize: theme.typography.fontSize,
     textAlign: "center",
-    padding: theme.spacing(4, 0)
+    padding: theme.spacing(4, 0),
+    lineHeight: "1.7em"
   }
 }));
 
