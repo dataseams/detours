@@ -96,7 +96,7 @@ function Pricing(props) {
           component="h2"
           color="primary"
         >
-          $3
+          $4
         </Typography>
         <Typography
           className={classes.priceUnit}
@@ -110,7 +110,7 @@ function Pricing(props) {
           accessible for anyone. We're also in beta. For these reasons,
           we've decided to make a full travel itinerary, regardless of
           destination or length of vacation, available for a subscription fee of
-          $3.
+          $4.
         </Typography>
         <br />
         <Typography className={classes.body}>
@@ -130,7 +130,7 @@ function Pricing(props) {
                 accessible for anyone. We're also in beta. For these reasons,
                 we've decided to make a full travel itinerary, regardless of
                 destination or length of vacation, available for a subscription fee of
-                $3.
+                $4.
                 <br></br>
                 <br></br>
                 This small fee will save you an average of 20 to 30 hours of
@@ -145,7 +145,7 @@ function Pricing(props) {
                 component="h2"
                 color="primary"
               >
-                $3
+                $4
                 </Typography>
               <Typography
                 className={classes.priceUnit}
