@@ -106,7 +106,7 @@ const howItWorksSteps = [
   {
     title: "Step 3",
     image: "/static/howitworks3.svg",
-    description: "Finally, we select results matching your preferences to build you an optimized itinerary. We show you a preview of it, and if you like it, you can subscribe for just $3."
+    description: "Finally, we select results matching your preferences to build you an optimized itinerary. We show you a preview of it, and if you like it, you can subscribe for just $4."
   }
 ];
 
