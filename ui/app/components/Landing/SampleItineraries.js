@@ -7,8 +7,7 @@ import {
   CardActionArea,
   CardContent,
   GridList,
-  GridListTile,
-  Popover
+  GridListTile
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
@@ -131,20 +130,6 @@ function SampleItineraries(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
 
-  const popoverClasses = usePopoverClasses();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
   return (
     (isMobile) ? (
       <Box className={classes.root}>
@@ -172,39 +157,18 @@ function SampleItineraries(props) {
         </GridList>
       </Box>
     ) : (
-        <Box className={classes.root} >
+        <Box className={classes.root} onClick={() => window.open("itinerarysample?city=LA", "_blank")}>
           <Typography className={classes.h2}>
             See sample itineraries to:
             </Typography>
           <Grid className={classes.grid}>
             {itineraries.map((itinerary, index) => (
-              <Box
-                aria-describedby={index}
-                onClick={handleClick}>
-                <Itinerary
-                  key={index}
-                  classes={classes}
-                  itinerary={itinerary}
-                  index={index}
-                />
-                <Popover
-                  id={index}
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  transformOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center",
-                  }}
-                  classes={popoverClasses}
-                >
-                  <Typography>The content of the Popover</Typography>
-                </Popover>
-              </Box>
+              <Itinerary
+                key={index}
+                classes={classes}
+                itinerary={itinerary}
+                index={index}
+              />
             ))}
           </Grid>
         </Box>
