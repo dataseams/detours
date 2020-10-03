@@ -1,0 +1,425 @@
+{
+    "data": {
+      "getLastTripPlanForSurveyResponse": {
+        "id": "VHJpcFBsYW46ODY=",
+        "city": {
+          "name": "New York City",
+          "state": "New York",
+          "country": "USA"
+        },
+        "spendingPerDay": 176,
+        "hoursSaved": "20-30",
+        "interestsMatched": [
+          "Intimate, authentic dining",
+          "Markets",
+          "Massages",
+          "Walking tours",
+          "Wine bars"
+        ],
+        "startDate": "2020-08-06",
+        "endDate": "2020-08-09",
+        "timeStamp": "2020-10-01T19:18:44.544658",
+        "dailyPlans": {
+          "edges": [
+            {
+              "node": {
+                "date": "2020-08-06",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Babbo",
+                            "description": "Italian",
+                            "locality": "Greenwich Village",
+                            "latitude": 40.73228,
+                            "longitude": -73.99928
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Bike Rent NYC - Central Park Bike Rentals",
+                            "description": "Bike Rent NYC - Central Park Bike Rentals",
+                            "locality": null,
+                            "latitude": 40.765463,
+                            "longitude": -73.97724
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Peter Luger Steak House",
+                            "description": "Steak, American, German, Burger",
+                            "locality": "South Side",
+                            "latitude": 40.709878,
+                            "longitude": -73.962342
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Solomon R. Guggenheim Museum",
+                            "description": "Solomon R. Guggenheim Museum",
+                            "locality": null,
+                            "latitude": 40.78298,
+                            "longitude": -73.958971
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Katz's Delicatessen",
+                            "description": "Sandwich",
+                            "locality": "Lower East Side",
+                            "latitude": 40.722328,
+                            "longitude": -73.98735
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "A.R.T./New York Theatres",
+                            "description": "A.R.T./New York Theatres",
+                            "locality": null,
+                            "latitude": 40.766702,
+                            "longitude": -73.990985
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-07",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Burger Joint",
+                            "description": "Burger",
+                            "locality": "Midtown",
+                            "latitude": 40.76395,
+                            "longitude": -73.97818
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Coney Island Beach",
+                            "description": "Coney Island Beach",
+                            "locality": null,
+                            "latitude": 40.57213,
+                            "longitude": -73.97933
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Shake Shack",
+                            "description": "American, Burger",
+                            "locality": "Gramercy-Flatiron",
+                            "latitude": 40.740868,
+                            "longitude": -73.987984
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Central Park",
+                            "description": "Central Park",
+                            "locality": null,
+                            "latitude": 40.78122,
+                            "longitude": -73.966514
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Grimaldi's Pizzeria",
+                            "description": "Pizza, Italian",
+                            "locality": "Front Street, DUMBO",
+                            "latitude": 40.702514,
+                            "longitude": -73.993272
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "New York Comedy Club",
+                            "description": "New York Comedy Club",
+                            "locality": null,
+                            "latitude": 40.738921,
+                            "longitude": -73.98082
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-08",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "The Spotted Pig",
+                            "description": "Burger, Bar Food",
+                            "locality": "Greenwich Village",
+                            "latitude": 40.73559,
+                            "longitude": -74.0065
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Woolworth Bldg",
+                            "description": "Woolworth Bldg",
+                            "locality": null,
+                            "latitude": 40.712631,
+                            "longitude": -74.008304
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Buddakan",
+                            "description": "Chinese, Fusion, Asian",
+                            "locality": "9th Avenue, Greenwich Village",
+                            "latitude": 40.742276,
+                            "longitude": -74.0048
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Momofuku Noodle Bar",
+                            "description": "Asian, Ramen",
+                            "locality": "East Village",
+                            "latitude": 40.7291,
+                            "longitude": -73.98432
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-09",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Cafeteria",
+                            "description": "American",
+                            "locality": "Chelsea, Manhattan",
+                            "latitude": 40.74071,
+                            "longitude": -73.998
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Pommes Frites",
+                            "description": "European, Belgian",
+                            "locality": "Greenwich Village",
+                            "latitude": 40.730031,
+                            "longitude": -74.000162
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Ippudo",
+                            "description": "Ramen",
+                            "locality": "East Village",
+                            "latitude": 40.730736,
+                            "longitude": -73.990683
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

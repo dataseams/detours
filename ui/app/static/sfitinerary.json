@@ -1,0 +1,425 @@
+{
+    "data": {
+      "getLastTripPlanForSurveyResponse": {
+        "id": "VHJpcFBsYW46ODg=",
+        "city": {
+          "name": "San Francisco",
+          "state": "California",
+          "country": "USA"
+        },
+        "spendingPerDay": 176,
+        "hoursSaved": "20-30",
+        "interestsMatched": [
+          "Intimate, authentic dining",
+          "Markets",
+          "Massages",
+          "Walking tours",
+          "Wine bars"
+        ],
+        "startDate": "2020-08-06",
+        "endDate": "2020-08-09",
+        "timeStamp": "2020-10-01T19:18:44.544658",
+        "dailyPlans": {
+          "edges": [
+            {
+              "node": {
+                "date": "2020-08-06",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Tadich Grill",
+                            "description": "Seafood, American",
+                            "locality": "Financial District",
+                            "latitude": 37.79338,
+                            "longitude": -122.39929
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "San Francisco Bicycle Rentals",
+                            "description": "San Francisco Bicycle Rentals",
+                            "locality": null,
+                            "latitude": 37.807646,
+                            "longitude": -122.419525
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Burma Superstar",
+                            "description": "Burmese",
+                            "locality": "Inner Richmond",
+                            "latitude": 37.783036,
+                            "longitude": -122.462547
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Truhlsen-Marmor Museum of the Eye",
+                            "description": "Truhlsen-Marmor Museum of the Eye",
+                            "locality": null,
+                            "latitude": 37.806587,
+                            "longitude": -122.419995
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "House of Nanking",
+                            "description": "Chinese",
+                            "locality": "Chinatown",
+                            "latitude": 37.796475,
+                            "longitude": -122.405092
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Blue Shield of California Theater at YBCA",
+                            "description": "Blue Shield of California Theater at YBCA",
+                            "locality": null,
+                            "latitude": 37.784842,
+                            "longitude": -122.401326
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-07",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "State Bird Provisions",
+                            "description": "California, Fusion",
+                            "locality": "Western Addition",
+                            "latitude": 37.783736,
+                            "longitude": -122.432948
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Ocean Beach",
+                            "description": "Ocean Beach",
+                            "locality": null,
+                            "latitude": 37.759392,
+                            "longitude": -122.510734
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Foreign Cinema",
+                            "description": "California, Seafood",
+                            "locality": "Mission District",
+                            "latitude": 37.756531,
+                            "longitude": -122.419044
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "USS San Francisco Memorial",
+                            "description": "USS San Francisco Memorial",
+                            "locality": null,
+                            "latitude": 37.782836,
+                            "longitude": -122.511618
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Hog Island Oyster Company",
+                            "description": "Seafood",
+                            "locality": "Embarcadero",
+                            "latitude": 37.7961,
+                            "longitude": -122.393433
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "The Punch Line San Francisco",
+                            "description": "The Punch Line San Francisco",
+                            "locality": null,
+                            "latitude": 37.795345,
+                            "longitude": -122.399877
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-08",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Scoma's",
+                            "description": "Italian, Seafood",
+                            "locality": "Fisherman's Wharf",
+                            "latitude": 37.809053,
+                            "longitude": -122.41825
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Coit Tower",
+                            "description": "Coit Tower",
+                            "locality": null,
+                            "latitude": 37.802395,
+                            "longitude": -122.405822
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Boudin Bakery",
+                            "description": "Cafe, Bakery",
+                            "locality": "Fisherman's Wharf",
+                            "latitude": 37.80878,
+                            "longitude": -122.414644
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Gary Danko",
+                            "description": "California",
+                            "locality": "Fisherman's Wharf",
+                            "latitude": 37.805706,
+                            "longitude": -122.420564
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-09",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Nopa",
+                            "description": "California",
+                            "locality": "Western Addition",
+                            "latitude": 37.774853,
+                            "longitude": -122.437881
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Tartine Bakery",
+                            "description": "Bakery, Cafe",
+                            "locality": "Mission District",
+                            "latitude": 37.761486,
+                            "longitude": -122.42395
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Delfina",
+                            "description": "Italian",
+                            "locality": "Mission District",
+                            "latitude": 37.761539,
+                            "longitude": -122.424369
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
