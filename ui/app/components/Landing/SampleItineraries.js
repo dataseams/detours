@@ -101,10 +101,10 @@ const useMobileStyles = makeStyles(theme => ({
 }));
 
 const itineraries = [
-  { title: "Paris, France", image: "static/paris.png" },
-  { title: "New York, NY", image: "static/nyc.png" },
-  { title: "San Francisco, CA", image: "static/goldengate.png" },
-  { title: "Barcelona, Spain", image: "static/barcelona.png" },
+  { city: "LA", title: "Paris, France", image: "static/paris.png" },
+  { city: "NYC", title: "New York, NY", image: "static/nyc.png" },
+  { city: "SF", title: "San Francisco, CA", image: "static/goldengate.png" },
+  { city: "CHI", title: "Barcelona, Spain", image: "static/barcelona.png" },
 ];
 
 const Itinerary = props => {
@@ -146,6 +146,7 @@ function SampleItineraries(props) {
             <GridListTile
               key={index}
               classes={{ tile: classes.cardContainer }}
+              onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}
             >
               <Itinerary
                 classes={classes}
@@ -157,18 +158,20 @@ function SampleItineraries(props) {
         </GridList>
       </Box>
     ) : (
-        <Box className={classes.root} onClick={() => window.open("itinerarysample?city=LA", "_blank")}>
+        <Box className={classes.root}>
           <Typography className={classes.h2}>
             See sample itineraries to:
             </Typography>
           <Grid className={classes.grid}>
             {itineraries.map((itinerary, index) => (
-              <Itinerary
-                key={index}
-                classes={classes}
-                itinerary={itinerary}
-                index={index}
-              />
+              <Box onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}>
+                <Itinerary
+                  key={index}
+                  classes={classes}
+                  itinerary={itinerary}
+                  index={index}
+                />
+              </Box>
             ))}
           </Grid>
         </Box>

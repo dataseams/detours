@@ -1,0 +1,406 @@
+{
+    "data": {
+      "getLastTripPlanForSurveyResponse": {
+        "id": "VHJpcFBsYW46ODU=",
+        "city": {
+          "name": "Los Angeles",
+          "state": "California",
+          "country": "USA"
+        },
+        "spendingPerDay": 176,
+        "hoursSaved": "20-30",
+        "interestsMatched": [
+          "Intimate, authentic dining",
+          "Markets",
+          "Massages",
+          "Walking tours",
+          "Wine bars"
+        ],
+        "startDate": "2020-08-06",
+        "endDate": "2020-08-09",
+        "timeStamp": "2020-10-01T19:18:44.544658",
+        "dailyPlans": {
+          "edges": [
+            {
+              "node": {
+                "date": "2020-08-06",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Philippe, The Original",
+                            "description": "American, Sandwich",
+                            "locality": "North Alameda Street, Chinatown",
+                            "latitude": 34.059721,
+                            "longitude": -118.237025
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Venice",
+                            "description": "Venice",
+                            "locality": null,
+                            "latitude": 33.985047,
+                            "longitude": -118.469483
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Milk",
+                            "description": "Bakery, American, Desserts",
+                            "locality": "Beverly Boulevard, Melrose",
+                            "latitude": 34.075871,
+                            "longitude": -118.348435
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Natural History Museum of Los Angeles County (NHM)",
+                            "description": "Natural History Museum of Los Angeles County (NHM)",
+                            "locality": null,
+                            "latitude": 34.016957,
+                            "longitude": -118.28877
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Father's Office",
+                            "description": "American, Burger",
+                            "locality": "Helms Ave, Regent Square",
+                            "latitude": 34.030405,
+                            "longitude": -118.38481
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Theatre West",
+                            "description": "Theatre West",
+                            "locality": null,
+                            "latitude": 34.130773,
+                            "longitude": -118.351071
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-07",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Bossa Nova Brazilian Cuisine",
+                            "description": "Brazilian, Latin American, Pizza",
+                            "locality": "Sunset Boulevard, Hollywood",
+                            "latitude": 34.09821,
+                            "longitude": -118.346626
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Bradbury Building",
+                            "description": "Bradbury Building",
+                            "locality": null,
+                            "latitude": 34.050604,
+                            "longitude": -118.247857
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "The Bazaar by Jose Andres",
+                            "description": "Spanish, Tapas",
+                            "locality": "La Cienega Boulevard, Carthay",
+                            "latitude": 34.0796,
+                            "longitude": -118.37664
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 3,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "City Terrace Park",
+                            "description": "City Terrace Park",
+                            "locality": null,
+                            "latitude": 34.048646,
+                            "longitude": -118.179423
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 4,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Gjelina",
+                            "description": "American",
+                            "locality": "Venice",
+                            "latitude": 33.990507,
+                            "longitude": -118.464928
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 5,
+                        "activity": {
+                          "activityType": {
+                            "name": "tour",
+                            "materialIcon": "directions_bike"
+                          },
+                          "place": {
+                            "name": "Good Time Comedy Club at Hooters Hollywood",
+                            "description": "Good Time Comedy Club at Hooters Hollywood",
+                            "locality": null,
+                            "latitude": 34.101326,
+                            "longitude": -118.341152
+                          },
+                          "name": "tour"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-08",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Osteria Mozza",
+                            "description": "Italian",
+                            "locality": "North Highland Avenue, Melrose",
+                            "latitude": 34.08319,
+                            "longitude": -118.33951
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Diddy Riese Cookies",
+                            "description": "Desserts",
+                            "locality": "Westwood",
+                            "latitude": 34.06335,
+                            "longitude": -118.44695
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "The Apple Pan",
+                            "description": "Burger, Desserts",
+                            "locality": "West Pico Boulevard, Rancho Park",
+                            "latitude": 34.04062,
+                            "longitude": -118.42843
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "node": {
+                "date": "2020-08-09",
+                "planItems": {
+                  "edges": [
+                    {
+                      "node": {
+                        "order": 0,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Roscoe's House of Chicken & Waffles",
+                            "description": "Southern",
+                            "locality": "Hollywood",
+                            "latitude": 34.098658,
+                            "longitude": -118.322166
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 1,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Alcove Cafe & Bakery",
+                            "description": "American, Coffee and Tea",
+                            "locality": "Hillhurst Avenue, Los Feliz",
+                            "latitude": 34.106313,
+                            "longitude": -118.287752
+                          },
+                          "name": "food"
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "order": 2,
+                        "activity": {
+                          "activityType": {
+                            "name": "food",
+                            "materialIcon": "restaurant"
+                          },
+                          "place": {
+                            "name": "Wurstküche",
+                            "description": "German",
+                            "locality": "East 3rd Street, Wholesale District",
+                            "latitude": 34.04564,
+                            "longitude": -118.23528
+                          },
+                          "name": "food"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

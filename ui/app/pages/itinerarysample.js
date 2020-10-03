@@ -9,9 +9,18 @@ import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import ItineraryDescription from "../components/Itinerary/Description";
 import DailyTabs from "../components/Itinerary/Days";
-import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import { itineraryReducer } from "../redux/reducers";
-import data from "../static/ItinerarySamples";
+import laData from "../static/laitinerary.json";
+import nycData from "../static/nycitinerary.json";
+import chiData from "../static/chiitinerary.json";
+import sfData from "../static/sfitinerary.json";
+
+const data = {
+  "LA": laData.data,
+  "NYC": nycData.data,
+  "CHI": chiData.data,
+  "SF": sfData.data
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,7 +48,7 @@ function Itinerary(props) {
   const { isMobile } = props;
   const router = useRouter();
   const classes = isMobile ? useMobileStyles() : useStyles();
-  const variables = { "cityCode": router.query.city };
+  const city = router.query.city;
 
   return (
     <Provider store={store}>
@@ -49,14 +58,13 @@ function Itinerary(props) {
           <LogoNavigationBar />
           <Container className={classes.root}>
             <ItineraryDescription
-              fullItinerary={data.getLastTripPlanForSurveyResponse}
+              fullItinerary={data[city].getLastTripPlanForSurveyResponse}
               isMobile={isMobile}
             />
             <DailyTabs
-              plan={data.getLastTripPlanForSurveyResponse.dailyPlans}
+              plan={data[city].getLastTripPlanForSurveyResponse.dailyPlans}
               isMobile={isMobile}
             />
-            <PurchaseBox />
           </Container>
         </div>
       </div>
