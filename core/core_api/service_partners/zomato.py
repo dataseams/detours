@@ -128,7 +128,14 @@ class Client:
         return city[0]
 
     def get_city_id(self, city_name: str):
-        """Get zomato city id by name."""
+        """Get zomato city id by name.
+
+        Parameters
+        ----------
+        city_name: str
+            Name of the city to get id for
+
+        """
         kwargs = self.CITY_FILTERS[city_name]
         return self.get_city(**kwargs)["id"]
 
@@ -238,8 +245,27 @@ class Client:
         cuisines: str,
         establishment_type: str,
         count: int,
-    ):
-        """Search for `count` restaurants in zomato's api. Count up to 100."""
+    ) -> List[dict]:
+        """Search for `count` restaurants in zomato's api. Count up to 100.
+
+        Parameters
+        ----------
+        entity_id : int
+            City, or other geographical area id
+        entity_type : str
+            Type of the geographical area the id belongs to
+        cuisines : str
+            Comma separated list of cuisine ids
+        establishment_type : str
+            Establishment type id
+        count : int
+            Number of restaurants needed
+
+        Returns
+        -------
+        List[dict]
+            List of restaurant objects
+        """
         batch_size = 20
         n_batches = math.ceil(count / batch_size)
         restaurants = []

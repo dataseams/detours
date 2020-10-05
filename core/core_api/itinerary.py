@@ -6,6 +6,7 @@ The itinerary is created based on:
 - Queried APIs.
 """
 from typing import List, Dict
+import multiprocessing as mp
 
 import pandas as pd
 
@@ -46,6 +47,75 @@ def trip_length(arrival_date: str, return_date: str) -> int:
     return n_days
 
 
+def get_activities(
+    survey_response: dict, time_of_day: str, food_or_activities: str
+) -> dict:
+    """Get activities based on provided parameters.
+
+    Function made to be called in parallel to improve app's response time
+    when building an itinerary.
+
+    Parameters
+    ----------
+    survey_response : dict
+        User survey response
+    time_of_day : str
+        One of morning, noon, or evening
+    food_or_activities : str
+        Either food or activities, this allows calling the relative API
+
+    Returns
+    -------
+    dict
+        Activity items as a structured itinerary object
+    """
+    itinerary_items = {
+        "morning": {"food": [], "activities": []},
+        "noon": {"food": [], "activities": []},
+        "evening": {"food": [], "activities": []},
+    }
+    if food_or_activities == "food":
+        n_days = trip_length(
+            arrival_date=survey_response.get("travelDates")[0],
+            return_date=survey_response.get("travelDates")[1],
+        )
+        restaurants = Dining(survey_response).get()
+        breakfast = restaurants[:n_days]
+        lunch = restaurants[n_days : 2 * n_days]
+        dinner = restaurants[2 * n_days :]
+        itinerary_items = {
+            "morning": {"food": breakfast, "activities": []},
+            "noon": {"food": lunch, "activities": []},
+            "evening": {"food": dinner, "activities": []},
+        }
+    if food_or_activities == "activities":
+        if time_of_day == "morning":
+            itinerary_items["morning"]["activities"].extend(
+                Biking(survey_response).get()
+            )
+            itinerary_items["morning"]["activities"].extend(
+                Beach(survey_response).get()
+            )
+            itinerary_items["morning"]["activities"].extend(
+                HistoricBuilding(survey_response).get()
+            )
+        if time_of_day == "noon":
+            itinerary_items["noon"]["activities"].extend(
+                Museum(survey_response).get()
+            )
+            itinerary_items["noon"]["activities"].extend(
+                Park(survey_response).get()
+            )
+        if time_of_day == "evening":
+            itinerary_items["evening"]["activities"].extend(
+                Theater(survey_response).get(theater_type="art")
+            )
+            itinerary_items["evening"]["activities"].extend(
+                Theater(survey_response).get(theater_type="comedy")
+            )
+    return itinerary_items
+
+
 class Builder:
     """Build an itinerary given the a user survey parameters."""
 
@@ -63,46 +133,34 @@ class Builder:
         Parameters
         ----------
         survey_response : dict
-            User's survey response.
+            User's survey response
 
         Returns
         -------
         Dict[str, List[dict]]
-            Dict of itinerary items.
+            Dict of itinerary items
         """
-        n_days = trip_length(
-            arrival_date=self.arrival_date, return_date=self.return_date
-        )
-        restaurants = Dining(self.survey_response).get()
-        breakfast = restaurants[:n_days]
-        lunch = restaurants[n_days : 2 * n_days]
-        dinner = restaurants[2 * n_days :]
         itinerary_items = {
-            "morning": {"food": breakfast, "activities": []},
-            "noon": {"food": lunch, "activities": []},
-            "evening": {"food": dinner, "activities": []},
+            "morning": {"food": [], "activities": []},
+            "noon": {"food": [], "activities": []},
+            "evening": {"food": [], "activities": []},
         }
-        itinerary_items["morning"]["activities"].extend(
-            Biking(self.survey_response).get()
-        )
-        itinerary_items["morning"]["activities"].extend(
-            Beach(self.survey_response).get()
-        )
-        itinerary_items["morning"]["activities"].extend(
-            HistoricBuilding(self.survey_response).get()
-        )
-        itinerary_items["noon"]["activities"].extend(
-            Museum(self.survey_response).get()
-        )
-        itinerary_items["noon"]["activities"].extend(
-            Park(self.survey_response).get()
-        )
-        itinerary_items["evening"]["activities"].extend(
-            Theater(self.survey_response).get(theater_type="art")
-        )
-        itinerary_items["evening"]["activities"].extend(
-            Theater(self.survey_response).get(theater_type="comedy")
-        )
+        n_processes = mp.cpu_count() - 1
+        with mp.Pool(processes=n_processes) as pool:
+            results = pool.starmap(
+                get_activities,
+                zip(
+                    [self.survey_response] * 4,
+                    ["", "morning", "noon", "evening"],
+                    ["food", "activities", "activities", "activities"],
+                ),
+            )
+        for item in results:
+            for time_of_day in item:
+                for food_or_activities in item[time_of_day]:
+                    itinerary_items[time_of_day][food_or_activities].extend(
+                        item[time_of_day][food_or_activities]
+                    )
 
         return itinerary_items
 
