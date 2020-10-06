@@ -101,10 +101,10 @@ const useMobileStyles = makeStyles(theme => ({
 }));
 
 const itineraries = [
-  { city: "LA", title: "Paris, France", image: "static/paris.png" },
+  { city: "LA", title: "Los Angeles, CA", image: "static/losangeles.png" },
   { city: "NYC", title: "New York, NY", image: "static/nyc.png" },
   { city: "SF", title: "San Francisco, CA", image: "static/goldengate.png" },
-  { city: "CHI", title: "Barcelona, Spain", image: "static/barcelona.png" },
+  { city: "CHI", title: "Chicago, IL", image: "static/chicago.png" },
 ];
 
 const Itinerary = props => {
