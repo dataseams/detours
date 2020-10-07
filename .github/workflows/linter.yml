@@ -1,0 +1,23 @@
+name: lint code
+
+on: [pull_request]
+
+jobs:
+  black-format:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: Set up Python environment
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: black format
+        uses: rahul-deepsource/pyaction@v1.4.0
+        with:
+          python-root-list: "core/"
+          use-pycodestyle: false
+          use-mypy: false
+          use-black: true
+          extra-black-options: "--line-length=79"
