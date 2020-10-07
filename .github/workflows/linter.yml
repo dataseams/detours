@@ -1,4 +1,4 @@
-name: lint code
+name: Source code checks
 
 on: [pull_request]
 
@@ -13,9 +13,8 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: "3.8"
-      - uses: actions/checkout@v1
       - name: black format
-        uses: rahul-deepsource/pyaction@v1.4.0
+        uses: py-actions/flake8@v1
         with:
           python-root-list: "core/"
           use-pycodestyle: false
