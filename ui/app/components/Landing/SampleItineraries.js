@@ -68,7 +68,7 @@ const useMobileStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     fontSize: theme.typography.fontSize,
     color: theme.typography.color,
-    padding: theme.spacing(4, 1, 4, 1)
+    padding: theme.spacing(4, 1, 4, 0)
   },
   h2: {
     color: "white",
@@ -164,9 +164,11 @@ function SampleItineraries(props) {
             </Typography>
           <Grid className={classes.grid}>
             {itineraries.map((itinerary, index) => (
-              <Box onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}>
+              <Box
+                key={index}
+                onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}
+              >
                 <Itinerary
-                  key={index}
                   classes={classes}
                   itinerary={itinerary}
                   index={index}

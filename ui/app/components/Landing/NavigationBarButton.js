@@ -6,7 +6,7 @@ const NavigationButton = withStyles({
   root: {
     boxShadow: "none",
     textTransform: "none",
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 1,
     borderRadius: 0,
     "&:hover": {
