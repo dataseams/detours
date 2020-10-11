@@ -1,4 +1,4 @@
-![Build and Deploy to GKE](https://github.com/sammo/detours/workflows/Build%20and%20Deploy%20to%20GKE/badge.svg)
+![Lint and docstring](https://github.com/sammo/detours/workflows/Source%20code%20checks/badge.svg) ![Unit tests](https://github.com/sammo/detours/workflows/Unit%20tests/badge.svg) ![Build and Deploy to GKE](https://github.com/sammo/detours/workflows/Build%20and%20Deploy%20to%20GKE/badge.svg)
 # robocation
 
 The Travel Robot
