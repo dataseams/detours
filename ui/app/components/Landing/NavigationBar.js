@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import NavigationBarButton from "./NavigationBarButton";
@@ -43,39 +42,21 @@ const StyledAppBar = withStyles({
   }
 })(AppBar);
 
-const useStyles = makeStyles(theme => ({
+const useToolbarStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
-  },
-  box: {
-    flexGrow: 1,
-    xs: 4
-  },
-  appBar: {
-    color: "white",
-    backgroundColor: "white"
-  },
-  toolBar: {
-    justifyContent: "flex-end",
-    flexDirection: "row"
+    padding: theme.spacing(0, 14, 0, 13)
   }
 }));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileToolbarStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
-  },
+    padding: theme.spacing(0, 2, 0, 2)
+  }
+}));
+
+const useLogoStyles = makeStyles(theme => ({
   box: {
-    flexGrow: 1,
-    xs: 4
-  },
-  appBar: {
-    color: "white",
-    backgroundColor: "white"
-  },
-  toolBar: {
-    justifyContent: "flex-end",
-    flexDirection: "row"
+    flexGrow: 1
   }
 }));
 
@@ -113,17 +94,19 @@ const useTextStyles = makeStyles(theme => ({
 }));
 
 function MobileToolbar(props) {
-  const { isMobile, classes } = props;
+  const { isMobile } = props;
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false
   });
+  const logoClasses = useLogoStyles();
   const drawerClasses = useDrawerStyles();
   const listClasses = useListStyles();
   const dividerClasses = useDividerStyles();
   const textclasses = useTextStyles();
+  const toolbarClasses = useMobileToolbarStyles();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === "keydown" && (event.key === "tab" || event.key === "shift")) {
@@ -168,8 +151,8 @@ function MobileToolbar(props) {
   );
 
   return (
-    <Toolbar>
-      <Box className={classes.box}>
+    <Toolbar classes={toolbarClasses}>
+      <Box className={logoClasses.box}>
         <LogoButton name="DETOURS" />
       </Box>
       <IconButton aria-label="menu" onClick={toggleDrawer("right", true)}>
@@ -189,29 +172,27 @@ function MobileToolbar(props) {
 
 function NavigationBar(props) {
   const { isMobile } = props;
-  const classes = isMobile ? useMobileStyles() : useStyles();
+  const logoClasses = useLogoStyles();
+  const toolbarClasses = useToolbarStyles();
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <ElevationScroll {...props}>
-        <StyledAppBar>
-          {isMobile ? (
-            <MobileToolbar isMobile={isMobile} classes={classes} />
-          ) : (
-              <Toolbar>
-                <Box className={classes.box}>
-                  <LogoButton name="DETOURS" />
-                </Box>
-                <NavigationBarButton name="How it works" />
-                <NavigationBarButton name="Pricing" />
-                <NavigationBarButton name="About us" />
-                <GetStartedButton />
-              </Toolbar>
-            )}
-        </StyledAppBar>
-      </ElevationScroll>
-    </React.Fragment>
+    <ElevationScroll {...props}>
+      <StyledAppBar>
+        {isMobile ? (
+          <MobileToolbar isMobile={isMobile} />
+        ) : (
+            <Toolbar classes={toolbarClasses}>
+              <Box className={logoClasses.box}>
+                <LogoButton name="DETOURS" />
+              </Box>
+              <NavigationBarButton name="How it works" />
+              <NavigationBarButton name="Pricing" />
+              <NavigationBarButton name="About us" />
+              <GetStartedButton />
+            </Toolbar>
+          )}
+      </StyledAppBar>
+    </ElevationScroll>
   );
 }
 
