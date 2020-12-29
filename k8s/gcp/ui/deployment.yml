@@ -44,6 +44,16 @@ spec:
               configMapKeyRef:
                 name: ui
                 key: LOGOUT_API_URL
+          - name: STRIPE_PUBLIC_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe
+                key: STRIPE_PUBLIC_KEY
+          - name: STRIPE_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe
+                key: STRIPE_SECRET_KEY
         ports:
           - name: ui
             containerPort: 3000

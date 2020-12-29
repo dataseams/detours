@@ -1,11 +1,13 @@
-import { Box, Divider, Typography, Grid } from "@material-ui/core";
+import { Box, Divider, Typography, Grid, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
+import { loadStripe } from "@stripe/stripe-js";
 
 import { Purchase } from "../Buttons";
 import UPDATE_USER from "../../utils/queries/UpdateUser";
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
 const useStyles = makeStyles(theme => ({
   purchaseContainer: {
@@ -37,6 +39,22 @@ const PurchaseBox = props => {
   const { query: { surveyId } } = useRouter();
   const [savePlan, { data }] = useMutation(UPDATE_USER);
 
+  const handleClick = async (event) => {
+    const stripe = await stripePromise;
+    const response = await fetch("/create-checkout-session", {
+      method: "POST",
+    });
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    }
+  };
+
   return (
     <Box>
       {userEmail ?
@@ -60,6 +78,9 @@ const PurchaseBox = props => {
             }>
             {data ? "Saved" : "Save"}
           </Purchase>
+          <Button onClick={handleClick}>
+            Checkout (test)
+          </Button>
         </Box>
         :
         <Box className={classes.purchaseContainer}>

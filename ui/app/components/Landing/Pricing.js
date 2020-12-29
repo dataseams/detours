@@ -103,13 +103,13 @@ function Pricing(props) {
           variant="h5"
           color="primary"
         >
-          per month
+          per itinerary
         </Typography>
         <Typography className={classes.body}>
           We believe that affordable and enjoyable travel should be
           accessible for anyone. We're also in beta. For these reasons,
           we've decided to make a full travel itinerary, regardless of
-          destination or length of vacation, available for a subscription fee of
+          destination or length of vacation, available for a one-time fee of
           $4.
         </Typography>
         <br />
@@ -129,7 +129,7 @@ function Pricing(props) {
                 We believe that affordable and enjoyable travel should be
                 accessible for anyone. We're also in beta. For these reasons,
                 we've decided to make a full travel itinerary, regardless of
-                destination or length of vacation, available for a subscription fee of
+                destination or length of vacation, available for a one-time fee of
                 $4.
                 <br></br>
                 <br></br>
@@ -153,7 +153,7 @@ function Pricing(props) {
                 component="h3"
                 color="primary"
               >
-                per month
+                per itinerary
                 </Typography>
             </Grid>
           </Grid>

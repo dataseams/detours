@@ -4,12 +4,12 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const next = require('next')
 const admin = require('firebase-admin')
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev })
 const handle = app.getRequestHandler()
-
 
 const firebase = admin.initializeApp(
   {
@@ -65,6 +65,29 @@ app.prepare().then(() => {
   server.get('*', (req, res) => {
     return handle(req, res)
   })
+
+  server.post('/create-checkout-session', async (req, res) => {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Detours Itinerary View Access',
+              images: ['https://i.imgur.com/EHyR2nP.png'],
+            },
+            unit_amount: 400,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `http://localhost:3000/checkout?success=true`,
+      cancel_url: `http://localhost:3000/itinerary?surveyId=${req.body.surveyId}?canceled=true`,
+    });
+    res.json({ id: session.id });
+  });
 
   server.listen(port, err => {
     if (err) throw err
