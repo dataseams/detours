@@ -43,6 +43,9 @@ const PurchaseBox = props => {
     const stripe = await stripePromise;
     const response = await fetch("/create-checkout-session", {
       method: "POST",
+      headers: new Headers({ "Content-Type": "application/json" }),
+      credentials: "same-origin",
+      body: JSON.stringify({ surveyId: surveyId })
     });
     const session = await response.json();
     const result = await stripe.redirectToCheckout({

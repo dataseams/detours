@@ -66,7 +66,7 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  server.post('/create-checkout-session', async (req, res) => {
+  server.post('/create-checkout-session', async (request, response) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -83,10 +83,10 @@ app.prepare().then(() => {
         },
       ],
       mode: 'payment',
-      success_url: `http://localhost:3000/checkout?success=true`,
-      cancel_url: `http://localhost:3000/itinerary?surveyId=${req.body.surveyId}?canceled=true`,
+      success_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?success=true`,
+      cancel_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?canceled=true`,
     });
-    res.json({ id: session.id });
+    response.json({ id: session.id });
   });
 
   server.listen(port, err => {
