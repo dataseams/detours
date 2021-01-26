@@ -17,6 +17,7 @@ env:
   CORE_API_URL: ${{ secrets.CORE_API_URL }}
   LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
   LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
+  STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
 
 jobs:
   setup-build-publish-deploy:
@@ -84,6 +85,7 @@ jobs:
             --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
             --build-arg CORE_API_URL="$CORE_API_URL" \
             --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
+            --build-arg STRIPE_PUBLIC_KEY="$STRIPE_PUBLIC_KEY" \
             --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
             ./"$IMAGE_UI"/.
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
