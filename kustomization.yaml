@@ -1,4 +1,0 @@
-secretGenerator:
-- name: example-secret-1
-  files:
-  - .env
