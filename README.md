@@ -4,41 +4,95 @@
 The Travel Robot
 
 ## Local Development Setup
-We use minikube and a combination of tools for local development. To setup your local development environment on ubuntu, follow the instructions below, assuming you use a _zsh_ shell:
+We use docker-compose for local development. To setup your local development environment, follow the instructions below (assuming ubuntu os and zsh shell):
 
-1- Install ansible with system's pip
+1- Install docker
 
-`pip install ansible`
+```bash
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+docker --version
+```
 
-2- Install miniconda
+2- Install docker-compose
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
+3- Install miniconda
 
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 zsh Miniconda3-latest-Linux-x86_64.sh
-eval "$(/home/sam/miniconda3/bin/conda shell.zsh hook)"
+eval "$(~/miniconda3/bin/conda shell.zsh hook)"
 conda init zsh
 source ~/.zshrc
 ```
 
-3- Let ansible setup your environment by running the following command (_coming soon_)
+4- Install node.js
 
-`ansible-playbook -K minikube.yml`
+```bash
+sudo apt install -y nodejs npm
+sudo npm install -g firebase-tools
+```
 
-_this should start minikube and create the development namespace_
+5- Install java
 
-## Continuous Development with skaffold
+```bash
+sudo apt install -y default-jdk
+update-alternatives --config java
+```
 
-We use skaffold for continuous development. To build and deploy a development environment in minikube, run the command below:
+6- Install insomnia for GraphQL troubleshooting
 
-`skaffold dev`
+```bash
+echo "deb https://dl.bintray.com/getinsomnia/Insomnia /" \
+    | sudo tee -a /etc/apt/sources.list.d/insomnia.list
+# Add public key used to verify code signature
+wget --quiet -O - https://insomnia.rest/keys/debian-public.key.asc \
+    | sudo apt-key add -
 
-This will automatically deploy any saved changes in your local environment. If you prefer to deploy without automatic deployment of changes, run the command below:
+sudo apt-get update
+sudo apt-get install insomnia
+```
 
-`skaffold run --tail`
+7- Install postgresql binaries
 
-Follow the link below to access the ui in your local development environment.
+```bash
+sudo apt install libpq-dev
+```
 
-http://dataseams.local/
+8- Set environment variables
+
+Create _.env_ file in the root of this repo and set the following variable:
+
+```bash
+ZOMATO_API_KEY=
+ZOMATO_API_URL=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=detours
+CORE_API_URL=http://localhost:5000/graphql
+GOOGLE_MAPS_API_KEY=
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+```
 
 ## Set up a new developer user
 
