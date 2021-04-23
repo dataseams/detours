@@ -38,7 +38,7 @@ function QuestionComp(props) {
   var comp = {
     1: (
       <div>
-        <span className={classes.h3}>STEP 1/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
         <div>
           <p className={classes.question}>Which city do you want to travel to?</p>
           <CitiesField />
@@ -47,7 +47,7 @@ function QuestionComp(props) {
     ),
     2: (
       <div>
-        <span className={classes.h3}>STEP 2/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
         <div>
           <p className={classes.question}>When are you planning to take your vacation?</p>
           <TravelDatesField />
@@ -56,7 +56,7 @@ function QuestionComp(props) {
     ),
     // 3: (
     //   <div>
-    //     <span>STEP 3/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>What occasion are you celebrating?</h1>
     //       <OccasionField />
@@ -65,7 +65,7 @@ function QuestionComp(props) {
     // ),
     // 4: (
     //   <div>
-    //     <span>STEP 4/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>What is your age and gender?</h1>
     //       <AgeGenderField />
@@ -74,7 +74,7 @@ function QuestionComp(props) {
     // ),
     3: (
       <div>
-        <span className={classes.h3}>STEP 5/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
         <div>
           <p className={classes.question}>Who are you traveling with?</p>
           <CompanionField />
@@ -83,7 +83,7 @@ function QuestionComp(props) {
     ),
     // 6: (
     //   <div>
-    //     <span>STEP 6/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Have you traveled to this location before?</h1>
     //       <PriorVisitsField />
@@ -92,7 +92,7 @@ function QuestionComp(props) {
     // ),
     4: (
       <div>
-        <span className={classes.h3}>STEP 7/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
         <div>
           <p className={classes.question}>What do you like to do when you travel?</p>
           <GeneralPreferencesField />
@@ -101,7 +101,7 @@ function QuestionComp(props) {
     ),
     5: (
       <div>
-        <span className={classes.h3}>STEP 8/{questionnaireLength}</span>
+        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
         <div>
           <p className={classes.question}>Food & Beverages</p>
           <FoodNBeveragesField />
@@ -110,7 +110,7 @@ function QuestionComp(props) {
     ),
     // 9: (
     //   <div>
-    //     <span>STEP 9/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Which museums do you enjoy the most?</h1>
     //       <MuseumsField />
@@ -119,7 +119,7 @@ function QuestionComp(props) {
     // ),
     // 10: (
     //   <div>
-    //     <span>STEP 10/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>What are your favorite ways to relax?</h1>
     //       <RelaxationMethodsField />
@@ -128,7 +128,7 @@ function QuestionComp(props) {
     // ),
     // 11: (
     //   <div>
-    //     <span>STEP 11/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>What are your favorite outdoor activities?</h1>
     //       <OutdoorActivitiesField />
@@ -137,7 +137,7 @@ function QuestionComp(props) {
     // ),
     // 12: (
     //   <div>
-    //     <span>STEP 12/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Which tours do you enjoy the most?</h1>
     //       <ToursField />
@@ -146,7 +146,7 @@ function QuestionComp(props) {
     // ),
     // 13: (
     //   <div>
-    //     <span>STEP 13/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Shopping</h1>
     //       <ShoppingField />
@@ -155,7 +155,7 @@ function QuestionComp(props) {
     // ),
     // 14: (
     //   <div>
-    //     <span>STEP 14/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Which shows and performances do you enjoy the most?</h1>
     //       <ShowsField />
@@ -164,7 +164,7 @@ function QuestionComp(props) {
     // ),
     // 15: (
     //   <div>
-    //     <span>STEP 15/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Which type of nightlife do you enjoy the most?</h1>
     //       <NightlifeField />
@@ -173,7 +173,7 @@ function QuestionComp(props) {
     // ),
     // 16: (
     //   <div>
-    //     <span>STEP 16/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Which adventure sports do you enjoy the most?</h1>
     //       <AdventureSportsField />
@@ -182,7 +182,7 @@ function QuestionComp(props) {
     // ),
     // 17: (
     //   <div>
-    //     <span>STEP 17/{questionnaireLength}</span>
+    //     <span>STEP {props.index}/{questionnaireLength}</span>
     //     <div>
     //       <h1>Do you know which neighborhood you'd like to stay in?</h1>
     //       <NeighborhoodsField />
