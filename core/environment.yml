@@ -1,32 +1,32 @@
 name: detours
 channels:
   - defaults
+  - conda-forge
 dependencies:
-  - python=3.8.1
-  - pip=20.1.1
-  - pip:
-    - flake8==3.8.3 #dev
-    - flake8-docstrings==1.5.0 #dev
-    - pep8-naming==0.11.1 #dev
-    - black==19.10b0 #dev
-    - pytest==6.0.1 #dev
-    - pytest-benchmark==3.2.3 #dev
-    - pytest-asyncio==0.14.0 #dev
-    - pytest-cov==2.10.0 #dev
-    - coveralls==2.1.1 #dev
-    - snapshottest==0.5.1 #dev
-    - flask==1.1.2 #prod
-    - flask-cors==3.0.8 #prod
-    - flask-graphql==2.0.1 #prod
-    - gunicorn==20.0.4 #prod
-    - graphene==2.1.8 #prod
-    - graphene-sqlalchemy==2.3.0 #prod
-    - promise==2.3 #prod
-    - pytz==2020.1 #prod
-    - psycopg2==2.8.5 #prod
-    - rope==0.17.0 #prod
-    - pandas==1.1.0 #prod
-    - requests==2.24.0 #prod
-    - jupyterlab==2.1.5 #dev
-    - beautifulsoup4==4.9.1 #dev
-    - wordcloud==1.7.0 #dev
+  - python=3.8.8
+  - pip=21.0.1
+  - flake8=3.9.1 #dev
+  - flake8-docstrings=1.6.0 #dev
+  - pep8-naming=0.11.1 #dev
+  - black=19.10b0 #dev
+  - pytest=6.2.3 #dev
+  - pytest-benchmark=3.2.3 #dev
+  - pytest-asyncio=0.15.0 #dev
+  - pytest-cov=2.11.1 #dev
+  - coveralls=3.0.1 #dev
+  - snapshottest=0.5.1 #dev
+  - flask=1.1.2 #prod
+  - flask-cors=3.0.10 #prod
+  - flask-graphql=2.0.1 #prod
+  - gunicorn=20.1.0 #prod
+  - graphene=2.1.8 #prod
+  - graphene-sqlalchemy=2.3.0 #prod
+  - promise=2.3 #prod
+  - pytz=2020.1 #prod
+  - psycopg2=2.8.6 #prod
+  - rope=0.18.0 #prod
+  - pandas=1.2.4 #prod
+  - requests=2.25.1 #prod
+  - jupyterlab=3.0.14 #dev
+  - beautifulsoup4=4.9.3 #dev
+  - wordcloud=1.8.1 #dev

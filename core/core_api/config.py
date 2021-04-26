@@ -13,7 +13,7 @@ DATABASE = {
     "name": os.environ.get("POSTGRES_DB", "detours"),
 }
 DB_URL = (
-    f"postgres://{DATABASE['user']}:{DATABASE['password']}"
+    f"postgresql://{DATABASE['user']}:{DATABASE['password']}"
     f"@{DATABASE['host']}:{DATABASE['port']}/{DATABASE['name']}"
 )
 engine = create_engine(DB_URL, convert_unicode=True)
