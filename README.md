@@ -78,7 +78,7 @@ sudo apt install libpq-dev
 
 8- Set environment variables
 
-Create _.env_ file in the root of this repo and set the following variable:
+Create _./.env_ file in the root of this repo and set the following environment variables:
 
 ```bash
 ZOMATO_API_KEY=
@@ -92,6 +92,33 @@ CORE_API_URL=http://localhost:5000/graphql
 GOOGLE_MAPS_API_KEY=
 STRIPE_PUBLIC_KEY=
 STRIPE_SECRET_KEY=
+```
+
+9- Set node environment variables
+
+Create _./ui/app/.env.local_ file and set the following environment variables:
+
+```bash
+REACT_APP_GOOGLE_MAPS_API_KEY=
+FIREBASE_CLIENT_EMAIL=sam@detours.com
+FIREBASE_PUBLIC_API_KEY=
+FIREBASE_PRIVATE_KEY=
+FIREBASE_API_KEY=
+FIREBASE_AUTH_DOMAIN=
+FIREBASE_DATABASE_URL=
+FIREBASE_PROJECT_ID=
+FIREBASE_STORAGE_BUCKET=
+FIREBASE_MESSAGING_SENDER_ID=
+FIREBASE_APP_ID=
+FIREBASE_MEASUREMENT_ID=
+SESSION_SECRET_CURRENT=
+SESSION_SECRET_PREVIOUS=
+CORE_API_URL=
+LOGIN_API_URL=
+LOGOUT_API_URL=
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+
 ```
 
 ## Set up a new developer user
