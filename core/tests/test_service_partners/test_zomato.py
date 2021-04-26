@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch, MagicMock
 import os
 import json
 
-from core_api.service_partners.zomato import Client
+from core.core_api.service_partners.zomato import Client
 
 
 class TestZomato(TestCase):
@@ -56,7 +56,7 @@ class TestZomato(TestCase):
         )
         self.assertEqual(city_id, 281)
 
-    @patch("core_api.service_partners.zomato.requests")
+    @patch("core.core_api.service_partners.zomato.requests")
     def test_search(self, mock_requests):
         zomato = Client()
         mock_requests_get_response = Mock()

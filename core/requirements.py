@@ -6,8 +6,7 @@ def get(tags=[]):
     """Compile requirements by tag from conda's environment.yml file."""
     with open("environment.yml", "r") as f:
         conda_env_yml = f.readlines()
-        pip_idx = conda_env_yml.index("  - pip:\n")
-        requirements = conda_env_yml[pip_idx + 1 :]
+        requirements = conda_env_yml
 
         if tags:
             requirements = [r for r in requirements for t in tags if t in r]
@@ -16,6 +15,7 @@ def get(tags=[]):
         requirements = [
             re.sub(r"[ ]*[#][a-z]*\n$", "", r) for r in requirements
         ]
+        requirements = [r.replace("=", "==") for r in requirements]
 
     return requirements
 
