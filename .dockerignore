@@ -1,0 +1,7 @@
+**/__pycache__
+**/.pytest_cache
+**/*debug*.py
+.github
+.vscode
+k8s
+.git
