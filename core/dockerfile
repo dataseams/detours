@@ -12,7 +12,7 @@ RUN pip install $(python -c "import requirements; print(requirements.get_ssv(['#
 
 COPY core_api /app/core_api/
 COPY tests /app/tests/
-COPY app.py Makefile README.md setup.py wait-for-it.sh /app/
+COPY app.py README.md setup.py wait-for-it.sh /app/
 
 ENV FLASK_APP=/app/app.py
 
