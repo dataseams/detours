@@ -15,7 +15,7 @@ import Copyright from "../components/Landing/Copyright";
 const initialUserState = {
   email: null,
   displayName: null,
-  photoUrl: null
+  photoUrl: null,
 };
 const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
@@ -24,14 +24,14 @@ const userReducer = (state = initialUserState, action) => {
         ...state,
         email: action.value.userEmail,
         displayName: action.value.userDisplayName,
-        photoUrl: action.value.userPhotoUrl
-      }
+        photoUrl: action.value.userPhotoUrl,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 const userReducers = combineReducers({
-  user: userReducer
+  user: userReducer,
 });
 const store = createStore(userReducers);
 
@@ -39,7 +39,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800
+      width: 800,
     };
   }
 
@@ -48,25 +48,21 @@ class Index extends React.Component {
   };
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener("resize", this.handleWindowSizeChange);
     this.setState(() => {
-      return { width: window.innerWidth }
-    })
+      return { width: window.innerWidth };
+    });
   }
 
   render() {
     return (
       <Provider store={store}>
         <Meta />
-        <Container
-          maxWidth="lg"
-          component="div"
-          disableGutters={true}
-        >
+        <Container maxWidth="lg" component="div" disableGutters={true}>
           <NavigationBar isMobile={this.state.width <= 500} />
           <LandingTitle isMobile={this.state.width <= 500} />
           <SampleItineraries isMobile={this.state.width <= 500} />

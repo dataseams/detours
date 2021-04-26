@@ -12,17 +12,17 @@ const AdventureSportsOptions = [
   { name: "Mountain biking", id: "adventureSports.mountainBiking" },
   { name: "Paragliding", id: "adventureSports.paragliding" },
   { name: "Surfing", id: "adventureSports.surfing" },
-  { name: "Skiing", id: "adventureSports.skiing" }
+  { name: "Skiing", id: "adventureSports.skiing" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const AdventureSportsField = props => {
+const AdventureSportsField = (props) => {
   const classes = useStyles();
 
   return (

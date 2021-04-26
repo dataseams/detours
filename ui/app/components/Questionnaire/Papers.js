@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/styles";
 
 import { StyledPaper } from "./styles/paper";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 }));
 
 const renderPaper = ({ options, input, ...rest }) => {

@@ -5,7 +5,7 @@ import StoreTypesField from "./Shopping/StoreType";
 import FashionStylesField from "./Shopping/FashionStyle";
 import { paperStyles } from "./styles/paper";
 
-const ShoppingField = props => {
+const ShoppingField = (props) => {
   const classes = paperStyles();
   const [spacing, setSpacing] = React.useState(2);
 

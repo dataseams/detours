@@ -15,17 +15,17 @@ const diningEnvironmentOptions = [
   { name: "Special occasions", id: "dining.environment.specialOccasions" },
   { name: "Where locals hang", id: "dining.environment.whereLocalsHang" },
   { name: "Good for groups", id: "dining.environment.goodForGroups" },
-  { name: "Historic", id: "dining.environment.historic" }
+  { name: "Historic", id: "dining.environment.historic" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const DiningEnvironmentsField = props => {
+const DiningEnvironmentsField = (props) => {
   const classes = useStyles();
 
   return (

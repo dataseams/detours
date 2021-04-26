@@ -16,30 +16,30 @@ import chiData from "../static/chiitinerary.json";
 import sfData from "../static/sfitinerary.json";
 
 const data = {
-  "LA": laData.data,
-  "NYC": nycData.data,
-  "CHI": chiData.data,
-  "SF": sfData.data
-}
+  LA: laData.data,
+  NYC: nycData.data,
+  CHI: chiData.data,
+  SF: sfData.data,
+};
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(10),
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 }));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(1),
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 }));
 
 const store = createStore(itineraryReducer);
@@ -70,14 +70,14 @@ function Itinerary(props) {
       </div>
     </Provider>
   );
-};
+}
 
 class ItineraryClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800
-    }
+      width: 800,
+    };
   }
 
   handleWindowSizeChange = () => {
@@ -85,20 +85,18 @@ class ItineraryClass extends React.Component {
   };
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener("resize", this.handleWindowSizeChange);
     this.setState(() => {
-      return { width: window.innerWidth }
-    })
+      return { width: window.innerWidth };
+    });
   }
 
   render() {
-    return (
-      <Itinerary isMobile={this.state.width <= 500} />
-    )
+    return <Itinerary isMobile={this.state.width <= 500} />;
   }
 }
 

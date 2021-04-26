@@ -3,9 +3,9 @@ name: Source code checks
 on: [pull_request]
 
 jobs:
-  code-lint:
+  core-code-lint:
     runs-on: ubuntu-latest
-    name: code lint
+    name: core code lint
     steps:
       - name: check out source repository
         uses: actions/checkout@v2
@@ -29,22 +29,40 @@ jobs:
           extra-black-options: ""
           extra-mypy-options: ""
           extra-isort-options: ""
-  docstring-lint:
-      runs-on: ubuntu-latest
-      name: docstring lint
-      steps:
-        - name: Check out source repository
-          uses: actions/checkout@v2
-        - name: Set up Python environment
-          uses: actions/setup-python@v1
-          with:
-            python-version: "3.8"
-        - name: flake8 lint
-          uses: py-actions/flake8@v1
-          with:
-            python-root-list: "core/"
-            use-pycodestyle: false
-            use-mypy: false
-            use-flake8: true
-            use-black: false
-            extra-flake8-options: ""
+  core-docstring-lint:
+    runs-on: ubuntu-latest
+    name: core docstring lint
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: Set up Python environment
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: flake8 lint
+        uses: py-actions/flake8@v1
+        with:
+          python-root-list: "core/"
+          use-pycodestyle: false
+          use-mypy: false
+          use-flake8: true
+          use-black: false
+          extra-flake8-options: ""
+  ui-code-lint:
+    runs-on: ubuntu-latest
+    name: ui code lint
+    steps:
+      - name: checkout source repository
+        uses: actions/checkout@v2
+      - name: set up node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: install node.js dependencies
+        working-directory: ./ui/app
+        run: npm install --only=dev
+      - name: run linter
+        uses: wearerequired/lint-action@v1
+        with:
+          prettier: true
+          prettier_dir: ./ui/app

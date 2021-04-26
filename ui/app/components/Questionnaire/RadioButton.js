@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/styles";
 
 import { StyledRadio } from "./styles/radio";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
-const renderRadioButton = ({ options, input, ...rest}) => {
+const renderRadioButton = ({ options, input, ...rest }) => {
   const customClasses = useStyles();
 
   return (

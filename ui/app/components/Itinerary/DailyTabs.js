@@ -7,38 +7,38 @@ import TabPanel from "./TabPanel";
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   itineraryBox: {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
     backgroundColor: theme.palette.secondary.main,
-    padding: "2em"
+    padding: "2em",
   },
   itineraryContainer: {
     display: "flex",
     flexGrow: 1,
     flexDirection: "row",
-    height: "35vh"
+    height: "35vh",
   },
   mapContainer: {
     display: "flex",
     flexGrow: 1,
     flexDirection: "row",
-    padding: "0 0 0 0.25em"
-  }
+    padding: "0 0 0 0.25em",
+  },
 }));
 
-const DailyTabs = props => {
+const DailyTabs = (props) => {
   const { plan } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);

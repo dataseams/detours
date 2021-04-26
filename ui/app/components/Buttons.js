@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   nextButton: {
     margin: theme.spacing(1),
     minWidth: "20%",
@@ -10,8 +10,8 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     "&:hover": {
       backgroundColor: "#5865bc",
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   },
 
   hiddenButton: {
@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     "&:hover": {
       backgroundColor: "#5865bc",
-      opacity: 0.7
+      opacity: 0.7,
     },
-    display: "none"
+    display: "none",
   },
 
   backButton: {
@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "white",
     "&:hover": {
       backgroundColor: "white",
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   },
 
   purchaseButton: {
@@ -44,12 +44,12 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     "&:hover": {
       backgroundColor: "#5865bc",
-      opacity: 0.7
+      opacity: 0.7,
     },
     textTransform: "none",
     fontSize: "16px",
-    margin: "1em"
-  }
+    margin: "1em",
+  },
 }));
 
 function Back(props) {
@@ -101,7 +101,11 @@ function Purchase(props) {
   const { className, ...otherProps } = props;
 
   return (
-    <Button variant="contained" className={classes.purchaseButton} {...otherProps}>
+    <Button
+      variant="contained"
+      className={classes.purchaseButton}
+      {...otherProps}
+    >
       {props.children}
     </Button>
   );

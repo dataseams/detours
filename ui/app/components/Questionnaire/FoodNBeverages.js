@@ -4,7 +4,7 @@ import DiningPricePointsField from "./FoodNBeverages/PricePoints";
 import DiningEnvironmentsField from "./FoodNBeverages/DiningEnvironments";
 import { paperStyles } from "./styles/paper";
 
-const FoodNBeveragesField = props => {
+const FoodNBeveragesField = (props) => {
   const classes = paperStyles();
   const [spacing, setSpacing] = React.useState(2);
 
