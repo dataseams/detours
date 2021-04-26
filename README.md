@@ -94,7 +94,7 @@ STRIPE_PUBLIC_KEY=
 STRIPE_SECRET_KEY=
 ```
 
-9- Set node environment variables
+9- Set environment variables for next.js
 
 Create _./ui/app/.env.local_ file and set the following environment variables:
 
