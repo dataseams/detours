@@ -1,9 +1,6 @@
 import React from "react";
 import { Button, Link } from "@material-ui/core";
-import {
-  withStyles,
-  makeStyles,
-} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const StyledButton = withStyles({
   root: {
@@ -12,15 +9,15 @@ const StyledButton = withStyles({
     fontSize: 16,
     lineHeight: 1,
     borderRadius: 0,
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 })(Button);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
     backgroundColor: "white",
-  }
+  },
 }));
 
 function LogoButton(props) {
@@ -32,7 +29,7 @@ function LogoButton(props) {
         className={classes.margin}
         component={Link}
         href="/"
-        style={{ textDecoration: "none"}}
+        style={{ textDecoration: "none" }}
       >
         {props.name}
       </StyledButton>

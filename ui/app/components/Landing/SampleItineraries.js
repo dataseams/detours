@@ -7,11 +7,11 @@ import {
   CardActionArea,
   CardContent,
   GridList,
-  GridListTile
+  GridListTile,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexFlow: "column",
@@ -19,12 +19,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.fontSize,
     backgroundColor: theme.palette.primary.main,
     color: theme.typography.color,
-    padding: theme.spacing(5, 15)
+    padding: theme.spacing(5, 15),
   },
   h2: {
     color: "white",
     paddingBottom: theme.spacing(2),
-    ...theme.h2.desktop
+    ...theme.h2.desktop,
   },
   grid: {
     display: "flex",
@@ -32,48 +32,48 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     justifyContent: "space-between",
     flexWrap: "wrap",
-    margin: theme.spacing(0, -2)
+    margin: theme.spacing(0, -2),
   },
   card: {
     width: 200,
-    margin: theme.spacing(2, 2)
+    margin: theme.spacing(2, 2),
   },
   media: {
-    height: 140
+    height: 140,
   },
   content: {
     height: 50,
-    padding: 10
+    padding: 10,
   },
   body: {
     paddingLeft: theme.spacing(1),
     ...theme.body,
     fontWeight: 500,
-  }
+  },
 }));
 
-const usePopoverClasses = makeStyles(theme => ({
+const usePopoverClasses = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   paper: {
     width: "95%",
-    height: "95%"
-  }
-}))
+    height: "95%",
+  },
+}));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     fontSize: theme.typography.fontSize,
     color: theme.typography.color,
-    padding: theme.spacing(4, 1, 4, 0)
+    padding: theme.spacing(4, 1, 4, 0),
   },
   h2: {
     color: "white",
     ...theme.h2.mobile,
-    padding: theme.spacing(0, 0, 1, 4)
+    padding: theme.spacing(0, 0, 1, 4),
   },
   gridList: {
     flexWrap: "nowrap",
@@ -81,23 +81,23 @@ const useMobileStyles = makeStyles(theme => ({
     height: 274,
   },
   cardContainer: {
-    height: 234
+    height: 234,
   },
   card: {
-    width: "100%"
+    width: "100%",
   },
   media: {
-    height: 170
+    height: 170,
   },
   content: {
     height: 60,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   body: {
     paddingLeft: theme.spacing(1),
     fontWeight: 500,
-    ...theme.body
-  }
+    ...theme.body,
+  },
 }));
 
 const itineraries = [
@@ -107,7 +107,7 @@ const itineraries = [
   { city: "CHI", title: "Chicago, IL", image: "static/chicago.png" },
 ];
 
-const Itinerary = props => {
+const Itinerary = (props) => {
   const { classes, itinerary, index } = props;
 
   return (
@@ -123,62 +123,52 @@ const Itinerary = props => {
         </CardContent>
       </CardActionArea>
     </Card>
-  )
-}
+  );
+};
 
 function SampleItineraries(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
 
-  return (
-    (isMobile) ? (
-      <Box className={classes.root}>
-        <Typography className={classes.h2}>
-          See sample itineraries to:
-        </Typography>
-        <GridList
-          className={classes.gridList}
-          cols={1.4}
-          spacing={2 * 8}
-          cellHeight="auto"
-        >
-          {itineraries.map((itinerary, index) => (
-            <GridListTile
-              key={index}
-              classes={{ tile: classes.cardContainer }}
-              onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}
-            >
-              <Itinerary
-                classes={classes}
-                itinerary={itinerary}
-                index={index}
-              />
-            </GridListTile>
-          ))}
-        </GridList>
-      </Box>
-    ) : (
-        <Box className={classes.root}>
-          <Typography className={classes.h2}>
-            See sample itineraries to:
-            </Typography>
-          <Grid className={classes.grid}>
-            {itineraries.map((itinerary, index) => (
-              <Box
-                key={index}
-                onClick={() => window.open("itinerarysample?city=" + itinerary.city, "_blank")}
-              >
-                <Itinerary
-                  classes={classes}
-                  itinerary={itinerary}
-                  index={index}
-                />
-              </Box>
-            ))}
-          </Grid>
-        </Box>
-      )
-  )
+  return isMobile ? (
+    <Box className={classes.root}>
+      <Typography className={classes.h2}>See sample itineraries to:</Typography>
+      <GridList
+        className={classes.gridList}
+        cols={1.4}
+        spacing={2 * 8}
+        cellHeight="auto"
+      >
+        {itineraries.map((itinerary, index) => (
+          <GridListTile
+            key={index}
+            classes={{ tile: classes.cardContainer }}
+            onClick={() =>
+              window.open("itinerarysample?city=" + itinerary.city, "_blank")
+            }
+          >
+            <Itinerary classes={classes} itinerary={itinerary} index={index} />
+          </GridListTile>
+        ))}
+      </GridList>
+    </Box>
+  ) : (
+    <Box className={classes.root}>
+      <Typography className={classes.h2}>See sample itineraries to:</Typography>
+      <Grid className={classes.grid}>
+        {itineraries.map((itinerary, index) => (
+          <Box
+            key={index}
+            onClick={() =>
+              window.open("itinerarysample?city=" + itinerary.city, "_blank")
+            }
+          >
+            <Itinerary classes={classes} itinerary={itinerary} index={index} />
+          </Box>
+        ))}
+      </Grid>
+    </Box>
+  );
 }
 
 export default SampleItineraries;

@@ -1,64 +1,64 @@
 import { Typography, Box, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(10, 10, 5, 10),
-    fontSize: 18
+    fontSize: 18,
   },
   title: {
-    fontSize: "2.68em"
+    fontSize: "2.68em",
   },
   divider: {
     width: "90px",
     height: "2px",
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
   },
   descParagraph: {
-    paddingTop: "1em"
+    paddingTop: "1em",
   },
   descItem: {
-    paddingLeft: "1em"
+    paddingLeft: "1em",
   },
   tags: {
     display: "flex",
     padding: "1em 0 1em 2em",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   tag: {
-    color: theme.palette.primary.main
-  }
+    color: theme.palette.primary.main,
+  },
 }));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(10, 0, 3, 0)
+    margin: theme.spacing(10, 0, 3, 0),
   },
   title: {
-    fontSize: "2em"
+    fontSize: "2em",
   },
   divider: {
     width: "25%",
     height: "2px",
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
   },
   descParagraph: {
-    paddingTop: "1em"
+    paddingTop: "1em",
   },
   descItem: {
-    paddingLeft: "0em"
+    paddingLeft: "0em",
   },
   tags: {
     display: "flex",
     padding: theme.spacing(1, 0, 0, 0),
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   tag: {
-    color: theme.palette.primary.main
-  }
+    color: theme.palette.primary.main,
+  },
 }));
 
-const TagBox = props => {
+const TagBox = (props) => {
   const { children, classes } = props;
   return (
     <Box border={1} padding={1} margin={0.5} className={classes.tag}>
@@ -67,15 +67,18 @@ const TagBox = props => {
   );
 };
 
-const ItineraryDescription = props => {
+const ItineraryDescription = (props) => {
   const { fullItinerary, isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
   const summary = {
-    "cityName": fullItinerary.city.name + ", " + (fullItinerary.city.state || fullItinerary.city.country),
-    "spendingPerDay": fullItinerary.spendingPerDay,
-    "hoursSaved": fullItinerary.hoursSaved,
-    "interestsMatched": fullItinerary.interestsMatched,
-  }
+    cityName:
+      fullItinerary.city.name +
+      ", " +
+      (fullItinerary.city.state || fullItinerary.city.country),
+    spendingPerDay: fullItinerary.spendingPerDay,
+    hoursSaved: fullItinerary.hoursSaved,
+    interestsMatched: fullItinerary.interestsMatched,
+  };
 
   return (
     <Box className={classes.root}>
@@ -100,7 +103,9 @@ const ItineraryDescription = props => {
       </Typography>
       <Box className={classes.tags}>
         {summary.interestsMatched.map((interest, index) => (
-          <TagBox classes={classes} key={index}>{interest}</TagBox>
+          <TagBox classes={classes} key={index}>
+            {interest}
+          </TagBox>
         ))}
       </Box>
     </Box>

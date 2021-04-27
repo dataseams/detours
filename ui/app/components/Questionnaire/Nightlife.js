@@ -14,14 +14,14 @@ const nightlifeOptions = [
   { name: "Craft beer bars", id: "nightlife.craftBeerBars" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const NightlifeField = props => {
+const NightlifeField = (props) => {
   const classes = useStyles();
 
   return (

@@ -10,16 +10,16 @@ const NavigationButton = withStyles({
     lineHeight: 1,
     borderRadius: 0,
     "&:hover": {
-      borderBottom: "2px solid #7983c9"
-    }
-  }
+      borderBottom: "2px solid #7983c9",
+    },
+  },
 })(Button);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 }));
 
 function NavigationBarButton(props) {

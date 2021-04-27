@@ -14,24 +14,24 @@ import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import { itineraryReducer } from "../redux/reducers";
 import GET_ITINERARY from "../utils/queries/GetItinerary";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(10),
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 }));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(1),
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 }));
 
 const store = createStore(itineraryReducer);
@@ -40,8 +40,10 @@ function Itinerary(props) {
   const { isMobile } = props;
   const router = useRouter();
   const classes = isMobile ? useMobileStyles() : useStyles();
-  const variables = { "surveyResponseNodeId": router.query.surveyId };
-  const { loading, error, data } = useQuery(GET_ITINERARY, { variables: variables });
+  const variables = { surveyResponseNodeId: router.query.surveyId };
+  const { loading, error, data } = useQuery(GET_ITINERARY, {
+    variables: variables,
+  });
 
   return (
     <Provider store={store}>
@@ -49,7 +51,9 @@ function Itinerary(props) {
         <Meta />
         <div>
           <LogoNavigationBar />
-          {loading ? <p>Loading...</p> :
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
             <Container className={classes.root}>
               <ItineraryDescription
                 fullItinerary={data.getLastTripPlanForSurveyResponse}
@@ -60,19 +64,20 @@ function Itinerary(props) {
                 isMobile={isMobile}
               />
               <PurchaseBox />
-            </Container>}
+            </Container>
+          )}
         </div>
       </div>
     </Provider>
   );
-};
+}
 
 class ItineraryClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800
-    }
+      width: 800,
+    };
   }
 
   handleWindowSizeChange = () => {
@@ -80,20 +85,18 @@ class ItineraryClass extends React.Component {
   };
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener("resize", this.handleWindowSizeChange);
     this.setState(() => {
-      return { width: window.innerWidth }
-    })
+      return { width: window.innerWidth };
+    });
   }
 
   render() {
-    return (
-      <Itinerary isMobile={this.state.width <= 500} />
-    )
+    return <Itinerary isMobile={this.state.width <= 500} />;
   }
 }
 

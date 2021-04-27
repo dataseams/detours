@@ -15,17 +15,17 @@ const diningFeatureOptions = [
   { name: "Late night eats", id: "dining.features.lateNightEats" },
   { name: "Craft beer", id: "dining.features.craftBeer" },
   { name: "Artisinal coffee", id: "dining.features.artisinalCoffee" },
-  { name: "Aperitif", id: "dining.features.aperitif" }
+  { name: "Aperitif", id: "dining.features.aperitif" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const DiningFeaturesField = props => {
+const DiningFeaturesField = (props) => {
   const classes = useStyles();
 
   return (
