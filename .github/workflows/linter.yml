@@ -60,7 +60,7 @@ jobs:
           node-version: 12
       - name: install node.js dependencies
         working-directory: ./ui/app
-        run: npm install dev
+        run: npm install --only=dev
       - name: run linter
         uses: wearerequired/lint-action@v1
         with:
