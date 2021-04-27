@@ -6,10 +6,10 @@ import renderRadioButton from "./RadioButton";
 const priorVisitOptions = [
   { label: "Never", value: "never" },
   { label: "One time", value: "one time" },
-  { label: "Many times", value: "many times" }
+  { label: "Many times", value: "many times" },
 ];
 
-const PriorVisitsField = props => {
+const PriorVisitsField = (props) => {
   const { classes } = props;
 
   return (

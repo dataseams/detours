@@ -4,10 +4,10 @@ import renderRadioButton from "../RadioButton";
 
 const dietaryConstraintFilterOptions = [
   { label: "Yes", value: "yes" },
-  { label: "No", value: "no" }
+  { label: "No", value: "no" },
 ];
 
-const DietaryConstraintFilterField = props => {
+const DietaryConstraintFilterField = (props) => {
   const { classes } = props;
 
   return (

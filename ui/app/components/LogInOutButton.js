@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "row",
@@ -12,8 +12,8 @@ const useStyles = makeStyles(theme => ({
     borderWidth: "2px",
     color: theme.palette.primary.main,
     height: "3.3em",
-    borderRadius: "2px"
-  }
+    borderRadius: "2px",
+  },
 }));
 
 function LogInOutButton(props) {

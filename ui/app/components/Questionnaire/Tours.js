@@ -10,17 +10,17 @@ const tourOptions = [
   { name: "Day trips", id: "tours.dayTrips" },
   { name: "Boat tours", id: "tours.boatTours" },
   { name: "Classes", id: "tours.classes" },
-  { name: "Guided tours", id: "tours.guidedTours" }
+  { name: "Guided tours", id: "tours.guidedTours" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const ToursField = props => {
+const ToursField = (props) => {
   const classes = useStyles();
 
   return (

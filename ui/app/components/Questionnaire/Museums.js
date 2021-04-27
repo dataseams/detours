@@ -8,17 +8,17 @@ const museumOptions = [
   { name: "Science", id: "museum.science" },
   { name: "Art", id: "museum.art" },
   { name: "Design", id: "museum.design" },
-  { name: "War", id: "museum.war" }
+  { name: "War", id: "museum.war" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const MuseumsField = props => {
+const MuseumsField = (props) => {
   const classes = useStyles();
 
   return (

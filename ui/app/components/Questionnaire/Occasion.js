@@ -11,10 +11,10 @@ const occasionsOptions = [
   { label: "Trip with friends", value: "trip with friends" },
   { label: "Birthday", value: "birthday" },
   { label: "Family vacation", value: "family vacation" },
-  { label: "Other", value: "other" }
+  { label: "Other", value: "other" },
 ];
 
-const OccasionField = props => {
+const OccasionField = (props) => {
   const { classes } = props;
 
   return (

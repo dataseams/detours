@@ -9,10 +9,10 @@ const companionOptions = [
   { label: "Friend", value: "friend" },
   { label: "Group", value: "group" },
   { label: "Family with kids", value: "family with kids" },
-  { label: "Other", value: "other" }
+  { label: "Other", value: "other" },
 ];
 
-const CompanionField = props => {
+const CompanionField = (props) => {
   const { classes } = props;
 
   return (

@@ -9,21 +9,21 @@ import renderFormHelper from "./RenderFormHelper";
 const genderOptions = [
   { value: "Female", label: "Female" },
   { value: "Male", label: "Male" },
-  { value: "Other", label: "Other" }
+  { value: "Other", label: "Other" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "inline",
     flexWrap: "wrap",
-    width: "100%"
+    width: "100%",
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: "45%",
-    maxWidth: "90%"
-  }
+    maxWidth: "90%",
+  },
 }));
 
 const renderAgeText = ({
@@ -42,7 +42,7 @@ const renderAgeText = ({
       helperText={touched && error}
       className={customClasses.textField}
       InputLabelProps={{
-        shrink: true
+        shrink: true,
       }}
       value=""
       margin="normal"
@@ -72,14 +72,14 @@ const renderGenderText = ({
       helperText={touched && error}
       className={customClasses.textField}
       InputLabelProps={{
-        shrink: true
+        shrink: true,
       }}
       margin="normal"
       variant="outlined"
       {...input}
       {...custom}
     >
-      {genderOptions.map(option => (
+      {genderOptions.map((option) => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}
         </MenuItem>
@@ -88,23 +88,15 @@ const renderGenderText = ({
   );
 };
 
-const AgeGenderField = props => {
+const AgeGenderField = (props) => {
   const { classes } = props;
   const customClasses = useStyles();
 
   return (
     <div className={customClasses.root}>
-      <Field
-        name="age"
-        component={renderAgeText}
-        label="Age"
-      />
-      <Field
-        name="gender"
-        label="Gender"
-        component={renderGenderText}
-      >
-        {genderOptions.map(option => (
+      <Field name="age" component={renderAgeText} label="Age" />
+      <Field name="gender" label="Gender" component={renderGenderText}>
+        {genderOptions.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

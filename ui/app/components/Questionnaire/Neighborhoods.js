@@ -9,14 +9,14 @@ const neighborhoodOptions = [
   { name: "Placeholder 3", id: "neighborhood.placeholder3" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const NeighborhoodsField = props => {
+const NeighborhoodsField = (props) => {
   const classes = useStyles();
 
   return (

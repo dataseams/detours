@@ -9,17 +9,17 @@ const relaxMethodOptions = [
   { name: "Massages", id: "relaxationMethods.massages" },
   { name: "Bath houses", id: "relaxationMethods.bathHouses" },
   { name: "Yoga", id: "relaxationMethods.yoga" },
-  { name: "Downtime", id: "relaxationMethods.downtime" }
+  { name: "Downtime", id: "relaxationMethods.downtime" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const RelaxMethodsField = props => {
+const RelaxMethodsField = (props) => {
   const classes = useStyles();
 
   return (

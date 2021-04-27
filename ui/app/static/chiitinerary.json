@@ -1,425 +1,425 @@
 {
-    "data": {
-      "getLastTripPlanForSurveyResponse": {
-        "id": "VHJpcFBsYW46ODc=",
-        "city": {
-          "name": "Chicago",
-          "state": "Illinois",
-          "country": "USA"
-        },
-        "spendingPerDay": 176,
-        "hoursSaved": "20-30",
-        "interestsMatched": [
-          "Intimate, authentic dining",
-          "Markets",
-          "Massages",
-          "Walking tours",
-          "Wine bars"
-        ],
-        "startDate": "2020-08-06",
-        "endDate": "2020-08-09",
-        "timeStamp": "2020-10-01T19:18:44.544658",
-        "dailyPlans": {
-          "edges": [
-            {
-              "node": {
-                "date": "2020-08-06",
-                "planItems": {
-                  "edges": [
-                    {
-                      "node": {
-                        "order": 0,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Xoco",
-                            "description": "Mexican",
-                            "locality": "River North",
-                            "latitude": 41.890792,
-                            "longitude": -87.631072
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 1,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "Bike and Roll Chicago - Navy Pier",
-                            "description": "Bike and Roll Chicago - Navy Pier",
-                            "locality": null,
-                            "latitude": 41.891068,
-                            "longitude": -87.610895
-                          },
-                          "name": "tour"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 2,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Portillo's Hot Dogs",
-                            "description": "American, Italian, Burger, Sandwich",
-                            "locality": "River North",
-                            "latitude": 41.89343,
-                            "longitude": -87.631415
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 3,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "The Art Institute of Chicago",
-                            "description": "The Art Institute of Chicago",
-                            "locality": null,
-                            "latitude": 41.879585,
-                            "longitude": -87.623713
-                          },
-                          "name": "tour"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 4,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Grand Lux Cafe",
-                            "description": "American, Pizza, Burger, Sandwich",
-                            "locality": "River North",
-                            "latitude": 41.893581,
-                            "longitude": -87.625114
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 5,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "The Chicago Theatre",
-                            "description": "The Chicago Theatre",
-                            "locality": null,
-                            "latitude": 41.885391,
-                            "longitude": -87.627505
-                          },
-                          "name": "tour"
-                        }
+  "data": {
+    "getLastTripPlanForSurveyResponse": {
+      "id": "VHJpcFBsYW46ODc=",
+      "city": {
+        "name": "Chicago",
+        "state": "Illinois",
+        "country": "USA"
+      },
+      "spendingPerDay": 176,
+      "hoursSaved": "20-30",
+      "interestsMatched": [
+        "Intimate, authentic dining",
+        "Markets",
+        "Massages",
+        "Walking tours",
+        "Wine bars"
+      ],
+      "startDate": "2020-08-06",
+      "endDate": "2020-08-09",
+      "timeStamp": "2020-10-01T19:18:44.544658",
+      "dailyPlans": {
+        "edges": [
+          {
+            "node": {
+              "date": "2020-08-06",
+              "planItems": {
+                "edges": [
+                  {
+                    "node": {
+                      "order": 0,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Xoco",
+                          "description": "Mexican",
+                          "locality": "River North",
+                          "latitude": 41.890792,
+                          "longitude": -87.631072
+                        },
+                        "name": "food"
                       }
                     }
-                  ]
-                }
-              }
-            },
-            {
-              "node": {
-                "date": "2020-08-07",
-                "planItems": {
-                  "edges": [
-                    {
-                      "node": {
-                        "order": 0,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Lou Malnati's Pizzeria",
-                            "description": "Pizza",
-                            "locality": "River North",
-                            "latitude": 41.890381,
-                            "longitude": -87.634024
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 1,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "North Avenue Beach",
-                            "description": "North Avenue Beach",
-                            "locality": null,
-                            "latitude": 41.914811,
-                            "longitude": -87.625109
-                          },
-                          "name": "tour"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 2,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Pequod's Pizza",
-                            "description": "Pizza, Italian, Sandwich",
-                            "locality": "Lincoln Park",
-                            "latitude": 41.92175,
-                            "longitude": -87.664658
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 3,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "Lincoln Park",
-                            "description": "Lincoln Park",
-                            "locality": null,
-                            "latitude": 41.939897,
-                            "longitude": -87.634536
-                          },
-                          "name": "tour"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 4,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Big Star",
-                            "description": "Mexican",
-                            "locality": "Wicker Park",
-                            "latitude": 41.909242,
-                            "longitude": -87.677253
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 5,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "UP Comedy Club",
-                            "description": "UP Comedy Club",
-                            "locality": null,
-                            "latitude": 41.911322,
-                            "longitude": -87.635417
-                          },
-                          "name": "tour"
-                        }
+                  },
+                  {
+                    "node": {
+                      "order": 1,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "Bike and Roll Chicago - Navy Pier",
+                          "description": "Bike and Roll Chicago - Navy Pier",
+                          "locality": null,
+                          "latitude": 41.891068,
+                          "longitude": -87.610895
+                        },
+                        "name": "tour"
                       }
                     }
-                  ]
-                }
-              }
-            },
-            {
-              "node": {
-                "date": "2020-08-08",
-                "planItems": {
-                  "edges": [
-                    {
-                      "node": {
-                        "order": 0,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Frontera Grill",
-                            "description": "Mexican",
-                            "locality": "River North",
-                            "latitude": 41.890433,
-                            "longitude": -87.631133
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 1,
-                        "activity": {
-                          "activityType": {
-                            "name": "tour",
-                            "materialIcon": "directions_bike"
-                          },
-                          "place": {
-                            "name": "Rookery Building",
-                            "description": "Rookery Building",
-                            "locality": null,
-                            "latitude": 41.879224,
-                            "longitude": -87.631787
-                          },
-                          "name": "tour"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 2,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Chicago Pizza & Oven Grinder Company",
-                            "description": "Italian, Pizza, Sandwich",
-                            "locality": "Lincoln Park",
-                            "latitude": 41.920712,
-                            "longitude": -87.637309
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 3,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Yolk (South Loop)",
-                            "description": "American",
-                            "locality": "Loop",
-                            "latitude": 41.8693,
-                            "longitude": -87.62413
-                          },
-                          "name": "food"
-                        }
+                  },
+                  {
+                    "node": {
+                      "order": 2,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Portillo's Hot Dogs",
+                          "description": "American, Italian, Burger, Sandwich",
+                          "locality": "River North",
+                          "latitude": 41.89343,
+                          "longitude": -87.631415
+                        },
+                        "name": "food"
                       }
                     }
-                  ]
-                }
-              }
-            },
-            {
-              "node": {
-                "date": "2020-08-09",
-                "planItems": {
-                  "edges": [
-                    {
-                      "node": {
-                        "order": 0,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Kuma's Corner - Belmont",
-                            "description": "Burger, American",
-                            "locality": "Avondale",
-                            "latitude": 41.93945,
-                            "longitude": -87.70092
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 1,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "Cafe Ba-Ba-Reeba!",
-                            "description": "Spanish, Tapas",
-                            "locality": "Lincoln Park",
-                            "latitude": 41.91891,
-                            "longitude": -87.64862
-                          },
-                          "name": "food"
-                        }
-                      }
-                    },
-                    {
-                      "node": {
-                        "order": 2,
-                        "activity": {
-                          "activityType": {
-                            "name": "food",
-                            "materialIcon": "restaurant"
-                          },
-                          "place": {
-                            "name": "The Publican",
-                            "description": "American",
-                            "locality": "West Loop",
-                            "latitude": 41.886683,
-                            "longitude": -87.648933
-                          },
-                          "name": "food"
-                        }
+                  },
+                  {
+                    "node": {
+                      "order": 3,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "The Art Institute of Chicago",
+                          "description": "The Art Institute of Chicago",
+                          "locality": null,
+                          "latitude": 41.879585,
+                          "longitude": -87.623713
+                        },
+                        "name": "tour"
                       }
                     }
-                  ]
-                }
+                  },
+                  {
+                    "node": {
+                      "order": 4,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Grand Lux Cafe",
+                          "description": "American, Pizza, Burger, Sandwich",
+                          "locality": "River North",
+                          "latitude": 41.893581,
+                          "longitude": -87.625114
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 5,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "The Chicago Theatre",
+                          "description": "The Chicago Theatre",
+                          "locality": null,
+                          "latitude": 41.885391,
+                          "longitude": -87.627505
+                        },
+                        "name": "tour"
+                      }
+                    }
+                  }
+                ]
               }
             }
-          ]
-        }
+          },
+          {
+            "node": {
+              "date": "2020-08-07",
+              "planItems": {
+                "edges": [
+                  {
+                    "node": {
+                      "order": 0,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Lou Malnati's Pizzeria",
+                          "description": "Pizza",
+                          "locality": "River North",
+                          "latitude": 41.890381,
+                          "longitude": -87.634024
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 1,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "North Avenue Beach",
+                          "description": "North Avenue Beach",
+                          "locality": null,
+                          "latitude": 41.914811,
+                          "longitude": -87.625109
+                        },
+                        "name": "tour"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 2,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Pequod's Pizza",
+                          "description": "Pizza, Italian, Sandwich",
+                          "locality": "Lincoln Park",
+                          "latitude": 41.92175,
+                          "longitude": -87.664658
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 3,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "Lincoln Park",
+                          "description": "Lincoln Park",
+                          "locality": null,
+                          "latitude": 41.939897,
+                          "longitude": -87.634536
+                        },
+                        "name": "tour"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 4,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Big Star",
+                          "description": "Mexican",
+                          "locality": "Wicker Park",
+                          "latitude": 41.909242,
+                          "longitude": -87.677253
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 5,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "UP Comedy Club",
+                          "description": "UP Comedy Club",
+                          "locality": null,
+                          "latitude": 41.911322,
+                          "longitude": -87.635417
+                        },
+                        "name": "tour"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "node": {
+              "date": "2020-08-08",
+              "planItems": {
+                "edges": [
+                  {
+                    "node": {
+                      "order": 0,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Frontera Grill",
+                          "description": "Mexican",
+                          "locality": "River North",
+                          "latitude": 41.890433,
+                          "longitude": -87.631133
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 1,
+                      "activity": {
+                        "activityType": {
+                          "name": "tour",
+                          "materialIcon": "directions_bike"
+                        },
+                        "place": {
+                          "name": "Rookery Building",
+                          "description": "Rookery Building",
+                          "locality": null,
+                          "latitude": 41.879224,
+                          "longitude": -87.631787
+                        },
+                        "name": "tour"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 2,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Chicago Pizza & Oven Grinder Company",
+                          "description": "Italian, Pizza, Sandwich",
+                          "locality": "Lincoln Park",
+                          "latitude": 41.920712,
+                          "longitude": -87.637309
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 3,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Yolk (South Loop)",
+                          "description": "American",
+                          "locality": "Loop",
+                          "latitude": 41.8693,
+                          "longitude": -87.62413
+                        },
+                        "name": "food"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "node": {
+              "date": "2020-08-09",
+              "planItems": {
+                "edges": [
+                  {
+                    "node": {
+                      "order": 0,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Kuma's Corner - Belmont",
+                          "description": "Burger, American",
+                          "locality": "Avondale",
+                          "latitude": 41.93945,
+                          "longitude": -87.70092
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 1,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "Cafe Ba-Ba-Reeba!",
+                          "description": "Spanish, Tapas",
+                          "locality": "Lincoln Park",
+                          "latitude": 41.91891,
+                          "longitude": -87.64862
+                        },
+                        "name": "food"
+                      }
+                    }
+                  },
+                  {
+                    "node": {
+                      "order": 2,
+                      "activity": {
+                        "activityType": {
+                          "name": "food",
+                          "materialIcon": "restaurant"
+                        },
+                        "place": {
+                          "name": "The Publican",
+                          "description": "American",
+                          "locality": "West Loop",
+                          "latitude": 41.886683,
+                          "longitude": -87.648933
+                        },
+                        "name": "food"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
       }
     }
   }
+}

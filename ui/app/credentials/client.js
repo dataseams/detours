@@ -6,5 +6,5 @@ module.exports = {
   storageBucket: "detours-bb95f.appspot.com",
   messagingSenderId: "1093347990752",
   appId: "1:1093347990752:web:c76d082af65630feed4485",
-  measurementId: "G-HHTS8X31N4"
+  measurementId: "G-HHTS8X31N4",
 };

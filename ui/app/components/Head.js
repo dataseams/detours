@@ -19,7 +19,7 @@ const AppHead = () => {
         ></link>
       </Head>
     </div>
-  )
-}
+  );
+};
 
 export default AppHead;

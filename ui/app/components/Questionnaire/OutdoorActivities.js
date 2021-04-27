@@ -11,14 +11,14 @@ const outdoorActivityOptions = [
   { name: "Scenic views", id: "outdoorActivities.scenicViews" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const OutdoorActivitiesField = props => {
+const OutdoorActivitiesField = (props) => {
   const classes = useStyles();
 
   return (

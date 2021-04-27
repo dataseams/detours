@@ -4,10 +4,10 @@ import { reduxForm } from "redux-form";
 import { QuestionComp, questionnaireLength } from "./QuestionBank";
 import { Back, Next, Submit } from "../Buttons";
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   const requiredFields = ["city"];
-  requiredFields.forEach(field => {
+  requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = "Required";
     }
@@ -22,7 +22,7 @@ class QuestionnaireForm extends React.Component {
     this.state = {
       index: 1,
       hiddenNext: false,
-      disabledBack: true
+      disabledBack: true,
     };
   }
 
@@ -33,7 +33,7 @@ class QuestionnaireForm extends React.Component {
     this.setState({
       index: index,
       disabledBack: disabledBack,
-      hiddenNext: false
+      hiddenNext: false,
     });
   }
 
@@ -44,7 +44,7 @@ class QuestionnaireForm extends React.Component {
     this.setState({
       index: index,
       hiddenNext: hiddenNext,
-      disabledBack: false
+      disabledBack: false,
     });
   }
 
@@ -58,8 +58,8 @@ class QuestionnaireForm extends React.Component {
           <QuestionComp index={index} handleChange={this.props.handleChange} />
         </div>
         <div className={classes.surveyButtons}>
-          <Back toggle={e => this.toggleBack(e)} active={disabledBack} />
-          <Next toggle={e => this.toggleNext(e)} hidden={hiddenNext} />
+          <Back toggle={(e) => this.toggleBack(e)} active={disabledBack} />
+          <Next toggle={(e) => this.toggleNext(e)} hidden={hiddenNext} />
           <Submit
             type="submit"
             hidden={hiddenNext}
@@ -73,5 +73,5 @@ class QuestionnaireForm extends React.Component {
 
 export default reduxForm({
   form: "questionnaire",
-  validate
+  validate,
 })(QuestionnaireForm);

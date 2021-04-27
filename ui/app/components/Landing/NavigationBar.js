@@ -9,11 +9,11 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import PropTypes from 'prop-types';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import PropTypes from "prop-types";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
@@ -24,7 +24,7 @@ function ElevationScroll(props) {
   const { children } = props;
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 0
+    threshold: 0,
   });
 
   return React.cloneElement(children, {
@@ -38,59 +38,59 @@ ElevationScroll.propTypes = {
 
 const StyledAppBar = withStyles({
   root: {
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 })(AppBar);
 
-const useToolbarStyles = makeStyles(theme => ({
+const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(0, 14, 0, 13)
-  }
+    padding: theme.spacing(0, 14, 0, 13),
+  },
 }));
 
-const useMobileToolbarStyles = makeStyles(theme => ({
+const useMobileToolbarStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(0, 2, 0, 2)
-  }
+    padding: theme.spacing(0, 2, 0, 2),
+  },
 }));
 
-const useLogoStyles = makeStyles(theme => ({
+const useLogoStyles = makeStyles((theme) => ({
   box: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
-const useDrawerStyles = makeStyles(theme => ({
+const useDrawerStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   paper: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
-const useListStyles = makeStyles(theme => ({
+const useListStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 }));
 
-const useDividerStyles = makeStyles(theme => ({
+const useDividerStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.primary.main
-  }
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
-const useTextStyles = makeStyles(theme => ({
+const useTextStyles = makeStyles((theme) => ({
   root: {
     fontSize: theme.typography.fontSize,
     padding: theme.spacing(1, 0),
-    color: theme.typography.color
+    color: theme.typography.color,
   },
   primary: {
     fontSize: "1.167em",
-    fontWeight: 500
-  }
+    fontWeight: 500,
+  },
 }));
 
 function MobileToolbar(props) {
@@ -99,7 +99,7 @@ function MobileToolbar(props) {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
   const logoClasses = useLogoStyles();
   const drawerClasses = useDrawerStyles();
@@ -109,8 +109,11 @@ function MobileToolbar(props) {
   const toolbarClasses = useMobileToolbarStyles();
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === "keydown" && (event.key === "tab" || event.key === "shift")) {
-      return
+    if (
+      event.type === "keydown" &&
+      (event.key === "tab" || event.key === "shift")
+    ) {
+      return;
     }
     setState({ ...state, [anchor]: open });
   };
@@ -147,7 +150,7 @@ function MobileToolbar(props) {
           <Auth />
         </ListItem>
       </List>
-    </Box >
+    </Box>
   );
 
   return (
@@ -167,7 +170,7 @@ function MobileToolbar(props) {
         {list("right")}
       </Drawer>
     </Toolbar>
-  )
+  );
 }
 
 function NavigationBar(props) {
@@ -181,16 +184,16 @@ function NavigationBar(props) {
         {isMobile ? (
           <MobileToolbar isMobile={isMobile} />
         ) : (
-            <Toolbar classes={toolbarClasses}>
-              <Box className={logoClasses.box}>
-                <LogoButton name="DETOURS" />
-              </Box>
-              <NavigationBarButton name="How it works" />
-              <NavigationBarButton name="Pricing" />
-              <NavigationBarButton name="About us" />
-              <GetStartedButton />
-            </Toolbar>
-          )}
+          <Toolbar classes={toolbarClasses}>
+            <Box className={logoClasses.box}>
+              <LogoButton name="DETOURS" />
+            </Box>
+            <NavigationBarButton name="How it works" />
+            <NavigationBarButton name="Pricing" />
+            <NavigationBarButton name="About us" />
+            <GetStartedButton />
+          </Toolbar>
+        )}
       </StyledAppBar>
     </ElevationScroll>
   );

@@ -7,10 +7,10 @@ const pricePointOptions = [
   { name: "$", id: "inexpensive" },
   { name: "$$", id: "moderate" },
   { name: "$$$", id: "expensive" },
-  { name: "$$$$", id: "luxury" }
+  { name: "$$$$", id: "luxury" },
 ];
 
-const DiningPricePointsField = props => {
+const DiningPricePointsField = (props) => {
   const { classes } = props;
 
   return (
