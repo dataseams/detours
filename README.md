@@ -1,4 +1,4 @@
-![Lint and docstring](https://github.com/sammo/detours/workflows/Source%20code%20checks/badge.svg) ![Unit tests](https://github.com/sammo/detours/workflows/Unit%20tests/badge.svg) ![Build and Deploy to GKE](https://github.com/sammo/detours/workflows/Build%20and%20Deploy%20to%20GKE/badge.svg)
+![Linters](https://github.com/dataseams/detours/actions/workflows/linter.yml/badge.svg?branch=master&event=push) ![Unit tests](https://github.com/dataseams/detours/actions/workflows/tests.yml/badge.svg?branch=master&event=push) ![Build and Deploy to GKE](https://github.com/dataseams/detours/actions/workflows/google.yml/badge.svg?branch=add-env-to-actions&event=pull_request)
 # robocation
 
 The Travel Robot
