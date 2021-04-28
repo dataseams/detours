@@ -6,26 +6,26 @@ import {
   ListItemText,
   ListItemAvatar,
   Typography,
-  Paper
+  Paper,
 } from "@material-ui/core";
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   inline: {
-    display: "inline"
+    display: "inline",
   },
   icon: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   listItem: {
     "&:hover": {
-      backgroundColor: theme.palette.secondary.main
-    }
-  }
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
 }));
 
 function ItineraryItem(props) {
@@ -38,9 +38,7 @@ function ItineraryItem(props) {
         <div key={(index + 1) * event.node.order} className={classes.listItem}>
           <ListItem alignItems="flex-start" divider={true}>
             <ListItemAvatar>
-              <i
-                className={`material-icons ${classes.icon}`}
-              >
+              <i className={`material-icons ${classes.icon}`}>
                 {event.node.activity.activityType.materialIcon}
               </i>
             </ListItemAvatar>

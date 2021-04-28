@@ -10,14 +10,14 @@ import LogoNavigationBar from "../components/LogoNavigationBar";
 import { questionnaireReducer } from "../redux/reducers";
 import CREATE_PLAN_MUTATION from "../utils/queries/CreatePlan";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "left",
-    width: "50%"
+    width: "50%",
   },
   surveyButtons: {
     textAlign: "center",
-    paddingTop: theme.spacing(5)
+    paddingTop: theme.spacing(5),
   },
   surveyPage: {
     display: "flex",
@@ -26,20 +26,20 @@ const useStyles = makeStyles(theme => ({
     justifyText: "center",
     width: "100%",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
-const useMobileStyles = makeStyles(theme => ({
+const useMobileStyles = makeStyles((theme) => ({
   root: {
     textAlign: "left",
-    width: "80%"
+    width: "80%",
   },
   surveyButtons: {
     display: "flex",
     flexDirection: "column-reverse",
     textAlign: "center",
-    paddingTop: theme.spacing(5)
+    paddingTop: theme.spacing(5),
   },
   surveyPage: {
     display: "flex",
@@ -48,39 +48,46 @@ const useMobileStyles = makeStyles(theme => ({
     justifyText: "center",
     width: "100%",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
 const store = createStore(questionnaireReducer);
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 function SurveyWithoutRedux(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
-  const QuestionnaireForm = require(
-    "../components/Questionnaire/QuestionnaireForm"
-  ).default;
+  const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
+    .default;
   const router = useRouter();
   const [createPlan, { data }] = useMutation(CREATE_PLAN_MUTATION);
-  const travelerEmail = useSelector(state => state.user.email) || "";
+  const travelerEmail = useSelector((state) => state.user.email) || "";
 
   return (
     <div>
       <Meta />
       <LogoNavigationBar />
       <div className={classes.surveyPage}>
-        <QuestionnaireForm classes={classes} onSubmit={
-          values => createPlan({
-            variables: {
-              travelerEmail: "", json: JSON.stringify(values, null, 2)
-            }
-          }).then(res => {
-            router.push("/itinerary?surveyId=".concat(
-              res.data.createPlanForSurveyResponse.surveyResponse.id
-            ))
-          }).catch(e => console.log(e))
-        } />
+        <QuestionnaireForm
+          classes={classes}
+          onSubmit={(values) =>
+            createPlan({
+              variables: {
+                travelerEmail: "",
+                json: JSON.stringify(values, null, 2),
+              },
+            })
+              .then((res) => {
+                router.push(
+                  "/itinerary?surveyId=".concat(
+                    res.data.createPlanForSurveyResponse.surveyResponse.id
+                  )
+                );
+              })
+              .catch((e) => console.log(e))
+          }
+        />
       </div>
     </div>
   );
@@ -93,36 +100,34 @@ function Survey(props) {
     <Provider store={store}>
       <SurveyWithoutRedux isMobile={isMobile} />
     </Provider>
-  )
+  );
 }
 
 class SurveyWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800
+      width: 800,
     };
   }
 
   handleWindowSizeChange = () => {
-      this.setState({ width: window.innerWidth });
-    };
+    this.setState({ width: window.innerWidth });
+  };
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener("resize", this.handleWindowSizeChange);
     this.setState(() => {
-      return { width: window.innerWidth }
-    })
+      return { width: window.innerWidth };
+    });
   }
 
   render() {
-    return (
-      <Survey isMobile={this.state.width <= 500} />
-    )
+    return <Survey isMobile={this.state.width <= 500} />;
   }
 }
 

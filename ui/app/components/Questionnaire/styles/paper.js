@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { makeStyles, Radio, Paper } from "@material-ui/core";
 
-const paperStyles = makeStyles(theme => ({
+const paperStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     borderRadius: "5px",
@@ -21,10 +21,10 @@ const paperStyles = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
       color: "white",
-      opacity: 0.8
+      opacity: 0.8,
     },
     color: theme.typography.color,
-    fontWeight: "normal"
+    fontWeight: "normal",
   },
   paperSelected: {
     borderRadius: "5px",
@@ -40,27 +40,27 @@ const paperStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     padding: 0,
     "&:hover": {
-      backgroundColor: theme.palette.primary.main
+      backgroundColor: theme.palette.primary.main,
     },
   },
   q: {
     fontSize: 26,
     fontWeight: 500,
     color: theme.typography.color,
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   cb: {
-    paddingLeft: theme.spacing(1)
+    paddingLeft: theme.spacing(1),
   },
   text: {
     fontSize: theme.typography.fontSize,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   textSelected: {
     fontSize: theme.typography.fontSize,
     textTransform: "capitalize",
-    color: "white"
-  }
+    color: "white",
+  },
 }));
 
 function StyledPaper(props) {

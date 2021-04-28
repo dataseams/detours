@@ -9,23 +9,23 @@ const dietaryConstraintOptions = [
   { name: "Lactose", id: "dining.dietaryConstraints.lactose" },
   {
     name: "Vegetarian-friendly",
-    id: "dining.dietaryConstraints.vegetarianFriendly"
+    id: "dining.dietaryConstraints.vegetarianFriendly",
   },
   { name: "Vegan-friendly", id: "dining.dietaryConstraints.veganFriendly" },
   { name: "Pescatarian", id: "dining.dietaryConstraints.pescatarian" },
   { name: "Kosher", id: "dining.dietaryConstraints.kosher" },
   { name: "Halal", id: "dining.dietaryConstraints.halal" },
-  { name: "No shellfish", id: "dining.dietaryConstraints.noShellfish" }
+  { name: "No shellfish", id: "dining.dietaryConstraints.noShellfish" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const DietaryConstraintsField = props => {
+const DietaryConstraintsField = (props) => {
   const classes = useStyles();
 
   return (

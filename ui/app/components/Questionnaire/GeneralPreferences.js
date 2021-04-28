@@ -9,7 +9,7 @@ const preferenceOptions = [
   { name: "Museums", id: "generalPreferences.museums" },
   {
     name: "Historical buildings",
-    id: "generalPreferences.historicalbuildings"
+    id: "generalPreferences.historicalbuildings",
   },
   { name: "Spas & wellness", id: "generalPreferences.spasnwellness" },
   { name: "Outdoors", id: "generalPreferences.outdoors" },
@@ -18,17 +18,17 @@ const preferenceOptions = [
   { name: "Shopping", id: "generalPreferences.shopping" },
   { name: "Performances & shows", id: "generalPreferences.performancesnshows" },
   { name: "Nightlife", id: "generalPreferences.nigthlife" },
-  { name: "Adventure sports", id: "generalPreferences.adventuresports" }
+  { name: "Adventure sports", id: "generalPreferences.adventuresports" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const GeneralPreferencesField = props => {
+const GeneralPreferencesField = (props) => {
   const classes = useStyles();
 
   return (

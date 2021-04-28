@@ -7,17 +7,17 @@ const showOptions = [
   { name: "Musicals", id: "shows.musicals" },
   { name: "Plays", id: "shows.plays" },
   { name: "Concerts", id: "shows.concerts" },
-  { name: "Immersive theater", id: "shows.immersiveTheater" }
+  { name: "Immersive theater", id: "shows.immersiveTheater" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const ShowsField = props => {
+const ShowsField = (props) => {
   const classes = useStyles();
 
   return (

@@ -6,26 +6,26 @@ import {
   ListItemText,
   ListItemAvatar,
   Typography,
-  Paper
+  Paper,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
-    margin: "0 3px 0 0"
+    margin: "0 3px 0 0",
   },
   inline: {
-    display: "inline"
+    display: "inline",
   },
   icon: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   listItem: {
     "&:hover": {
-      backgroundColor: theme.palette.secondary.main
-    }
-  }
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
 }));
 
 function ItineraryItems(props) {
@@ -36,12 +36,13 @@ function ItineraryItems(props) {
     <Paper style={{ height: "100%" }}>
       <List className={classes.root}>
         {events.edges.map((event, index) => (
-          <div key={(index + 1) * event.node.order} className={classes.listItem}>
+          <div
+            key={(index + 1) * event.node.order}
+            className={classes.listItem}
+          >
             <ListItem alignItems="flex-start" divider={true}>
               <ListItemAvatar>
-                <i
-                  className={`material-icons ${classes.icon}`}
-                >
+                <i className={`material-icons ${classes.icon}`}>
                   {event.node.activity.activityType.materialIcon}
                 </i>
               </ListItemAvatar>

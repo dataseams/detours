@@ -3,7 +3,6 @@ import { FormControlLabel } from "@material-ui/core";
 import { StyledCheckbox } from "./styles/checkbox";
 
 const renderCheckbox = ({ input, label }) => {
-
   return (
     <FormControlLabel
       control={

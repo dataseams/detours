@@ -11,19 +11,19 @@ const cityOptions = [
   { value: "SD", label: "San Diego, CA" },
   { value: "SF", label: "San Francisco, CA" },
   { value: "NYC", label: "New York, NY" },
-  { value: "CHI", label: "Chicago, IL" }
+  { value: "CHI", label: "Chicago, IL" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   select: {
     display: "flex",
     flexGrow: 1,
     height: theme.spacing(7),
-    color: theme.typography.color
-  }
+    color: theme.typography.color,
+  },
 }));
 
 const renderCitySelect = ({
@@ -45,7 +45,7 @@ const renderCitySelect = ({
         {...custom}
         inputProps={{
           name: input.name,
-          id: "city"
+          id: "city",
         }}
         className={customClasses.select}
       >
@@ -56,12 +56,12 @@ const renderCitySelect = ({
   );
 };
 
-const CitiesField = props => {
+const CitiesField = (props) => {
   const { classes } = props;
 
   return (
     <Field name="city" classes={classes} component={renderCitySelect}>
-      {cityOptions.map(option => (
+      {cityOptions.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>

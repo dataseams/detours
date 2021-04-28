@@ -19,15 +19,15 @@ import NightlifeField from "./Nightlife";
 import AdventureSportsField from "./AdventureSports";
 import NeighborhoodsField from "./Neighborhoods";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   h3: {
-    ...theme.h3
+    ...theme.h3,
   },
   question: {
     color: theme.typography.color,
     fontSize: 38,
-    fontWeight: 600
-  }
+    fontWeight: 600,
+  },
 }));
 
 const questionnaireLength = 5;
@@ -38,18 +38,26 @@ function QuestionComp(props) {
   var comp = {
     1: (
       <div>
-        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
+        <span className={classes.h3}>
+          STEP {props.index}/{questionnaireLength}
+        </span>
         <div>
-          <p className={classes.question}>Which city do you want to travel to?</p>
+          <p className={classes.question}>
+            Which city do you want to travel to?
+          </p>
           <CitiesField />
         </div>
       </div>
     ),
     2: (
       <div>
-        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
+        <span className={classes.h3}>
+          STEP {props.index}/{questionnaireLength}
+        </span>
         <div>
-          <p className={classes.question}>When are you planning to take your vacation?</p>
+          <p className={classes.question}>
+            When are you planning to take your vacation?
+          </p>
           <TravelDatesField />
         </div>
       </div>
@@ -74,7 +82,9 @@ function QuestionComp(props) {
     // ),
     3: (
       <div>
-        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
+        <span className={classes.h3}>
+          STEP {props.index}/{questionnaireLength}
+        </span>
         <div>
           <p className={classes.question}>Who are you traveling with?</p>
           <CompanionField />
@@ -92,16 +102,22 @@ function QuestionComp(props) {
     // ),
     4: (
       <div>
-        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
+        <span className={classes.h3}>
+          STEP {props.index}/{questionnaireLength}
+        </span>
         <div>
-          <p className={classes.question}>What do you like to do when you travel?</p>
+          <p className={classes.question}>
+            What do you like to do when you travel?
+          </p>
           <GeneralPreferencesField />
         </div>
       </div>
     ),
     5: (
       <div>
-        <span className={classes.h3}>STEP {props.index}/{questionnaireLength}</span>
+        <span className={classes.h3}>
+          STEP {props.index}/{questionnaireLength}
+        </span>
         <div>
           <p className={classes.question}>Food & Beverages</p>
           <FoodNBeveragesField />

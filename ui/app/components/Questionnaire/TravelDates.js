@@ -4,20 +4,20 @@ import {
   FormControl,
   FormHelperText,
   TextField,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   LocalizationProvider,
   StaticDateRangePicker,
-  DateRangeDelimiter
+  DateRangeDelimiter,
 } from "@material-ui/pickers";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 const renderFromHelper = ({ touched, error }) => {
@@ -60,19 +60,16 @@ const renderDateRangeComponent = ({
         </StaticDateRangePicker>
       </LocalizationProvider>
       {renderFromHelper({ touched, error })}
-    </FormControl >
-  )
-}
+    </FormControl>
+  );
+};
 
-const TravelDatesField = props => {
+const TravelDatesField = (props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Field
-        name="travelDates"
-        component={renderDateRangeComponent}
-      ></Field>
+      <Field name="travelDates" component={renderDateRangeComponent}></Field>
     </div>
   );
 };

@@ -2,14 +2,14 @@ import React from "react";
 import MuiLink from "@material-ui/core/Link";
 import { Typography, makeStyles, Box } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   bottomBox: {
     backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(5)
+    padding: theme.spacing(5),
   },
   text: {
-    color: "white"
-  }
+    color: "white",
+  },
 }));
 
 function Copyright() {

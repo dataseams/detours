@@ -4,16 +4,16 @@ import "firebase/auth";
 import "isomorphic-unfetch";
 import { Button, Divider, Avatar } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-import { Menu, MenuItem, IconButton } from '@material-ui/core';
+import { Menu, MenuItem, IconButton } from "@material-ui/core";
 
 import clientCredentials from "../credentials/client";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
+    display: "flex",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -28,79 +28,82 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export async function getServerSideProps({ req, query }) {
-  const user = req.session && req.session.decodedToken ? req.session.decodedToken : null
+  const user =
+    req.session && req.session.decodedToken ? req.session.decodedToken : null;
 
   return {
     props: {
-      user
+      user,
     },
-  }
+  };
 }
 
-const Auth = props => {
+const Auth = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    setAnchorEl(null)
+    setAnchorEl(null);
   };
   const open = Boolean(anchorEl);
 
   if (!firebase.apps.length) {
-    firebase.initializeApp(clientCredentials)
+    firebase.initializeApp(clientCredentials);
   }
-  firebase.auth().onAuthStateChanged(user => {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const updateUserEmail = {
-        type: "UPDATE_USER", value: {
+        type: "UPDATE_USER",
+        value: {
           userEmail: user.email,
           userDisplayName: user.displayName,
-          userPhotoUrl: user.photoURL
-        }
+          userPhotoUrl: user.photoURL,
+        },
       };
       dispatch(updateUserEmail);
-      console.log(process.env.LOGIN_API_URL)
-      return user
-        .getIdToken()
-        .then(token => {
+      console.log(process.env.LOGIN_API_URL);
+      return user.getIdToken().then((token) => {
+        // eslint-disable-next-line no-undef
+        return fetch(process.env.LOGIN_API_URL, {
+          method: "POST",
           // eslint-disable-next-line no-undef
-          return fetch(process.env.LOGIN_API_URL, {
-            method: 'POST',
-            // eslint-disable-next-line no-undef
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            credentials: 'same-origin',
-            body: JSON.stringify({ token }),
-          }).catch(e => console.log(e))
-        })
+          headers: new Headers({ "Content-Type": "application/json" }),
+          credentials: "same-origin",
+          body: JSON.stringify({ token }),
+        }).catch((e) => console.log(e));
+      });
     } else {
-      const updateUserEmail = { type: "UPDATE_USER", value: { userEmail: null, userDisplayName: null } };
+      const updateUserEmail = {
+        type: "UPDATE_USER",
+        value: { userEmail: null, userDisplayName: null },
+      };
       dispatch(updateUserEmail);
 
-      console.log(process.env.LOGOUT_API_URL)
+      console.log(process.env.LOGOUT_API_URL);
       // eslint-disable-next-line no-undef
       fetch(process.env.LOGOUT_API_URL, {
-        method: 'POST',
-        credentials: 'same-origin',
-      }).catch(e => console.log(e))
+        method: "POST",
+        credentials: "same-origin",
+      }).catch((e) => console.log(e));
     }
-  })
+  });
 
-  const userEmail = useSelector(state => state.user.email);
-  const userDisplayName = useSelector(state => state.user.displayName);
-  const userPhotoUrl = useSelector(state => state.user.photoUrl);
+  const userEmail = useSelector((state) => state.user.email);
+  const userDisplayName = useSelector((state) => state.user.displayName);
+  const userPhotoUrl = useSelector((state) => state.user.photoUrl);
 
-  const handleLogin = props => {
+  const handleLogin = (props) => {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
     setAnchorEl(null);
-  }
+  };
 
-  const handleLogout = props => {
-    firebase.auth().signOut()
-  }
+  const handleLogout = (props) => {
+    firebase.auth().signOut();
+  };
 
   console.log("User: " + userEmail);
 
@@ -115,19 +118,23 @@ const Auth = props => {
             onClick={handleMenu}
             color="primary"
           >
-            <Avatar alt={userDisplayName} src={userPhotoUrl} className={classes.small} />
+            <Avatar
+              alt={userDisplayName}
+              src={userPhotoUrl}
+              className={classes.small}
+            />
           </IconButton>
           <Menu
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             open={open}
             onClose={handleClose}
@@ -137,9 +144,11 @@ const Auth = props => {
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
         </div>
-      ) : (<Button onClick={handleLogin}>Log in</Button>)}
+      ) : (
+        <Button onClick={handleLogin}>Log in</Button>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Auth;

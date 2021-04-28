@@ -8,17 +8,17 @@ const fashionStyleOptions = [
   { name: "Trendy", id: "shopping.fashionStyle.trendy" },
   { name: "Edgy", id: "shopping.fashionStyle.edgy" },
   { name: "Business", id: "shopping.fashionStyle.business" },
-  { name: "Formal", id: "shopping.fashionStyle.formal" }
+  { name: "Formal", id: "shopping.fashionStyle.formal" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const FashionStylesField = props => {
+const FashionStylesField = (props) => {
   const classes = useStyles();
 
   return (

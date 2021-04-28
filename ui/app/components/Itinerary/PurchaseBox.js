@@ -9,34 +9,36 @@ import { Purchase } from "../Buttons";
 import UPDATE_USER from "../../utils/queries/UpdateUser";
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   purchaseContainer: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   purchaseItem: {
     padding: "1em",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   divider: {
     height: "2px",
     backgroundColor: theme.palette.primary.main,
-    margin: "1em"
+    margin: "1em",
   },
   purchaseSubContainer: {
     width: "90px",
     padding: "0px",
-    margin: "0px"
-  }
+    margin: "0px",
+  },
 }));
 
-const PurchaseBox = props => {
+const PurchaseBox = (props) => {
   const classes = useStyles();
-  const userEmail = useSelector(state => state.user.email);
-  const { query: { surveyId } } = useRouter();
+  const userEmail = useSelector((state) => state.user.email);
+  const {
+    query: { surveyId },
+  } = useRouter();
   const [savePlan, { data }] = useMutation(UPDATE_USER);
 
   const handleClick = async (event) => {
@@ -45,7 +47,7 @@ const PurchaseBox = props => {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       credentials: "same-origin",
-      body: JSON.stringify({ surveyId: surveyId })
+      body: JSON.stringify({ surveyId: surveyId }),
     });
     const session = await response.json();
     const result = await stripe.redirectToCheckout({
@@ -60,7 +62,7 @@ const PurchaseBox = props => {
 
   return (
     <Box>
-      {userEmail ?
+      {userEmail ? (
         <Box className={classes.purchaseContainer}>
           <Typography className={classes.purchaseItem}>
             Do you like this itinerary? Save it to your account.
@@ -71,21 +73,22 @@ const PurchaseBox = props => {
           <Purchase
             className={classes.purchaseItem}
             disabled={Boolean(data)}
-            onClick={
-              () => savePlan({
+            onClick={() =>
+              savePlan({
                 variables: {
-                  surveyResponseId: surveyId, travelerEmail: userEmail
-                }
-              }
-              ).then(r => console.log(r)).catch(e => console.log(e))
-            }>
+                  surveyResponseId: surveyId,
+                  travelerEmail: userEmail,
+                },
+              })
+                .then((r) => console.log(r))
+                .catch((e) => console.log(e))
+            }
+          >
             {data ? "Saved" : "Save"}
           </Purchase>
-          <Button onClick={handleClick}>
-            Checkout (test)
-          </Button>
+          <Button onClick={handleClick}>Checkout (test)</Button>
         </Box>
-        :
+      ) : (
         <Box className={classes.purchaseContainer}>
           <Typography className={classes.purchaseItem}>
             Log in to save your itinerary.
@@ -97,9 +100,8 @@ const PurchaseBox = props => {
             Save
           </Purchase>
         </Box>
-      }
-    </Box >
-
+      )}
+    </Box>
   );
 };
 

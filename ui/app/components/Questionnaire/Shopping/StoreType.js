@@ -9,17 +9,17 @@ const storeTypeOptions = [
   { name: "Markets", id: "shopping.storeType.markets" },
   { name: "Gift shops", id: "shopping.storeType.giftShops" },
   { name: "Shopping centers", id: "shopping.storeType.shoppingCenters" },
-  { name: "Thrift shops/Vintage", id: "shopping.storeType.thriftShopsVintage" }
+  { name: "Thrift shops/Vintage", id: "shopping.storeType.thriftShopsVintage" },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 
-const StoreTypesField = props => {
+const StoreTypesField = (props) => {
   const classes = useStyles();
 
   return (
