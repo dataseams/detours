@@ -165,7 +165,7 @@ function HowItWorks(props) {
   };
 
   return isMobile ? (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="howitworks">
       <Typography className={classes.h2}>How it works</Typography>
       <SwipableViews index={activeStep} onChangeIndex={handleStepChange}>
         {howItWorksSteps.map((step, index) => (
@@ -187,7 +187,7 @@ function HowItWorks(props) {
       />
     </Box>
   ) : (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="howitworks">
       <Typography className={classes.h2}>How it works</Typography>
       <Box className={classes.stepsContainer}>
         {howItWorksSteps.map((step, index) => (

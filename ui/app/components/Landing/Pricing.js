@@ -86,7 +86,7 @@ function Pricing(props) {
   const classes = isMobile ? useMobileStyles() : useStyles();
 
   return isMobile ? (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="pricing">
       <Typography className={classes.h2}>Pricing</Typography>
 
       <Typography
@@ -115,7 +115,7 @@ function Pricing(props) {
       <Divider className={classes.divider}></Divider>
     </Box>
   ) : (
-    <Box className={classes.root}>
+    <Box className={classes.root} id="pricing">
       <Typography className={classes.h2}>Pricing</Typography>
       <Grid className={classes.gridMain}>
         <Grid className={classes.gridLeft} item xs={8}>

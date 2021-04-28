@@ -14,7 +14,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-
+import { Link } from "react-scroll";
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
@@ -127,20 +127,34 @@ function MobileToolbar(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List classes={listClasses}>
-        <ListItem button alignItems="center">
-          <ListItemText />
-          <ListItemText classes={textclasses} primary={"How It Works"} />
-        </ListItem>
+        <Link
+          to="howitworks"
+          spy={true}
+          smooth={true}
+          offset={-60}
+          duration={600}
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItem button alignItems="center">
+            <ListItemText />
+            <ListItemText classes={textclasses} primary={"How It Works"} />
+          </ListItem>
+        </Link>
         <Divider variant="middle" classes={dividerClasses} />
-        <ListItem button alignItems="center">
-          <ListItemText />
-          <ListItemText classes={textclasses} primary={"Pricing"} />
-        </ListItem>
+        <Link
+          to="pricing"
+          spy={true}
+          smooth={true}
+          offset={-60}
+          duration={600}
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItem button alignItems="center">
+            <ListItemText />
+            <ListItemText classes={textclasses} primary={"Pricing"} />
+          </ListItem>
+        </Link>
         <Divider variant="middle" classes={dividerClasses} />
-        <ListItem button alignItems="center">
-          <ListItemText />
-          <ListItemText classes={textclasses} primary={"About Us"} />
-        </ListItem>
         <ListItem />
         <ListItem />
         <ListItem>
@@ -188,9 +202,24 @@ function NavigationBar(props) {
             <Box className={logoClasses.box}>
               <LogoButton name="DETOURS" />
             </Box>
-            <NavigationBarButton name="How it works" />
-            <NavigationBarButton name="Pricing" />
-            <NavigationBarButton name="About us" />
+            <Link
+              to="howitworks"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={600}
+            >
+              <NavigationBarButton name="How it works" />
+            </Link>
+            <Link
+              to="pricing"
+              spy={true}
+              smooth={true}
+              offset={-60}
+              duration={600}
+            >
+              <NavigationBarButton name="Pricing" />
+            </Link>
             <GetStartedButton />
           </Toolbar>
         )}
