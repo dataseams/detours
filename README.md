@@ -1,4 +1,4 @@
-![Linters](https://github.com/dataseams/detours/actions/workflows/linter.yml/badge.svg?branch=master&event=push) ![Unit tests](https://github.com/dataseams/detours/actions/workflows/tests.yml/badge.svg?branch=master&event=push) ![Build and Deploy to GKE](https://github.com/dataseams/detours/actions/workflows/google.yml/badge.svg?branch=master&event=push)
+![Linters](https://github.com/dataseams/detours/actions/workflows/linter.yml/badge.svg?branch=master&event=push) ![Unit tests](https://github.com/dataseams/detours/actions/workflows/tests.yml/badge.svg?branch=master&event=push) ![Build and Deploy to GKE](https://github.com/dataseams/detours/actions/workflows/google.yml/badge.svg?branch=add-env-to-actions&event=pull_request)
 # robocation
 
 The Travel Robot
