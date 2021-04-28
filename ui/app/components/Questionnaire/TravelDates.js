@@ -62,8 +62,7 @@ const renderDateRangeComponent = ({
               <DateRangeDelimiter> to </DateRangeDelimiter>
               <TextField {...endProps} />
             </React.Fragment>
-          )}
-        >
+          )}>
           {children}
         </StaticDateRangePicker>
       </LocalizationProvider>
