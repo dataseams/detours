@@ -36,7 +36,6 @@ const renderDateRangeComponent = ({
   ...custom
 }) => {
   const [value, setValue] = React.useState([null, null]);
-  const todaysDate = new Date();
 
   return (
     <FormControl>
@@ -48,7 +47,6 @@ const renderDateRangeComponent = ({
           {...input}
           {...custom}
           value={value}
-          minDate={todaysDate}
           displayStaticWrapperAs="mobile"
           renderInput={(startProps, endProps) => (
             <React.Fragment>
