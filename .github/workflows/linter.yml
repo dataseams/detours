@@ -1,7 +1,9 @@
 name: Source code checks
-
-on: [pull_request]
-
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 jobs:
   core-code-lint:
     runs-on: ubuntu-latest
