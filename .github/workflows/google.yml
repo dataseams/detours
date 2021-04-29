@@ -1,0 +1,106 @@
+name: Build and Deploy to GKE
+on:
+  pull_request:
+    types: [closed]
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  GKE_ZONE: us-west1-a
+  GKE_CLUSTER: detours
+  IMAGE_UI: ui
+  IMAGE_CORE: core
+  REGISTRY_HOSTNAME: gcr.io
+  REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.REACT_APP_GOOGLE_MAPS_API_KEY }}
+  CORE_API_URL: ${{ secrets.CORE_API_URL }}
+  LOGIN_API_URL: ${{ secrets.LOGIN_API_URL }}
+  LOGOUT_API_URL: ${{ secrets.LOGOUT_API_URL }}
+  STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: "302.0.0"
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}
+      - run: |
+          gcloud auth configure-docker
+      - name: Get diff in core
+        uses: technote-space/get-diff-action@gh-actions
+        id: git-core-diff
+        with:
+          PREFIX_FILTER: |
+            core
+      - name: Get diff in ui
+        uses: technote-space/get-diff-action@gh-actions
+        id: git-ui-diff
+        with:
+          PREFIX_FILTER: |
+            ui
+      - name: Get diff in k8s
+        uses: technote-space/get-diff-action@gh-actions
+        id: git-k8s-diff
+        with:
+          PREFIX_FILTER: |
+            k8s
+      - name: Print diffs
+        run: |
+          echo "Core diffs: "${{ steps.git-core-diff.outputs.diff }}
+          echo "UI diffs: "${{ steps.git-ui-diff.outputs.diff }}
+          echo "k8s diffs: "${{ steps.git-k8s-diff.outputs.diff }}
+      - name: Build core
+        run: |
+          docker build \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            ./"$IMAGE_CORE"/.
+      - name: Build ui
+        run: |
+          docker build \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":"$GITHUB_SHA" \
+            -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" \
+            --build-arg LOGIN_API_URL="$LOGIN_API_URL" \
+            --build-arg LOGOUT_API_URL="$LOGOUT_API_URL" \
+            --build-arg CORE_API_URL="$CORE_API_URL" \
+            --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
+            --build-arg STRIPE_PUBLIC_KEY="$STRIPE_PUBLIC_KEY" \
+            --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
+            ./"$IMAGE_UI"/.
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
+      - name: Publish core
+        run: |
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:$GITHUB_SHA
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest
+      - name: Publish ui
+        run: |
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
+          docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
+      - name: Set up kustomize
+        run: |
+          curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+          sudo mv kustomize /usr/bin
+      - name: Deploy
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER \
+            --zone $GKE_ZONE --project $GKE_PROJECT
+          cd k8s/gcp
+          kustomize edit set image \
+            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:${GITHUB_SHA} \
+            $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:latest=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_CORE:${GITHUB_SHA}
+          kustomize build . | kubectl apply -f -
+          kubectl rollout status deployment/ui --namespace production
+          kubectl rollout status deployment/core --namespace production
+          kubectl get services -o wide --namespace production
