@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
+import addDays from "date-fns/addDays";
 import {
   LocalizationProvider,
   StaticDateRangePicker,
@@ -27,7 +28,9 @@ const renderFromHelper = ({ touched, error }) => {
     return <FormHelperText>{touched && error}</FormHelperText>;
   }
 };
-
+function getDaysAfter(date, amount) {
+  return date ? addDays(date, amount) : undefined;
+}
 const renderDateRangeComponent = ({
   input,
   label,
@@ -35,18 +38,18 @@ const renderDateRangeComponent = ({
   children,
   ...custom
 }) => {
-  const [value, setValue] = React.useState([null, null]);
-
   return (
     <FormControl>
       <LocalizationProvider dateAdapter={DateFnsUtils}>
         <StaticDateRangePicker
+          disablePast
           label={label}
           error={touched && error}
           helperText={touched && error}
           {...input}
           {...custom}
-          value={value}
+          value={[input.value[0] || null, input.value[1] || null]}
+          maxDate={getDaysAfter(input.value[0], 13)}
           displayStaticWrapperAs="mobile"
           renderInput={(startProps, endProps) => (
             <React.Fragment>
