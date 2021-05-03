@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from core.core_api import models
+from core_api import models
 
 
 class TestModels(TestCase):
