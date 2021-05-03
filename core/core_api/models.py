@@ -186,6 +186,10 @@ class ActivityType(Base):
             "food": "restaurant",
             "tour": "directions_bike",
             "museum": "museum",
+            "historic_building": "account_balance",
+            "park": "nature_people",
+            "beach": "beach_access",
+            "theater": "theaters",
         }
     )
 
