@@ -58,10 +58,7 @@ function TabPanel(props) {
           nextButton={<div />}
           backButton={<div />}
         />
-        <ItineraryMap
-          containerStyle={{  width: "100%" }}
-          events={planItems}
-        />
+        <ItineraryMap containerStyle={{ width: "100%" }} events={planItems} />
       </Box>
     </Typography>
   ) : (
