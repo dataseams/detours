@@ -59,7 +59,7 @@ function TabPanel(props) {
           backButton={<div />}
         />
         <ItineraryMap
-          containerStyle={{ height: "35vh", width: "100%" }}
+          containerStyle={{  width: "100%" }}
           events={planItems}
         />
       </Box>
@@ -84,7 +84,7 @@ function TabPanel(props) {
           </Grid>
           <Grid item xs={8} className={classes.mapContainer}>
             <ItineraryMap
-              containerStyle={{ height: "35vh", width: "100%" }}
+              containerStyle={{ width: "100%" }}
               events={planItems}
             />
           </Grid>
