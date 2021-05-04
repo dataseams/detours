@@ -79,7 +79,7 @@ function TabPanel(props) {
           {moment(data.date, "YYYY-MM-DD").format("dddd, MMM DD, YYYY")}
         </Typography>
         <Grid item xs={12} className={classes.itineraryContainer}>
-          <Grid item xs={4} style={{ height: "100%", overflow: "auto" }}>
+          <Grid item xs={4} style={{ height: "35vh", overflow: "auto" }}>
             <ItineraryItems events={planItems} />
           </Grid>
           <Grid item xs={8} className={classes.mapContainer}>

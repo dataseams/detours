@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Back(props) {
   const classes = useStyles();
-
   return (
     <Button
       variant="contained"

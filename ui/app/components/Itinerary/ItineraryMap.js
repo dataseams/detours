@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
   iconContainer: {
     display: "flex",
     flexDirection: "column",
-    minWidth: "33px",
-    padding: "2px",
+    minWidth: "40px",
+    padding: "3px",
     borderColor: theme.palette.primary.main,
     borderRadius: "20%",
     "&:hover": {
