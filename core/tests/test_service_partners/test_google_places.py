@@ -2,8 +2,8 @@ from unittest import TestCase
 from unittest.mock import Mock, patch
 import pytest
 
-from core.core_api.service_partners.google_places import Client
-from core.core_api.activities import Biking
+from core_api.service_partners.google_places import Client
+from core_api.activities import Biking
 
 
 class TestGooglePlaces(TestCase):
@@ -13,7 +13,7 @@ class TestGooglePlaces(TestCase):
 
 
 class TestGetActivities(TestCase):
-    @patch("core.core_api.activities.google_places")
+    @patch("core_api.activities.google_places")
     def test_happy_path(self, mock_google_places):
         survey_response = (
             '{"city": "LA" , "travelDates": ["2020-01-01", "2020-01-02"]}'
