@@ -4,7 +4,6 @@ import { createStore } from "redux";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
 import { useMutation } from "@apollo/react-hooks";
-
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import { questionnaireReducer } from "../redux/reducers";
@@ -53,8 +52,6 @@ const useMobileStyles = makeStyles((theme) => ({
 }));
 
 const store = createStore(questionnaireReducer);
-const unsubscribe = store.subscribe(() => console.log(store.getState()));
-
 function SurveyWithoutRedux(props) {
   const { isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();

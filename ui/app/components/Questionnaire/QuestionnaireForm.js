@@ -1,14 +1,30 @@
 import React from "react";
 import { reduxForm } from "redux-form";
-
 import { QuestionComp, questionnaireLength } from "./QuestionBank";
 import { Back, Next, Submit } from "../Buttons";
+import { connect } from "react-redux";
 
 const validate = (values) => {
   const errors = {};
-  const requiredFields = ["city"];
+  const requiredFields = [
+    "city",
+    "companion",
+    "dining",
+    "travelDates",
+    "generalPreferences",
+  ];
   requiredFields.forEach((field) => {
     if (!values[field]) {
+      errors[field] = "Required";
+    } else if (
+      field === "travelDates" &&
+      values["travelDates"].includes(null)
+    ) {
+      errors[field] = "Required";
+    } else if (
+      field === "generalPreferences" &&
+      !Object.values(values["generalPreferences"]).some((val) => val === true)
+    ) {
       errors[field] = "Required";
     }
   });
@@ -36,7 +52,18 @@ class QuestionnaireForm extends React.Component {
       hiddenNext: false,
     });
   }
-
+  isNextButtonDisabled(invalid, index, requiredFields) {
+    if (invalid) {
+      return true;
+    } else if (
+      index === 4 &&
+      requiredFields.generalPreferences === "Required"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   toggleNext(e) {
     let index = this.state.index + 1;
     let hiddenNext = index === questionnaireLength;
@@ -47,11 +74,17 @@ class QuestionnaireForm extends React.Component {
       disabledBack: false,
     });
   }
-
   render() {
-    const { handleSubmit, pristine, submitting, classes } = this.props;
+    const {
+      handleSubmit,
+      pristine,
+      submitting,
+      classes,
+      invalid,
+      form,
+    } = this.props;
     const { index, hiddenNext, disabledBack } = this.state;
-
+    const requiredFields = form.questionnaire.syncErrors;
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div>
@@ -59,7 +92,11 @@ class QuestionnaireForm extends React.Component {
         </div>
         <div className={classes.surveyButtons}>
           <Back toggle={(e) => this.toggleBack(e)} active={disabledBack} />
-          <Next toggle={(e) => this.toggleNext(e)} hidden={hiddenNext} />
+          <Next
+            toggle={(e) => this.toggleNext(e)}
+            hidden={hiddenNext}
+            disable={this.isNextButtonDisabled(invalid, index, requiredFields)}
+          />
           <Submit
             type="submit"
             hidden={hiddenNext}
@@ -70,7 +107,10 @@ class QuestionnaireForm extends React.Component {
     );
   }
 }
-
+function mapStateToProps(state) {
+  return state;
+}
+QuestionnaireForm = connect(mapStateToProps)(QuestionnaireForm);
 export default reduxForm({
   form: "questionnaire",
   validate,
