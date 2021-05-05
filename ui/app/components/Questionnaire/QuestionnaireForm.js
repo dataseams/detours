@@ -95,11 +95,7 @@ class QuestionnaireForm extends React.Component {
           <Next
             toggle={(e) => this.toggleNext(e)}
             hidden={hiddenNext}
-            disable={this.isNextButtonDisabled(
-              invalid,
-              index,
-              requiredFields
-            )}
+            disable={this.isNextButtonDisabled(invalid, index, requiredFields)}
           />
           <Submit
             type="submit"
