@@ -52,7 +52,7 @@ class QuestionnaireForm extends React.Component {
       hiddenNext: false,
     });
   }
-  checkNextButtonDisability(invalid, index, requiredFields) {
+  isNextButtonDisabled(invalid, index, requiredFields) {
     if (invalid) {
       return true;
     } else if (
@@ -95,7 +95,7 @@ class QuestionnaireForm extends React.Component {
           <Next
             toggle={(e) => this.toggleNext(e)}
             hidden={hiddenNext}
-            disable={this.checkNextButtonDisability(
+            disable={this.isNextButtonDisabled(
               invalid,
               index,
               requiredFields
