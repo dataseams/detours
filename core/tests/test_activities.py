@@ -3,7 +3,7 @@ from unittest.mock import patch, Mock
 import os
 import json
 
-from core.core_api import activities
+from core_api import activities
 
 
 class TestDining(TestCase):
@@ -18,7 +18,7 @@ class TestDining(TestCase):
         with open(restaurants_path, "r") as f:
             self.restaurants = json.load(f)
 
-    @patch("core.core_api.service_partners.zomato.Client.search_")
+    @patch("core_api.service_partners.zomato.Client.search_")
     def test_get_restaurants_happy_path(self, zomato_search_mock):
         zomato_search_mock.return_value = self.restaurants
         restaurants = activities.Dining(self.survey_response).get()
