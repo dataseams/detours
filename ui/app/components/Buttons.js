@@ -74,6 +74,7 @@ function Next(props) {
       variant="contained"
       className={props.hidden ? classes.hiddenButton : classes.nextButton}
       onClick={props.toggle}
+      disabled={props.disable}
     >
       Next
     </Button>
