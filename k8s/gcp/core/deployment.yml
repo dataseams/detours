@@ -65,9 +65,12 @@ spec:
             - containerPort: 5000
               protocol: TCP
           resources:
+            requests:
+              memory: "250Mi"
+              cpu: "250m"
             limits:
-              memory: "1Gi"
-              cpu: "100m"
+              memory: "250Mi"
+              cpu: "250m"
           livenessProbe:
             httpGet:
               path: /test
@@ -91,6 +94,9 @@ spec:
             runAsUser: 65532
             runAsGroup: 65532
           resources:
+            requests:
+              memory: "250Mi"
+              cpu: "25m"
             limits:
-              memory: "250M"
+              memory: "250Mi"
               cpu: "25m"
