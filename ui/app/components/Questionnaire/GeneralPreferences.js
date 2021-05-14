@@ -4,21 +4,27 @@ import { makeStyles } from "@material-ui/styles";
 import renderCheckbox from "./Checkbox";
 
 const preferenceOptions = [
-  { name: "Food & beverages", id: "generalPreferences.foodnbeverages" },
-  { name: "Must see attractions", id: "generalPreferences.mustseeattractions" },
-  { name: "Museums", id: "generalPreferences.museums" },
+  { name: "Food & beverages", id: "generalPreferences.Food & beverages" },
+  {
+    name: "Must see attractions",
+    id: "generalPreferences.Must see attractions",
+  },
+  { name: "Museums", id: "generalPreferences.Museums" },
   {
     name: "Historical buildings",
-    id: "generalPreferences.historicalbuildings",
+    id: "generalPreferences.Historical buildings",
   },
-  { name: "Spas & wellness", id: "generalPreferences.spasnwellness" },
-  { name: "Outdoors", id: "generalPreferences.outdoors" },
-  { name: "Tours", id: "generalPreferences.tours" },
-  { name: "Local culture", id: "generalPreferences.localculture" },
-  { name: "Shopping", id: "generalPreferences.shopping" },
-  { name: "Performances & shows", id: "generalPreferences.performancesnshows" },
-  { name: "Nightlife", id: "generalPreferences.nigthlife" },
-  { name: "Adventure sports", id: "generalPreferences.adventuresports" },
+  { name: "Spas & wellness", id: "generalPreferences.Spas & wellness" },
+  { name: "Outdoors", id: "generalPreferences.Outdoors" },
+  { name: "Tours", id: "generalPreferences.Tours" },
+  { name: "Local culture", id: "generalPreferences.Local culture" },
+  { name: "Shopping", id: "generalPreferences.Shopping" },
+  {
+    name: "Performances & shows",
+    id: "generalPreferences.Performances & shows",
+  },
+  { name: "Nightlife", id: "generalPreferences.Night life" },
+  { name: "Adventure sports", id: "generalPreferences.Adventure sports" },
 ];
 
 const useStyles = makeStyles((theme) => ({

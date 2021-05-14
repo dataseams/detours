@@ -2,26 +2,25 @@
 import re
 
 
-class StringCasing:
-    """Manipulate string casing."""
+class ItineraryTag:
+    """Format itinerary summary tags."""
 
     @staticmethod
-    def camel_to_proper_spaced(text: str) -> str:
-        """Convert camel cased text to proper casing spaced text.
+    def format_dining(text: str) -> str:
+        """Format dining tags on the itinerary summary and add dining suffix.
 
         Parameters
         ----------
         text : str
-            Text to transform
-            i.e. holeInTheWall
+            Tag text to format
+            i.e. Hole-in-the-wall
 
         Returns
         -------
         str
-            Transformed text
-            i.e. Hole in the wall
+            Formatted text
+            i.e. Hole-in-the-wall dining
         """
-        transformed_text = re.sub(
-            "([a-z])([A-Z])", "\g<1> \g<2>", text
-        ).lower().capitalize()
-        return transformed_text
+        text_wo_dining = re.sub(r"dining$", "", text.lower()).strip()
+        formatted_text = f"{text_wo_dining} dining".capitalize()
+        return formatted_text
