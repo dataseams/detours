@@ -2,6 +2,7 @@ name: Build and Deploy to GKE
 on:
   pull_request:
     types: [closed]
+    branches: [master]
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
