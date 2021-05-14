@@ -21,6 +21,7 @@ from .activities import (
     Park,
     HistoricBuilding,
 )
+from .utils import StringCasing
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -244,6 +245,7 @@ class Builder:
         survey_response_id: int,
         arrival_date,
         return_date,
+        interests_matched: List,
     ):
         """Save trip and daily plans."""
         destination_city = models.City.query.filter_by(code=city_code).first()
@@ -258,13 +260,7 @@ class Builder:
             city=destination_city,
             spending_per_day="176",
             hours_saved="20-30",
-            interests_matched=[
-                "Intimate, authentic dining",
-                "Markets",
-                "Massages",
-                "Walking tours",
-                "Wine bars",
-            ],
+            interests_matched=interests_matched,
         )
         db_session.add(trip_plan)
         db_session.commit()
@@ -321,11 +317,27 @@ class Builder:
         )
         activities = self._save_return_activities(places=places)
 
+        interests_matched = [
+            f"{StringCasing.camel_to_proper_spaced(k)}"
+            for k, v in self.survey_response["generalPreferences"].items()
+            if v
+        ]
+        interests_matched.extend(
+            [
+                f"{StringCasing.camel_to_proper_spaced(k)} dining"
+                for k, v in self.survey_response["dining"][
+                    "environment"
+                ].items()
+                if v
+            ]
+        )
+
         trip_plan, daily_plans = self._save_plans(
             city_code=self.city_code,
             survey_response_id=self.survey_response_id,
             arrival_date=self.arrival_date,
             return_date=self.return_date,
+            interests_matched=interests_matched,
         )
 
         self._save_plan_items(activities=activities, daily_plans=daily_plans)
