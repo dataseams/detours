@@ -21,7 +21,7 @@ from .activities import (
     Park,
     HistoricBuilding,
 )
-from .utils import StringCasing
+from .utils import ItineraryTag
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -318,13 +318,13 @@ class Builder:
         activities = self._save_return_activities(places=places)
 
         interests_matched = [
-            f"{StringCasing.camel_to_proper_spaced(k)}"
+            k.capitalize()
             for k, v in self.survey_response["generalPreferences"].items()
             if v
         ]
         interests_matched.extend(
             [
-                f"{StringCasing.camel_to_proper_spaced(k)} dining"
+                ItineraryTag.format_dining(k)
                 for k, v in self.survey_response["dining"][
                     "environment"
                 ].items()
