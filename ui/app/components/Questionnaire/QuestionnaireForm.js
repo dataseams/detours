@@ -13,6 +13,16 @@ const validate = (values) => {
     "travelDates",
     "generalPreferences",
   ];
+  const countInArray = (array) => {
+    var count = 0;
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === true) {
+        count++;
+        if (count === 2) return false;
+      }
+    }
+    return true;
+  };
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -23,7 +33,7 @@ const validate = (values) => {
       errors[field] = "Required";
     } else if (
       field === "generalPreferences" &&
-      !Object.values(values["generalPreferences"]).some((val) => val === true)
+      countInArray(Object.values(values["generalPreferences"]))
     ) {
       errors[field] = "Required";
     }
