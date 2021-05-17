@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 const validate = (values) => {
   const errors = {};
+  const environment = values.dining.environment;
+  const pricePoint = values.dining.pricePoint;
   const requiredFields = [
     "city",
     "companion",
@@ -34,6 +36,14 @@ const validate = (values) => {
     } else if (
       field === "generalPreferences" &&
       countInArray(Object.values(values["generalPreferences"]))
+    ) {
+      errors[field] = "Required";
+    } else if (
+      field === "dining" &&
+      (!pricePoint ||
+        !environment ||
+        (environment &&
+          !Object.values(environment).some((val) => val === true)))
     ) {
       errors[field] = "Required";
     }
@@ -85,14 +95,7 @@ class QuestionnaireForm extends React.Component {
     });
   }
   render() {
-    const {
-      handleSubmit,
-      pristine,
-      submitting,
-      classes,
-      invalid,
-      form,
-    } = this.props;
+    const { handleSubmit, classes, invalid, form } = this.props;
     const { index, hiddenNext, disabledBack } = this.state;
     const requiredFields = form.questionnaire.syncErrors;
     return (
@@ -110,7 +113,10 @@ class QuestionnaireForm extends React.Component {
           <Submit
             type="submit"
             hidden={hiddenNext}
-            disabled={pristine || submitting}
+            disable={
+              requiredFields &&
+              Object.values(requiredFields).some((val) => val === "Required")
+            }
           />
         </div>
       </form>
