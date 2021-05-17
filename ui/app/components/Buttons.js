@@ -59,7 +59,7 @@ function Back(props) {
       variant="contained"
       className={classes.backButton}
       onClick={props.toggle}
-      disabled={props.active}
+      disabled={props.active || props.disable}
     >
       Back
     </Button>
@@ -83,11 +83,11 @@ function Next(props) {
 
 function Submit(props) {
   const classes = useStyles();
-  const { type } = props;
-  const { disable } = props;
+  const { type, onHandleSubmit, disable } = props;
   return (
     <Button
       variant="contained"
+      onClick={onHandleSubmit}
       className={props.hidden ? classes.nextButton : classes.hiddenButton}
       type={type}
       disabled={disable}

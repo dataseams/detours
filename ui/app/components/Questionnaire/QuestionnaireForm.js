@@ -59,6 +59,7 @@ class QuestionnaireForm extends React.Component {
       index: 1,
       hiddenNext: false,
       disabledBack: true,
+      disableSubmitButton: false,
     };
   }
 
@@ -72,6 +73,14 @@ class QuestionnaireForm extends React.Component {
       hiddenNext: false,
     });
   }
+  handleSubmitButton = () => {
+    if (this.state.disableSubmitButton) {
+      return;
+    }
+    setTimeout(() => {
+      this.setState({ disableSubmitButton: true });
+    }, 0);
+  };
   isNextButtonDisabled(invalid, index, requiredFields) {
     if (invalid) {
       return true;
@@ -96,15 +105,20 @@ class QuestionnaireForm extends React.Component {
   }
   render() {
     const { handleSubmit, classes, invalid, form } = this.props;
-    const { index, hiddenNext, disabledBack } = this.state;
+    const { index, hiddenNext, disabledBack, disableSubmitButton } = this.state;
     const requiredFields = form.questionnaire.syncErrors;
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div>
           <QuestionComp index={index} handleChange={this.props.handleChange} />
         </div>
+
         <div className={classes.surveyButtons}>
-          <Back toggle={(e) => this.toggleBack(e)} active={disabledBack} />
+          <Back
+            toggle={(e) => this.toggleBack(e)}
+            active={disabledBack}
+            disable={disableSubmitButton}
+          />
           <Next
             toggle={(e) => this.toggleNext(e)}
             hidden={hiddenNext}
@@ -113,9 +127,11 @@ class QuestionnaireForm extends React.Component {
           <Submit
             type="submit"
             hidden={hiddenNext}
+            onHandleSubmit={this.handleSubmitButton}
             disable={
-              requiredFields &&
-              Object.values(requiredFields).some((val) => val === "Required")
+              disableSubmitButton ||
+              (requiredFields &&
+                Object.values(requiredFields).some((val) => val === "Required"))
             }
           />
         </div>

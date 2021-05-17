@@ -3,6 +3,8 @@ import { Provider, useSelector } from "react-redux";
 import { createStore } from "redux";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useMutation } from "@apollo/react-hooks";
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
@@ -13,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "left",
     width: "50%",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   surveyButtons: {
     textAlign: "center",
@@ -33,6 +38,9 @@ const useMobileStyles = makeStyles((theme) => ({
   root: {
     textAlign: "left",
     width: "80%",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   surveyButtons: {
     display: "flex",
@@ -58,12 +66,18 @@ function SurveyWithoutRedux(props) {
   const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
     .default;
   const router = useRouter();
-  const [createPlan, { data }] = useMutation(CREATE_PLAN_MUTATION);
+  const [createPlan, loading] = useMutation(CREATE_PLAN_MUTATION);
   const travelerEmail = useSelector((state) => state.user.email) || "";
-
   return (
     <div>
       <Meta />
+      {loading.loading ? (
+        <Backdrop className={classes.backdrop} open={true}>
+          <CircularProgress />
+        </Backdrop>
+      ) : (
+        0
+      )}
       <LogoNavigationBar />
       <div className={classes.surveyPage}>
         <QuestionnaireForm
