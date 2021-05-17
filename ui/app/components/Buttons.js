@@ -59,7 +59,7 @@ function Back(props) {
       variant="contained"
       className={classes.backButton}
       onClick={props.toggle}
-      disabled={props.active || props.disable}
+      disabled={props.active}
     >
       Back
     </Button>

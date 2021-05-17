@@ -82,15 +82,17 @@ class QuestionnaireForm extends React.Component {
     }, 0);
   };
   isNextButtonDisabled(invalid, index, requiredFields) {
-    if (invalid) {
-      return true;
-    } else if (
-      index === 4 &&
-      requiredFields.generalPreferences === "Required"
-    ) {
-      return true;
-    } else {
-      return false;
+    if (requiredFields) {
+      if (invalid) {
+        return true;
+      } else if (
+        index === 4 &&
+        requiredFields.generalPreferences === "Required"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
   toggleNext(e) {
@@ -114,11 +116,7 @@ class QuestionnaireForm extends React.Component {
         </div>
 
         <div className={classes.surveyButtons}>
-          <Back
-            toggle={(e) => this.toggleBack(e)}
-            active={disabledBack}
-            disable={disableSubmitButton}
-          />
+          <Back toggle={(e) => this.toggleBack(e)} active={disabledBack} />
           <Next
             toggle={(e) => this.toggleNext(e)}
             hidden={hiddenNext}
