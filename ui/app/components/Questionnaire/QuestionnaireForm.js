@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 
 const validate = (values) => {
   const errors = {};
-  const environment = values.dining.environment;
-  const pricePoint = values.dining.pricePoint;
+  const environment = values && values.dining && values.dining.environment;
+  const pricePoint = values && values.dining && values.dining.pricePoint;
   const requiredFields = [
     "city",
     "companion",
