@@ -36,7 +36,7 @@ class Activity:
             self.survey_response["travelDates"][1][:10], DATE_FORMAT
         )
         self.n_days = (self.return_date - self.arrival_date).days + 1
-    
+
     def get(self):
         """Return a list of activities based on the user's survey response."""
         activities = self.client.search(query=self.query)
@@ -143,6 +143,7 @@ class Dining(Activity):
         )
 
     """ override base class method as for Dinning we are using zomato client."""
+
     def get(self):
         """Get a list of restaurants based on the number of trip days."""
         n_restaurants_per_day = 3
