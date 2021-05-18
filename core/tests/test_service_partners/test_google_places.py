@@ -20,7 +20,7 @@ class TestGetActivities(TestCase):
         )
         client_object = Mock()
         mock_google_places.Client.return_value = client_object
-        expected_activities = [object(), object()]
+        expected_activities = [dict(), dict()]
         client_object.search.return_value = expected_activities
         activities = Biking(survey_response).get()
         mock_google_places.Client.assert_called_once()
@@ -29,4 +29,4 @@ class TestGetActivities(TestCase):
         )
         self.assertIsInstance(activities, list)
         self.assertEqual(len(activities), 1)
-        self.assertIn(activities[0], expected_activities)
+        self.assertIn("activity_type", activities[0].keys())

@@ -21,7 +21,10 @@ class TestDining(TestCase):
     @patch("core_api.service_partners.zomato.Client.search_")
     def test_get_restaurants_happy_path(self, zomato_search_mock):
         zomato_search_mock.return_value = self.restaurants
-        restaurants = activities.Dining(self.survey_response).get()
+        restaurants = [
+            {"restaurant": r["restaurant"]}
+            for r in activities.Dining(self.survey_response).get()
+        ]
         self.assertEqual(
             sorted(restaurants, key=lambda x: x["restaurant"]["id"]),
             sorted(self.restaurants, key=lambda x: x["restaurant"]["id"]),
