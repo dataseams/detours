@@ -83,13 +83,14 @@ function Next(props) {
 
 function Submit(props) {
   const classes = useStyles();
-  const { type } = props;
-
+  const { type, handleSubmit, disable } = props;
   return (
     <Button
       variant="contained"
+      onClick={handleSubmit}
       className={props.hidden ? classes.nextButton : classes.hiddenButton}
       type={type}
+      disabled={disable}
     >
       Submit
     </Button>
