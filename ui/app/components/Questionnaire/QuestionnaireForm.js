@@ -59,7 +59,7 @@ class QuestionnaireForm extends React.Component {
       index: 1,
       hiddenNext: false,
       disabledBack: true,
-      disableSubmitButton: false,
+      disabledSubmit: false,
     };
   }
 
@@ -73,15 +73,15 @@ class QuestionnaireForm extends React.Component {
       hiddenNext: false,
     });
   }
-  handleSubmitButton = () => {
-    if (this.state.disableSubmitButton) {
+  handleSubmit = () => {
+    if (this.state.disabledSubmit) {
       return;
     }
     setTimeout(() => {
-      this.setState({ disableSubmitButton: true });
+      this.setState({ disabledSubmit: true });
     }, 0);
   };
-  isNextButtonDisabled(invalid, index, requiredFields) {
+  disableNext(invalid, index, requiredFields) {
     if (requiredFields) {
       if (invalid) {
         return true;
@@ -107,7 +107,7 @@ class QuestionnaireForm extends React.Component {
   }
   render() {
     const { handleSubmit, classes, invalid, form } = this.props;
-    const { index, hiddenNext, disabledBack, disableSubmitButton } = this.state;
+    const { index, hiddenNext, disabledBack, disabledSubmit } = this.state;
     const requiredFields = form.questionnaire.syncErrors;
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
@@ -120,14 +120,14 @@ class QuestionnaireForm extends React.Component {
           <Next
             toggle={(e) => this.toggleNext(e)}
             hidden={hiddenNext}
-            disable={this.isNextButtonDisabled(invalid, index, requiredFields)}
+            disable={this.disableNext(invalid, index, requiredFields)}
           />
           <Submit
             type="submit"
             hidden={hiddenNext}
-            onHandleSubmit={this.handleSubmitButton}
+            handleSubmit={this.handleSubmit}
             disable={
-              disableSubmitButton ||
+              disabledSubmit ||
               (requiredFields &&
                 Object.values(requiredFields).some((val) => val === "Required"))
             }
