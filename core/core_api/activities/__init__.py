@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Union
 
 from ..service_partners import google_places, zomato
-from ..models import City
+from ..models import City, ActivityType
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -45,6 +45,9 @@ class Biking(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
+        self.activity_type = ActivityType(
+            name="tour", material_icon=ActivityType.VALUES.tour
+        )
 
     def get(self):
         """Return a list of activities based on the user's survey response."""
@@ -65,6 +68,9 @@ class Museum(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
+        self.activity_type = ActivityType(
+            name="museum", material_icon=ActivityType.VALUES.museum
+        )
 
     def get(self):
         """Return a list of activities based on the user's survey response."""
@@ -82,6 +88,9 @@ class Theater(Activity):
     def __init__(self, survey_response: Union[str, dict]):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
+        )
+        self.activity_type = ActivityType(
+            name="theater", material_icon=ActivityType.VALUES.theater
         )
 
     def get(self, theater_type: str):
@@ -103,6 +112,9 @@ class Beach(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
+        self.activity_type = ActivityType(
+            name="beach", material_icon=ActivityType.VALUES.beach
+        )
 
     def get(self):
         """Return a list of activities based on the user's survey response."""
@@ -121,6 +133,9 @@ class Park(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
+        self.activity_type = ActivityType(
+            name="park", material_icon=ActivityType.VALUES.park
+        )
 
     def get(self):
         """Return a list of activities based on the user's survey response."""
@@ -128,6 +143,10 @@ class Park(Activity):
         filtered_activities = (
             random.sample(activities, 1) if activities else activities
         )
+        filtered_activities = [
+            {**activity, "activity_type": self.activity_type}
+            for activity in filtered_activities
+        ]
 
         return filtered_activities
 
@@ -138,6 +157,10 @@ class HistoricBuilding(Activity):
     def __init__(self, survey_response: Union[str, dict]):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
+        )
+        self.activity_type = ActivityType(
+            name="historic_building",
+            material_icon=ActivityType.VALUES.historic_building,
         )
 
     def get(self):
@@ -160,6 +183,9 @@ class Dining(Activity):
             survey_response=survey_response, client_class=zomato.Client
         )
         self.city_id = self.client.CITY_IDS[self.survey_response["city"]]
+        self.activity_type = ActivityType(
+            name="food", material_icon=ActivityType.VALUES.food
+        )
 
     def get(self):
         """Get a list of restaurants based on the number of trip days."""
@@ -176,5 +202,9 @@ class Dining(Activity):
             count=n_total_restaurants,
         )
         filtered_restaurants = random.sample(restaurants, n_total_restaurants)
+        filtered_restaurants = [
+            {**restaurant, "activity_type": self.activity_type}
+            for restaurant in filtered_restaurants
+        ]
 
         return filtered_restaurants

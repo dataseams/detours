@@ -5,7 +5,7 @@ The itinerary is created based on:
 - Survey reponse.
 - Queried APIs.
 """
-from typing import List, Dict
+from typing import AsyncIterable, List, Dict
 import multiprocessing as mp
 
 import pandas as pd
@@ -175,8 +175,8 @@ class Builder:
             "evening": {"food": [], "activities": []},
         }
 
-        for day_period in self.itinerary_items:
-            for restaurant_obj in self.itinerary_items[day_period]["food"]:
+        for day_period in itinerary_items:
+            for restaurant_obj in itinerary_items[day_period]["food"]:
                 restaurant = restaurant_obj["restaurant"]
                 places[day_period]["food"].append(
                     {
@@ -189,10 +189,10 @@ class Builder:
                             latitude=restaurant["location"]["latitude"],
                             longitude=restaurant["location"]["longitude"],
                         ),
-                        "type": activity_types.food,
+                        "type": restaurant_obj["activity_type"],
                     }
                 )
-            for place in self.itinerary_items[day_period]["activities"]:
+            for place in itinerary_items[day_period]["activities"]:
                 places[day_period]["activities"].append(
                     {
                         "place": models.Place(
@@ -204,7 +204,9 @@ class Builder:
                             latitude=place["geometry"]["location"]["lat"],
                             longitude=place["geometry"]["location"]["lng"],
                         ),
-                        "type": activity_types.tour,
+                        "type": place.get(
+                            "activity_type", activity_types.tour
+                        ),
                     }
                 )
         for day_period in places:
