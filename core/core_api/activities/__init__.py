@@ -36,6 +36,19 @@ class Activity:
             self.survey_response["travelDates"][1][:10], DATE_FORMAT
         )
         self.n_days = (self.return_date - self.arrival_date).days + 1
+    
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(query=self.query)
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+        filtered_activities = [
+            {**activity, "activity_type": self.activity_type}
+            for activity in filtered_activities
+        ]
+
+        return filtered_activities
 
 
 class Biking(Activity):
@@ -48,17 +61,7 @@ class Biking(Activity):
         self.activity_type = ActivityType(
             name="tour", material_icon=ActivityType.VALUES.tour
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"bicycle rental in {self.city_name}"
-        )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"bicycle rental in {self.city_name}"
 
 
 class Museum(Activity):
@@ -71,38 +74,20 @@ class Museum(Activity):
         self.activity_type = ActivityType(
             name="museum", material_icon=ActivityType.VALUES.museum
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"museum in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"museum in {self.city_name}"
 
 
 class Theater(Activity):
     """Get theater places in a city."""
 
-    def __init__(self, survey_response: Union[str, dict]):
+    def __init__(self, survey_response: Union[str, dict], theater_type: str):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
         self.activity_type = ActivityType(
             name="theater", material_icon=ActivityType.VALUES.theater
         )
-
-    def get(self, theater_type: str):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"{theater_type} theater in {self.city_name}"
-        )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"{theater_type} theater in {self.city_name}"
 
 
 class Beach(Activity):
@@ -115,15 +100,7 @@ class Beach(Activity):
         self.activity_type = ActivityType(
             name="beach", material_icon=ActivityType.VALUES.beach
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"beach in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"beach in {self.city_name}"
 
 
 class Park(Activity):
@@ -136,19 +113,7 @@ class Park(Activity):
         self.activity_type = ActivityType(
             name="park", material_icon=ActivityType.VALUES.park
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"park in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-        filtered_activities = [
-            {**activity, "activity_type": self.activity_type}
-            for activity in filtered_activities
-        ]
-
-        return filtered_activities
+        self.query = f"park in {self.city_name}"
 
 
 class HistoricBuilding(Activity):
@@ -162,17 +127,7 @@ class HistoricBuilding(Activity):
             name="historic_building",
             material_icon=ActivityType.VALUES.historic_building,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"historic building in {self.city_name}"
-        )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"historic building in {self.city_name}"
 
 
 class Dining(Activity):
@@ -187,6 +142,7 @@ class Dining(Activity):
             name="food", material_icon=ActivityType.VALUES.food
         )
 
+    """ override base class method as for Dinning we are using zomato client."""
     def get(self):
         """Get a list of restaurants based on the number of trip days."""
         n_restaurants_per_day = 3

@@ -5,7 +5,7 @@ The itinerary is created based on:
 - Survey reponse.
 - Queried APIs.
 """
-from typing import AsyncIterable, List, Dict
+from typing import List, Dict
 import multiprocessing as mp
 
 import pandas as pd
@@ -109,10 +109,10 @@ def get_activities(
             )
         if time_of_day == "evening":
             itinerary_items["evening"]["activities"].extend(
-                Theater(survey_response).get(theater_type="art")
+                Theater(survey_response, theater_type="art").get()
             )
             itinerary_items["evening"]["activities"].extend(
-                Theater(survey_response).get(theater_type="comedy")
+                Theater(survey_response, theater_type="comedy").get()
             )
     return itinerary_items
 
