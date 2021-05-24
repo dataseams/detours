@@ -8,7 +8,7 @@ This is why you might see imported but unsued objects.
 """
 import base64
 
-from graphene import ObjectType, String, Schema, Int, Field
+from graphene import ObjectType, String, Schema, Int, Field, Boolean
 from graphene_sqlalchemy import SQLAlchemyConnectionField
 
 from .time_of_day import TimeOfDay
@@ -46,10 +46,7 @@ class Query(ObjectType):
     get_all_activities = SQLAlchemyConnectionField(Activity)
     get_all_activity_types = SQLAlchemyConnectionField(ActivityType)
     get_all_places = SQLAlchemyConnectionField(Place)
-    get_all_survey_responses = SQLAlchemyConnectionField(SurveyResponse)
-
-    hello = String(surveyResponseNodeId=Int())
-    goodbye = String()
+    get_survey_response_record = SQLAlchemyConnectionField(SurveyResponse)
 
     get_last_trip_plan_for_survey_response = Field(
         lambda: TripPlan, surveyResponseNodeId=String()
@@ -75,6 +72,25 @@ class Query(ObjectType):
         )
 
         return trip_plans
+
+    is_itinerary_saved = Field(lambda: Boolean, surveyResponseNodeId=String())
+
+    def resolve_is_itinerary_saved(root, info, surveyResponseNodeId):
+        """Check if there is a user email on survey response table by id.
+
+        Return True if the survey response has a save user email on record,
+        otherwise return False.
+        """
+        survey_response_id = int(
+            base64.b64decode(surveyResponseNodeId)
+            .decode("utf-8")
+            .split(":")[-1]
+        )
+        query = SurveyResponse.get_query(info)
+        survey_response = query.get(survey_response_id)
+        traveler_email = survey_response.traveler_email
+        result = True if traveler_email else False
+        return result
 
 
 schema = Schema(query=Query, mutation=Mutation)
