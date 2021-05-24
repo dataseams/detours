@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Union
 
 from ..service_partners import google_places, zomato
-from ..models import City
+from ..models import City, ActivityType
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -37,6 +37,19 @@ class Activity:
         )
         self.n_days = (self.return_date - self.arrival_date).days + 1
 
+    def get(self):
+        """Return a list of activities based on the user's survey response."""
+        activities = self.client.search(query=self.query)
+        filtered_activities = (
+            random.sample(activities, 1) if activities else activities
+        )
+        filtered_activities = [
+            {**activity, "activity_type": self.activity_type}
+            for activity in filtered_activities
+        ]
+
+        return filtered_activities
+
 
 class Biking(Activity):
     """Get biking rental places in a city."""
@@ -45,17 +58,10 @@ class Biking(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"bicycle rental in {self.city_name}"
+        self.activity_type = ActivityType(
+            name="tour", material_icon=ActivityType.VALUES.tour
         )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"bicycle rental in {self.city_name}"
 
 
 class Museum(Activity):
@@ -65,35 +71,23 @@ class Museum(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"museum in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
+        self.activity_type = ActivityType(
+            name="museum", material_icon=ActivityType.VALUES.museum
         )
-
-        return filtered_activities
+        self.query = f"museum in {self.city_name}"
 
 
 class Theater(Activity):
     """Get theater places in a city."""
 
-    def __init__(self, survey_response: Union[str, dict]):
+    def __init__(self, survey_response: Union[str, dict], theater_type: str):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self, theater_type: str):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"{theater_type} theater in {self.city_name}"
+        self.activity_type = ActivityType(
+            name="theater", material_icon=ActivityType.VALUES.theater
         )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"{theater_type} theater in {self.city_name}"
 
 
 class Beach(Activity):
@@ -103,15 +97,10 @@ class Beach(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"beach in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
+        self.activity_type = ActivityType(
+            name="beach", material_icon=ActivityType.VALUES.beach
         )
-
-        return filtered_activities
+        self.query = f"beach in {self.city_name}"
 
 
 class Park(Activity):
@@ -121,15 +110,10 @@ class Park(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=f"park in {self.city_name}")
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
+        self.activity_type = ActivityType(
+            name="park", material_icon=ActivityType.VALUES.park
         )
-
-        return filtered_activities
+        self.query = f"park in {self.city_name}"
 
 
 class HistoricBuilding(Activity):
@@ -139,17 +123,11 @@ class HistoricBuilding(Activity):
         super().__init__(
             survey_response=survey_response, client_class=google_places.Client,
         )
-
-    def get(self):
-        """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(
-            query=f"historic building in {self.city_name}"
+        self.activity_type = ActivityType(
+            name="historic_building",
+            material_icon=ActivityType.VALUES.historic_building,
         )
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
-        )
-
-        return filtered_activities
+        self.query = f"historic building in {self.city_name}"
 
 
 class Dining(Activity):
@@ -160,6 +138,11 @@ class Dining(Activity):
             survey_response=survey_response, client_class=zomato.Client
         )
         self.city_id = self.client.CITY_IDS[self.survey_response["city"]]
+        self.activity_type = ActivityType(
+            name="food", material_icon=ActivityType.VALUES.food
+        )
+
+    """ override base class method as for Dinning we are using zomato client."""
 
     def get(self):
         """Get a list of restaurants based on the number of trip days."""
@@ -176,5 +159,9 @@ class Dining(Activity):
             count=n_total_restaurants,
         )
         filtered_restaurants = random.sample(restaurants, n_total_restaurants)
+        filtered_restaurants = [
+            {**restaurant, "activity_type": self.activity_type}
+            for restaurant in filtered_restaurants
+        ]
 
         return filtered_restaurants
