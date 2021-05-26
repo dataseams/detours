@@ -67,6 +67,21 @@ const useMobileStyles = makeStyles((theme) => ({
     flexDirection: "row",
     padding: "0 0 0 0.25em",
   },
+  dateTypography: {
+    display: "flex",
+    alignItems: "center",
+    flex: "0.6",
+  },
+  viewChangeButton: {
+    "& .MuiButton-startIcon > *:first-child ": {
+      fontSize: "27px",
+    },
+    "& > *:first-child": {
+      textTransform: "none",
+    },
+    flex: "0.4",
+    borderColor: "#5865BC",
+  },
 }));
 
 const DailyTabs = (props) => {
