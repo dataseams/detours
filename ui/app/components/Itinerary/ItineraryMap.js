@@ -43,14 +43,41 @@ const ItineraryMap = (props) => {
     lat: middle(centerLat),
     lng: middle(centerLng),
   };
-  let zoom = 12;
-
+  let zoom = 11;
+  const lineSymbol = {
+    path: "M 0,-1 0,1",
+    strokeOpacity: 1,
+    scale: 3,
+    strokeColor: "#5865BC",
+  };
+  const handleApiLoaded = (map, maps, pathToDrawPolyLine) => {
+    const connectPolyline = new maps.Polyline({
+      path: pathToDrawPolyLine,
+      geodesic: false,
+      strokeOpacity: 0,
+      icons: [
+        {
+          icon: lineSymbol,
+          offset: "0",
+          repeat: "20px",
+        },
+      ],
+    });
+    connectPolyline.setMap(map);
+  };
+  const pathToDrawPolyLine = events.edges.map((event, index) => ({
+    lat: event.node.activity.place.latitude,
+    lng: event.node.activity.place.longitude,
+  }));
   return (
     <div style={containerStyle}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         center={center}
         zoom={zoom}
+        onGoogleApiLoaded={({ map, maps }) =>
+          handleApiLoaded(map, maps, pathToDrawPolyLine)
+        }
       >
         {events.edges.map((event, index) => (
           <MapIcon
