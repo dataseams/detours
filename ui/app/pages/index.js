@@ -39,7 +39,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 800,
+      width: null,
     };
   }
 
@@ -47,30 +47,34 @@ class Index extends React.Component {
     this.setState({ width: window.innerWidth });
   };
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
-    this.setState(() => {
-      return { width: window.innerWidth };
-    });
+  componentWillMount() {
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", this.handleWindowSizeChange);
+      this.setState(() => {
+        return { width: window.innerWidth };
+      });
+    }
   }
 
   render() {
     return (
       <Provider store={store}>
-        <Meta />
-        <Container maxWidth="lg" component="div" disableGutters={true}>
-          <NavigationBar isMobile={this.state.width <= 500} />
-          <LandingTitle isMobile={this.state.width <= 500} />
-          <SampleItineraries isMobile={this.state.width <= 500} />
-          <HowItWorks isMobile={this.state.width <= 500} />
-          <Pricing isMobile={this.state.width <= 500} />
-          <Testimonials isMobile={this.state.width <= 500} />
-        </Container>
-        <Copyright />
+        {this.state.width ? (
+          <>
+            <Meta />
+            <Container maxWidth="lg" component="div" disableGutters={true}>
+              <NavigationBar isMobile={this.state.width <= 500} />
+              <LandingTitle isMobile={this.state.width <= 500} />
+              <SampleItineraries isMobile={this.state.width <= 500} />
+              <HowItWorks isMobile={this.state.width <= 500} />
+              <Pricing isMobile={this.state.width <= 500} />
+              <Testimonials isMobile={this.state.width <= 500} />
+            </Container>
+            <Copyright />
+          </>
+        ) : (
+          ""
+        )}
       </Provider>
     );
   }
