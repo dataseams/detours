@@ -1,34 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Grid, Typography, MobileStepper } from "@material-ui/core";
-import SwipeableViews from "react-swipeable-views";
-import { withStyles } from "@material-ui/styles";
-
+import { Box, Grid, Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import MapIcon from "@material-ui/icons/Map";
+import ListIcon from "@material-ui/icons/List";
 import ItineraryItems from "./ItineraryItems";
 import ItineraryItem from "./ItineraryItem";
 import ItineraryMap from "./ItineraryMap";
 
 var moment = require("moment");
 
-const StyledMobileStepper = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(0, 0, 1, 0),
-  },
-  dot: {
-    backgroundColor: theme.palette.secondary.dark,
-  },
-  dotActive: {
-    backgroundColor: theme.palette.primary.main,
-  },
-}))(MobileStepper);
-
 function TabPanel(props) {
   const { isMobile, children, value, index, classes, data, ...other } = props;
   const planItems = data.planItems;
-  const maxSteps = planItems.edges.length;
-  const [activeStep, setActiveStep] = React.useState(0);
-  const handleStepChange = (step) => {
-    setActiveStep(step);
+  const [listViewOnMobile, setListViewOnMobile] = React.useState(true);
+  const changeListView = () => {
+    setListViewOnMobile(!listViewOnMobile);
   };
 
   return isMobile ? (
@@ -42,24 +29,40 @@ function TabPanel(props) {
       {...other}
     >
       <Box className={classes.itineraryBox}>
-        <Typography variant="h6">
-          {moment(data.date, "YYYY-MM-DD").format("dddd, MMM DD, YYYY")}
-        </Typography>
-        <SwipeableViews index={activeStep} onChangeIndex={handleStepChange}>
-          {planItems.edges.map((step, index) => (
-            <ItineraryItem key={index} event={step} index={index} />
-          ))}
-        </SwipeableViews>
-        <StyledMobileStepper
-          steps={maxSteps}
-          position="static"
-          variant="dots"
-          activeStep={activeStep}
-          nextButton={<div />}
-          backButton={<div />}
-        />
+        <Box py={1} display="flex">
+          <Typography variant="body2" className={classes.dateTypography}>
+            {moment(data.date, "YYYY-MM-DD").format("dddd, MMM DD, YYYY")}
+          </Typography>
+          <span className={classes.viewChangeButton}>
+            <Button
+              startIcon={
+                listViewOnMobile === false ? <ListIcon /> : <MapIcon />
+              }
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={changeListView}
+              fullWidth={true}
+            >
+              {listViewOnMobile === false ? "List View" : "Map View"}{" "}
+            </Button>
+          </span>
+        </Box>{" "}
+        {planItems.edges.map((step, index) => (
+          <ItineraryItem
+            key={index}
+            event={step}
+            index={index}
+            listLength={planItems.edges.length}
+            type={listViewOnMobile === false ? "none" : "block"}
+          />
+        ))}
         <ItineraryMap
-          containerStyle={{ height: "35vh", width: "100%" }}
+          containerStyle={{
+            height: "35vh",
+            width: "100%",
+            display: listViewOnMobile ? "none" : "block",
+          }}
           events={planItems}
         />
       </Box>
