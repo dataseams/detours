@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ItineraryItems(props) {
-  const { events } = props;
+  const { events, onItineraryItemHover } = props;
   const classes = useStyles();
-
   return (
     <Paper style={{ height: "100%" }}>
       <List className={classes.root}>
@@ -39,6 +38,8 @@ function ItineraryItems(props) {
           <div
             key={(index + 1) * event.node.order}
             className={classes.listItem}
+            onMouseEnter={() => onItineraryItemHover(index)}
+            onMouseLeave={() => onItineraryItemHover(null)}
           >
             <ListItem alignItems="flex-start" divider={true}>
               <ListItemAvatar>
