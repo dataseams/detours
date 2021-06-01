@@ -14,8 +14,13 @@ function TabPanel(props) {
   const { isMobile, children, value, index, classes, data, ...other } = props;
   const planItems = data.planItems;
   const [listViewOnMobile, setListViewOnMobile] = React.useState(true);
+  const [iteneraryIconToHover, setIteneraryIconToHover] = React.useState(null);
+
   const changeListView = () => {
     setListViewOnMobile(!listViewOnMobile);
+  };
+  const onItineraryItemHover = (index) => {
+    setIteneraryIconToHover(index);
   };
 
   return isMobile ? (
@@ -83,12 +88,16 @@ function TabPanel(props) {
         </Typography>
         <Grid item xs={12} className={classes.itineraryContainer}>
           <Grid item xs={4} style={{ height: "35vh", overflow: "auto" }}>
-            <ItineraryItems events={planItems} />
+            <ItineraryItems
+              events={planItems}
+              onItineraryItemHover={onItineraryItemHover}
+            />
           </Grid>
           <Grid item xs={8} className={classes.mapContainer}>
             <ItineraryMap
               containerStyle={{ height: "35vh", width: "100%" }}
               events={planItems}
+              iteneraryIconToHover={iteneraryIconToHover}
             />
           </Grid>
         </Grid>
