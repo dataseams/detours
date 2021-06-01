@@ -88,8 +88,6 @@ const ItineraryMap = (props) => {
             lat={event.node.activity.place.latitude}
             lng={event.node.activity.place.longitude}
             materialIcon={event.node.activity.activityType.materialIcon}
-            iteneraryIconToHover={iteneraryIconToHover}
-            mapIconIndex={index}
             highlightIconColor={iteneraryIconToHover === index ? true : false}
           />
         ))}
