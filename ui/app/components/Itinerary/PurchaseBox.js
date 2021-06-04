@@ -45,7 +45,6 @@ const PurchaseBox = (props) => {
   const { data: isItinerarySaved } = useQuery(CHECK_USER_ID, {
     variables: variables,
   });
-  console.log(isItinerarySaved, "isItinerarySaved");
   const [savePlan, { data }] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: CHECK_USER_ID, variables: variables }],
   });
@@ -94,8 +93,6 @@ const PurchaseBox = (props) => {
                   travelerEmail: userEmail,
                 },
               })
-                .then((r) => console.log(r, "saveResults"))
-                .catch((e) => console.log(e))
             }
           >
             {data ? "Saved" : "Save"}
