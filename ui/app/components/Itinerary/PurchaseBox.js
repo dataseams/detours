@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
 import { Box, Divider, Typography, Grid, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
 import { loadStripe } from "@stripe/stripe-js";
-
 import { Purchase } from "../Buttons";
 import UPDATE_USER from "../../utils/queries/UpdateUser";
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
+import CHECK_USER_ID from "../../utils/queries/CheckUserId";
 
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 const useStyles = makeStyles((theme) => ({
   purchaseContainer: {
     display: "flex",
@@ -39,8 +40,20 @@ const PurchaseBox = (props) => {
   const {
     query: { surveyId },
   } = useRouter();
-  const [savePlan, { data }] = useMutation(UPDATE_USER);
+  const [idAvailable, setIdAvailable] = useState(false);
+  const variables = { surveyResponseNodeId: surveyId };
+  const { data: isItinerarySaved } = useQuery(CHECK_USER_ID, {
+    variables: variables,
+  });
+  const [savePlan, { data }] = useMutation(UPDATE_USER, {
+    refetchQueries: [{ query: CHECK_USER_ID, variables: variables }],
+  });
 
+  useEffect(() => {
+    if (isItinerarySaved && isItinerarySaved.isItinerarySaved) {
+      setIdAvailable(isItinerarySaved.isItinerarySaved);
+    }
+  }, [isItinerarySaved]);
   const handleClick = async (event) => {
     const stripe = await stripePromise;
     const response = await fetch("/create-checkout-session", {
@@ -72,7 +85,7 @@ const PurchaseBox = (props) => {
           </Box>
           <Purchase
             className={classes.purchaseItem}
-            disabled={Boolean(data)}
+            disabled={Boolean(data) || idAvailable}
             onClick={() =>
               savePlan({
                 variables: {
@@ -80,8 +93,6 @@ const PurchaseBox = (props) => {
                   travelerEmail: userEmail,
                 },
               })
-                .then((r) => console.log(r))
-                .catch((e) => console.log(e))
             }
           >
             {data ? "Saved" : "Save"}
