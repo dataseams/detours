@@ -41,12 +41,14 @@ const PurchaseBox = (props) => {
     query: { surveyId },
   } = useRouter();
   const [idAvailable, setIdAvailable] = useState(false);
-  const [savePlan, { data }] = useMutation(UPDATE_USER);
   const variables = { surveyResponseNodeId: surveyId };
   const { data: isItinerarySaved } = useQuery(CHECK_USER_ID, {
     variables: variables,
   });
   console.log(isItinerarySaved, "isItinerarySaved");
+  const [savePlan, { data }] = useMutation(UPDATE_USER, {
+    refetchQueries: [{ query: CHECK_USER_ID, variables: variables }],
+  });
 
   useEffect(() => {
     if (isItinerarySaved && isItinerarySaved.isItinerarySaved) {
@@ -92,7 +94,7 @@ const PurchaseBox = (props) => {
                   travelerEmail: userEmail,
                 },
               })
-                .then((r) => console.log(r))
+                .then((r) => console.log(r, "saveResults"))
                 .catch((e) => console.log(e))
             }
           >

@@ -9,20 +9,23 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     minWidth: "40px",
     padding: "3px",
-    borderColor: theme.palette.primary.main,
+    borderColor: (props) =>
+      props ? theme.palette.secondary.dark : theme.palette.primary.main,
     borderRadius: "20%",
     "&:hover": {
-      borderColor: "red",
+      borderColor: theme.palette.secondary.dark,
     },
   },
+
   icon: {
-    color: theme.palette.primary.main,
+    color: (props) =>
+      props ? theme.palette.secondary.dark : theme.palette.primary.main,
   },
 }));
 
 const MapIcon = (props) => {
-  const { materialIcon } = props;
-  const classes = useStyles();
+  const { materialIcon, highlightIconColor } = props;
+  const classes = useStyles(highlightIconColor ? highlightIconColor : false);
 
   return (
     <Box className={classes.iconContainer} border={2}>
@@ -36,7 +39,7 @@ function middle(nums) {
 }
 
 const ItineraryMap = (props) => {
-  const { containerStyle, events } = props;
+  const { containerStyle, events, iteneraryIconToHover } = props;
   let centerLat = events.edges.map((x) => x.node.activity.place.latitude);
   let centerLng = events.edges.map((x) => x.node.activity.place.longitude);
   let center = {
@@ -85,6 +88,7 @@ const ItineraryMap = (props) => {
             lat={event.node.activity.place.latitude}
             lng={event.node.activity.place.longitude}
             materialIcon={event.node.activity.activityType.materialIcon}
+            highlightIconColor={iteneraryIconToHover === index ? true : false}
           />
         ))}
       </GoogleMapReact>
