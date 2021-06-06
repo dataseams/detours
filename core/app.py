@@ -1,11 +1,10 @@
 """Run the app."""
-from flask_graphql import GraphQLView
-from flask import Flask
-from flask_cors import CORS
-
 from core_api.config import db_session
 from core_api.models import sync_db
 from core_api.schema import schema
+from flask import Flask
+from flask_cors import CORS
+from flask_graphql import GraphQLView
 
 app = Flask(__name__)
 CORS(app)

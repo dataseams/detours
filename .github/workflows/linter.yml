@@ -24,7 +24,7 @@ jobs:
           use-mypy: false
           use-flake8: false
           use-black: true
-          use-isort: false
+          use-isort: true
           extra-pylint-options: ""
           extra-pycodestyle-options: ""
           extra-flake8-options: ""

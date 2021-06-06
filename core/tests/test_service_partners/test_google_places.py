@@ -1,9 +1,9 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch
-import pytest
 
-from core_api.service_partners.google_places import Client
+import pytest
 from core_api.activities import Biking
+from core_api.service_partners.google_places import Client
 
 
 class TestGooglePlaces(TestCase):

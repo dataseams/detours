@@ -12,10 +12,12 @@ help:
 
 lint: ## Run a linting check on the core service using flake8
 	@python -m flake8 core/.
+	@cd ./ui/app && npx prettier --check .
 
 format:  ## Run black formatter on the core service
 	@python -m isort --settings-path pyproject.toml ./core
 	@python -m black ./core
+	@cd ./ui/app && npx prettier --write .
 
 format-check:  ## Run a formatting check using black on the core service
 	@python -m isort -c --settings-path pyproject.toml ./core

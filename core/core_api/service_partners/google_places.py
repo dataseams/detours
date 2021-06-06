@@ -1,6 +1,7 @@
 """Main Google Places object to get activities from the api."""
-import requests
 from typing import List
+
+import requests
 
 from .config import GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_API_URL
 
