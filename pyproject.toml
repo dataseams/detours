@@ -16,3 +16,10 @@ exclude = '''
   )/
 )
 '''
+
+[tool.coverage.run]
+omit = ['*tests/*']
+
+[tool.isort]
+profile = "black"
+line_length = 79
