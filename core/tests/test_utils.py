@@ -1,5 +1,6 @@
 from typing import Text
 from unittest import TestCase
+
 from core_api import utils
 
 

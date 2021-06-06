@@ -7,8 +7,8 @@ import random
 from datetime import datetime
 from typing import Union
 
+from ..models import ActivityType, City
 from ..service_partners import google_places, zomato
-from ..models import City, ActivityType
 
 DATE_FORMAT = "%Y-%m-%d"
 

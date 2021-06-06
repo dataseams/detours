@@ -1,20 +1,19 @@
 """Module for all data models logic."""
-from datetime import time
-from datetime import datetime
+from datetime import datetime, time
 
 from sqlalchemy import (
+    ARRAY,
+    JSON,
     Column,
-    DateTime,
     Date,
-    Time,
+    DateTime,
     ForeignKey,
     Integer,
     Numeric,
     String,
-    JSON,
-    ARRAY,
+    Time,
 )
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import backref, relationship
 
 from .config import Base, db_session, engine
 

@@ -1,12 +1,10 @@
 """SurveyResponse schema."""
-from graphene import Mutation, Field, String, JSONString
-from graphene import relay
+from graphene import Field, JSONString, Mutation, String, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from graphql_relay.node.node import from_global_id
 
-from .. import models
+from .. import itinerary, models
 from ..config import db_session
-from .. import itinerary
 
 
 class SurveyResponse(SQLAlchemyObjectType):

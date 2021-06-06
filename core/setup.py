@@ -1,8 +1,8 @@
 """Package setup module."""
 import os
-from setuptools import setup, find_packages
 
 import requirements
+from setuptools import find_packages, setup
 
 package_name = os.path.basename(os.getcwd()).replace("-", "_")
 

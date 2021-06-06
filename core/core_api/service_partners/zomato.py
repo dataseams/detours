@@ -1,10 +1,11 @@
 """Main zomato object to get needed restaurant data from the zomato api."""
-import requests
+import math
 from typing import List, Optional
 from warnings import warn
-import math
 
-from .config import ZOMATO_API_URL, ZOMATO_API_KEY
+import requests
+
+from .config import ZOMATO_API_KEY, ZOMATO_API_URL
 
 
 class Client:

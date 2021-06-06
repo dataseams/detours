@@ -5,22 +5,22 @@ The itinerary is created based on:
 - Survey reponse.
 - Queried APIs.
 """
-from typing import List, Dict
 import multiprocessing as mp
+from typing import Dict, List
 
 import pandas as pd
 
-from .config import db_session
 from . import models
 from .activities import (
-    Dining,
-    Biking,
-    Museum,
-    Theater,
     Beach,
-    Park,
+    Biking,
+    Dining,
     HistoricBuilding,
+    Museum,
+    Park,
+    Theater,
 )
+from .config import db_session
 from .utils import ItineraryTag
 
 DATE_FORMAT = "%Y-%m-%d"

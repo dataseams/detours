@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from snapshottest import Snapshot
 
-
 snapshots = Snapshot()
 
 snapshots["TestCaseAPI::test_check_type_of_luke_in_episode 1"] = {
