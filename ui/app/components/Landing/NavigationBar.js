@@ -18,7 +18,8 @@ import { Link } from "react-scroll";
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
-import Auth from "../autht";
+import { default as AuthButton } from "../autht";
+import { default as AuthMenu } from "../auth";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -161,7 +162,7 @@ function MobileToolbar(props) {
           <GetStartedButton isMobile={isMobile} />
         </ListItem>
         <ListItem>
-          <Auth />
+          <AuthButton />
         </ListItem>
       </List>
     </Box>
@@ -220,6 +221,7 @@ function NavigationBar(props) {
             >
               <NavigationBarButton name="Pricing" />
             </Link>
+            <AuthMenu />
             <GetStartedButton />
           </Toolbar>
         )}
