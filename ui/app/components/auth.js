@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+  authButton: {
+    textTransform: "none",
+  },
 }));
 
 export async function getServerSideProps({ req, query }) {
@@ -141,11 +144,15 @@ const Auth = (props) => {
           >
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
+            <MenuItem>My profile</MenuItem>
+            <MenuItem>My itineraries</MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
         </div>
       ) : (
-        <Button onClick={handleLogin}>Log in</Button>
+        <Button onClick={handleLogin} classes={{ label: classes.authButton }}>
+          Log in
+        </Button>
       )}
     </div>
   );
