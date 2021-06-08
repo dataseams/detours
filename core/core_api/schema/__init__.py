@@ -25,7 +25,7 @@ from .survey_response import (
     UpdateTravelerEmailForSurveryResponse,
 )
 from .time_of_day import TimeOfDay
-from .trip_plan import TripPlan
+from .trip_plan import TripPlan, UserTripPlans
 
 
 class Mutation(ObjectType):
