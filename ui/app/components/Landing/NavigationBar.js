@@ -12,6 +12,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import ClearIcon from "@material-ui/icons/Clear";
 import PropTypes from "prop-types";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { Link } from "react-scroll";
@@ -81,7 +82,12 @@ const useDividerStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
 }));
-
+const useClearButtonStyles = makeStyles(() => ({
+  button: {
+    padding: 0,
+    alignContent: "center",
+  },
+}));
 const useTextStyles = makeStyles((theme) => ({
   root: {
     fontSize: theme.typography.fontSize,
@@ -108,6 +114,7 @@ function MobileToolbar(props) {
   const dividerClasses = useDividerStyles();
   const textclasses = useTextStyles();
   const toolbarClasses = useMobileToolbarStyles();
+  const ClearClasses = useClearButtonStyles();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -127,6 +134,13 @@ function MobileToolbar(props) {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <Box display="flex" justifyContent="space-between">
+        <LogoButton name="DETOURS" />
+        <IconButton className={ClearClasses.button}>
+          <ClearIcon />
+        </IconButton>
+      </Box>
+
       <List classes={listClasses}>
         <Link
           to="howitworks"
