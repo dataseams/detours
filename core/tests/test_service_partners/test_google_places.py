@@ -21,12 +21,13 @@ class TestGetActivities(TestCase):
         client_object = Mock()
         mock_google_places.Client.return_value = client_object
         expected_activities = [dict(), dict()]
-        client_object.search.return_value = expected_activities
+        client_object.search_nearby.return_value = expected_activities
         activities = Biking(survey_response).get()
         mock_google_places.Client.assert_called_once()
-        client_object.search.assert_called_once_with(
-            query="bicycle rental in Los Angeles California"
+        client_object.search_nearby.assert_called_once_with(
+            location="34.0619,-118.242",
+            query="bicycle rental in Los Angeles California",
         )
         self.assertIsInstance(activities, list)
-        self.assertEqual(len(activities), 1)
+        self.assertEqual(len(activities), 2)
         self.assertIn("activity_type", activities[0].keys())

@@ -78,8 +78,8 @@ class City(Base):
             "state": "California",
             "state_abbr": "CA",
             "country": "USA",
-            "latitude": 32.8027,
-            "longitude": -117.1456,
+            "latitude": 32.7468,
+            "longitude": -117.1612,
         },
         {
             "code": "NYC",
