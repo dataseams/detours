@@ -6,10 +6,10 @@ The itinerary is created based on:
 - Queried APIs.
 """
 import multiprocessing as mp
+import random
 from typing import Dict, List
 
 import pandas as pd
-import random
 
 from . import models
 from .activities import (
