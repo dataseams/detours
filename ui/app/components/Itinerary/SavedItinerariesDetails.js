@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid",
     borderColor: theme.palette.primary.main,
     backgroundColor: theme.palette.background.default,
-    width:"30px",
-    height:"30px"
+    width: "30px",
+    height: "30px",
   },
   button: {
     "& .MuiButton-label": {
@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.primary.main,
-    width:"22px",
-    height:"22px"
+    width: "22px",
+    height: "22px",
   },
   line: {
     margin: "4px",
