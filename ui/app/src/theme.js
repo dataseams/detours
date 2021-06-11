@@ -18,7 +18,10 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#fff",
+      linearGradiant:"linear-gradient(to right, #FFFFFF , #D6DBFF)",
     },
+    borderColor:"#C6C6C6",
+    iconColor:"#000000"
   },
   typography: {
     fontFamily: "Jost",
