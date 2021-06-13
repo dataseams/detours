@@ -60,7 +60,7 @@ class Client:
         self,
         query: str,
         location: str,
-        radius: int = 5000,
+        radius: int = 10000,
         language: str = "en",
     ) -> List[dict]:
         """Make an API call to Google Places with a search query.
