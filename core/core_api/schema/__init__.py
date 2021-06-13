@@ -26,6 +26,7 @@ from .survey_response import (
 )
 from .time_of_day import TimeOfDay
 from .trip_plan import TripPlan, UserTripPlans
+from ..config import db_session
 
 
 class Mutation(ObjectType):
@@ -90,6 +91,43 @@ class Query(ObjectType):
         traveler_email = survey_response.traveler_email
         result = True if traveler_email else False
         return result
+
+    get_user_trip_plans = Field(UserTripPlans, travelerEmail=String())
+
+    def resolve_get_user_trip_plans(root, info, travelerEmail):
+        """Return all trip plans for a user."""
+        survey_responses = (
+            db_session.query(models.SurveyResponse)
+            .filter_by(traveler_email=travelerEmail)
+            .join(
+                models.TripPlan,
+                models.SurveyResponse.id == models.TripPlan.survey_response_id,
+            )
+            .join(models.City, models.City.id == models.TripPlan.city_id)
+            .join(
+                models.DailyPlan,
+                models.DailyPlan.trip_plan_id == models.TripPlan.id,
+            )
+            .all()
+        )
+        trip_plans = [
+            {
+                "whatIsHappening": "hello",
+                "city": x.trip_plans[0].city.name
+                + ", "
+                + x.trip_plans[0].city.state_abbr,
+                "start_date": x.trip_plans[0].start_date,
+                "end_date": x.trip_plans[0].end_date,
+                "first_five_icons": [
+                    z.activity.activity_type.material_icon
+                    for y in x.trip_plans[0].daily_plans
+                    for z in y.plan_items
+                ][:5],
+            }
+            for x in survey_responses
+        ]
+
+        return trip_plans[0]
 
 
 schema = Schema(query=Query, mutation=Mutation)
