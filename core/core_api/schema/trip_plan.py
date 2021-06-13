@@ -24,18 +24,13 @@ class TripPlan(SQLAlchemyObjectType):
 class UserTripPlans(ObjectType):
     """List of trip plan information for a user's my itinerary page."""
 
-    survey_response_id = String()
-    city_state = String()
-    start_date = Date()
-    end_date = Date()
+    what_is_happening = String(
+        description="Base64 encoding of the survey response id"
+    )
+    city = String(description="City, State (abbreviated)")
+    start_date = Date(description="Trip start date")
+    end_date = Date(description="Trip end date")
     first_five_icons = List(
-        String(),
+        String,
         description="Material icon codes for the first five trip activities",
     )
-
-    class Arguments:
-        """Declare input to this query, user_email."""
-
-        traveler_email = String(
-            required=True, description="The traveler email from Firebase auth."
-        )
