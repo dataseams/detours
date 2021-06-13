@@ -9,7 +9,6 @@ from sqlalchemy import engine_from_config, pool
 config = context.config
 
 config.set_main_option("sqlalchemy.url", DB_URL)
-print(DB_URL)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
@@ -18,10 +17,9 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-# target_metadata = None
-from core_api.config import Base
+from core_api import models
 
-target_metadata = Base.metadata
+target_metadata = models.Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

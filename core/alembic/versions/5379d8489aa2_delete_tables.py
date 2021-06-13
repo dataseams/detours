@@ -28,5 +28,5 @@ def upgrade():
 
 
 def downgrade():
-    # ### No need to revert the chenges ###
+    # ### No need to revert the changes ###
     pass
