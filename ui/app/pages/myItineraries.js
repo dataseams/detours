@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { makeStyles } from "@material-ui/styles";
-import { Container, Typography, Box } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Meta from "../components/Head";
 import { itineraryReducer } from "../redux/reducers";
@@ -30,46 +30,27 @@ const useStyles = makeStyles((theme) => ({
   savedForYou: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "30%",
-      flexBasis: "30%",
-    },
-  },
-  pageBody: {
-    justifyContent: "center",
-    [theme.breakpoints.down("xs")]: {
-      flexDirection: "column",
     },
   },
   savedItinerariesDetails: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "70%",
-      flexBasis: "70%",
     },
   },
 }));
 const MyItineraries = () => {
   const store = createStore(itineraryReducer);
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
 
   return (
     <Provider store={store}>
       <Meta />
       <LogoNavigationBar />
       <Container className={classes.root}>
-        <Box>
-          <Typography className={classes.pageHeading}>
-            My Itineraries
-          </Typography>
-        </Box>
-        <Grid container className={classes.pageBody}>
+        <Typography className={classes.pageHeading}>My Itineraries</Typography>
+        <Grid container>
           <Grid sm={3} className={classes.savedForYou}>
-            <SavedForYou
-              selectedIndex={selectedIndex}
-              handleListItemClick={handleListItemClick}
-            />
+            <SavedForYou />
           </Grid>
           <Grid sm={9} className={classes.savedItinerariesDetails}>
             <SavedItinerariesDetails />

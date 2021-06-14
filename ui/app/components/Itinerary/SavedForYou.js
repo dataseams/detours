@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.borderColor}`,
     borderRadius: "15px",
     [theme.breakpoints.down("xs")]: {
-      width: "auto",
+      width: "335px",
     },
   },
   icon: {
@@ -36,36 +36,22 @@ const SavedForYou = ({ selectedIndex, handleListItemClick }) => {
     <Box className={classes.listBorders} mt={[2, 0, 0, 0]}>
       <List component="nav" aria-label="main mailbox folders">
         <ListItem>
-          <ListItemText
-            className={classes.listItemsText}
-            primary="SAVED FOR YOU"
-          />
+          <ListItemText className={classes.listItems} primary="SAVED FOR YOU" />
         </ListItem>
         <Divider />
-        <ListItem
-          button
-          selected={selectedIndex === 0}
-          onClick={(event) => handleListItemClick(event, 0)}
-        >
+        <ListItem button>
           <ListItemIcon>
             <BookmarksIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText
-            className={classes.listItemsText}
-            primary="Itineraries"
-          />
+          <ListItemText className={classes.listItems} primary="Itineraries" />
         </ListItem>
         <Divider />
-        <ListItem
-          button
-          selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
-        >
+        <ListItem button>
           <ListItemIcon>
             <DescriptionIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText
-            className={classes.listItemsText}
+            className={classes.listItems}
             primary="Survey Answers"
           />
         </ListItem>
