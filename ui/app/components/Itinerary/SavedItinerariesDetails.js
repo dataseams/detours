@@ -1,8 +1,7 @@
 import React from "react";
-import { Box, Typography, Icon } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
-import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
 import TrendingFlatIcon from "@material-ui/icons/TrendingFlat";
 import Hidden from "@material-ui/core/Hidden";
 
@@ -10,13 +9,12 @@ const useStyles = makeStyles((theme) => ({
   listBorders: {
     boxShadow: "0px 3px 6px #00000026",
     borderRadius: "15px",
-    marginTop: "65px",
+    marginTop: "20px",
     marginLeft: "25px",
     marginRight: "0px",
 
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0",
-      marginTop: "30px",
       width: "335px",
     },
     background: theme.palette.background.linearGradiant,
@@ -45,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiButton-label": {
       color: theme.typography.color,
     },
+    textTransform: "none",
     padding: "6px 0px",
     [theme.breakpoints.down("xs")]: {
       marginTop: "10px",
@@ -72,7 +71,7 @@ const SavedItinerariesDetails = () => {
         <Typography className={classes.dates}>
           November 24 - December 2
         </Typography>
-        <Hidden mdDown>
+        <Hidden smDown>
           <Button className={classes.button} endIcon={<TrendingFlatIcon />}>
             View itinerary
           </Button>
@@ -81,35 +80,35 @@ const SavedItinerariesDetails = () => {
       <Box display="flex" my={[1, 0, 0, 0]}>
         <Box display="flex" alignItems="center">
           <Box className={classes.iconContainer} border={2}>
-            <DirectionsBikeIcon className={classes.icon} />
+            <i className={`material-icons ${classes.icon}`}>restaurant</i>
           </Box>
           <Box className={classes.line}></Box>
         </Box>
         <Box display="flex" alignItems="center">
           <Box className={classes.iconContainer} border={2}>
-            <DirectionsBikeIcon className={classes.icon} />
+            <i className={`material-icons ${classes.icon}`}>restaurant</i>
           </Box>
           <Box className={classes.line}></Box>
         </Box>
         <Box display="flex" alignItems="center">
           <Box className={classes.iconContainer} border={2}>
-            <DirectionsBikeIcon className={classes.icon} />
+            <i className={`material-icons ${classes.icon}`}>restaurant</i>
           </Box>
           <Box className={classes.line}></Box>
         </Box>
         <Box display="flex" alignItems="center">
           <Box className={classes.iconContainer} border={2}>
-            <DirectionsBikeIcon className={classes.icon} />
+            <i className={`material-icons ${classes.icon}`}>restaurant</i>
           </Box>
           <Box className={classes.line}></Box>
         </Box>
         <Box display="flex" alignItems="center">
           <Box className={classes.iconContainer} border={2}>
-            <DirectionsBikeIcon className={classes.icon} />
+            <i className={`material-icons ${classes.icon}`}>restaurant</i>
           </Box>
         </Box>
       </Box>
-      <Hidden lgUp>
+      <Hidden mdUp>
         <Button className={classes.button} endIcon={<TrendingFlatIcon />}>
           View itinerary
         </Button>
