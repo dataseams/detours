@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down("xs")]: {
       marginLeft: "0",
-      width: "335px",
+      width: "auto",
     },
     background: theme.palette.background.linearGradiant,
     padding: "30px",
@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
       color: theme.typography.color,
     },
     textTransform: "none",
-    padding: "6px 0px",
     [theme.breakpoints.down("xs")]: {
       marginTop: "10px",
     },
