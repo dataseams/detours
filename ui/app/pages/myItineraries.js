@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { makeStyles } from "@material-ui/styles";
-import { Container, Typography } from "@material-ui/core";
+import { Container, Typography, Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Meta from "../components/Head";
 import { itineraryReducer } from "../redux/reducers";
@@ -30,11 +30,19 @@ const useStyles = makeStyles((theme) => ({
   savedForYou: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "30%",
+      flexBasis: "30%",
+    },
+  },
+  pageBody: {
+    justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
     },
   },
   savedItinerariesDetails: {
     [theme.breakpoints.up("sm")]: {
       maxWidth: "70%",
+      flexBasis: "70%",
     },
   },
 }));
@@ -47,8 +55,12 @@ const MyItineraries = () => {
       <Meta />
       <LogoNavigationBar />
       <Container className={classes.root}>
-        <Typography className={classes.pageHeading}>My Itineraries</Typography>
-        <Grid container>
+        <Box>
+          <Typography className={classes.pageHeading}>
+            My Itineraries
+          </Typography>
+        </Box>
+        <Grid container className={classes.pageBody}>
           <Grid sm={3} className={classes.savedForYou}>
             <SavedForYou />
           </Grid>
