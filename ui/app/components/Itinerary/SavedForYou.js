@@ -15,42 +15,60 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.borderColor}`,
     borderRadius: "15px",
     [theme.breakpoints.down("xs")]: {
-      width: "335px",
+      width: "auto",
     },
   },
   icon: {
     color: theme.palette.iconColor,
   },
-  listItems: {
+  listItemsText: {
     "& .MuiListItemText-primary": {
       fontWeight: 500,
       color: theme.typography.color,
     },
   },
 }));
+
 const SavedForYou = () => {
   const classes = useStyles();
-
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
   return (
     <Box className={classes.listBorders} mt={[2, 0, 0, 0]}>
       <List component="nav" aria-label="main mailbox folders">
         <ListItem>
-          <ListItemText className={classes.listItems} primary="SAVED FOR YOU" />
+          <ListItemText
+            className={classes.listItemsText}
+            primary="SAVED FOR YOU"
+          />
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem
+          button
+          selected={selectedIndex === 0}
+          onClick={(event) => handleListItemClick(event, 0)}
+        >
           <ListItemIcon>
             <BookmarksIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText className={classes.listItems} primary="Itineraries" />
+          <ListItemText
+            className={classes.listItemsText}
+            primary="Itineraries"
+          />
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem
+          button
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1)}
+        >
           <ListItemIcon>
             <DescriptionIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText
-            className={classes.listItems}
+            className={classes.listItemsText}
             primary="Survey Answers"
           />
         </ListItem>
