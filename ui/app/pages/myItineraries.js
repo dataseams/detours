@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
 const MyItineraries = () => {
   const store = createStore(itineraryReducer);
   const classes = useStyles();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
 
   return (
     <Provider store={store}>
@@ -62,7 +66,10 @@ const MyItineraries = () => {
         </Box>
         <Grid container className={classes.pageBody}>
           <Grid sm={3} className={classes.savedForYou}>
-            <SavedForYou />
+            <SavedForYou
+              selectedIndex={selectedIndex}
+              handleListItemClick={handleListItemClick}
+            />
           </Grid>
           <Grid sm={9} className={classes.savedItinerariesDetails}>
             <SavedItinerariesDetails />

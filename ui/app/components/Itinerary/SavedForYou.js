@@ -31,10 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SavedForYou = ({ selectedIndex, handleListItemClick }) => {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
+
   return (
     <Box className={classes.listBorders} mt={[2, 0, 0, 0]}>
       <List component="nav" aria-label="main mailbox folders">
