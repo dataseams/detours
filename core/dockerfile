@@ -4,7 +4,7 @@ RUN apt update && apt install -y \
     build-essential \
     libpq-dev
 
-RUN mkdir /app /app/core_api /app/tests
+RUN mkdir /app /app/core_api /app/tests /app/alembic
 WORKDIR /app
 
 COPY environment.yml requirements.py /app/
@@ -12,10 +12,12 @@ RUN pip install $(python -c "import requirements; print(requirements.get_ssv(['#
 
 COPY core_api /app/core_api/
 COPY tests /app/tests/
-COPY app.py README.md setup.py wait-for-it.sh /app/
+COPY alembic /app/alembic
+COPY app.py README.md setup.py wait-for-it.sh service-startup.sh alembic.ini /app/
 
 ENV FLASK_APP=/app/app.py
 
 RUN chmod 550 wait-for-it.sh
+RUN chmod 550 service-startup.sh
 
-CMD ["gunicorn", "--bind=:5000", "--timeout=300", "app:app"]
+CMD ["sh", "./service-startup.sh"]

@@ -60,6 +60,8 @@ class City(Base):
             "state": "California",
             "state_abbr": "CA",
             "country": "USA",
+            "latitude": 34.0619,
+            "longitude": -118.2420,
         },
         {
             "code": "SF",
@@ -67,6 +69,8 @@ class City(Base):
             "state": "California",
             "state_abbr": "CA",
             "country": "USA",
+            "latitude": 37.9296,
+            "longitude": -122.4279,
         },
         {
             "code": "SD",
@@ -74,6 +78,8 @@ class City(Base):
             "state": "California",
             "state_abbr": "CA",
             "country": "USA",
+            "latitude": 32.7468,
+            "longitude": -117.1612,
         },
         {
             "code": "NYC",
@@ -81,13 +87,17 @@ class City(Base):
             "state": "New York",
             "state_abbr": "NY",
             "country": "USA",
+            "latitude": 41.8456,
+            "longitude": -73.9249,
         },
         {
             "code": "CHI",
-            "name": "Chicagp",
+            "name": "Chicago",
             "state": "Illinois",
             "state_abbr": "IL",
             "country": "USA",
+            "latitude": 42.5780,
+            "longitude": -87.7352,
         },
     ]
 
@@ -98,6 +108,8 @@ class City(Base):
     state = Column(String(20))
     state_abbr = Column(String(2))
     country = Column(String(50))
+    latitude = Column(Numeric(precision=10, scale=6))
+    longitude = Column(Numeric(precision=10, scale=6))
 
 
 class SurveyResponse(Base):
@@ -232,7 +244,6 @@ class Place(Base):
 
 def sync_db():
     """Import modules need to be registered properly on the metadata."""
-    Base.metadata.create_all(bind=engine)
     time_of_day = []
     existing_time_of_day = TimeOfDay.query.all()
     for k, v in TimeOfDay.VALUES.items():

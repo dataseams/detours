@@ -24,11 +24,9 @@ class Activity:
         )
         self.client = client_class()
         self.city_code = self.survey_response["city"]
-        self.city_name = [
-            x["name"] + " " + x["state"]
-            for x in City.VALUES
-            if x["code"] == self.city_code
-        ][0]
+        city_data = [x for x in City.VALUES if x["code"] == self.city_code][0]
+        self.city_name = f'{city_data["name"]} {city_data["state"]}'
+        self.city_center = f'{city_data["latitude"]},{city_data["longitude"]}'
         self.arrival_date = datetime.strptime(
             self.survey_response["travelDates"][0][:10], DATE_FORMAT
         )
@@ -39,13 +37,16 @@ class Activity:
 
     def get(self):
         """Return a list of activities based on the user's survey response."""
-        activities = self.client.search(query=self.query)
-        filtered_activities = (
-            random.sample(activities, 1) if activities else activities
+        activities = self.client.search_nearby(
+            query=self.query, location=self.city_center
         )
+        if len(activities) >= self.n_days:
+            activities = random.sample(activities, self.n_days)
+        else:
+            random.shuffle(activities)
         filtered_activities = [
             {**activity, "activity_type": self.activity_type}
-            for activity in filtered_activities
+            for activity in activities
         ]
 
         return filtered_activities

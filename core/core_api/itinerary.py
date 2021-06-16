@@ -6,6 +6,7 @@ The itinerary is created based on:
 - Queried APIs.
 """
 import multiprocessing as mp
+import random
 from typing import Dict, List
 
 import pandas as pd
@@ -75,11 +76,11 @@ def get_activities(
         "noon": {"food": [], "activities": []},
         "evening": {"food": [], "activities": []},
     }
+    n_days = trip_length(
+        arrival_date=survey_response.get("travelDates")[0],
+        return_date=survey_response.get("travelDates")[1],
+    )
     if food_or_activities == "food":
-        n_days = trip_length(
-            arrival_date=survey_response.get("travelDates")[0],
-            return_date=survey_response.get("travelDates")[1],
-        )
         restaurants = Dining(survey_response).get()
         breakfast = restaurants[:n_days]
         lunch = restaurants[n_days : 2 * n_days]
@@ -89,31 +90,36 @@ def get_activities(
             "noon": {"food": lunch, "activities": []},
             "evening": {"food": dinner, "activities": []},
         }
-    if food_or_activities == "activities":
+    elif food_or_activities == "activities":
+        time_of_day_activites = []
+
         if time_of_day == "morning":
-            itinerary_items["morning"]["activities"].extend(
-                Biking(survey_response).get()
-            )
-            itinerary_items["morning"]["activities"].extend(
-                Beach(survey_response).get()
-            )
-            itinerary_items["morning"]["activities"].extend(
+            time_of_day_activites.extend(Biking(survey_response).get())
+            time_of_day_activites.extend(Beach(survey_response).get())
+            time_of_day_activites.extend(
                 HistoricBuilding(survey_response).get()
             )
-        if time_of_day == "noon":
-            itinerary_items["noon"]["activities"].extend(
-                Museum(survey_response).get()
-            )
-            itinerary_items["noon"]["activities"].extend(
-                Park(survey_response).get()
-            )
-        if time_of_day == "evening":
-            itinerary_items["evening"]["activities"].extend(
+        elif time_of_day == "noon":
+            time_of_day_activites.extend(Museum(survey_response).get())
+            time_of_day_activites.extend(Park(survey_response).get())
+        elif time_of_day == "evening":
+            time_of_day_activites.extend(
                 Theater(survey_response, theater_type="art").get()
             )
-            itinerary_items["evening"]["activities"].extend(
+            time_of_day_activites.extend(
                 Theater(survey_response, theater_type="comedy").get()
             )
+
+        if len(time_of_day_activites) > n_days:
+            time_of_day_activites = random.sample(
+                time_of_day_activites, n_days
+            )
+        else:
+            random.shuffle(time_of_day_activites)
+        itinerary_items[time_of_day]["activities"].extend(
+            time_of_day_activites
+        )
+
     return itinerary_items
 
 
@@ -198,7 +204,7 @@ class Builder:
                         "place": models.Place(
                             name=place["name"],
                             description=place["name"],
-                            address=place["formatted_address"],
+                            address=place["vicinity"],
                             locality=None,
                             zipcode=None,
                             latitude=place["geometry"]["location"]["lat"],
@@ -269,7 +275,7 @@ class Builder:
 
         daily_plans = []
         for trip_date in pd.date_range(
-            start=arrival_date, end=return_date, freq="D",
+            start=arrival_date, end=return_date, freq="D"
         ):
             daily_plans.append(
                 models.DailyPlan(date=trip_date, trip_plan=trip_plan)

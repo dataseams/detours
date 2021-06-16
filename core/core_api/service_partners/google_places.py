@@ -55,3 +55,43 @@ class Client:
         results = response.json()["candidates"]
 
         return results
+
+    def search_nearby(
+        self,
+        query: str,
+        location: str,
+        radius: int = 10000,
+        language: str = "en",
+    ) -> List[dict]:
+        """Make an API call to Google Places with a search query.
+
+        Parameters
+        ----------
+        query : str
+            Activity and city to query for
+        input_type : str, optional
+            Textquery or phonenumber, by default "textquery"
+        language : str, optional
+            Natural language, by default "en"
+
+        Returns
+        -------
+        List[dict]
+            Response object containins the search results as a list of places
+        """
+        params = {}
+        params["key"] = self.key
+        params["keyword"] = query
+        params["language"] = language
+        params["location"] = location
+        params["radius"] = radius
+
+        request_url = f"{self.url}/{self.output}"
+
+        response = requests.get(
+            request_url, params=params, headers=self.headers
+        )
+
+        results = response.json()["results"]
+
+        return results
