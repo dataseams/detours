@@ -8,6 +8,7 @@ import Meta from "../components/Head";
 import { itineraryReducer } from "../redux/reducers";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import SavedForYou from "../components/Itinerary/SavedForYou";
+import SurveyAnswer from "../components/Itinerary/SurveyAnswer"
 import SavedItinerariesDetails from "../components/Itinerary/SavedItinerariesDetails";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,8 +73,14 @@ const MyItineraries = () => {
             />
           </Grid>
           <Grid sm={9} className={classes.savedItinerariesDetails}>
-            <SavedItinerariesDetails />
-            <SavedItinerariesDetails />
+            {selectedIndex === 0 ? (
+              <>
+                <SavedItinerariesDetails />
+                <SavedItinerariesDetails />
+              </>
+            ) : (
+              <SurveyAnswer />
+            )}
           </Grid>
         </Grid>
       </Container>
