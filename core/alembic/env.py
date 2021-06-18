@@ -1,3 +1,4 @@
+"""Alembic migration configuration module."""
 from logging.config import fileConfig
 
 from alembic import context
