@@ -67,7 +67,7 @@ const SurveyAnswer = () => {
       </Typography>
       <List component="ol">
         <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1" a>
+          <Box display="flex" flex="1">
             <ListItemText
               className={classes.listItemText}
               primary="1. What is your age and gender?"
@@ -80,7 +80,7 @@ const SurveyAnswer = () => {
         </ListItem>
         <Divider />
         <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1" a>
+          <Box display="flex" flex="1">
             <ListItemText
               className={classes.listItemText}
               primary="2. What do you like to do when you travel?"
@@ -93,7 +93,7 @@ const SurveyAnswer = () => {
         </ListItem>
         <Divider />
         <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1" a>
+          <Box display="flex" flex="1">
             <ListItemText
               className={classes.listItemText}
               primary="3. Which museums do you enjoy the most?"

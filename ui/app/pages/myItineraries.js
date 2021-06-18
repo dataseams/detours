@@ -7,9 +7,9 @@ import Grid from "@material-ui/core/Grid";
 import Meta from "../components/Head";
 import { itineraryReducer } from "../redux/reducers";
 import LogoNavigationBar from "../components/LogoNavigationBar";
-import SavedForYou from "../components/Itinerary/SavedForYou";
-import SurveyAnswer from "../components/Itinerary/SurveyAnswer";
-import SavedItinerariesDetails from "../components/Itinerary/SavedItinerariesDetails";
+import SavedForYou from "../components/MyItineraries/SavedForYou";
+import SurveyAnswer from "../components/MyItineraries/SurveyAnswers";
+import SavedItinerariesDetails from "../components/MyItineraries/SavedItinerariesDetails";
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: "180px",
@@ -66,13 +66,13 @@ const MyItineraries = () => {
           </Typography>
         </Box>
         <Grid container className={classes.pageBody}>
-          <Grid sm={3} className={classes.savedForYou}>
+          <Grid item sm={3} className={classes.savedForYou}>
             <SavedForYou
               selectedIndex={selectedIndex}
               handleListItemClick={handleListItemClick}
             />
           </Grid>
-          <Grid sm={9} className={classes.savedItinerariesDetails}>
+          <Grid item sm={9} className={classes.savedItinerariesDetails}>
             {selectedIndex === 0 ? (
               <>
                 <SavedItinerariesDetails />
