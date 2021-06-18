@@ -19,14 +19,14 @@ dependencies:
   - jupyterlab=3.0.14 #dev
   - pandas=1.2.4 #prod
   - pep8-naming=0.8.2 #dev
-  - pip=21.1.2 #dev
+  - pip=21.1.2
   - promise=2.3 #prod
   - psycopg2=2.8.6 #prod
   - pytest-asyncio=0.15.1 #dev
   - pytest-benchmark=3.4.1 #dev
   - pytest-cov=2.11.1 #dev
   - pytest=6.2.4 #dev
-  - python=3.9.5 #dev
+  - python=3.9.5
   - pytz=2021.1 #prod
   - pyyaml=5.4.1 #dev
   - requests=2.25.1 #prod
