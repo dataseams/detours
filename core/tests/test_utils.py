@@ -4,7 +4,7 @@ from unittest import TestCase
 from core_api import utils
 
 
-class TextItineraryTag(TestCase):
+class TestItineraryTag(TestCase):
     def test_format_dining_happy_path(self):
         tag = "Hole-in-the-wall"
         formatted_tag = utils.ItineraryTag.format_dining(tag)
@@ -24,3 +24,17 @@ class TextItineraryTag(TestCase):
         tag = "where locals hang"
         formatted_tag = utils.ItineraryTag.format_dining(tag)
         self.assertEqual(formatted_tag, "Where locals hang dining")
+
+
+class TestSurveyResponseID(TestCase):
+    def test_encode_happy_path(self):
+        int_id = 1
+        expected_b64_id = "U3VydmV5UmVzcG9uc2U6MQ=="
+        b64_id = utils.SurveyResponseID.encode(int_id)
+        self.assertEqual(b64_id, expected_b64_id)
+
+    def test_decode_happy_path(self):
+        b64_id = "U3VydmV5UmVzcG9uc2U6MQ=="
+        int_id = utils.SurveyResponseID.decode(b64_id)
+        expected_int_id = 1
+        self.assertEqual(int_id, expected_int_id)
