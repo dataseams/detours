@@ -38,3 +38,9 @@ class TestSurveyResponseID(TestCase):
         int_id = utils.SurveyResponseID.decode(b64_id)
         expected_int_id = 1
         self.assertEqual(int_id, expected_int_id)
+
+    def test_decode_from_binary(self):
+        b64_id = b"U3VydmV5UmVzcG9uc2U6MQ=="
+        int_id = utils.SurveyResponseID.decode(b64_id)
+        expected_int_id = 1
+        self.assertEqual(int_id, expected_int_id)
