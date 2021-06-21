@@ -1,5 +1,5 @@
 """TripPlan schema."""
-from graphene import relay, String, Date, List, ObjectType
+from graphene import Date, List, ObjectType, String, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
 from .. import models
@@ -21,10 +21,10 @@ class TripPlan(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
-class UserTripPlans(ObjectType):
-    """List of trip plan information for a user's my itinerary page."""
+class UserTripPlan(ObjectType):
+    """A trip plan object for a user's my itinerary page."""
 
-    what_is_happening = String(
+    survey_response_id = String(
         description="Base64 encoding of the survey response id"
     )
     city = String(description="City, State (abbreviated)")
@@ -34,3 +34,9 @@ class UserTripPlans(ObjectType):
         String,
         description="Material icon codes for the first five trip activities",
     )
+
+
+class UserTripPlans(ObjectType):
+    """List of trip plan information for a user's my itinerary page."""
+
+    data = List(UserTripPlan)
