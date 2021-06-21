@@ -1,6 +1,7 @@
 """Utility logic."""
 import base64
 import re
+from typing import Union
 
 
 class ItineraryTag:
@@ -31,7 +32,7 @@ class SurveyResponseID:
     """Survey Response ID encode/decode."""
 
     @staticmethod
-    def decode(id: str):
+    def decode(id: Union[str, bytes]):
         """Decode and extract integer survey response id from base64 encoding.
 
         Parameters
@@ -45,9 +46,8 @@ class SurveyResponseID:
         int
             Integer survey response id
         """
-        return int(
-            base64.b64decode(id.encode("utf-8")).decode("utf-8").split(":")[1]
-        )
+        byte_id = id.encode("utf-8") if isinstance(id, str) else id
+        return int(base64.b64decode(byte_id).decode("utf-8").split(":")[1])
 
     @staticmethod
     def encode(id: int):

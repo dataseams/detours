@@ -55,11 +55,7 @@ class Query(ObjectType):
         root, info, surveyResponseNodeId
     ):
         """Query trip plan by survey response id."""
-        survey_response_id = int(
-            base64.b64decode(surveyResponseNodeId)
-            .decode("utf-8")
-            .split(":")[-1]
-        )
+        survey_response_id = SurveyResponseID.decode(surveyResponseNodeId)
 
         query = TripPlan.get_query(info)
         trip_plans = (
@@ -80,11 +76,7 @@ class Query(ObjectType):
         Return True if the survey response has a save user email on record,
         otherwise return False.
         """
-        survey_response_id = int(
-            base64.b64decode(surveyResponseNodeId)
-            .decode("utf-8")
-            .split(":")[-1]
-        )
+        survey_response_id = SurveyResponseID.decode(surveyResponseNodeId)
         query = SurveyResponse.get_query(info)
         survey_response = query.get(survey_response_id)
         traveler_email = survey_response.traveler_email
