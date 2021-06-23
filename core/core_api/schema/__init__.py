@@ -83,6 +83,18 @@ class Query(ObjectType):
         result = True if traveler_email else False
         return result
 
+    get_last_survey_response = Field(SurveyResponse, travelerEmail=String())
+
+    def resolve_get_last_survey_response(root, info, travelerEmail):
+        """Return last survey response object for a traveler."""
+        last_survey_response = (
+            db_session.query(models.SurveyResponse)
+            .filter_by(traveler_email=travelerEmail)
+            .order_by(models.SurveyResponse.time_stamp.desc())
+            .first()
+        )
+        return last_survey_response
+
     get_user_trip_plans = Field(UserTripPlans, travelerEmail=String())
 
     def resolve_get_user_trip_plans(root, info, travelerEmail):
