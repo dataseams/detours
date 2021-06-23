@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase/app";
+import { useRouter } from "next/router";
 import "firebase/auth";
 import "isomorphic-unfetch";
 import { Button, Divider, Avatar } from "@material-ui/core";
@@ -44,6 +45,7 @@ export async function getServerSideProps({ req, query }) {
 const Auth = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleMenu = (event) => {
@@ -145,7 +147,9 @@ const Auth = (props) => {
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
             <MenuItem>My profile</MenuItem>
-            <MenuItem>My itineraries</MenuItem>
+            <MenuItem onClick={() => router.push("/myItineraries")}>
+              My itineraries
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
         </div>
