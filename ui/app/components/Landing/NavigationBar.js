@@ -16,6 +16,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import PropTypes from "prop-types";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { Link } from "react-scroll";
+import { Link as MuiLink } from "@material-ui/core";
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
@@ -170,6 +171,17 @@ function MobileToolbar(props) {
           </ListItem>
         </Link>
         <Divider variant="middle" classes={dividerClasses} />
+        <MuiLink
+          href="myItineraries"
+          underline="none"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItem button alignItems="center">
+            <ListItemText />
+            <ListItemText classes={textclasses} primary={"My Itineraries"} />
+          </ListItem>
+        </MuiLink>
+        <Divider variant="middle" classes={dividerClasses} />
         <ListItem />
         <ListItem />
         <ListItem>
@@ -235,6 +247,10 @@ function NavigationBar(props) {
             >
               <NavigationBarButton name="Pricing" />
             </Link>
+            <MuiLink href="myItineraries" underline="none">
+              <NavigationBarButton name="My Itineraries" />
+            </MuiLink>
+
             <AuthMenu />
             <GetStartedButton />
           </Toolbar>

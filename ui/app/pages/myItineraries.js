@@ -74,10 +74,7 @@ const MyItineraries = () => {
           </Grid>
           <Grid item sm={9} className={classes.savedItinerariesDetails}>
             {selectedIndex === 0 ? (
-              <>
-                <SavedItinerariesDetails />
-                <SavedItinerariesDetails />
-              </>
+              <SavedItinerariesDetails />
             ) : (
               <SurveyAnswer />
             )}
