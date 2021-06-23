@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import {
   AppBar,
   Toolbar,
@@ -116,6 +117,7 @@ function MobileToolbar(props) {
   const textclasses = useTextStyles();
   const toolbarClasses = useMobileToolbarStyles();
   const ClearClasses = useClearButtonStyles();
+  const userEmail = useSelector((state) => state.user.email);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -171,17 +173,26 @@ function MobileToolbar(props) {
           </ListItem>
         </Link>
         <Divider variant="middle" classes={dividerClasses} />
-        <MuiLink
-          href="myItineraries"
-          underline="none"
-          onClick={toggleDrawer(anchor, false)}
-        >
-          <ListItem button alignItems="center">
-            <ListItemText />
-            <ListItemText classes={textclasses} primary={"My Itineraries"} />
-          </ListItem>
-        </MuiLink>
-        <Divider variant="middle" classes={dividerClasses} />
+        {userEmail ? (
+          <>
+            <MuiLink
+              href="myItineraries"
+              underline="none"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <ListItem button alignItems="center">
+                <ListItemText />
+                <ListItemText
+                  classes={textclasses}
+                  primary={"My Itineraries"}
+                />
+              </ListItem>
+            </MuiLink>
+            <Divider variant="middle" classes={dividerClasses} />
+          </>
+        ) : (
+          ""
+        )}
         <ListItem />
         <ListItem />
         <ListItem>
@@ -247,10 +258,6 @@ function NavigationBar(props) {
             >
               <NavigationBarButton name="Pricing" />
             </Link>
-            <MuiLink href="myItineraries" underline="none">
-              <NavigationBarButton name="My Itineraries" />
-            </MuiLink>
-
             <AuthMenu />
             <GetStartedButton />
           </Toolbar>
