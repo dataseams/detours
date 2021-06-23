@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -65,8 +66,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SavedItinerariesDetails = ({ user }) => {
   const classes = useStyles();
-  const UserEmail = user && user.email && user.email;
-  const variables = { travelerEmail: UserEmail && UserEmail };
+  const router = useRouter();
+  const UserEmail = user.email;
+  const variables = { travelerEmail: UserEmail };
   const { data } = useQuery(GET_USER_TRIP_PLAN, {
     variables: variables,
     skip: !UserEmail,
@@ -83,6 +85,7 @@ const SavedItinerariesDetails = ({ user }) => {
     <>
       {userTripPlan?.map((plan) => {
         const icons = plan.firstFiveIcons;
+        const viewItineraries = `/itinerary?surveyId=${plan.surveyResponseId}`;
 
         return (
           <Box key={plan.surveyResponseId} className={classes.listBorders}>
@@ -93,6 +96,7 @@ const SavedItinerariesDetails = ({ user }) => {
               </Typography>
               <Hidden smDown>
                 <Button
+                  onClick={() => router.push(viewItineraries)}
                   className={classes.button}
                   endIcon={<TrendingFlatIcon />}
                 >
@@ -116,7 +120,11 @@ const SavedItinerariesDetails = ({ user }) => {
             </Box>
 
             <Hidden mdUp>
-              <Button className={classes.button} endIcon={<TrendingFlatIcon />}>
+              <Button
+                onClick={() => router.push(viewItineraries)}
+                className={classes.button}
+                endIcon={<TrendingFlatIcon />}
+              >
                 View itinerary
               </Button>
             </Hidden>
