@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import "firebase/auth";
 import "isomorphic-unfetch";
-import { Button, Divider, Avatar } from "@material-ui/core";
+import { Button, Divider, Avatar, Box } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -109,13 +109,16 @@ const Auth = (props) => {
   const handleLogout = (props) => {
     firebase.auth().signOut();
   };
-
+  const goToMyItinerariesPage = () => {
+    setAnchorEl(null);
+    router.push("/myItineraries");
+  };
   console.log("User: " + userEmail);
 
   return (
-    <div>
+    <Box>
       {userEmail ? (
-        <div>
+        <Box>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -132,33 +135,22 @@ const Auth = (props) => {
           <Menu
             id="menu-appbar"
             anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
             open={open}
             onClose={handleClose}
           >
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
             <MenuItem>My profile</MenuItem>
-            <MenuItem onClick={() => router.push("/myItineraries")}>
-              My itineraries
-            </MenuItem>
+            <MenuItem onClick={goToMyItinerariesPage}>My itineraries</MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
-        </div>
+        </Box>
       ) : (
         <Button onClick={handleLogin} classes={{ label: classes.authButton }}>
           Log in
         </Button>
       )}
-    </div>
+    </Box>
   );
 };
 
