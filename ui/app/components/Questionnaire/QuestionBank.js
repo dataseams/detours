@@ -109,7 +109,9 @@ function QuestionComp(props) {
           <p className={classes.question}>
             What do you like to do when you travel?
           </p>
-          <p>Note: Atleast 2 answers are required before you can move on.</p>
+          <p>
+            <i>Note: choose at least two options.</i>
+          </p>
           <GeneralPreferencesField />
         </div>
       </div>
