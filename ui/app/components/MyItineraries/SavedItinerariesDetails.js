@@ -1,9 +1,13 @@
 import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { useRouter } from "next/router";
+import { connect } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import TrendingFlatIcon from "@material-ui/icons/TrendingFlat";
 import Hidden from "@material-ui/core/Hidden";
+import GET_USER_TRIP_PLAN from "../../utils/queries/GetUserTripPlan";
 
 const useStyles = makeStyles((theme) => ({
   listBorders: {
@@ -60,60 +64,77 @@ const useStyles = makeStyles((theme) => ({
     background: `repeating-linear-gradient(to right,${theme.palette.primary.main} 0,${theme.palette.primary.main} 9px,transparent 9px,transparent 15px)`,
   },
 }));
-const SavedItinerariesDetails = () => {
+const SavedItinerariesDetails = ({ user }) => {
   const classes = useStyles();
+  const router = useRouter();
+  const UserEmail = user.email;
+  const variables = { travelerEmail: UserEmail };
+  const { data } = useQuery(GET_USER_TRIP_PLAN, {
+    variables: variables,
+    skip: !UserEmail,
+  });
+  const userTripPlan = data && data.getUserTripPlans.data;
+  const convertDate = (currentDate) => {
+    const date = new Date(currentDate);
+    const month = date.toLocaleString("default", { month: "long" });
+    const day = date.toLocaleString("default", { day: "2-digit" });
 
+    return `${month} ${day}`;
+  };
   return (
-    <Box className={classes.listBorders}>
-      <Typography className={classes.heading}>Paris, France</Typography>
-      <Box display="flex" justifyContent="space-between">
-        <Typography className={classes.dates}>
-          November 24 - December 2
-        </Typography>
-        <Hidden smDown>
-          <Button className={classes.button} endIcon={<TrendingFlatIcon />}>
-            View itinerary
-          </Button>
-        </Hidden>
-      </Box>
-      <Box display="flex" my={[1, 0, 0, 0]}>
-        <Box display="flex" alignItems="center">
-          <Box className={classes.iconContainer} border={2}>
-            <i className={`material-icons ${classes.icon}`}>restaurant</i>
+    <>
+      {userTripPlan?.map((plan) => {
+        const icons = plan.firstFiveIcons;
+        const viewItineraries = `/itinerary?surveyId=${plan.surveyResponseId}`;
+
+        return (
+          <Box key={plan.surveyResponseId} className={classes.listBorders}>
+            <Typography className={classes.heading}>{plan.city}</Typography>
+            <Box display="flex" justifyContent="space-between">
+              <Typography className={classes.dates}>
+                {convertDate(plan.startDate)} - {convertDate(plan.endDate)}
+              </Typography>
+              <Hidden smDown>
+                <Button
+                  onClick={() => router.push(viewItineraries)}
+                  className={classes.button}
+                  endIcon={<TrendingFlatIcon />}
+                >
+                  View itinerary
+                </Button>
+              </Hidden>
+            </Box>
+            <Box display="flex" my={[1, 0, 0, 0]}>
+              {icons?.map((icon, index) => (
+                <Box key={index} display="flex" alignItems="center">
+                  <Box className={classes.iconContainer} border={2}>
+                    <i className={`material-icons ${classes.icon}`}>{icon}</i>
+                  </Box>
+                  {index + 1 !== icons.length ? (
+                    <Box className={classes.line}></Box>
+                  ) : (
+                    ""
+                  )}{" "}
+                </Box>
+              ))}
+            </Box>
+
+            <Hidden mdUp>
+              <Button
+                onClick={() => router.push(viewItineraries)}
+                className={classes.button}
+                endIcon={<TrendingFlatIcon />}
+              >
+                View itinerary
+              </Button>
+            </Hidden>
           </Box>
-          <Box className={classes.line}></Box>
-        </Box>
-        <Box display="flex" alignItems="center">
-          <Box className={classes.iconContainer} border={2}>
-            <i className={`material-icons ${classes.icon}`}>restaurant</i>
-          </Box>
-          <Box className={classes.line}></Box>
-        </Box>
-        <Box display="flex" alignItems="center">
-          <Box className={classes.iconContainer} border={2}>
-            <i className={`material-icons ${classes.icon}`}>restaurant</i>
-          </Box>
-          <Box className={classes.line}></Box>
-        </Box>
-        <Box display="flex" alignItems="center">
-          <Box className={classes.iconContainer} border={2}>
-            <i className={`material-icons ${classes.icon}`}>restaurant</i>
-          </Box>
-          <Box className={classes.line}></Box>
-        </Box>
-        <Box display="flex" alignItems="center">
-          <Box className={classes.iconContainer} border={2}>
-            <i className={`material-icons ${classes.icon}`}>restaurant</i>
-          </Box>
-        </Box>
-      </Box>
-      <Hidden mdUp>
-        <Button className={classes.button} endIcon={<TrendingFlatIcon />}>
-          View itinerary
-        </Button>
-      </Hidden>
-    </Box>
+        );
+      })}
+    </>
   );
 };
-
-export default SavedItinerariesDetails;
+function mapStateToProps(state) {
+  return state;
+}
+export default connect(mapStateToProps)(SavedItinerariesDetails);

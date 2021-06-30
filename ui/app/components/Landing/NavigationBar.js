@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import {
   AppBar,
   Toolbar,
@@ -16,6 +17,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import PropTypes from "prop-types";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { Link } from "react-scroll";
+import { Link as MuiLink } from "@material-ui/core";
 import NavigationBarButton from "./NavigationBarButton";
 import GetStartedButton from "./GetStartedButton";
 import LogoButton from "../LogoButton";
@@ -115,6 +117,7 @@ function MobileToolbar(props) {
   const textclasses = useTextStyles();
   const toolbarClasses = useMobileToolbarStyles();
   const ClearClasses = useClearButtonStyles();
+  const userEmail = useSelector((state) => state.user.email);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -170,6 +173,26 @@ function MobileToolbar(props) {
           </ListItem>
         </Link>
         <Divider variant="middle" classes={dividerClasses} />
+        {userEmail ? (
+          <>
+            <MuiLink
+              href="myItineraries"
+              underline="none"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <ListItem button alignItems="center">
+                <ListItemText />
+                <ListItemText
+                  classes={textclasses}
+                  primary={"My Itineraries"}
+                />
+              </ListItem>
+            </MuiLink>
+            <Divider variant="middle" classes={dividerClasses} />
+          </>
+        ) : (
+          ""
+        )}
         <ListItem />
         <ListItem />
         <ListItem>
