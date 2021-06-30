@@ -140,7 +140,7 @@ const Auth = (props) => {
           >
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
-            <MenuItem>My profile</MenuItem>
+            <MenuItem>My account</MenuItem>
             <MenuItem onClick={goToMyItinerariesPage}>My itineraries</MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
