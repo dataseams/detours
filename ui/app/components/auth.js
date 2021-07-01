@@ -140,7 +140,9 @@ const Auth = (props) => {
           >
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
-            <MenuItem>My account</MenuItem>
+            <MenuItem onClick={() => router.push("/myAccount")}>
+              My account
+            </MenuItem>
             <MenuItem onClick={goToMyItinerariesPage}>My itineraries</MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
