@@ -6,7 +6,7 @@ import { Container, Typography, Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Meta from "../components/Head";
 import { itineraryReducer } from "../redux/reducers";
-import NavigationBar from "../components/Landing/NavigationBar";
+import LogoNavigationBar from "../components/LogoNavigationBar";
 import General from "../components/MyAccount/General";
 import PersonalInfo from "../components/MyAccount/PersonalInfo";
 
@@ -52,15 +52,11 @@ const MyAccount = () => {
   const store = createStore(itineraryReducer);
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [width, setWidth] = React.useState(null);
 
-  useEffect(() => {
-    setWidth(window.innerWidth);
-  }, []);
   return (
     <Provider store={store}>
       <Meta />
-      <NavigationBar isMobile={width <= 500} />
+      <LogoNavigationBar />
       <Container className={classes.root}>
         <Box>
           <Typography className={classes.pageHeading}>Settings</Typography>

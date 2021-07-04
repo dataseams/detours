@@ -113,6 +113,10 @@ const Auth = (props) => {
     setAnchorEl(null);
     router.push("/myItineraries");
   };
+  const goToMyAccountPage = () => {
+    setAnchorEl(null);
+    router.push("/myAccount");
+  };
   console.log("User: " + userEmail);
 
   return (
@@ -140,9 +144,7 @@ const Auth = (props) => {
           >
             <MenuItem disabled={true}>{userDisplayName}</MenuItem>
             <Divider />
-            <MenuItem onClick={() => router.push("/myAccount")}>
-              My account
-            </MenuItem>
+            <MenuItem onClick={goToMyAccountPage}>My account</MenuItem>
             <MenuItem onClick={goToMyItinerariesPage}>My itineraries</MenuItem>
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </Menu>
