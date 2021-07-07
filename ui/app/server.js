@@ -86,6 +86,7 @@ app.prepare().then(() => {
         },
       ],
       mode: "payment",
+      client_reference_id: request.body.surveyId,
       success_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?success=true`,
       cancel_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?canceled=true`,
     });

@@ -33,3 +33,4 @@ dependencies:
   - rope=0.19.0 #prod
   - snapshottest=0.5.1 #dev
   - wordcloud=1.8.1 #dev
+  - stripe=2.29.3 #prod
