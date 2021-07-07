@@ -63,22 +63,35 @@ def webhook():
         checkout_session = event["data"][
             "object"
         ]  # contains a checkout_session
-        logging.info('checkout session for {} completed'.format(checkout_session['client_reference_id']))
+        logging.info(
+            "checkout session for {} completed".format(
+                checkout_session["client_reference_id"]
+            )
+        )
         if checkout_session["payment_status"] == "paid":
-            logging.info('Payment for {} succeeded'.format(checkout_session['client_reference_id']))
+            logging.info(
+                "Payment for {} succeeded".format(
+                    checkout_session["client_reference_id"]
+                )
+            )
             if checkout_session["client_reference_id"]:
                 mark_survey_as_paid(
                     checkout_session["client_reference_id"],
                     checkout_session["id"],
                 )
             else:
-                logging.info('Invalid client_reference_id for session {}'.format(checkout_session['id']))
+                logging.info(
+                    "Invalid client_reference_id for session {}".format(
+                        checkout_session["id"]
+                    )
+                )
                 return jsonify(success=False)
 
     else:
         # Unexpected event type
-        logging.warn('Unhandled event type {}'.format(event['type'] if event else None))
-
+        logging.warn(
+            "Unhandled event type {}".format(event["type"] if event else None)
+        )
 
     return jsonify(success=True)
 
