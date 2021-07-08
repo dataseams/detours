@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "25px",
   },
   listItem: {
-    paddingLeft: "0px",
+    padding: "0px",
   },
   listItemText: {
     "& .MuiListItemText-primary": {
