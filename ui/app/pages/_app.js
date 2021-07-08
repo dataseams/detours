@@ -32,7 +32,7 @@ class DetoursApp extends App {
           <CssBaseline />
           <ApolloProvider client={apollo}>
             <Component {...pageProps} client={apollo} />
-            <CookieBanner/>
+            <CookieBanner />
           </ApolloProvider>
         </ThemeProvider>
       </React.Fragment>
