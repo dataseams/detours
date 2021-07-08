@@ -189,6 +189,17 @@ function MobileToolbar(props) {
               </ListItem>
             </MuiLink>
             <Divider variant="middle" classes={dividerClasses} />
+            <MuiLink
+              href="myAccount"
+              underline="none"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <ListItem button alignItems="center">
+                <ListItemText />
+                <ListItemText classes={textclasses} primary={"My Account"} />
+              </ListItem>
+            </MuiLink>
+            <Divider variant="middle" classes={dividerClasses} />
           </>
         ) : (
           ""
