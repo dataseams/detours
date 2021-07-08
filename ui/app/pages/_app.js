@@ -5,6 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import { ApolloProvider } from "@apollo/react-hooks";
+import CookieBanner from "../components/CookieBanner";
 
 import withData from "../utils/apolloclient";
 
@@ -31,6 +32,7 @@ class DetoursApp extends App {
           <CssBaseline />
           <ApolloProvider client={apollo}>
             <Component {...pageProps} client={apollo} />
+            <CookieBanner/>
           </ApolloProvider>
         </ThemeProvider>
       </React.Fragment>
