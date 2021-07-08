@@ -68,7 +68,11 @@ const General = ({ selectedIndex, handleListItemClick }) => {
           />
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem
+          button
+          selected={selectedIndex === 2}
+          onClick={(event) => handleListItemClick(event, 2)}
+        >
           <ListItemIcon>
             <NotInterestedIcon className={classes.icon} />
           </ListItemIcon>

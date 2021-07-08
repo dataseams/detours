@@ -10,6 +10,7 @@ import LogoNavigationBar from "../components/LogoNavigationBar";
 import General from "../components/MyAccount/General";
 import PersonalInfo from "../components/MyAccount/PersonalInfo";
 import Notifications from "../components/MyAccount/Notifications";
+import DeleteAccount from "../components/MyAccount/DeleteAccount";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,7 +73,13 @@ const MyAccount = () => {
             />
           </Grid>
           <Grid item sm={9} className={classes.personalInfo}>
-            {selectedIndex === 0 ? <PersonalInfo /> : <Notifications />}{" "}
+            {selectedIndex === 0 ? (
+              <PersonalInfo />
+            ) : selectedIndex === 1 ? (
+              <Notifications />
+            ) : (
+              <DeleteAccount />
+            )}{" "}
           </Grid>
         </Grid>
       </Container>

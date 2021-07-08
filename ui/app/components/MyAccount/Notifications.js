@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     textTransform: "capitalize",
-    padding: "15px 30px",
+    padding: "10px 30px",
     fontWeight: "400",
   },
 }));
