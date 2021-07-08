@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SavedForYou = ({ selectedIndex }) => {
+const General = ({ selectedIndex, handleListItemClick }) => {
   const classes = useStyles();
 
   return (
@@ -40,7 +40,11 @@ const SavedForYou = ({ selectedIndex }) => {
           <ListItemText className={classes.listItemsText} primary="GENERAL" />
         </ListItem>
         <Divider />
-        <ListItem button selected={selectedIndex === 0}>
+        <ListItem
+          button
+          selected={selectedIndex === 0}
+          onClick={(event) => handleListItemClick(event, 0)}
+        >
           <ListItemIcon>
             <AccountCircleIcon className={classes.icon} />
           </ListItemIcon>
@@ -50,7 +54,11 @@ const SavedForYou = ({ selectedIndex }) => {
           />
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem
+          button
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1)}
+        >
           <ListItemIcon>
             <NotificationsIcon className={classes.icon} />
           </ListItemIcon>
@@ -74,4 +82,4 @@ const SavedForYou = ({ selectedIndex }) => {
   );
 };
 
-export default SavedForYou;
+export default General;
