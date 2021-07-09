@@ -83,13 +83,13 @@ const SurveyAnswer = ({ user }) => {
     }
   }, [data]);
   const loopThroughObjectValues = (obj) => {
-    let value = "";
-    for (var key in obj) {
+    let array = [];
+    for (let key in obj) {
       if (obj[key]) {
-        value = `${value} ${key},`;
+        array.push(key);
       }
     }
-    return value;
+    return array.join();
   };
   return (
     <Box className={classes.listBorders}>
@@ -111,7 +111,9 @@ const SurveyAnswer = ({ user }) => {
               secondary={answers?.city}
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Button disabled className={classes.button}>
+                Edit
+              </Button>
             </Box>{" "}
           </Box>
         </ListItem>
@@ -125,7 +127,9 @@ const SurveyAnswer = ({ user }) => {
                ${convertDate(answers?.travelDates?.[1])}`}
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Button disabled className={classes.button}>
+                Edit
+              </Button>
             </Box>
           </Box>
         </ListItem>
@@ -138,7 +142,9 @@ const SurveyAnswer = ({ user }) => {
               secondary={answers?.companion}
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Button disabled className={classes.button}>
+                Edit
+              </Button>
             </Box>{" "}
           </Box>
         </ListItem>
@@ -151,7 +157,9 @@ const SurveyAnswer = ({ user }) => {
               secondary={loopThroughObjectValues(answers?.generalPreferences)}
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Button disabled className={classes.button}>
+                Edit
+              </Button>
             </Box>
           </Box>
         </ListItem>
@@ -165,7 +173,9 @@ const SurveyAnswer = ({ user }) => {
               secondary={answers?.dining?.pricePoint}
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Button disabled className={classes.button}>
+                Edit
+              </Button>
             </Box>
           </Box>
         </ListItem>
