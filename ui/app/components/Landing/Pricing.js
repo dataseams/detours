@@ -95,7 +95,7 @@ function Pricing(props) {
         component="h2"
         color="primary"
       >
-        $4
+        $10
       </Typography>
       <Typography className={classes.priceUnit} variant="h5" color="primary">
         per itinerary
@@ -104,7 +104,7 @@ function Pricing(props) {
         We believe that affordable and enjoyable travel should be accessible for
         anyone. We're also in beta. For these reasons, we've decided to make a
         full travel itinerary, regardless of destination or length of vacation,
-        available for a one-time fee of $4.
+        available for a one-time fee of $10.
       </Typography>
       <br />
       <Typography className={classes.body}>
@@ -123,7 +123,7 @@ function Pricing(props) {
             We believe that affordable and enjoyable travel should be accessible
             for anyone. We're also in beta. For these reasons, we've decided to
             make a full travel itinerary, regardless of destination or length of
-            vacation, available for a one-time fee of $4.
+            vacation, available for a one-time fee of $10.
             <br></br>
             <br></br>
             This small fee will save you an average of 20 to 30 hours of
@@ -138,7 +138,7 @@ function Pricing(props) {
             component="h2"
             color="primary"
           >
-            $4
+            $10
           </Typography>
           <Typography
             className={classes.priceUnit}
