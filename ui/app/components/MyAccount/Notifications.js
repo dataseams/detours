@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import Switch from "@material-ui/core/Switch";
 import { Box, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "25px",
   },
   listItem: {
-    paddingLeft: "0px",
+    padding: "0px",
   },
   listItemText: {
     "& .MuiListItemText-primary": {
@@ -40,30 +41,41 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    "& .MuiButton-label": {
-      color: theme.palette.primary.light,
-      textTransform: "none",
-    },
-    alignItems: "flex-start",
+    textTransform: "capitalize",
+    padding: "15px 30px",
+    fontWeight: "400",
   },
 }));
 
-const PersonalInfo = () => {
+const Notifications = () => {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
 
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
   return (
     <Box className={classes.listBorders}>
-      <Typography className={classes.heading}>Personal Info</Typography>
+      <Typography className={classes.heading}>Notifications</Typography>
       <List>
         <ListItem className={classes.listItem}>
           <Box display="flex" flex="1">
             <ListItemText
               className={classes.listItemText}
-              primary="Email Address"
-              secondary="sam@dataseams.com"
+              primary="Promotions and tips"
+              secondary="Receive promotions, product updates, surveys and more from Detourse."
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Switch
+                checked={state.checkedA}
+                onChange={handleChange}
+                color="primary"
+                name="checkedA"
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />{" "}
             </Box>{" "}
           </Box>
         </ListItem>
@@ -72,30 +84,29 @@ const PersonalInfo = () => {
           <Box display="flex" flex="1">
             <ListItemText
               className={classes.listItemText}
-              primary="Gender"
-              secondary="Male"
+              primary="Reminders"
+              secondary="Receive booking reminders, pricing notices, and other reminders related to your activities on Detourse."
             />
             <Box>
-              <Button className={classes.button}>Edit</Button>
+              <Switch
+                checked={state.checkedB}
+                onChange={handleChange}
+                color="primary"
+                name="checkedB"
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />{" "}
             </Box>
           </Box>
         </ListItem>
         <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="Age"
-              secondary="24"
-            />
-            <Box>
-              <Button className={classes.button}>Edit</Button>
-            </Box>{" "}
-          </Box>
-        </ListItem>
       </List>
+      <Box>
+        <Button variant="contained" color="primary" className={classes.button}>
+          Unsubscribe from All Emails
+        </Button>
+      </Box>
     </Box>
   );
 };
 
-export default PersonalInfo;
+export default Notifications;
