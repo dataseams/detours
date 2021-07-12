@@ -34,7 +34,7 @@ const General = ({ selectedIndex, handleListItemClick }) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.listBorders} mt={[2, 0, 0, 0]}>
+    <Box className={classes.listBorders}>
       <List component="nav" aria-label="main mailbox folders">
         <ListItem>
           <ListItemText className={classes.listItemsText} primary="GENERAL" />

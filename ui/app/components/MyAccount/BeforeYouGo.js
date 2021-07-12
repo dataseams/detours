@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.typography.color,
     fontWeight: "500",
   },
-
   button: {
     textTransform: "capitalize",
     padding: "10px 30px",
@@ -27,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BeforeYouGo = ({handleListItemClick={handleListItemClick}}) => {
+const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   return (
     <Box>
       <Typography className={classes.heading}>Before you go...</Typography>
@@ -95,7 +94,6 @@ const BeforeYouGo = ({handleListItemClick={handleListItemClick}}) => {
           className={classes.button}
           fullWidth
           onClick={(event) => handleListItemClick(event, 2)}
-
         >
           Delete my account
         </Button>
