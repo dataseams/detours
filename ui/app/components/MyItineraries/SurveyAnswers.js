@@ -48,11 +48,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.typography.color,
   },
   button: {
-    "& .MuiButton-label": {
-      color: theme.palette.primary.light,
-      textTransform: "none",
-    },
     alignItems: "flex-start",
+    color: theme.palette.primary.light,
   },
 }));
 
@@ -89,7 +86,7 @@ const SurveyAnswer = ({ user }) => {
         array.push(key);
       }
     }
-    return array.join();
+    return array.join(", ");
   };
   return (
     <Box className={classes.listBorders}>
