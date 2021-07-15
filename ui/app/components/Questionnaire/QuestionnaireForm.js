@@ -80,6 +80,11 @@ class QuestionnaireForm extends React.Component {
     setTimeout(() => {
       this.setState({ disabledSubmit: true });
     }, 0);
+    setTimeout(() => {
+      if(this.props.errorMessage){
+        this.setState({ disabledSubmit: false });
+      }
+    }, 200);
   };
   disableNext(invalid, index, requiredFields) {
     if (requiredFields) {
@@ -106,15 +111,22 @@ class QuestionnaireForm extends React.Component {
     });
   }
   render() {
-    const { handleSubmit, classes, invalid, form } = this.props;
+    const { handleSubmit, classes, invalid, form, errorMessage } = this.props;
     const { index, hiddenNext, disabledBack, disabledSubmit } = this.state;
     const requiredFields = form.questionnaire.syncErrors;
+
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div>
           <QuestionComp index={index} handleChange={this.props.handleChange} />
         </div>
-
+        {errorMessage ? (
+          <div className={classes.errorsMessage}>
+            An error occurred while processing your request. Please try again.
+          </div>
+        ) : (
+          ""
+        )}
         <div className={classes.surveyButtons}>
           <Back toggle={(e) => this.toggleBack(e)} active={disabledBack} />
           <Next
