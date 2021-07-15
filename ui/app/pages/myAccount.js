@@ -9,6 +9,8 @@ import { itineraryReducer } from "../redux/reducers";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import General from "../components/MyAccount/General";
 import PersonalInfo from "../components/MyAccount/PersonalInfo";
+import Notifications from "../components/MyAccount/Notifications";
+import DeleteAccount from "../components/MyAccount/DeleteAccount";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +54,9 @@ const MyAccount = () => {
   const store = createStore(itineraryReducer);
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
   return (
     <Provider store={store}>
       <Meta />
@@ -63,10 +67,19 @@ const MyAccount = () => {
         </Box>
         <Grid container className={classes.pageBody}>
           <Grid item sm={3} className={classes.general}>
-            <General selectedIndex={selectedIndex} />
+            <General
+              selectedIndex={selectedIndex}
+              handleListItemClick={handleListItemClick}
+            />
           </Grid>
           <Grid item sm={9} className={classes.personalInfo}>
-            <PersonalInfo />
+            {selectedIndex === 0 ? (
+              <PersonalInfo />
+            ) : selectedIndex === 1 ? (
+              <Notifications />
+            ) : (
+              <DeleteAccount />
+            )}{" "}
           </Grid>
         </Grid>
       </Container>
