@@ -19,7 +19,22 @@ const userReducer = (state = initialUserState, action) => {
       return state;
   }
 };
-
+const initialCookieState = {
+  cookieBannerConfirmed: false,
+};
+const cookiesReducer = (state = initialCookieState, action) => {
+  switch (action.type) {
+    case "UPDATE_COOKIE":
+      return {
+        ...state,
+        cookieBannerConfirmed: true,
+      };
+    default:
+      return state;
+  }
+};
+const cookieReducer = { cookie: cookiesReducer };
+const cookieReducers = combineReducers(cookieReducer);
 const itinararyReducers = { user: userReducer };
 const itineraryReducer = combineReducers(itinararyReducers);
 
@@ -29,4 +44,4 @@ const questionnaireReducers = {
 };
 const questionnaireReducer = combineReducers(questionnaireReducers);
 
-export { itineraryReducer, questionnaireReducer };
+export { itineraryReducer, questionnaireReducer, cookieReducers };
