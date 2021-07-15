@@ -100,7 +100,7 @@ function SurveyWithoutRedux(props) {
             createPlan({
               variables: {
                 travelerEmail: "",
-                json: JSON.stringify(values, null, 2),
+                json: "",
               },
             })
               .then((res) => {

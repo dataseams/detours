@@ -81,7 +81,7 @@ class QuestionnaireForm extends React.Component {
       this.setState({ disabledSubmit: true });
     }, 0);
     setTimeout(() => {
-      if(this.props.errorMessage){
+      if (this.props.errorMessage) {
         this.setState({ disabledSubmit: false });
       }
     }, 200);
