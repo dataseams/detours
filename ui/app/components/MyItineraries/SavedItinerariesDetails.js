@@ -73,7 +73,7 @@ const SavedItinerariesDetails = ({ user }) => {
     variables: variables,
     skip: !UserEmail,
   });
-  const userTripPlan = data && data.getUserTripPlans.data;
+  const userTripPlan = data?.getUserTripPlans?.data;
   const convertDate = (currentDate) => {
     const date = new Date(currentDate);
     const month = date.toLocaleString("default", { month: "long" });
