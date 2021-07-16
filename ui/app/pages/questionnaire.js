@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  errorsMessage: {
+    color: theme.palette.error.main,
+    marginTop: "30px",
+    marginBottom: "-30px",
+    textAlign: "center",
+  },
 }));
 
 const useMobileStyles = makeStyles((theme) => ({
@@ -57,6 +63,12 @@ const useMobileStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  errorsMessage: {
+    color: theme.palette.error.main,
+    marginTop: "30px",
+    marginBottom: "-30px",
+    textAlign: "center",
+  },
 }));
 
 const store = createStore(questionnaireReducer);
@@ -66,12 +78,13 @@ function SurveyWithoutRedux(props) {
   const QuestionnaireForm = require("../components/Questionnaire/QuestionnaireForm")
     .default;
   const router = useRouter();
-  const [createPlan, loading] = useMutation(CREATE_PLAN_MUTATION);
+  const [createPlan, { loading, error }] = useMutation(CREATE_PLAN_MUTATION);
   const travelerEmail = useSelector((state) => state.user.email) || "";
+  const errorMessage = error?.message;
   return (
     <div>
       <Meta />
-      {loading.loading ? (
+      {loading ? (
         <Backdrop className={classes.backdrop} open={true}>
           <CircularProgress />
         </Backdrop>
@@ -82,6 +95,7 @@ function SurveyWithoutRedux(props) {
       <div className={classes.surveyPage}>
         <QuestionnaireForm
           classes={classes}
+          errorMessage={errorMessage}
           onSubmit={(values) =>
             createPlan({
               variables: {
