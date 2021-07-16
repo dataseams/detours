@@ -80,7 +80,7 @@ app.prepare().then(() => {
               name: "Detours Itinerary View Access",
               images: ["https://i.imgur.com/EHyR2nP.png"],
             },
-            unit_amount: 400,
+            unit_amount: 1000,
           },
           quantity: 1,
         },
