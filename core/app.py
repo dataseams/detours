@@ -5,7 +5,7 @@ import os
 
 import stripe
 from core_api.config import db_session
-from core_api.models import mark_survey_as_paid, sync_db
+from core_api.models import SurveyResponse, sync_db
 from core_api.schema import schema
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -43,7 +43,7 @@ def webhook():
 
     try:
         event = json.loads(payload)
-    except:
+    except Exception as e:
         logging.warn("⚠️  Webhook error while parsing basic request." + str(e))
         return jsonify(success=False)
     if stripe_endpoint_secret:
@@ -75,7 +75,7 @@ def webhook():
                 )
             )
             if checkout_session["client_reference_id"]:
-                mark_survey_as_paid(
+                SurveyResponse.mark_survey_as_paid(
                     checkout_session["client_reference_id"],
                     checkout_session["id"],
                 )
