@@ -23,7 +23,7 @@ def upgrade():
     )
     op.add_column(
         "survey_response",
-        sa.Column("payment_status", sa.String(length=6), nullable=True),
+        sa.Column("payment_status", sa.String(length=6), nullable=True, default="unpaid"),
     )
     # ### end Alembic commands ###
 
