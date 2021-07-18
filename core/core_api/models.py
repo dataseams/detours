@@ -63,6 +63,7 @@ class City(Base):
             "country": "USA",
             "latitude": 34.0619,
             "longitude": -118.2420,
+            "spending_per_day": 190,
         },
         {
             "code": "SF",
@@ -72,6 +73,7 @@ class City(Base):
             "country": "USA",
             "latitude": 37.9296,
             "longitude": -122.4279,
+            "spending_per_day": 365,
         },
         {
             "code": "SD",
@@ -81,6 +83,7 @@ class City(Base):
             "country": "USA",
             "latitude": 32.7468,
             "longitude": -117.1612,
+            "spending_per_day": 161,
         },
         {
             "code": "NYC",
@@ -90,6 +93,7 @@ class City(Base):
             "country": "USA",
             "latitude": 41.8456,
             "longitude": -73.9249,
+            "spending_per_day": 144,
         },
         {
             "code": "CHI",
@@ -99,6 +103,7 @@ class City(Base):
             "country": "USA",
             "latitude": 42.5780,
             "longitude": -87.7352,
+            "spending_per_day": 221,
         },
     ]
 
@@ -111,6 +116,7 @@ class City(Base):
     country = Column(String(50))
     latitude = Column(Numeric(precision=10, scale=6))
     longitude = Column(Numeric(precision=10, scale=6))
+    spending_per_day = Column(Integer, default=176)
 
 
 class SurveyResponse(Base):
