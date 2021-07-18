@@ -25,7 +25,7 @@ from .activities import (
 from .config import db_session
 from .utils import ItineraryTag
 
-DATE_FORMAT = "%Y-%m-%d"
+DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.000Z"
 
 
 def trip_length(arrival_date: str, return_date: str) -> int:
@@ -261,8 +261,8 @@ class Builder:
 
         time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
         delta = (
-            datetime.strptime(return_date, date_format)
-            - datetime.strptime(arrival_date, date_format)
+            datetime.strptime(return_date, DATE_FORMAT)
+            - datetime.strptime(arrival_date, DATE_FORMAT)
         ).days + 1
         trip_plan = models.TripPlan(
             survey_response_id=survey_response_id,
