@@ -11,6 +11,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_graphql import GraphQLView
 
+log = logging.getLogger(__name__)
+
 stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
 stripe_endpoint_secret = os.environ.get("STRIPE_ENDPOINT_SECRET")
 
@@ -44,7 +46,7 @@ def webhook():
     try:
         event = json.loads(payload)
     except Exception as e:
-        logging.warn("⚠️  Webhook error while parsing basic request." + str(e))
+        log.warn("⚠️  Webhook error while parsing basic request." + str(e))
         return jsonify(success=False)
     if stripe_endpoint_secret:
         # Only verify the event if there is an endpoint secret defined
@@ -55,7 +57,7 @@ def webhook():
                 payload, sig_header, stripe_endpoint_secret
             )
         except stripe.error.SignatureVerificationError as e:
-            logging.warn("⚠️  Webhook signature verification failed." + str(e))
+            log.warn("⚠️  Webhook signature verification failed." + str(e))
             return jsonify(success=False)
 
     # Handle the event
@@ -63,13 +65,13 @@ def webhook():
         checkout_session = event["data"][
             "object"
         ]  # contains a checkout_session
-        logging.info(
+        log.info(
             "checkout session for {} completed".format(
                 checkout_session["client_reference_id"]
             )
         )
         if checkout_session["payment_status"] == "paid":
-            logging.info(
+            log.info(
                 "Payment for {} succeeded".format(
                     checkout_session["client_reference_id"]
                 )
@@ -80,7 +82,7 @@ def webhook():
                     checkout_session["id"],
                 )
             else:
-                logging.info(
+                log.info(
                     "Invalid client_reference_id for session {}".format(
                         checkout_session["id"]
                     )
@@ -89,7 +91,7 @@ def webhook():
 
     else:
         # Unexpected event type
-        logging.warn(
+        log.warn(
             "Unhandled event type {}".format(event["type"] if event else None)
         )
 

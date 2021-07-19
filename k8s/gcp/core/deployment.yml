@@ -61,6 +61,16 @@ spec:
                 secretKeyRef:
                   name: google
                   key: GOOGLE_MAPS_API_KEY
+            - name: STRIPE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe
+                  key: STRIPE_SECRET_KEY
+            - name: STRIPE_ENDPOINT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: stripe
+                  key: STRIPE_ENDPOINT_SECRET
           ports:
             - containerPort: 5000
               protocol: TCP

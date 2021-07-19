@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -87,14 +90,14 @@ app.prepare().then(() => {
       ],
       mode: "payment",
       client_reference_id: request.body.surveyId,
-      success_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?success=true`,
-      cancel_url: `http://localhost:3000/itinerary?surveyId=${request.body.surveyId}?canceled=true`,
+      success_url: `${process.env.STRIPE_REDIRECT_TO_HOST}/itinerary?surveyId=${request.body.surveyId}&success=true`,
+      cancel_url: `${process.env.STRIPE_REDIRECT_TO_HOST}/itinerary?surveyId=${request.body.surveyId}&canceled=true`,
     });
     response.json({ id: session.id });
   });
 
   server.listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on port localhost:${port}`);
+    console.log(`> Ready on port ${port}`);
   });
 });

@@ -46,7 +46,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./ui/app/.env.local
+      - ./ui/app/.env
     networks:
       detours:
         aliases:

@@ -97,7 +97,7 @@ const PurchaseBox = (props) => {
           >
             {data ? "Saved" : "Save"}
           </Purchase>
-          <Button onClick={handleClick}>Checkout (test)</Button>
+          <Button onClick={handleClick}>Checkout</Button>
         </Box>
       ) : (
         <Box className={classes.purchaseContainer}>
