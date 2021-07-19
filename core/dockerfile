@@ -20,4 +20,4 @@ ENV FLASK_APP=/app/app.py
 RUN chmod 550 wait-for-it.sh
 RUN chmod 550 service-startup.sh
 
-CMD ["sh", "./service-startup.sh"]
+CMD ["bash", "./wait-for-it.sh", "localhost:5432", "-t", "300", ";", "./service-startup.sh"]
