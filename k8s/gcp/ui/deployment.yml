@@ -54,6 +54,11 @@ spec:
               secretKeyRef:
                 name: stripe
                 key: STRIPE_SECRET_KEY
+          - name: STRIPE_REDIRECT_TO_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: ui
+                key: STRIPE_REDIRECT_TO_HOST
         ports:
           - name: ui
             containerPort: 3000

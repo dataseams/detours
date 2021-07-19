@@ -7,3 +7,4 @@ data:
   NODE_ENV: "production"
   LOGIN_API_URL: "https://app.dataseams.com/api/login"
   LOGOUT_API_URL: "https://app.dataseams.com/api/logout"
+  STRIPE_REDIRECT_TO_HOST: "https://graphql.dataseams.com"

@@ -29,6 +29,8 @@ services:
       ZOMATO_API_KEY: ${ZOMATO_API_KEY}
       ZOMATO_API_URL: ${ZOMATO_API_URL}
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_ENDPOINT_SECRET: ${STRIPE_ENDPOINT_SECRET}
     networks:
       detours:
         aliases:
@@ -44,7 +46,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./ui/app/.env.local
+      - ./ui/app/.env
     networks:
       detours:
         aliases:

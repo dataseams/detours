@@ -1,6 +1,7 @@
 """Module for all data models logic."""
 from datetime import datetime, time
 
+from graphql_relay.node.node import from_global_id
 from sqlalchemy import (
     ARRAY,
     JSON,
@@ -120,6 +121,16 @@ class SurveyResponse(Base):
     traveler_email = Column(String(100))
     json = Column(JSON)
     time_stamp = Column(DateTime, default=datetime.now())
+    checkout_id = Column(String(100))
+    payment_status = Column(String(6), default="unpaid")
+
+    @classmethod
+    def mark_survey_as_paid(cls, survey_response_id: str, checkout_id: str):
+        local_survey_response_id = int(from_global_id(survey_response_id)[1])
+        survey_response = cls.query.get(local_survey_response_id)
+        survey_response.checkout_id = checkout_id
+        survey_response.payment_status = "paid"
+        db_session.commit()
 
 
 class TripPlan(Base):
