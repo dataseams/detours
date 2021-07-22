@@ -13,6 +13,7 @@ import DailyTabs from "../components/Itinerary/Days";
 import PurchaseBox from "../components/Itinerary/PurchaseBox";
 import { itineraryReducer } from "../redux/reducers";
 import GET_ITINERARY from "../utils/queries/GetItinerary";
+import ContentRemoveCircleOutline from "material-ui/svg-icons/content/remove-circle-outline";
 
 const useStyles = makeStyles((theme) => ({
   root: {
