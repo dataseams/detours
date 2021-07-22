@@ -6,7 +6,7 @@ const GET_ITINERARY = gql`
       surveyResponseNodeId: $surveyResponseNodeId
     ) {
       id
-    	surveyResponse{
+      surveyResponse {
         paymentStatus
       }
       city {
