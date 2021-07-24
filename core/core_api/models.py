@@ -14,9 +14,10 @@ from sqlalchemy import (
     String,
     Time,
 )
+from sqlalchemy.dialects.postgresql import MONEY
 from sqlalchemy.orm import backref, relationship
 
-from .config import Base, db_session, engine
+from .config import Base, db_session
 
 
 class TableValues(dict):
@@ -63,6 +64,7 @@ class City(Base):
             "country": "USA",
             "latitude": 34.0619,
             "longitude": -118.2420,
+            "spending_per_day": 190,
         },
         {
             "code": "SF",
@@ -72,6 +74,7 @@ class City(Base):
             "country": "USA",
             "latitude": 37.9296,
             "longitude": -122.4279,
+            "spending_per_day": 365,
         },
         {
             "code": "SD",
@@ -81,6 +84,7 @@ class City(Base):
             "country": "USA",
             "latitude": 32.7468,
             "longitude": -117.1612,
+            "spending_per_day": 161,
         },
         {
             "code": "NYC",
@@ -90,6 +94,7 @@ class City(Base):
             "country": "USA",
             "latitude": 41.8456,
             "longitude": -73.9249,
+            "spending_per_day": 144,
         },
         {
             "code": "CHI",
@@ -99,6 +104,7 @@ class City(Base):
             "country": "USA",
             "latitude": 42.5780,
             "longitude": -87.7352,
+            "spending_per_day": 221,
         },
     ]
 
@@ -111,6 +117,7 @@ class City(Base):
     country = Column(String(50))
     latitude = Column(Numeric(precision=10, scale=6))
     longitude = Column(Numeric(precision=10, scale=6))
+    spending_per_day = Column(MONEY, default=176)
 
 
 class SurveyResponse(Base):
@@ -126,6 +133,15 @@ class SurveyResponse(Base):
 
     @classmethod
     def mark_survey_as_paid(cls, survey_response_id: str, checkout_id: str):
+        """Mark survey as paid.
+
+        Parameters
+        ----------
+        survey_response_id: str
+            Base64 encoded survey response id
+        checkout_id: str
+            Stripe checkout id
+        """
         local_survey_response_id = int(from_global_id(survey_response_id)[1])
         survey_response = cls.query.get(local_survey_response_id)
         survey_response.checkout_id = checkout_id
@@ -144,7 +160,7 @@ class TripPlan(Base):
     start_time = Column(Integer, ForeignKey("time_of_day.id"))
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
-    spending_per_day = Column(Integer)
+    spending_per_day = Column(MONEY)
     hours_saved = Column(String(50))
     interests_matched = Column(ARRAY(String(100)))
     time_stamp = Column(DateTime, default=datetime.now())
@@ -251,33 +267,3 @@ class Place(Base):
         "Activity",
         backref=backref("place", uselist=False, cascade="delete,all"),
     )
-
-
-def sync_db():
-    """Import modules need to be registered properly on the metadata."""
-    time_of_day = []
-    existing_time_of_day = TimeOfDay.query.all()
-    for k, v in TimeOfDay.VALUES.items():
-        time_of_day.append(TimeOfDay(name=k, start_time=v[0], end_time=v[1]))
-    for item in time_of_day:
-        if item.name not in [x.name for x in existing_time_of_day]:
-            db_session.add(item)
-    db_session.commit()
-
-    activity_types = []
-    existing_acitivity_types = ActivityType.query.all()
-    for k, v in ActivityType.VALUES.items():
-        activity_types.append(ActivityType(name=k, material_icon=v))
-    for item in activity_types:
-        if item.name not in [x.name for x in existing_acitivity_types]:
-            db_session.add(item)
-    db_session.commit()
-
-    cities = []
-    existing_cities = City.query.all()
-    for item in City.VALUES:
-        cities.append(City(**item))
-    for item in cities:
-        if item.code not in [x.code for x in existing_cities]:
-            db_session.add(item)
-    db_session.commit()

@@ -7,6 +7,7 @@ The itinerary is created based on:
 """
 import multiprocessing as mp
 import random
+from datetime import datetime
 from typing import Dict, List
 
 import pandas as pd
@@ -24,7 +25,7 @@ from .activities import (
 from .config import db_session
 from .utils import ItineraryTag
 
-DATE_FORMAT = "%Y-%m-%d"
+DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.000Z"
 
 
 def trip_length(arrival_date: str, return_date: str) -> int:
@@ -259,6 +260,10 @@ class Builder:
         destination_city = models.City.query.filter_by(code=city_code).first()
 
         time_of_day = models.TimeOfDay.query.filter_by(name="morning").first()
+        delta = (
+            datetime.strptime(return_date, DATE_FORMAT)
+            - datetime.strptime(arrival_date, DATE_FORMAT)
+        ).days + 1
         trip_plan = models.TripPlan(
             survey_response_id=survey_response_id,
             start_date=arrival_date,
@@ -266,8 +271,8 @@ class Builder:
             start_time_of_day=time_of_day,
             # end_time_of_day=time_of_day["evening"],
             city=destination_city,
-            spending_per_day="176",
-            hours_saved="20-30",
+            spending_per_day=destination_city.spending_per_day,
+            hours_saved=f"{delta * 4}-{delta * 5}",
             interests_matched=interests_matched,
         )
         db_session.add(trip_plan)
