@@ -31,6 +31,7 @@ jobs:
         with:
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
+          project_id: ${{secrets.GKE_PROJECT}}
       - run: |
           gcloud auth configure-docker
       - name: Get diff in core
