@@ -29,7 +29,6 @@ jobs:
           lfs: true
       - uses: google-github-actions/deploy-cloudrun@main
         with:
-          version: "302.0.0"
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
       - run: |
