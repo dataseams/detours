@@ -5,7 +5,7 @@ import os
 
 import stripe
 from core_api.config import db_session
-from core_api.models import SurveyResponse, sync_db
+from core_api.models import SurveyResponse
 from core_api.schema import schema
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -96,6 +96,3 @@ def webhook():
         )
 
     return jsonify(success=True)
-
-
-sync_db()

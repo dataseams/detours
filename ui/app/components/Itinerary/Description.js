@@ -70,14 +70,21 @@ const TagBox = (props) => {
 const ItineraryDescription = (props) => {
   const { fullItinerary, isMobile } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
+  const numberOfDays =
+    (Date.parse(fullItinerary.endDate) - Date.parse(fullItinerary.startDate)) /
+      (24 * 60 * 60 * 1000) +
+    1;
+  const dayOrDays = numberOfDays == 1 ? "day" : "days";
   const summary = {
     cityName:
       fullItinerary.city.name +
       ", " +
       (fullItinerary.city.state || fullItinerary.city.country),
     spendingPerDay: fullItinerary.spendingPerDay,
+    numberOfDays: numberOfDays,
     hoursSaved: fullItinerary.hoursSaved,
     interestsMatched: fullItinerary.interestsMatched,
+    dayOrDays: dayOrDays,
   };
 
   return (
@@ -90,12 +97,13 @@ const ItineraryDescription = (props) => {
         This is a preview of your itinerary.
       </Typography>
       <Typography className={classes.descItem}>
-        - You would spend a total of {summary.spendingPerDay} per day including
-        hotel, restaurant, and activities, for a total of 4 days.
+        - You would spend a total of {summary.spendingPerDay.replace(/"/g, "")}{" "}
+        per day including hotel, restaurant, and activities, for a total of{" "}
+        {summary.numberOfDays} {summary.dayOrDays}.
       </Typography>
       <Typography className={classes.descItem}>
-        - You would save an average of <b>{summary.hoursSaved} </b>planning your
-        trip.
+        - You would save an average of <b>{summary.hoursSaved} hours </b>
+        planning your trip.
       </Typography>
       <Typography className={classes.descItem}>
         - Your itinerary contains top-rated restaurants and experiences which

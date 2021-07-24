@@ -14,9 +14,10 @@ from sqlalchemy import (
     String,
     Time,
 )
+from sqlalchemy.dialects.postgresql import MONEY
 from sqlalchemy.orm import backref, relationship
 
-from .config import Base, db_session, engine
+from .config import Base, db_session
 
 
 class TableValues(dict):
@@ -116,7 +117,7 @@ class City(Base):
     country = Column(String(50))
     latitude = Column(Numeric(precision=10, scale=6))
     longitude = Column(Numeric(precision=10, scale=6))
-    spending_per_day = Column(Integer, default=176)
+    spending_per_day = Column(MONEY, default=176)
 
 
 class SurveyResponse(Base):
@@ -132,6 +133,15 @@ class SurveyResponse(Base):
 
     @classmethod
     def mark_survey_as_paid(cls, survey_response_id: str, checkout_id: str):
+        """Mark survey as paid.
+
+        Parameters
+        ----------
+        survey_response_id: str
+            Base64 encoded survey response id
+        checkout_id: str
+            Stripe checkout id
+        """
         local_survey_response_id = int(from_global_id(survey_response_id)[1])
         survey_response = cls.query.get(local_survey_response_id)
         survey_response.checkout_id = checkout_id
@@ -150,7 +160,7 @@ class TripPlan(Base):
     start_time = Column(Integer, ForeignKey("time_of_day.id"))
     # end_time = Column(Integer, ForeignKey("end_time_of_day.id"))
     city_id = Column(Integer, ForeignKey("city.id"))
-    spending_per_day = Column(Integer)
+    spending_per_day = Column(MONEY)
     hours_saved = Column(String(50))
     interests_matched = Column(ARRAY(String(100)))
     time_stamp = Column(DateTime, default=datetime.now())
@@ -257,33 +267,3 @@ class Place(Base):
         "Activity",
         backref=backref("place", uselist=False, cascade="delete,all"),
     )
-
-
-def sync_db():
-    """Import modules need to be registered properly on the metadata."""
-    time_of_day = []
-    existing_time_of_day = TimeOfDay.query.all()
-    for k, v in TimeOfDay.VALUES.items():
-        time_of_day.append(TimeOfDay(name=k, start_time=v[0], end_time=v[1]))
-    for item in time_of_day:
-        if item.name not in [x.name for x in existing_time_of_day]:
-            db_session.add(item)
-    db_session.commit()
-
-    activity_types = []
-    existing_acitivity_types = ActivityType.query.all()
-    for k, v in ActivityType.VALUES.items():
-        activity_types.append(ActivityType(name=k, material_icon=v))
-    for item in activity_types:
-        if item.name not in [x.name for x in existing_acitivity_types]:
-            db_session.add(item)
-    db_session.commit()
-
-    cities = []
-    existing_cities = City.query.all()
-    for item in City.VALUES:
-        cities.append(City(**item))
-    for item in cities:
-        if item.code not in [x.code for x in existing_cities]:
-            db_session.add(item)
-    db_session.commit()
