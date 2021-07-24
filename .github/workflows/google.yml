@@ -35,19 +35,19 @@ jobs:
       - run: |
           gcloud auth configure-docker
       - name: Get diff in core
-        uses: technote-space/get-diff-action@gh-actions
+        uses: technote-space/get-diff-action@v4
         id: git-core-diff
         with:
           PREFIX_FILTER: |
             core
       - name: Get diff in ui
-        uses: technote-space/get-diff-action@gh-actions
+        uses: technote-space/get-diff-action@v4
         id: git-ui-diff
         with:
           PREFIX_FILTER: |
             ui
       - name: Get diff in k8s
-        uses: technote-space/get-diff-action@gh-actions
+        uses: technote-space/get-diff-action@v4
         id: git-k8s-diff
         with:
           PREFIX_FILTER: |
