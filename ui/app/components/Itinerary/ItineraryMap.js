@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
-import { Box, Icon } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +19,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       borderColor: theme.palette.secondary.dark,
     },
-  },
-
-  icon: {
-    color: (props) =>
-      props ? theme.palette.secondary.dark : theme.palette.primary.main,
-    height: "0.5em",
   },
 }));
 
