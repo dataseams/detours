@@ -5,13 +5,17 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   iconContainer: {
-    display: "flex",
     flexDirection: "column",
-    minWidth: "40px",
-    padding: "3px",
+    minWidth: "20px",
+    height: "2em",
+    paddingLeft: "5px",
+    paddingTop: "3px",
+    fontWeight: "bold",
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.primary.main,
     borderColor: (props) =>
       props ? theme.palette.secondary.dark : theme.palette.primary.main,
-    borderRadius: "20%",
+    borderRadius: "50%",
     "&:hover": {
       borderColor: theme.palette.secondary.dark,
     },
@@ -20,16 +24,18 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: (props) =>
       props ? theme.palette.secondary.dark : theme.palette.primary.main,
+    height: "0.5em",
   },
 }));
 
 const MapIcon = (props) => {
-  const { materialIcon, highlightIconColor } = props;
+  const { highlightIconColor, letter } = props;
   const classes = useStyles(highlightIconColor ? highlightIconColor : false);
-
+  const aphabet = (letter + 10).toString(36);
+  console.log(letter, "letter");
   return (
     <Box className={classes.iconContainer} border={2}>
-      <Icon className={classes.icon}>{materialIcon}</Icon>
+      {aphabet.toUpperCase()}
     </Box>
   );
 };
@@ -87,8 +93,8 @@ const ItineraryMap = (props) => {
             key={index}
             lat={event.node.activity.place.latitude}
             lng={event.node.activity.place.longitude}
-            materialIcon={event.node.activity.activityType.materialIcon}
             highlightIconColor={iteneraryIconToHover === index ? true : false}
+            letter={index}
           />
         ))}
       </GoogleMapReact>
