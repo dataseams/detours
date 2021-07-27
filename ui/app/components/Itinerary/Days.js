@@ -85,7 +85,7 @@ const useMobileStyles = makeStyles((theme) => ({
 }));
 
 const DailyTabs = (props) => {
-  const { plan, isMobile } = props;
+  const { plan, isMobile, paymentStatus } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -109,6 +109,7 @@ const DailyTabs = (props) => {
             <Tab
               key={index}
               label={"Day " + (index + 1)}
+              disabled={paymentStatus === "unpaid" && index !== 0}
               {...a11yProps(index)}
             />
           ))}
