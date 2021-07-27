@@ -45,7 +45,8 @@ function Itinerary(props) {
   const { loading, error, data } = useQuery(GET_ITINERARY, {
     variables: variables,
   });
-
+  const paymentStatus =
+    data.getLastTripPlanForSurveyResponse.surveyResponse.paymentStatus;
   return (
     <Provider store={store}>
       <div>
@@ -64,7 +65,7 @@ function Itinerary(props) {
                 plan={data.getLastTripPlanForSurveyResponse.dailyPlans}
                 isMobile={isMobile}
               />
-              <PurchaseBox />
+              <PurchaseBox paymentStatus={paymentStatus} />
             </Container>
           )}
         </div>
