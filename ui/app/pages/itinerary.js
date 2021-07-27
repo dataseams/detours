@@ -46,7 +46,7 @@ function Itinerary(props) {
     variables: variables,
   });
   const paymentStatus =
-    data.getLastTripPlanForSurveyResponse.surveyResponse.paymentStatus;
+    data?.getLastTripPlanForSurveyResponse?.surveyResponse?.paymentStatus;
   return (
     <Provider store={store}>
       <div>
