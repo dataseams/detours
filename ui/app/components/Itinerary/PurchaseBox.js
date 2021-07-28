@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PurchaseBox = (props) => {
+const PurchaseBox = ({ paymentStatus }) => {
   const classes = useStyles();
   const userEmail = useSelector((state) => state.user.email);
   const {
@@ -72,7 +72,6 @@ const PurchaseBox = (props) => {
       // using `result.error.message`.
     }
   };
-
   return (
     <Box>
       {userEmail ? (
@@ -97,7 +96,9 @@ const PurchaseBox = (props) => {
           >
             {data ? "Saved" : "Save"}
           </Purchase>
-          <Button onClick={handleClick}>Checkout</Button>
+          {paymentStatus === "unpaid" && (
+            <Button onClick={handleClick}>Checkout</Button>
+          )}
         </Box>
       ) : (
         <Box className={classes.purchaseContainer}>

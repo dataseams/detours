@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
-
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import ItineraryDescription from "../components/Itinerary/Description";
@@ -45,7 +44,8 @@ function Itinerary(props) {
   const { loading, error, data } = useQuery(GET_ITINERARY, {
     variables: variables,
   });
-
+  const paymentStatus =
+    data?.getLastTripPlanForSurveyResponse?.surveyResponse?.paymentStatus;
   return (
     <Provider store={store}>
       <div>
@@ -65,7 +65,7 @@ function Itinerary(props) {
                 isMobile={isMobile}
                 paymentStatus={paymentStatus}
               />
-              <PurchaseBox />
+              <PurchaseBox paymentStatus={paymentStatus} />
             </Container>
           )}
         </div>
