@@ -100,6 +100,9 @@ const useMobileStyles = makeStyles((theme) => ({
     marginTop: "-2px",
     marginLeft: "5px",
   },
+  span: {
+    display: "flex",
+  },
 }));
 
 const DailyTabs = (props) => {
@@ -137,7 +140,7 @@ const DailyTabs = (props) => {
                     : ""
                 }
               >
-                <span>
+                <span className={classes.span}>
                   <Tab
                     key={index}
                     label={
