@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "5px",
     paddingTop: "3px",
     fontWeight: "bold",
+    marginTop: "-11px",
+    marginLeft: "-4px",
     backgroundColor: theme.palette.background.default,
     color: theme.palette.primary.main,
     borderColor: (props) =>
