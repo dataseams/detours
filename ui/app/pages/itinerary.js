@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
-
 import Meta from "../components/Head";
 import LogoNavigationBar from "../components/LogoNavigationBar";
 import ItineraryDescription from "../components/Itinerary/Description";
@@ -64,6 +63,7 @@ function Itinerary(props) {
               <DailyTabs
                 plan={data.getLastTripPlanForSurveyResponse.dailyPlans}
                 isMobile={isMobile}
+                paymentStatus={paymentStatus}
               />
               <PurchaseBox paymentStatus={paymentStatus} />
             </Container>
