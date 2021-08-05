@@ -6,6 +6,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import GenderDialog from "./GenderDialog";
+import AgeDialog from "./AgeDialog";
 
 const useStyles = makeStyles((theme) => ({
   listBorders: {
@@ -40,61 +42,75 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    "& .MuiButton-label": {
-      color: theme.palette.primary.light,
-      textTransform: "none",
-    },
-    alignItems: "flex-start",
+    color: theme.palette.primary.light,
   },
 }));
 
 const PersonalInfo = () => {
   const classes = useStyles();
+  const [openGenderDialog, setOpenGenderDialog] = React.useState(false);
+  const [openAgeDialog, setOpenAgeDialog] = React.useState(false);
+  const handleGenderDialog = () => {
+    setOpenGenderDialog(!openGenderDialog);
+  };
+  const handleAgeDialog = () => {
+    setOpenAgeDialog(!openAgeDialog);
+  };
 
   return (
-    <Box className={classes.listBorders}>
-      <Typography className={classes.heading}>Personal Info</Typography>
-      <List>
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="Email Address"
-              secondary="sam@dataseams.com"
-            />
-            <Box>
-              <Button className={classes.button}>Edit</Button>
-            </Box>{" "}
-          </Box>
-        </ListItem>
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="Gender"
-              secondary="Male"
-            />
-            <Box>
-              <Button className={classes.button}>Edit</Button>
+    <>
+      <Box className={classes.listBorders}>
+        <Typography className={classes.heading}>Personal Info</Typography>
+        <List>
+          <ListItem className={classes.listItem}>
+            <Box display="flex" flex="1">
+              <ListItemText
+                className={classes.listItemText}
+                primary="Email Address"
+                secondary="sam@dataseams.com"
+              />
+              <Box>
+                <Button disabled className={classes.button}>
+                  Edit
+                </Button>
+              </Box>{" "}
             </Box>
-          </Box>
-        </ListItem>
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="Age"
-              secondary="24"
-            />
-            <Box>
-              <Button className={classes.button}>Edit</Button>
-            </Box>{" "}
-          </Box>
-        </ListItem>
-      </List>
-    </Box>
+          </ListItem>
+          <Divider />
+          <ListItem className={classes.listItem}>
+            <Box display="flex" flex="1">
+              <ListItemText
+                className={classes.listItemText}
+                primary="Gender"
+                secondary="Male"
+              />
+              <Box>
+                <Button className={classes.button} onClick={handleGenderDialog}>
+                  Edit
+                </Button>
+              </Box>
+            </Box>
+          </ListItem>
+          <Divider />
+          <ListItem className={classes.listItem}>
+            <Box display="flex" flex="1">
+              <ListItemText
+                className={classes.listItemText}
+                primary="Age"
+                secondary="24"
+              />
+              <Box>
+                <Button className={classes.button} onClick={handleAgeDialog}>
+                  Edit
+                </Button>
+              </Box>{" "}
+            </Box>
+          </ListItem>
+        </List>
+      </Box>
+      <GenderDialog open={openGenderDialog} handleDialog={handleGenderDialog} />
+      <AgeDialog open={openAgeDialog} handleDialog={handleAgeDialog} />
+    </>
   );
 };
 

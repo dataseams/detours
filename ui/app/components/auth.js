@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import "firebase/auth";
@@ -62,7 +62,7 @@ const Auth = (props) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const setUserEmail = {
-        type: "SET_USER",
+        type: "UPDATE_USER",
         value: {
           userEmail: user.email,
           userDisplayName: user.displayName,
