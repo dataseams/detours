@@ -26,6 +26,14 @@ from .survey_response import (
 )
 from .time_of_day import TimeOfDay
 from .trip_plan import TripPlan, UserTripPlan, UserTripPlans
+from .user import (
+    UpdateUserAge,
+    UpdateUserGender,
+    UpdateUserWantsNoEmails,
+    UpdateUserWantsPromotionsAndTipsFlag,
+    UpdateUserWantsRemindersFlag,
+    User,
+)
 
 
 class Mutation(ObjectType):
@@ -35,6 +43,13 @@ class Mutation(ObjectType):
     update_traveler_email_for_survey_response = (
         UpdateTravelerEmailForSurveryResponse.Field()
     )
+    update_user_age = UpdateUserAge.Field()
+    update_user_gender = UpdateUserGender.Field()
+    update_user_wants_reminders_flag = UpdateUserWantsRemindersFlag.Field()
+    update_user_wants_promotions_and_tips_flag = (
+        UpdateUserWantsPromotionsAndTipsFlag.Field()
+    )
+    update_user_wants_no_emails = UpdateUserWantsNoEmails.Field()
 
 
 class Query(ObjectType):
