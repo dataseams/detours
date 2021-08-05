@@ -62,6 +62,14 @@ class Query(ObjectType):
     get_all_places = SQLAlchemyConnectionField(Place)
     get_survey_response_record = SQLAlchemyConnectionField(SurveyResponse)
 
+    get_user_record = Field(lambda: User, email=String())
+
+    def resolve_get_user_record(root, info, email):
+        """Query user table by email."""
+        query = User.get_query(info)
+        user_record = query.filter(models.User.email == email).first()
+        return user_record
+
     get_last_trip_plan_for_survey_response = Field(
         lambda: TripPlan, surveyResponseNodeId=String()
     )
