@@ -1,4 +1,6 @@
 """User schema."""
+from uuid import uuid4
+
 from graphene import Boolean, Field, Int, Mutation, String, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
@@ -148,6 +150,38 @@ class UpdateUserWantsNoEmails(Mutation):
             user_record = models.User(email=email)
         user_record.wants_reminders = False
         user_record.wants_promotions_and_tips = False
+        db_session.commit()
+
+        return UpdateUserWantsNoEmails(user_record=user_record)
+
+
+class DeleteUser(Mutation):
+    """Replace user's email with a uuid in the database."""
+
+    user_record = Field(
+        lambda: User, description="User record updated by this mutation."
+    )
+
+    class Arguments:
+        """Declare input arguments."""
+
+        email = String(required=True, description="User's email address")
+
+    def mutate(self, info, email):
+        """Replace user's email with a uuid in the database."""
+        incognito_id = uuid4().hex
+        user_record = (
+            db_session.query(models.User).filter_by(email=email).first()
+        )
+        if user_record:
+            user_record.email = incognito_id
+        survey_response_records = (
+            db_session.query(models.SurveyResponse)
+            .filter_by(traveler_email=email)
+            .all()
+        )
+        for record in survey_response_records:
+            record.traveler_email = incognito_id
         db_session.commit()
 
         return UpdateUserWantsNoEmails(user_record=user_record)

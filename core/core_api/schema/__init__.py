@@ -27,6 +27,7 @@ from .survey_response import (
 from .time_of_day import TimeOfDay
 from .trip_plan import TripPlan, UserTripPlan, UserTripPlans
 from .user import (
+    DeleteUser,
     UpdateUserAge,
     UpdateUserGender,
     UpdateUserWantsNoEmails,
@@ -50,6 +51,7 @@ class Mutation(ObjectType):
         UpdateUserWantsPromotionsAndTipsFlag.Field()
     )
     update_user_wants_no_emails = UpdateUserWantsNoEmails.Field()
+    delete_user = DeleteUser.Field()
 
 
 class Query(ObjectType):
