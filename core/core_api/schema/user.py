@@ -1,7 +1,8 @@
 """User schema."""
+from uuid import uuid4
+
 from graphene import Boolean, Field, Int, Mutation, String, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
-from uuid import uuid4
 
 from .. import models
 from ..config import db_session
