@@ -1,7 +1,7 @@
 import React from "react";
-import { AppBar, Tabs, Tab } from "@material-ui/core";
+import { AppBar, Tabs, Tab, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-
+import LockIcon from "@material-ui/icons/Lock";
 import TabPanel from "./TabPanel";
 
 function a11yProps(index) {
@@ -37,6 +37,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     flexDirection: "row",
     padding: "0 0 0 0.25em",
+  },
+  labelDiv: {
+    display: "flex",
+    alignItems: "center",
+  },
+  lockIcon: {
+    fontSize: "1.2rem",
+    marginTop: "-2px",
+    marginLeft: "5px",
   },
 }));
 
@@ -82,10 +91,23 @@ const useMobileStyles = makeStyles((theme) => ({
     flex: "0.4",
     borderColor: "#5865BC",
   },
+  labelDiv: {
+    display: "flex",
+    alignItems: "center",
+    margin: "0 10px 0 10px",
+  },
+  lockIcon: {
+    fontSize: "1.2rem",
+    marginTop: "-2px",
+    marginLeft: "5px",
+  },
+  span: {
+    display: "flex",
+  },
 }));
 
 const DailyTabs = (props) => {
-  const { plan, isMobile } = props;
+  const { plan, isMobile, paymentStatus } = props;
   const classes = isMobile ? useMobileStyles() : useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -105,13 +127,36 @@ const DailyTabs = (props) => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs"
         >
-          {plan.edges.map((day, index) => (
-            <Tab
-              key={index}
-              label={"Day " + (index + 1)}
-              {...a11yProps(index)}
-            />
-          ))}
+          {plan.edges.map((day, index) => {
+            const tabLabel = `Day ${index + 1} `;
+            const disableTab = paymentStatus === "unpaid" && index !== 0;
+            const isLockVisiable = disableTab && (
+              <LockIcon className={classes.lockIcon} />
+            );
+            return (
+              <Tooltip
+                title={
+                  isLockVisiable
+                    ? "Checkout below to gain full access to the itinerary"
+                    : ""
+                }
+              >
+                <span className={classes.span}>
+                  <Tab
+                    key={index}
+                    label={
+                      <div className={classes.labelDiv}>
+                        {tabLabel}
+                        {isLockVisiable}
+                      </div>
+                    }
+                    disabled={disableTab}
+                    {...a11yProps(index)}
+                  />
+                </span>
+              </Tooltip>
+            );
+          })}
         </Tabs>
       </AppBar>
       {plan.edges.map((day, index) => (

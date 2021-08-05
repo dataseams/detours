@@ -5,6 +5,8 @@ from graphql_relay.node.node import from_global_id
 from sqlalchemy import (
     ARRAY,
     JSON,
+    Boolean,
+    CheckConstraint,
     Column,
     Date,
     DateTime,
@@ -267,3 +269,20 @@ class Place(Base):
         "Activity",
         backref=backref("place", uselist=False, cascade="delete,all"),
     )
+
+
+class User(Base):
+    """Define a user entity."""
+
+    __tablename__ = "user"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(100), unique=True, nullable=False)
+    gender = Column(
+        String(20),
+        CheckConstraint(
+            "COALESCE(gender, 'Their') in ('Her', 'Him', 'Their')"
+        ),
+    )
+    age = Column(Integer, CheckConstraint("COALESCE(age, 0) >= 0"))
+    wants_promotions_and_tips = Column(Boolean, default=True)
+    wants_reminders = Column(Boolean, default=True)
