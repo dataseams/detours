@@ -28,7 +28,6 @@ const MapIcon = (props) => {
   const { highlightIconColor, letter } = props;
   const classes = useStyles(highlightIconColor ? highlightIconColor : false);
   const aphabet = (letter + 10).toString(36);
-  console.log(letter, "letter");
   return (
     <Box className={classes.iconContainer} border={2}>
       {aphabet.toUpperCase()}
