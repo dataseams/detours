@@ -33,6 +33,7 @@ from .user import (
     UpdateUserWantsPromotionsAndTipsFlag,
     UpdateUserWantsRemindersFlag,
     User,
+    DeleteUser,
 )
 
 
@@ -50,6 +51,7 @@ class Mutation(ObjectType):
         UpdateUserWantsPromotionsAndTipsFlag.Field()
     )
     update_user_wants_no_emails = UpdateUserWantsNoEmails.Field()
+    delete_user = DeleteUser.Field()
 
 
 class Query(ObjectType):
