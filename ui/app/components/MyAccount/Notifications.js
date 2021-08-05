@@ -1,11 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import { useSelector } from "react-redux";
 import Switch from "@material-ui/core/Switch";
 import { Box, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { useMutation } from "@apollo/react-hooks";
+import USER_WANTS_PROMOTIONS_AND_TIPS_FLAG from "../../utils/queries/UpdateUserWantsPromotionsAndTipsFlag";
+import USER_WANTS_REMINDERS_FLAG from "../../utils/queries/UpdateUserWantsRemindersFlag";
+import USER_WANTS_NO_EMAILS_FLAG from "../../utils/queries/UpdateUserWantsNoEmails";
+
 import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,13 +55,43 @@ const useStyles = makeStyles((theme) => ({
 
 const Notifications = () => {
   const classes = useStyles();
+  const userEmail = useSelector((state) => state.user.email);
+
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
   });
 
-  const handleChange = (event) => {
+  const [UpdatePromotionsAndTipsFlag] = useMutation(
+    USER_WANTS_PROMOTIONS_AND_TIPS_FLAG
+  );
+  const [updateRemindersFlag] = useMutation(USER_WANTS_REMINDERS_FLAG);
+  const [updateUserWantsNoEmails] = useMutation(USER_WANTS_NO_EMAILS_FLAG);
+
+  const handleChangeNotifications = (event) => {
+    if (event.target.name === "checkedA") {
+      UpdatePromotionsAndTipsFlag({
+        variables: {
+          email: userEmail,
+          wantsPromotionsAndTips: event.target.checked,
+        },
+      });
+    } else if (event.target.name === "checkedB") {
+      updateRemindersFlag({
+        variables: {
+          email: userEmail,
+          wantsReminders: event.target.checked,
+        },
+      });
+    }
     setState({ ...state, [event.target.name]: event.target.checked });
+  };
+  const handleNoEmail = () => {
+    updateUserWantsNoEmails({
+      variables: {
+        email: userEmail,
+      },
+    });
   };
   return (
     <Box className={classes.listBorders}>
@@ -71,7 +107,7 @@ const Notifications = () => {
             <Box>
               <Switch
                 checked={state.checkedA}
-                onChange={handleChange}
+                onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedA"
                 inputProps={{ "aria-label": "primary checkbox" }}
@@ -90,7 +126,7 @@ const Notifications = () => {
             <Box>
               <Switch
                 checked={state.checkedB}
-                onChange={handleChange}
+                onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedB"
                 inputProps={{ "aria-label": "primary checkbox" }}
@@ -101,7 +137,12 @@ const Notifications = () => {
         <Divider />
       </List>
       <Box>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={handleNoEmail}
+        >
           Unsubscribe from All Emails
         </Button>
       </Box>
