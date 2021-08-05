@@ -27,12 +27,12 @@ from .survey_response import (
 from .time_of_day import TimeOfDay
 from .trip_plan import TripPlan, UserTripPlan, UserTripPlans
 from .user import (
-    User,
     UpdateUserAge,
     UpdateUserGender,
-    UpdateUserWantsRemindersFlag,
-    UpdateUserWantsPromotionsAndTipsFlag,
     UpdateUserWantsNoEmails,
+    UpdateUserWantsPromotionsAndTipsFlag,
+    UpdateUserWantsRemindersFlag,
+    User,
 )
 
 

@@ -4,6 +4,7 @@ from datetime import datetime, time
 from graphql_relay.node.node import from_global_id
 from sqlalchemy import (
     ARRAY,
+    JSON,
     Boolean,
     CheckConstraint,
     Column,
@@ -11,7 +12,6 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     Integer,
-    JSON,
     Numeric,
     String,
     Time,

@@ -1,5 +1,5 @@
 """User schema."""
-from graphene import relay, Mutation, Field, String, Int, Boolean
+from graphene import Boolean, Field, Int, Mutation, String, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
 from .. import models
