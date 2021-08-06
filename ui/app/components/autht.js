@@ -26,7 +26,6 @@ const Auth = (props) => {
     firebase.initializeApp(clientCredentials);
   }
   firebase.auth().onAuthStateChanged((user) => {
-    console.log(user, "userdatas");
     if (user) {
       const updateUserEmail = {
         type: "SET_USER",

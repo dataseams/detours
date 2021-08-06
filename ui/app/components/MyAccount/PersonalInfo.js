@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import { useQuery } from "@apollo/react-hooks";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -52,13 +53,18 @@ const PersonalInfo = () => {
   const userEmail = useSelector((state) => state.user.email);
   const [openGenderDialog, setOpenGenderDialog] = React.useState(false);
   const [openAgeDialog, setOpenAgeDialog] = React.useState(false);
+  const variables = { email: userEmail };
+  const { data } = useQuery(GET_USER_RECORD, {
+    variables: variables,
+    skip: !UserEmail,
+  });
+  console.log(data, "datadata");
   const handleGenderDialog = () => {
     setOpenGenderDialog(!openGenderDialog);
   };
   const handleAgeDialog = () => {
     setOpenAgeDialog(!openAgeDialog);
   };
-
   return (
     <>
       <Box className={classes.listBorders}>

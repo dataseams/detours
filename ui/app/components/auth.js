@@ -61,7 +61,7 @@ const Auth = (props) => {
   }
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const setUserEmail = {
+      const updateUserEmail = {
         type: "UPDATE_USER",
         value: {
           userEmail: user.email,
@@ -69,7 +69,7 @@ const Auth = (props) => {
           userPhotoUrl: user.photoURL,
         },
       };
-      dispatch(setUserEmail);
+      dispatch(updateUserEmail);
       console.log(process.env.LOGIN_API_URL);
       return user.getIdToken().then((token) => {
         // eslint-disable-next-line no-undef
