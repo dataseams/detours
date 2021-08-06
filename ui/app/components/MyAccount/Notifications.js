@@ -7,11 +7,11 @@ import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import USER_WANTS_PROMOTIONS_AND_TIPS_FLAG from "../../utils/queries/UpdateUserWantsPromotionsAndTipsFlag";
 import USER_WANTS_REMINDERS_FLAG from "../../utils/queries/UpdateUserWantsRemindersFlag";
 import USER_WANTS_NO_EMAILS_FLAG from "../../utils/queries/UpdateUserWantsNoEmails";
-
+import GET_USER_RECORD from "../../utils/queries/GetUserRecord";
 import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,18 +55,32 @@ const useStyles = makeStyles((theme) => ({
 
 const Notifications = () => {
   const classes = useStyles();
-  const userEmail = useSelector((state) => state.user.email);
-
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+  const userEmail = useSelector((state) => state?.user?.email);
+  const variables = { email: userEmail };
+  const { data } = useQuery(GET_USER_RECORD, {
+    variables: variables,
   });
+  console.log(data, "data");
+  const [state, setState] = React.useState({
+    checkedA: false,
+    checkedB: false,
+  });
+  const refetchRecords = {
+    refetchQueries: [{ query: GET_USER_RECORD, variables: variables }],
+  };
 
   const [UpdatePromotionsAndTipsFlag] = useMutation(
-    USER_WANTS_PROMOTIONS_AND_TIPS_FLAG
+    USER_WANTS_PROMOTIONS_AND_TIPS_FLAG,
+    refetchRecords
   );
-  const [updateRemindersFlag] = useMutation(USER_WANTS_REMINDERS_FLAG);
-  const [updateUserWantsNoEmails] = useMutation(USER_WANTS_NO_EMAILS_FLAG);
+  const [updateRemindersFlag] = useMutation(
+    USER_WANTS_REMINDERS_FLAG,
+    refetchRecords
+  );
+  const [updateUserWantsNoEmails] = useMutation(
+    USER_WANTS_NO_EMAILS_FLAG,
+    refetchRecords
+  );
 
   const handleChangeNotifications = (event) => {
     if (event.target.name === "checkedA") {

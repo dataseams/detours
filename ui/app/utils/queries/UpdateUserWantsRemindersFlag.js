@@ -8,6 +8,7 @@ const USER_WANTS_REMINDERS_FLAG = gql`
     ) {
       userRecord {
         id
+        wantsReminders
       }
     }
   }
