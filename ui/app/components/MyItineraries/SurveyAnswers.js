@@ -72,7 +72,9 @@ const SurveyAnswer = ({ user }) => {
   };
   const lastSurveyDate = data?.getLastSurveyResponse?.timeStamp;
   const parseAnswers = () => {
-    setAnswers(JSON.parse(data?.getLastSurveyResponse.json));
+    if (data.getLastSurveyResponse) {
+      setAnswers(JSON.parse(data?.getLastSurveyResponse.json));
+    }
   };
   useEffect(() => {
     if (data) {
@@ -89,104 +91,112 @@ const SurveyAnswer = ({ user }) => {
     return array.join(", ");
   };
   return (
-    <Box className={classes.listBorders}>
-      <Typography className={classes.heading}>Survey Answers</Typography>
-      <Typography>
-        The last time you answered our survey was{" "}
-        <span className={classes.date}>{convertDate(lastSurveyDate)}</span>. You
-        can modify individual answers below or you can choose to{" "}
-        <Link href="/questionnaire" underline="always">
-          retake the survey.
-        </Link>
-      </Typography>
-      <List component="ol">
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="1. Which city do you want to travel to?"
-              secondary={answers?.city}
-            />
-            <Box>
-              <Button disabled className={classes.button}>
-                Edit
-              </Button>
-            </Box>{" "}
-          </Box>
-        </ListItem>
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="2. When are you planning to take your vacation?"
-              secondary={`  ${convertDate(answers?.travelDates?.[0])} -
+    <>
+      {data?.getLastSurveyResponse && (
+        <Box className={classes.listBorders}>
+          <Typography className={classes.heading}>Survey Answers</Typography>
+          <Typography>
+            The last time you answered our survey was{" "}
+            <span className={classes.date}>{convertDate(lastSurveyDate)}</span>.
+            You can modify individual answers below or you can choose to{" "}
+            <Link href="/questionnaire" underline="always">
+              retake the survey.
+            </Link>
+          </Typography>
+          <List component="ol">
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="1. Which city do you want to travel to?"
+                  secondary={answers?.city}
+                />
+                <Box>
+                  <Button disabled className={classes.button}>
+                    Edit
+                  </Button>
+                </Box>{" "}
+              </Box>
+            </ListItem>
+            <Divider />
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="2. When are you planning to take your vacation?"
+                  secondary={`  ${convertDate(answers?.travelDates?.[0])} -
                ${convertDate(answers?.travelDates?.[1])}`}
-            />
-            <Box>
-              <Button disabled className={classes.button}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-        </ListItem>
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="3. Who are you traveling with?"
-              secondary={answers?.companion}
-            />
-            <Box>
-              <Button disabled className={classes.button}>
-                Edit
-              </Button>
-            </Box>{" "}
-          </Box>
-        </ListItem>
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="4. What do you like to do when you travel?"
-              secondary={loopThroughObjectValues(answers?.generalPreferences)}
-            />
-            <Box>
-              <Button disabled className={classes.button}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-        </ListItem>
-        <Divider />
-        <Divider />
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="5(a). What is your preferred price point?"
-              secondary={answers?.dining?.pricePoint}
-            />
-            <Box>
-              <Button disabled className={classes.button}>
-                Edit
-              </Button>
-            </Box>
-          </Box>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <Box display="flex" flex="1">
-            <ListItemText
-              className={classes.listItemText}
-              primary="5(b). Which dining environments do you prefer?"
-              secondary={loopThroughObjectValues(answers?.dining?.environment)}
-            />
-          </Box>
-        </ListItem>
-      </List>
-    </Box>
+                />
+                <Box>
+                  <Button disabled className={classes.button}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+            </ListItem>
+            <Divider />
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="3. Who are you traveling with?"
+                  secondary={answers?.companion}
+                />
+                <Box>
+                  <Button disabled className={classes.button}>
+                    Edit
+                  </Button>
+                </Box>{" "}
+              </Box>
+            </ListItem>
+            <Divider />
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="4. What do you like to do when you travel?"
+                  secondary={loopThroughObjectValues(
+                    answers?.generalPreferences
+                  )}
+                />
+                <Box>
+                  <Button disabled className={classes.button}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+            </ListItem>
+            <Divider />
+            <Divider />
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="5(a). What is your preferred price point?"
+                  secondary={answers?.dining?.pricePoint}
+                />
+                <Box>
+                  <Button disabled className={classes.button}>
+                    Edit
+                  </Button>
+                </Box>
+              </Box>
+            </ListItem>
+            <ListItem className={classes.listItem}>
+              <Box display="flex" flex="1">
+                <ListItemText
+                  className={classes.listItemText}
+                  primary="5(b). Which dining environments do you prefer?"
+                  secondary={loopThroughObjectValues(
+                    answers?.dining?.environment
+                  )}
+                />
+              </Box>
+            </ListItem>
+          </List>
+        </Box>
+      )}
+    </>
   );
 };
 function mapStateToProps(state) {
