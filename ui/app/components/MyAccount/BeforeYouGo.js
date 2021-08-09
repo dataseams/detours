@@ -32,7 +32,7 @@ const BeforeYouGo = ({ handleListItemClick }) => {
   const userEmail = useSelector((state) => state.user.email);
   const [leavingReason, setLeavingReason] = React.useState("1");
   const [improvement, setImprovement] = React.useState("");
- 
+
   const handleRadioButton = (e) => {
     setLeavingReason(e.target.value);
   };
