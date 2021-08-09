@@ -59,11 +59,13 @@ const Notifications = () => {
   const variables = { email: userEmail };
   const { data } = useQuery(GET_USER_RECORD, {
     variables: variables,
+    skip: !userEmail,
   });
-  console.log(data, "data");
+  const wantsPromotionsAndTips = data?.getUserRecord?.wantsPromotionsAndTips;
+  const wantsReminders = data?.getUserRecord?.wantsReminders;
   const [state, setState] = React.useState({
-    checkedA: false,
-    checkedB: false,
+    checkedA: wantsPromotionsAndTips,
+    checkedB: wantsReminders,
   });
   const refetchRecords = {
     refetchQueries: [{ query: GET_USER_RECORD, variables: variables }],

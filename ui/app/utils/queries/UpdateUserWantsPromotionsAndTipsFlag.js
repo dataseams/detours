@@ -8,7 +8,6 @@ const UPDATE_USER_WANTS_PROMOTIONS_AND_TIPS_FLAG = gql`
     ) {
       userRecord {
         id
-        wantsPromotionsAndTips
       }
     }
   }
