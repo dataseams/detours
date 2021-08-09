@@ -12,7 +12,7 @@ import GenderDialog from "./GenderDialog";
 import AgeDialog from "./AgeDialog";
 import GET_USER_RECORD from "../../utils/queries/GetUserRecord";
 import UPDATE_GENDER from "../../utils/queries/UpdateGender";
-import UPDATE_AGE from "../../utils/queries/UpdateAge"
+import UPDATE_AGE from "../../utils/queries/UpdateAge";
 
 const useStyles = makeStyles((theme) => ({
   listBorders: {
@@ -153,7 +153,6 @@ const PersonalInfo = () => {
         handleDialog={handleAgeDialog}
         handleSaveAge={handleSaveAge}
         UserAge={age}
-
       />
     </>
   );
