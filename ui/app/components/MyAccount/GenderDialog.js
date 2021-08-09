@@ -47,7 +47,6 @@ const GenderDialog = ({ open, handleDialog, handleSaveGender, UserGender }) => {
     setGender(event.target.value);
   };
   const onHandleSubmit = () => {
-    console.log(gender,"gender")
     handleSaveGender(gender);
     handleDialog();
   };
