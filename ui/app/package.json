@@ -38,6 +38,7 @@
     "node-fetch": "^2.6.1",
     "prop-types": "latest",
     "react": "^16.14.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.14.0",
     "react-firebaseui": "^4.1.0",
     "react-redux": "^7.2.4",
