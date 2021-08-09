@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { useMutation } from "@apollo/react-hooks";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DELETE_USER from "../../utils/queries/DeleteUser";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -34,7 +32,7 @@ const BeforeYouGo = ({ handleListItemClick }) => {
   const userEmail = useSelector((state) => state.user.email);
   const [leavingReason, setLeavingReason] = React.useState("1");
   const [improvement, setImprovement] = React.useState("");
-  const [deleteUser, { data }] = useMutation(DELETE_USER, {});
+ 
   const handleRadioButton = (e) => {
     setLeavingReason(e.target.value);
   };
@@ -42,13 +40,9 @@ const BeforeYouGo = ({ handleListItemClick }) => {
     setImprovement(e.target.value);
   };
   const HandleDeleteMyAccount = (e) => {
-    handleListItemClick(e, 2);
     const variables = { leavingReason, improvement, email: userEmail };
-    deleteUser({
-      variables: variables,
-    });
+    handleListItemClick(e, 2, variables);
   };
-  console.log(data, "data");
   return (
     <Box>
       <Typography className={classes.heading}>Before you go...</Typography>

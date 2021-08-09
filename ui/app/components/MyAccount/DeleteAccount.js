@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import { useMutation } from "@apollo/react-hooks";
 import { Box } from "@material-ui/core";
+import DELETE_USER from "../../utils/queries/DeleteUser";
 import IsThisGoodbye from "./IsThisGoodbye";
 import BeforeYouGo from "./BeforeYouGo";
 import DeleteConfirmation from "./DeleteConfirmation";
@@ -23,19 +25,30 @@ const useStyles = makeStyles((theme) => ({
 const DeleteAccount = () => {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const handleListItemClick = (event, index) => {
+  const [deleteUser, { data }] = useMutation(DELETE_USER);
+  const handleListItemClick = (event, index, variables) => {
     setSelectedIndex(index);
+    if (variables) {
+      deleteUser({
+        variables: variables,
+      });
+    }
   };
+  const isSuccess = data?.deleteUser?.userRecord?.id;
   return (
-    <Box className={classes.listBorders}>
-      {selectedIndex === 0 ? (
-        <IsThisGoodbye handleListItemClick={handleListItemClick} />
-      ) : selectedIndex === 1 ? (
-        <BeforeYouGo handleListItemClick={handleListItemClick} />
-      ) : (
-        <DeleteConfirmation />
+    <>
+      {isSuccess && (
+        <Box className={classes.listBorders}>
+          {selectedIndex === 0 ? (
+            <IsThisGoodbye handleListItemClick={handleListItemClick} />
+          ) : selectedIndex === 1 ? (
+            <BeforeYouGo handleListItemClick={handleListItemClick} />
+          ) : (
+            <DeleteConfirmation />
+          )}
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
 
