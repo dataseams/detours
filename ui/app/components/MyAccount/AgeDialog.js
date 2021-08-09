@@ -29,14 +29,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AgeDialog = ({ open, handleDialog }) => {
+const AgeDialog = ({ open, handleDialog, userAge, handleSaveAge }) => {
   const classes = useStyles();
   const [error, setError] = useState(false);
+  const [age, setAge] = React.useState(userAge);
+  const [disableButton, setDisableButton] = React.useState(
+    userAge ? false : true
+  );
   const handleAge = (e) => {
-    let value = e.target.value;
-    value < 0 ? setError(true) : setError(false);
+    setDisableButton(false);
+    const value = e.target.value;
+    if (!value || value <= 0) {
+      setError(true);
+      setDisableButton(true);
+      setAge(value);
+    } else {
+      setAge(value);
+      setError(false);
+    }
   };
-
+  const onHandleSubmit = () => {
+    handleSaveAge(age);
+    handleDialog();
+  };
   return (
     <Dialog
       onClose={handleDialog}
@@ -54,6 +69,7 @@ const AgeDialog = ({ open, handleDialog }) => {
               label="Age"
               type="number"
               error={error}
+              value={age}
               variant="outlined"
               onChange={handleAge}
             />
@@ -74,8 +90,11 @@ const AgeDialog = ({ open, handleDialog }) => {
               <Button
                 variant="outlined"
                 color="primary"
+                type="submit"
                 className={classes.saveButton}
                 variant="contained"
+                onClick={onHandleSubmit}
+                disabled={disableButton}
               >
                 Save
               </Button>

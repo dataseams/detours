@@ -15,7 +15,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 const useStyles = makeStyles(() => ({
   dialog: {
     borderRadius: "10px",
-  },  
+  },
   saveButton: {
     "& 	.MuiButton-iconSizeMedium > *:first-child": {
       fontSize: "10px",
@@ -36,8 +36,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const GenderDialog = ({ open, handleDialog }) => {
+const GenderDialog = ({ open, handleDialog, handleSaveGender, UserGender }) => {
   const classes = useStyles();
+  const [gender, setGender] = React.useState(UserGender);
+  const [disableButton, setDisableButton] = React.useState(
+    UserGender ? false : true
+  );
+  const handleChange = (event) => {
+    setDisableButton(false);
+    setGender(event.target.value);
+  };
+  const onHandleSubmit = () => {
+    console.log(gender,"gender")
+    handleSaveGender(gender);
+    handleDialog();
+  };
 
   return (
     <Dialog
@@ -53,7 +66,12 @@ const GenderDialog = ({ open, handleDialog }) => {
         <DialogContent>
           <FormControl fullWidth variant="outlined">
             <InputLabel id="demo-simple-select-filled-label">Gender</InputLabel>
-            <Select variant="outlined" label="Gender">
+            <Select
+              value={gender}
+              variant="outlined"
+              label="Gender"
+              onChange={handleChange}
+            >
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
@@ -76,6 +94,8 @@ const GenderDialog = ({ open, handleDialog }) => {
                 color="primary"
                 className={classes.saveButton}
                 variant="contained"
+                disabled={disableButton}
+                onClick={onHandleSubmit}
               >
                 Save
               </Button>

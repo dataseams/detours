@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Box, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import GenderDialog from "./GenderDialog";
 import AgeDialog from "./AgeDialog";
+import GET_USER_RECORD from "../../utils/queries/GetUserRecord";
+import UPDATE_GENDER from "../../utils/queries/UpdateGender";
+import UPDATE_AGE from "../../utils/queries/UpdateAge"
 
 const useStyles = makeStyles((theme) => ({
   listBorders: {
@@ -56,14 +59,37 @@ const PersonalInfo = () => {
   const variables = { email: userEmail };
   const { data } = useQuery(GET_USER_RECORD, {
     variables: variables,
-    skip: !UserEmail,
+    skip: !userEmail,
   });
-  console.log(data, "datadata");
+  const refetchRecord = {
+    refetchQueries: [{ query: GET_USER_RECORD, variables: variables }],
+  };
+  const [updateGender] = useMutation(UPDATE_GENDER, refetchRecord);
+  const [updateAge] = useMutation(UPDATE_AGE, refetchRecord);
+  const gender = data?.getUserRecord?.gender;
+  const age = data?.getUserRecord?.age;
+
   const handleGenderDialog = () => {
     setOpenGenderDialog(!openGenderDialog);
   };
   const handleAgeDialog = () => {
     setOpenAgeDialog(!openAgeDialog);
+  };
+  const handleSaveGender = (gender) => {
+    updateGender({
+      variables: {
+        gender,
+        email: userEmail,
+      },
+    });
+  };
+  const handleSaveAge = (age) => {
+    updateAge({
+      variables: {
+        age,
+        email: userEmail,
+      },
+    });
   };
   return (
     <>
@@ -90,7 +116,7 @@ const PersonalInfo = () => {
               <ListItemText
                 className={classes.listItemText}
                 primary="Gender"
-                secondary="Male"
+                secondary={gender}
               />
               <Box>
                 <Button className={classes.button} onClick={handleGenderDialog}>
@@ -105,7 +131,7 @@ const PersonalInfo = () => {
               <ListItemText
                 className={classes.listItemText}
                 primary="Age"
-                secondary="24"
+                secondary={age}
               />
               <Box>
                 <Button className={classes.button} onClick={handleAgeDialog}>
@@ -116,8 +142,19 @@ const PersonalInfo = () => {
           </ListItem>
         </List>
       </Box>
-      <GenderDialog open={openGenderDialog} handleDialog={handleGenderDialog} />
-      <AgeDialog open={openAgeDialog} handleDialog={handleAgeDialog} />
+      <GenderDialog
+        UserGender={gender}
+        open={openGenderDialog}
+        handleDialog={handleGenderDialog}
+        handleSaveGender={handleSaveGender}
+      />
+      <AgeDialog
+        open={openAgeDialog}
+        handleDialog={handleAgeDialog}
+        handleSaveAge={handleSaveAge}
+        UserAge={age}
+
+      />
     </>
   );
 };
