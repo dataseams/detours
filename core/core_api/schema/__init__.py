@@ -27,6 +27,7 @@ from .survey_response import (
 from .time_of_day import TimeOfDay
 from .trip_plan import TripPlan, UserTripPlan, UserTripPlans
 from .user import (
+    DeleteUser,
     UpdateUserAge,
     UpdateUserGender,
     UpdateUserWantsNoEmails,
@@ -50,6 +51,7 @@ class Mutation(ObjectType):
         UpdateUserWantsPromotionsAndTipsFlag.Field()
     )
     update_user_wants_no_emails = UpdateUserWantsNoEmails.Field()
+    delete_user = DeleteUser.Field()
 
 
 class Query(ObjectType):
@@ -61,6 +63,14 @@ class Query(ObjectType):
     get_all_activity_types = SQLAlchemyConnectionField(ActivityType)
     get_all_places = SQLAlchemyConnectionField(Place)
     get_survey_response_record = SQLAlchemyConnectionField(SurveyResponse)
+
+    get_user_record = Field(lambda: User, email=String())
+
+    def resolve_get_user_record(root, info, email):
+        """Query user table by email."""
+        query = User.get_query(info)
+        user_record = query.filter(models.User.email == email).first()
+        return user_record
 
     get_last_trip_plan_for_survey_response = Field(
         lambda: TripPlan, surveyResponseNodeId=String()
