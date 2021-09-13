@@ -63,10 +63,6 @@ const Notifications = () => {
   });
   const wantsPromotionsAndTips = data?.getUserRecord?.wantsPromotionsAndTips;
   const wantsReminders = data?.getUserRecord?.wantsReminders;
-  const [state, setState] = React.useState({
-    checkedA: wantsPromotionsAndTips,
-    checkedB: wantsReminders,
-  });
   const refetchRecords = {
     refetchQueries: [{ query: GET_USER_RECORD, variables: variables }],
   };
@@ -100,7 +96,6 @@ const Notifications = () => {
         },
       });
     }
-    setState({ ...state, [event.target.name]: event.target.checked });
   };
   const handleNoEmail = () => {
     updateUserWantsNoEmails({
@@ -122,7 +117,7 @@ const Notifications = () => {
             />
             <Box>
               <Switch
-                checked={state.checkedA}
+                checked={wantsPromotionsAndTips || false}
                 onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedA"
@@ -141,7 +136,7 @@ const Notifications = () => {
             />
             <Box>
               <Switch
-                checked={state.checkedB}
+                checked={wantsReminders || false}
                 onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedB"
