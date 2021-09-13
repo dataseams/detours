@@ -61,8 +61,14 @@ const Notifications = () => {
     variables: variables,
     skip: !userEmail,
   });
-  const wantsPromotionsAndTips = data?.getUserRecord?.wantsPromotionsAndTips;
-  const wantsReminders = data?.getUserRecord?.wantsReminders;
+  const wantsPromotionsAndTips =
+    typeof data?.getUserRecord?.wantsPromotionsAndTips === "undefined"
+      ? true
+      : data?.getUserRecord?.wantsPromotionsAndTips;
+  const wantsReminders =
+    typeof data?.getUserRecord?.wantsReminders === "undefined"
+      ? true
+      : data?.getUserRecord?.wantsReminders;
   const refetchRecords = {
     refetchQueries: [{ query: GET_USER_RECORD, variables: variables }],
   };
@@ -117,7 +123,7 @@ const Notifications = () => {
             />
             <Box>
               <Switch
-                checked={wantsPromotionsAndTips || false}
+                checked={wantsPromotionsAndTips}
                 onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedA"
@@ -136,7 +142,7 @@ const Notifications = () => {
             />
             <Box>
               <Switch
-                checked={wantsReminders || false}
+                checked={wantsReminders}
                 onChange={handleChangeNotifications}
                 color="primary"
                 name="checkedB"

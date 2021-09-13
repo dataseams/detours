@@ -18,6 +18,33 @@ class User(SQLAlchemyObjectType):
         interfaces = (relay.Node,)
 
 
+class AddUser(Mutation):
+    """Update user age in the database."""
+
+    user_record = Field(
+        lambda: User, description="User record added by this mutation."
+    )
+
+    class Arguments:
+        """Declare input arguments."""
+
+        email = String(required=True, description="User's email")
+        age = Int(required=False, description="User's age")
+        gender = String(required=False, description="User's gender")
+
+    def mutate(self, info, email, age):
+        """Update user age in the database."""
+        user_record = (
+            db_session.query(models.User).filter_by(email=email).first()
+        )
+        if not user_record:
+            user_record = models.User(email=email, age=age)
+            db_session.add(user_record)
+            db_session.commit()
+
+        return UpdateUserAge(user_record=user_record)
+
+
 class UpdateUserAge(Mutation):
     """Update user age in the database."""
 
@@ -37,7 +64,11 @@ class UpdateUserAge(Mutation):
             db_session.query(models.User).filter_by(email=email).first()
         )
         if not user_record:
-            user_record = models.User(email=email)
+            user_record = models.User(
+                email=email,
+                wants_promotions_and_tips=True,
+                wants_reminders=True,
+            )
             db_session.add(user_record)
         user_record.age = age
         db_session.commit()
@@ -66,7 +97,11 @@ class UpdateUserGender(Mutation):
             db_session.query(models.User).filter_by(email=email).first()
         )
         if not user_record:
-            user_record = models.User(email=email)
+            user_record = models.User(
+                email=email,
+                wants_promotions_and_tips=True,
+                wants_reminders=True,
+            )
             db_session.add(user_record)
         user_record.gender = gender
         db_session.commit()
@@ -95,7 +130,11 @@ class UpdateUserWantsRemindersFlag(Mutation):
             db_session.query(models.User).filter_by(email=email).first()
         )
         if not user_record:
-            user_record = models.User(email=email)
+            user_record = models.User(
+                email=email,
+                wants_promotions_and_tips=True,
+                wants_reminders=True,
+            )
             db_session.add(user_record)
         user_record.wants_reminders = wants_reminders
         db_session.commit()
@@ -125,7 +164,11 @@ class UpdateUserWantsPromotionsAndTipsFlag(Mutation):
             db_session.query(models.User).filter_by(email=email).first()
         )
         if not user_record:
-            user_record = models.User(email=email)
+            user_record = models.User(
+                email=email,
+                wants_promotions_and_tips=True,
+                wants_reminders=True,
+            )
             db_session.add(user_record)
         user_record.wants_promotions_and_tips = wants_promotions_and_tips
         db_session.commit()
@@ -151,7 +194,11 @@ class UpdateUserWantsNoEmails(Mutation):
             db_session.query(models.User).filter_by(email=email).first()
         )
         if not user_record:
-            user_record = models.User(email=email)
+            user_record = models.User(
+                email=email,
+                wants_promotions_and_tips=True,
+                wants_reminders=True,
+            )
             db_session.add(user_record)
         user_record.wants_reminders = False
         user_record.wants_promotions_and_tips = False
