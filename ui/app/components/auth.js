@@ -61,15 +61,15 @@ const Auth = (props) => {
   }
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const updateUserEmail = {
-        type: "UPDATE_USER",
+      const setUserEmail = {
+        type: "SET_USER",
         value: {
           userEmail: user.email,
           userDisplayName: user.displayName,
           userPhotoUrl: user.photoURL,
         },
       };
-      dispatch(updateUserEmail);
+      dispatch(setUserEmail);
       console.log(process.env.LOGIN_API_URL);
       return user.getIdToken().then((token) => {
         // eslint-disable-next-line no-undef
@@ -82,11 +82,11 @@ const Auth = (props) => {
         }).catch((e) => console.log(e));
       });
     } else {
-      const updateUserEmail = {
-        type: "UPDATE_USER",
+      const setUserEmail = {
+        type: "SET_USER",
         value: { userEmail: null, userDisplayName: null },
       };
-      dispatch(updateUserEmail);
+      dispatch(setUserEmail);
 
       console.log(process.env.LOGOUT_API_URL);
       // eslint-disable-next-line no-undef
@@ -102,7 +102,19 @@ const Auth = (props) => {
   const userPhotoUrl = useSelector((state) => state.user.photoUrl);
 
   const handleLogin = (props) => {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then((result) => {
+        const email = result.user.email;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorMessage);
+      });
     setAnchorEl(null);
   };
 

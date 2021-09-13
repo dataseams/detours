@@ -38,6 +38,7 @@ class UpdateUserAge(Mutation):
         )
         if not user_record:
             user_record = models.User(email=email)
+            db_session.add(user_record)
         user_record.age = age
         db_session.commit()
 
@@ -66,6 +67,7 @@ class UpdateUserGender(Mutation):
         )
         if not user_record:
             user_record = models.User(email=email)
+            db_session.add(user_record)
         user_record.gender = gender
         db_session.commit()
 
@@ -94,6 +96,7 @@ class UpdateUserWantsRemindersFlag(Mutation):
         )
         if not user_record:
             user_record = models.User(email=email)
+            db_session.add(user_record)
         user_record.wants_reminders = wants_reminders
         db_session.commit()
 
@@ -123,6 +126,7 @@ class UpdateUserWantsPromotionsAndTipsFlag(Mutation):
         )
         if not user_record:
             user_record = models.User(email=email)
+            db_session.add(user_record)
         user_record.wants_promotions_and_tips = wants_promotions_and_tips
         db_session.commit()
 
@@ -148,6 +152,7 @@ class UpdateUserWantsNoEmails(Mutation):
         )
         if not user_record:
             user_record = models.User(email=email)
+            db_session.add(user_record)
         user_record.wants_reminders = False
         user_record.wants_promotions_and_tips = False
         db_session.commit()

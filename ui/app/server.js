@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const express = require("express");
-const bodyParser = require("body-parser");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const next = require("next");
@@ -26,7 +25,8 @@ app.prepare().then(() => {
   const sessionTtl = 60000;
   const sessionFileSecret = "lLImc85gngl45N77";
 
-  server.use(bodyParser.json());
+  server.use(express.urlencoded({ extended: true }));
+  server.use(express.json());
   server.use(
     session({
       secret: sessionFileSecret,
