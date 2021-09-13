@@ -47,7 +47,7 @@ class Index extends React.Component {
     this.setState({ width: window.innerWidth });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     if (typeof window !== "undefined") {
       window.addEventListener("resize", this.handleWindowSizeChange);
       this.setState(() => {
