@@ -2,9 +2,7 @@ import gql from "graphql-tag";
 
 const GET_USER_RECORD = gql`
   query getUserRecord($email: String!) {
-    getUserRecord(
-      email: $email
-    ) {
+    getUserRecord(email: $email) {
       id
       email
       gender

@@ -40,6 +40,7 @@ def shutdown_session(exception=None):
 
 @app.route("/stripe-webhook", methods=["POST"])
 def webhook():
+    """Save strip session information to database."""
     event = None
     payload = request.data
 
