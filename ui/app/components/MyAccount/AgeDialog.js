@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { FormControl, TextField, Box, Button } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/core/styles";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  FormControl,
+  TextField,
+  Box,
+  Button,
+} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   dialog: {
@@ -13,7 +18,6 @@ const useStyles = makeStyles(() => ({
     "& 	.MuiButton-iconSizeMedium > *:first-child": {
       fontSize: "10px",
     },
-
     textTransform: "capitalize",
     padding: "6px 40px",
     fontWeight: "400",
@@ -22,7 +26,6 @@ const useStyles = makeStyles(() => ({
     "& 	.MuiButton-iconSizeMedium > *:first-child": {
       fontSize: "10px",
     },
-
     textTransform: "capitalize",
     padding: "6px 35px",
     fontWeight: "400",

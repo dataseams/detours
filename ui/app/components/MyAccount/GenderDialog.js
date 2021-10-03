@@ -71,8 +71,9 @@ const GenderDialog = ({ open, handleDialog, handleSaveGender, UserGender }) => {
               label="Gender"
               onChange={handleChange}
             >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="Her">Her</MenuItem>
+              <MenuItem value="Him">Him</MenuItem>
+              <MenuItem value="Their">Their</MenuItem>
             </Select>
             <Box
               display="flex"
