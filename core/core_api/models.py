@@ -286,3 +286,14 @@ class User(Base):
     age = Column(Integer, CheckConstraint("COALESCE(age, 0) >= 0"))
     wants_promotions_and_tips = Column(Boolean, default=True)
     wants_reminders = Column(Boolean, default=True)
+
+
+class AttritionFeedback(Base):
+    """Define user feedback on account deletion."""
+
+    __tablename__ = "attrition_feedback"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(100), nullable=False)
+    incognito_id = Column(String(100), nullable=False)
+    reason_for_leaving = Column(Integer, nullable=True)
+    improvement = Column(String(4000), nullable=True)

@@ -1,11 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Box, Typography } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+} from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -23,20 +27,33 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "capitalize",
     padding: "10px 30px",
     fontWeight: "400",
+    marginBottom: "10px",
   },
 }));
 
-const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
+const BeforeYouGo = ({ handleListItemClick }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState("1");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  const userEmail = useSelector((state) => state.user.email);
+  const [leavingReason, setLeavingReason] = React.useState("1");
+  const [improvement, setImprovement] = React.useState("");
 
+  const handleRadioButton = (event) => {
+    setLeavingReason(event.target.value);
+  };
+  const handleTextInput = (event) => {
+    setImprovement(event.target.value);
+  };
+  const HandleDeleteMyAccount = (event) => {
+    const variables = {
+      email: userEmail,
+      leavingReason: parseInt(leavingReason),
+      improvement: improvement,
+    };
+    handleListItemClick(event, 2, variables);
+  };
   return (
     <Box>
       <Typography className={classes.heading}>Before you go...</Typography>
-
       <Box mb={1}>
         <Typography className={classes.subHeading}>
           Tell us why you're leaving: *
@@ -46,8 +63,8 @@ const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
         <RadioGroup
           aria-label="gender"
           name="gender1"
-          value={value}
-          onChange={handleChange}
+          value={leavingReason}
+          onChange={handleRadioButton}
         >
           <FormControlLabel
             value="1"
@@ -69,6 +86,11 @@ const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
             control={<Radio color="primary" />}
             label="I have a privacy concern"
           />
+          <FormControlLabel
+            value="5"
+            control={<Radio color="primary" />}
+            label="Other"
+          />
         </RadioGroup>
       </Box>
       <Box mt={3}>
@@ -82,6 +104,7 @@ const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
             id="outlined-multiline-static"
             multiline
             rows={4}
+            onChange={handleTextInput}
             fullWidth
             variant="outlined"
           />
@@ -93,7 +116,7 @@ const BeforeYouGo = ({ handleListItemClick = { handleListItemClick } }) => {
           color="primary"
           className={classes.button}
           fullWidth
-          onClick={(event) => handleListItemClick(event, 2)}
+          onClick={HandleDeleteMyAccount}
         >
           Delete my account
         </Button>
