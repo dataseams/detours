@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useSelector } from "react-redux";
 import { Box } from "@material-ui/core";
+import GET_USER_RECORD from "../../utils/queries/GetUserRecord";
 import DELETE_USER from "../../utils/queries/DeleteUser";
 import IsThisGoodbye from "./IsThisGoodbye";
 import BeforeYouGo from "./BeforeYouGo";
@@ -24,8 +26,15 @@ const useStyles = makeStyles((theme) => ({
 
 const DeleteAccount = () => {
   const classes = useStyles();
+  const userEmail = useSelector((state) => state?.user?.email);
+  const variables = { email: userEmail };
+  const { data: userData } = useQuery(GET_USER_RECORD, {
+    variables: variables,
+    skip: !userEmail,
+  });
+  const userRecord = userData?.getUserRecord;
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [deleteUser, { data }] = useMutation(DELETE_USER);
+  const [deleteUser, { data: deleteData }] = useMutation(DELETE_USER);
   const handleListItemClick = (event, index, variables) => {
     setSelectedIndex(index);
     if (variables) {
@@ -34,10 +43,10 @@ const DeleteAccount = () => {
       });
     }
   };
-  const isSuccess = data?.deleteUser?.userRecord?.id;
+  const isSuccess = deleteData?.deleteUser?.userRecord?.id;
   return (
     <>
-      {isSuccess && (
+      {!isSuccess && userRecord && (
         <Box className={classes.listBorders}>
           {selectedIndex === 0 ? (
             <IsThisGoodbye handleListItemClick={handleListItemClick} />
