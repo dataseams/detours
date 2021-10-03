@@ -66,8 +66,8 @@ const PersonalInfo = () => {
   };
   const [updateGender] = useMutation(UPDATE_GENDER, refetchRecord);
   const [updateAge] = useMutation(UPDATE_AGE, refetchRecord);
-  const gender = data?.getUserRecord?.gender;
-  const age = data?.getUserRecord?.age;
+  const gender = data?.getUserRecord?.gender ? data?.getUserRecord?.gender : "";
+  const age = data?.getUserRecord?.age ? data?.getUserRecord?.age : "";
 
   const handleGenderDialog = () => {
     setOpenGenderDialog(!openGenderDialog);
@@ -91,6 +91,9 @@ const PersonalInfo = () => {
       },
     });
   };
+  if (!data) {
+    return <div></div>;
+  }
   return (
     <>
       <Box className={classes.listBorders}>
@@ -143,16 +146,16 @@ const PersonalInfo = () => {
         </List>
       </Box>
       <GenderDialog
-        UserGender={gender}
         open={openGenderDialog}
         handleDialog={handleGenderDialog}
         handleSaveGender={handleSaveGender}
+        userGender={gender}
       />
       <AgeDialog
         open={openAgeDialog}
         handleDialog={handleAgeDialog}
         handleSaveAge={handleSaveAge}
-        UserAge={age}
+        userAge={age}
       />
     </>
   );

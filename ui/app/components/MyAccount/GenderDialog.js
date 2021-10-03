@@ -6,11 +6,11 @@ import {
   MenuItem,
   Box,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/core/styles";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
 
 const useStyles = makeStyles(() => ({
   dialog: {
@@ -36,11 +36,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const GenderDialog = ({ open, handleDialog, handleSaveGender, UserGender }) => {
+const GenderDialog = ({ open, handleDialog, handleSaveGender, userGender: userGender }) => {
   const classes = useStyles();
-  const [gender, setGender] = React.useState(UserGender);
+  const [gender, setGender] = React.useState(userGender);
   const [disableButton, setDisableButton] = React.useState(
-    UserGender ? false : true
+    userGender ? false : true
   );
   const handleChange = (event) => {
     setDisableButton(false);

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
   FormControl,
   TextField,
   Box,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   dialog: {
@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
     "& 	.MuiButton-iconSizeMedium > *:first-child": {
       fontSize: "10px",
     },
+
     textTransform: "capitalize",
     padding: "6px 40px",
     fontWeight: "400",
@@ -26,22 +27,23 @@ const useStyles = makeStyles(() => ({
     "& 	.MuiButton-iconSizeMedium > *:first-child": {
       fontSize: "10px",
     },
+
     textTransform: "capitalize",
     padding: "6px 35px",
     fontWeight: "400",
   },
 }));
 
-const AgeDialog = ({ open, handleDialog, userAge, handleSaveAge }) => {
+const AgeDialog = ({ open, handleDialog, handleSaveAge, userAge }) => {
   const classes = useStyles();
   const [error, setError] = useState(false);
   const [age, setAge] = React.useState(userAge);
   const [disableButton, setDisableButton] = React.useState(
     userAge ? false : true
   );
-  const handleAge = (e) => {
+  const handleAge = (event) => {
     setDisableButton(false);
-    const value = e.target.value;
+    const value = event.target.value;
     if (!value || value <= 0) {
       setError(true);
       setDisableButton(true);
