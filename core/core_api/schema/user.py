@@ -218,8 +218,15 @@ class DeleteUser(Mutation):
         """Declare input arguments."""
 
         email = String(required=True, description="User's email address")
+        leaving_reason = Int(
+            required=True, description="Reason for leaving as an integer id"
+        )
+        improvement = String(
+            required=True,
+            description="User's feedback on what can be improved",
+        )
 
-    def mutate(self, info, email):
+    def mutate(self, info, email, leaving_reason, improvement):
         """Replace user's email with a uuid in the database."""
         incognito_id = uuid4().hex
         user_record = (
@@ -234,6 +241,13 @@ class DeleteUser(Mutation):
         )
         for record in survey_response_records:
             record.traveler_email = incognito_id
+        attrition_feedback_record = models.AttritionFeedback(
+            email=email,
+            incognito_id=incognito_id,
+            reason_for_leaving=leaving_reason,
+            improvement=improvement,
+        )
+        db_session.add(attrition_feedback_record)
         db_session.commit()
 
         return UpdateUserWantsNoEmails(user_record=user_record)

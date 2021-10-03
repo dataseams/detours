@@ -1,12 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Box, Typography } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "capitalize",
     padding: "10px 30px",
     fontWeight: "400",
+    marginBottom: "10px",
   },
 }));
 
@@ -33,15 +37,19 @@ const BeforeYouGo = ({ handleListItemClick }) => {
   const [leavingReason, setLeavingReason] = React.useState("1");
   const [improvement, setImprovement] = React.useState("");
 
-  const handleRadioButton = (e) => {
-    setLeavingReason(e.target.value);
+  const handleRadioButton = (event) => {
+    setLeavingReason(event.target.value);
   };
-  const handleTextInput = (e) => {
-    setImprovement(e.target.value);
+  const handleTextInput = (event) => {
+    setImprovement(event.target.value);
   };
-  const HandleDeleteMyAccount = (e) => {
-    const variables = { leavingReason, improvement, email: userEmail };
-    handleListItemClick(e, 2, variables);
+  const HandleDeleteMyAccount = (event) => {
+    const variables = {
+      email: userEmail,
+      leavingReason: parseInt(leavingReason),
+      improvement: improvement,
+    };
+    handleListItemClick(event, 2, variables);
   };
   return (
     <Box>
@@ -77,6 +85,11 @@ const BeforeYouGo = ({ handleListItemClick }) => {
             value="4"
             control={<Radio color="primary" />}
             label="I have a privacy concern"
+          />
+          <FormControlLabel
+            value="5"
+            control={<Radio color="primary" />}
+            label="Other"
           />
         </RadioGroup>
       </Box>
