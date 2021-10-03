@@ -36,7 +36,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const GenderDialog = ({ open, handleDialog, handleSaveGender, userGender: userGender }) => {
+const GenderDialog = ({
+  open,
+  handleDialog,
+  handleSaveGender,
+  userGender: userGender,
+}) => {
   const classes = useStyles();
   const [gender, setGender] = React.useState(userGender);
   const [disableButton, setDisableButton] = React.useState(
