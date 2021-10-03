@@ -4,7 +4,6 @@ import "firebase/auth";
 import "isomorphic-unfetch";
 import { Box } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 
 import clientCredentials from "../credentials/client";
 import LogInOutButton from "./LogInOutButton";
@@ -29,7 +28,7 @@ const Auth = (props) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const updateUserEmail = {
-        type: "UPDATE_USER",
+        type: "SET_USER",
         value: {
           userEmail: user.email,
           userDisplayName: user.displayName,
@@ -49,7 +48,7 @@ const Auth = (props) => {
       });
     } else {
       const updateUserEmail = {
-        type: "UPDATE_USER",
+        type: "SET_USER",
         value: {
           userEmail: null,
           userDisplayName: null,
@@ -68,7 +67,19 @@ const Auth = (props) => {
   const userEmail = useSelector((state) => state.user.email);
 
   const handleLogin = (props) => {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then((result) => {
+        const email = result.user.email;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorMessage);
+      });
   };
 
   const handleLogout = (props) => {
