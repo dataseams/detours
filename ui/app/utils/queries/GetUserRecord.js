@@ -1,14 +1,14 @@
 import gql from "graphql-tag";
 
 const GET_USER_RECORD = gql`
-  query getUserRecord($email: String!) {
+  query($email: String!) {
     getUserRecord(email: $email) {
-      id
       email
-      gender
       age
-      wantsPromotionsAndTips
+      gender
+      id
       wantsReminders
+      wantsPromotionsAndTips
     }
   }
 `;
