@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import "firebase/auth";
@@ -61,15 +61,15 @@ const Auth = (props) => {
   }
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const updateUserEmail = {
-        type: "UPDATE_USER",
+      const setUserEmail = {
+        type: "SET_USER",
         value: {
           userEmail: user.email,
           userDisplayName: user.displayName,
           userPhotoUrl: user.photoURL,
         },
       };
-      dispatch(updateUserEmail);
+      dispatch(setUserEmail);
       console.log(process.env.LOGIN_API_URL);
       return user.getIdToken().then((token) => {
         // eslint-disable-next-line no-undef
