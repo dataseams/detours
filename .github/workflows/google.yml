@@ -59,14 +59,15 @@ jobs:
           echo "k8s diffs: "${{ steps.git-k8s-diff.outputs.diff }}
       - name: Build core
         run: |
-          docker build \
+          DOCKER_BUILDKIT=1 docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
             --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_CORE":latest \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
             ./"$IMAGE_CORE"/.
       - name: Build ui
         run: |
-          docker build \
+          DOCKER_BUILDKIT=1 docker build \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":"$GITHUB_SHA" \
             -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
@@ -77,6 +78,7 @@ jobs:
             --build-arg REACT_APP_GOOGLE_MAPS_API_KEY="$REACT_APP_GOOGLE_MAPS_API_KEY" \
             --build-arg STRIPE_PUBLIC_KEY="$STRIPE_PUBLIC_KEY" \
             --cache-from "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_UI":latest \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
             ./"$IMAGE_UI"/.
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:$GITHUB_SHA
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE_UI:latest
