@@ -19,7 +19,7 @@ const initialUserState = {
 };
 const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
-    case "UPDATE_USER":
+    case "SET_USER":
       return {
         ...state,
         email: action.value.userEmail,
