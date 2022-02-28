@@ -32,7 +32,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "material-ui": "^0.20.2",
     "moment": "^2.29.1",
-    "next": "^9.5.5",
+    "next": "^12.1.0",
     "next-with-apollo": "^5.1.1",
     "node-fetch": "^2.6.7",
     "prop-types": "latest",
