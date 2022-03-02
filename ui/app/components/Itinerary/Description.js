@@ -97,9 +97,9 @@ const ItineraryDescription = (props) => {
         This is a preview of your itinerary.
       </Typography>
       <Typography className={classes.descItem}>
-        - You would spend a total of {summary.spendingPerDay.replace(/"/g, "")}{" "}
-        per day including hotel, restaurant, and activities, for a total of{" "}
-        {summary.numberOfDays} {summary.dayOrDays}.
+        - You would spend a total of ${summary.spendingPerDay} per day including
+        hotel, restaurant, and activities, for a total of {summary.numberOfDays}{" "}
+        {summary.dayOrDays}.
       </Typography>
       <Typography className={classes.descItem}>
         - You would save an average of <b>{summary.hoursSaved} hours </b>
