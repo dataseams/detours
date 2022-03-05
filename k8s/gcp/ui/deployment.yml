@@ -65,8 +65,8 @@ spec:
             protocol: TCP
         resources:
           requests:
-            memory: "250M"
-            cpu: "500m"
+            memory: "500M"
+            cpu: "1"
           limits:
-            memory: "250M"
-            cpu: "500m"
+            memory: "500M"
+            cpu: "1"
