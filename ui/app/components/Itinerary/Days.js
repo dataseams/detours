@@ -134,27 +134,27 @@ const DailyTabs = (props) => {
               <LockIcon className={classes.lockIcon} />
             );
             return (
-              <Tooltip
-                title={
-                  isLockVisiable
-                    ? "Checkout below to gain full access to the itinerary"
-                    : ""
+              // <Tooltip
+              //   title={
+              //     isLockVisiable
+              //       ? "Checkout below to gain full access to the itinerary"
+              //       : ""
+              //   }
+              // >
+              //   <span className={classes.span}>
+              <Tab
+                key={index}
+                label={
+                  <div className={classes.labelDiv}>
+                    {tabLabel}
+                    {isLockVisiable}
+                  </div>
                 }
-              >
-                <span className={classes.span}>
-                  <Tab
-                    key={index}
-                    label={
-                      <div className={classes.labelDiv}>
-                        {tabLabel}
-                        {isLockVisiable}
-                      </div>
-                    }
-                    disabled={disableTab}
-                    {...a11yProps(index)}
-                  />
-                </span>
-              </Tooltip>
+                disabled={disableTab}
+                {...a11yProps(index)}
+              />
+              //   </span>
+              // </Tooltip>
             );
           })}
         </Tabs>
