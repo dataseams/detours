@@ -11,13 +11,13 @@ ENV LOGIN_API_URL=$LOGIN_API_URL \
     CORE_API_URL=$CORE_API_URL \
     REACT_APP_GOOGLE_MAPS_API_KEY=$REACT_APP_GOOGLE_MAPS_API_KEY \
     STRIPE_PUBLIC_KEY=$STRIPE_PUBLIC_KEY
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 WORKDIR /app
 RUN mkdir pages components credentials src utils static redux
 COPY app/.babelrc app/next.config.js app/package*.json app/server.js /app/
 RUN npm install
 RUN npx browserslist@latest --update-db
-
 
 COPY app/pages /app/pages/
 COPY app/components /app/components/
