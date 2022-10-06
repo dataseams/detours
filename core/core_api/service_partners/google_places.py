@@ -15,6 +15,8 @@ class Client:
         api_key: str = GOOGLE_MAPS_API_KEY,
     ):
         self.url = api_url
+        self.url_search_nearby = api_url + "/" + "nearbysearch"
+        self.url_details = api_url + "/" + "details"
         self.key = api_key
         self.headers = {"Accept": "application/json"}
         self.output = "json"
@@ -46,7 +48,7 @@ class Client:
         params["language"] = language
         params["fields"] = fields
 
-        request_url = f"{self.url}/{self.output}"
+        request_url = f"{self.self.url_search_nearby}/{self.output}"
 
         response = requests.get(
             request_url, params=params, headers=self.headers
@@ -86,12 +88,39 @@ class Client:
         params["location"] = location
         params["radius"] = radius
 
-        request_url = f"{self.url}/{self.output}"
+        request_url = f"{self.url_search_nearby}/{self.output}"
 
         response = requests.get(
             request_url, params=params, headers=self.headers
         )
 
         results = response.json()["results"]
+
+        return results
+
+    def place_details(self, place_id: str) -> list:
+        """Get place details.
+
+        Parameters
+        ----------
+        place_id : str
+            Google place id
+
+        Returns
+        -------
+        dict
+            place details returned
+        """
+        params = {}
+        params["key"] = self.key
+        params["place_id"] = place_id
+
+        request_url = f"{self.url_details}/{self.output}"
+
+        response = requests.get(
+            request_url, params=params, headers=self.headers
+        )
+
+        results = response.json()["result"]
 
         return results
