@@ -98,7 +98,7 @@ class Client:
 
         return results
 
-    def place_details(self, place_id: str) ->list:
+    def place_details(self, place_id: str) -> list:
         """Get place details.
 
         Parameters
